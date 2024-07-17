@@ -23,5 +23,4 @@ The tax-exempt foundation structure has previously been the exclusive privilege 
 
 ## Stage 3
 - [ ] Add additional jurisdictions.
-- [ ] Integrate with partner platforms like Geyser and the Foundation’s own nostr-native project, Fundsolvr.com.  
-
+- [ ] Integrate with partner platforms like Geyser and the Foundation supported nostr-native project, [Fundsolvr](https://github.com/Open-Source-Justice-Foundation/Fundsolvr)
