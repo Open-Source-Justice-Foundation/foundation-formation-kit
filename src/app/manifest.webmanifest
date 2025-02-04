@@ -1,0 +1,33 @@
+{
+  "name": "Foundation Formation Kit",
+  "short_name": "FFK",
+  "description": "Foundation Formation Kit by the Open Source Justice Foundation ⚖️",
+  "categories": [
+    "business",
+    "finance",
+    "government",
+    "productivity",
+    "utilities"
+  ],
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
