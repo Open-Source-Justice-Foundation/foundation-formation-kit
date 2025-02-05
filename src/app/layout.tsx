@@ -3,19 +3,7 @@ import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";
 
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://foundationformationkit.org"),
@@ -67,16 +55,22 @@ export const viewport: Viewport = {
   ],
 };
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "variable",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+  variable: "--font-inter",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`overflow-x-hidden bg-secondary antialiased sm:bg-background ${geistSans.variable} ${geistMono.variable}`}
-      >
+    <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
+      <body className="overflow-x-hidden bg-secondary antialiased sm:bg-background">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
