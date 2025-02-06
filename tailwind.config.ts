@@ -9,7 +9,7 @@ const config: Config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1440px",
       },
     },
     extend: {
@@ -53,6 +53,13 @@ const config: Config = {
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
+        },
+        // Custom colors
+        link: {
+          foreground: "hsl(var(--link-foreground))",
+        },
+        logo: {
+          foreground: "hsl(var(--logo-foreground))",
         },
       },
       borderRadius: {

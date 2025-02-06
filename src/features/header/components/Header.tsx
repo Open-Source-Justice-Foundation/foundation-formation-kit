@@ -4,14 +4,14 @@ import Image from "next/image";
 // import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-import { LoginButton } from "./LoginButton";
+import { GetStartedButton } from "./GetStartedButton";
 
 export async function Header() {
   // const session = await getServerSession(authOptions);
   // const user = session?.user;
 
   return (
-    <header className="relative flex items-center justify-between border-b px-20 py-2 lg:px-[7.5rem]">
+    <header className="relative mb-2.5 flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem]">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/images/logos/logo.svg"
@@ -20,10 +20,15 @@ export async function Header() {
           alt="Navbar Logo"
           unoptimized={true}
         />
-        <span className="text-xl font-bold">Foundation Formation Kit</span>
+        <span className="pr-4 text-xl font-bold text-logo-foreground">
+          Foundation Formation Kit
+        </span>
       </Link>
-      <div className="flex items-center gap-4">
-        <LoginButton />
+      <div className="flex items-center gap-6">
+        <Link href="/login">
+          <span className="font-medium text-link-foreground">Sign in</span>
+        </Link>
+        <GetStartedButton />
       </div>
     </header>
   );
