@@ -45,8 +45,6 @@ The tax-exempt foundation structure has previously been the exclusive privilege 
 - [ ] Add additional jurisdictions.
 - [ ] Integrate with partner platforms like Geyser and the Foundation supported nostr-native project, [Fundsolvr](https://github.com/Open-Source-Justice-Foundation/Fundsolvr)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 # Contribute
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
