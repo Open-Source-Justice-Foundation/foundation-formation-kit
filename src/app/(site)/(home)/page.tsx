@@ -1,10 +1,18 @@
 import { Button } from "~/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20">
       <div className="row-start-2 flex flex-col items-center gap-8">
+        <Image
+          src="/images/home/tax-free.svg"
+          width={96}
+          height={96}
+          alt="Homepage Tax Free Image"
+          unoptimized={true}
+        />
         <h2 className="text-center text-[1.65rem] font-semibold text-foreground/80">
           Get a tax exempt status for your open source project
         </h2>
