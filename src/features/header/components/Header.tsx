@@ -1,6 +1,6 @@
 // import { authOptions } from "~/auth";
 
-import { PenBoxIcon } from "lucide-react";
+import Image from "next/image";
 // import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -13,7 +13,13 @@ export async function Header() {
   return (
     <header className="relative flex items-center justify-between border-b px-20 py-2 lg:px-[7.5rem]">
       <Link href="/" className="flex items-center gap-2">
-        <PenBoxIcon className="h-5 w-5" />
+        <Image
+          src="/images/logos/logo.svg"
+          width={25}
+          height={25}
+          alt="Navbar Logo"
+          unoptimized={true}
+        />
         <span className="text-xl font-bold">Foundation Formation Kit</span>
       </Link>
       <div className="flex items-center gap-4">
