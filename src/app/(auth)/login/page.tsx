@@ -58,7 +58,7 @@ export default function UserAuthForm() {
 
       <Form {...form}>
         <form
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-5"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -68,9 +68,10 @@ export default function UserAuthForm() {
               <FormItem>
                 <FormControl>
                   <Input
+                    className="border-primary/60"
+                    {...field}
                     disabled={isLoading}
                     placeholder="email..."
-                    {...field}
                   />
                 </FormControl>
                 <FormMessage />

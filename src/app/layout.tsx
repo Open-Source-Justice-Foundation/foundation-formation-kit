@@ -70,7 +70,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
-      <body className="overflow-x-hidden bg-secondary antialiased sm:bg-background">
+      <body className="overflow-x-hidden bg-background antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

@@ -7,11 +7,11 @@ export function LoginButton() {
   return (
     <Button
       onClick={() => signIn()}
-      className="focus-visible:outline-none focus-visible:ring-transparent"
+      className="focus-visible:ring-transparent"
       variant="outline"
       type="submit"
     >
-      <span className="text-[1.05rem]">Login &rarr;</span>
+      <span className="text-base">Sign in</span>
     </Button>
   );
 }

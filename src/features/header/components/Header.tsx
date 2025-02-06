@@ -11,7 +11,7 @@ export async function Header() {
   // const user = session?.user;
 
   return (
-    <header className="relative flex items-center justify-between border-b px-6 py-4 sm:border-none lg:px-8">
+    <header className="relative flex items-center justify-between border-b px-20 py-2 lg:px-[7.5rem]">
       <Link href="/" className="flex items-center gap-2">
         <PenBoxIcon className="h-5 w-5" />
         <span className="text-xl font-bold">Foundation Formation Kit</span>
