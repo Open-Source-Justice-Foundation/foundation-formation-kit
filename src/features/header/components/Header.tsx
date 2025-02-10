@@ -11,7 +11,7 @@ export async function Header() {
   // const user = session?.user;
 
   return (
-    <header className="relative mb-2.5 flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem]">
+    <header className="flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem]">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/images/logos/logo.svg"

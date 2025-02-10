@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20">
-      <div className="row-start-2 flex flex-col items-center gap-10">
+    <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[75%]">
+      <div className="flex flex-col items-center gap-10">
         <Image
           src="/images/home/tax-free.svg"
           width={96}

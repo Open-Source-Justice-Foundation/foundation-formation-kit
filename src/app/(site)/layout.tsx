@@ -6,10 +6,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="relative isolate flex min-h-svh w-full flex-col bg-background">
+    <div className="h-screen">
       <Header />
-      <div className="flex flex-1 flex-col pb-2 sm:px-2">
-        <main className="grow px-6 py-4 sm:px-10">{children}</main>
+      <div className="flex h-full justify-center">
+        <main className="flex justify-center">{children}</main>
       </div>
     </div>
   );
