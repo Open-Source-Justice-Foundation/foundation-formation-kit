@@ -5,7 +5,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="h-screen">
-      <div className="flex h-full items-center">{children}</div>
+      <div className="flex h-full items-center py-5">{children}</div>
     </div>
   );
 }
