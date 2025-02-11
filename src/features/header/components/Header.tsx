@@ -24,7 +24,10 @@ export async function Header() {
         <div className="flex md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline">
+              <Button
+                variant="outline"
+                className="h-8 px-[0.6875rem] sm:h-10 sm:px-4"
+              >
                 <Menu />
               </Button>
             </SheetTrigger>

@@ -13,7 +13,7 @@ export function HomeButton() {
         alt="Home Button Logo"
         unoptimized={true}
       />
-      <span className="pr-4 text-xl font-bold text-logo-foreground">
+      <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
         Foundation Formation Kit
       </span>
     </Link>
