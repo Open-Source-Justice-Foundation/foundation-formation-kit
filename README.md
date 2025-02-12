@@ -45,6 +45,16 @@ The tax-exempt foundation structure has previously been the exclusive privilege 
 - [ ] Add additional jurisdictions.
 - [ ] Integrate with partner platforms like Geyser and the Foundation supported nostr-native project, [Fundsolvr](https://github.com/Open-Source-Justice-Foundation/Fundsolvr)
 
+# Documents
+
+The following links can be used to download, print, and copy the OSJF redacted forms and templates:
+
+- [1023 Form](https://drive.google.com/file/d/1vbNi7d8l4ZwriWKeL6utbMwxj6MTS6Hf/view "1023 Form")
+
+- [Articles of Incorporation](https://drive.google.com/file/d/1NR5mAyL8gJFLxkD093u6AKE8LixTtpBX/view "Articles of Incorporation")
+
+- [Non-profit Bylaws Template](https://docs.google.com/document/d/1dFw4dC5FL8eHn69-4eVtR49bxylIpan_/view "Non-profit Bylaws Template")
+
 # Contribute
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
