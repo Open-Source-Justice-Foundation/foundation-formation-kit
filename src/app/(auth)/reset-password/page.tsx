@@ -24,7 +24,7 @@ const formSchema = z.object({
   password: z.string(),
 });
 
-export default function UserAuthForm() {
+export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
