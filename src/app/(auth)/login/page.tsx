@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -48,73 +49,77 @@ export default function UserAuthForm() {
   }
 
   return (
-    <div className="mx-auto grid w-[350px] gap-6">
-      <div className="flex w-full flex-col space-y-4 text-left">
-        <Link href="/" className="flex items-center justify-center gap-2">
-          <Image
-            src="/images/logos/logo.svg"
-            width={25}
-            height={25}
-            alt="Sign In Logo"
-            unoptimized={true}
-          />
-          <span className="pr-4 text-xl font-bold text-logo-foreground">
-            Foundation Formation Kit
-          </span>
-        </Link>
-        <p className="text-sm text-muted-foreground">
-          <Link href="/register" className="font-semibold text-link-foreground">
+    <Card className="flex w-[360px] flex-col sm:w-[425px]">
+      <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
+        <CardTitle>
+          <Link href="/" className="flex items-center justify-center gap-2">
+            <Image
+              src="/images/logos/logo.svg"
+              width={25}
+              height={25}
+              alt="Sign In Logo"
+              unoptimized={true}
+            />
+            <span className="text-xl font-bold tracking-normal text-logo-foreground">
+              Foundation Formation Kit
+            </span>
+          </Link>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+        <div className="flex flex-col gap-5">
+          <Link
+            href="/register"
+            className="text-sm font-semibold text-link-foreground"
+          >
             Create an account
           </Link>
-        </p>
-      </div>
-
-      <Form {...form}>
-        <form
-          className="flex flex-col gap-5"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email address</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border-primary/60"
-                    {...field}
-                    disabled={isLoading}
-                    placeholder="email..."
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Enter your password</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border-primary/60"
-                    {...field}
-                    disabled={isLoading}
-                    placeholder="password..."
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={isLoading}>
-            Sign in
-          </Button>
-        </form>
-      </Form>
-    </div>
+          <Form {...form}>
+            <form
+              className="flex flex-col gap-5"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email address</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isLoading}
+                        placeholder="email..."
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Enter your password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isLoading}
+                        placeholder="password..."
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" disabled={isLoading}>
+                Sign in
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
