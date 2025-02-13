@@ -7,8 +7,8 @@ export function GetStartedButton() {
   return (
     <Button
       onClick={() => signIn()}
-      className="focus-visible:ring-transparent"
       type="submit"
+      className="focus-visible:ring-ringPrimary"
     >
       <span className="text-base">Get started</span>
     </Button>

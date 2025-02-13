@@ -57,7 +57,7 @@ export default function ResetPasswordForm() {
               alt="Reset Password Logo"
               unoptimized={true}
             />
-            <span className="text-xl font-bold tracking-normal text-logo-foreground">
+            <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
               Foundation Formation Kit
             </span>
           </Link>
@@ -80,13 +80,18 @@ export default function ResetPasswordForm() {
                       {...field}
                       disabled={isLoading}
                       placeholder="password..."
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="focus-visible:ring-ringPrimary"
+            >
               Reset password
             </Button>
           </form>

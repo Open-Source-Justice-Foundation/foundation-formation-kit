@@ -12,7 +12,7 @@ export default function NotFound() {
           Oops! The page you&apos;re looking for doesn&apos;t exist. It might
           have been moved or deleted.
         </p>
-        <Button asChild>
+        <Button asChild className="focus-visible:ring-ringPrimary">
           <Link href="/">Return to Home</Link>
         </Button>
       </div>

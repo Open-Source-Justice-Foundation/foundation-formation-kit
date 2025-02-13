@@ -19,16 +19,18 @@ export default function UpdatedPasswordCard() {
                 alt="Password Updated Logo"
                 unoptimized={true}
               />
-              <span className="text-xl font-bold tracking-normal text-logo-foreground">
+              <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
                 Foundation Formation Kit
               </span>
             </Link>
-            <span className="text-xl font-medium">New password saved</span>
+            <span className="text-base font-medium sm:text-xl">
+              New password saved
+            </span>
           </div>
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-        <Button asChild className="w-full">
+        <Button asChild className="w-full focus-visible:ring-ringPrimary">
           <Link href="/">Return to Home</Link>
         </Button>
       </CardContent>

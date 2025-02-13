@@ -69,7 +69,7 @@ export default function RegisterForm() {
               alt="Create Account Logo"
               unoptimized={true}
             />
-            <span className="text-xl font-bold tracking-normal text-logo-foreground">
+            <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
               Foundation Formation Kit
             </span>
           </Link>
@@ -99,6 +99,7 @@ export default function RegisterForm() {
                         {...field}
                         disabled={isLoading}
                         placeholder="email..."
+                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       />
                     </FormControl>
                     <FormMessage />
@@ -116,6 +117,7 @@ export default function RegisterForm() {
                         {...field}
                         disabled={isLoading}
                         placeholder="password..."
+                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       />
                     </FormControl>
                     <FormMessage />
@@ -133,6 +135,7 @@ export default function RegisterForm() {
                         {...field}
                         disabled={isLoading}
                         placeholder="password..."
+                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       />
                     </FormControl>
                     <FormMessage />
@@ -140,7 +143,11 @@ export default function RegisterForm() {
                 )}
               />
 
-              <Button type="submit" disabled={isLoading}>
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="focus-visible:ring-ringPrimary"
+              >
                 Create account
               </Button>
             </form>

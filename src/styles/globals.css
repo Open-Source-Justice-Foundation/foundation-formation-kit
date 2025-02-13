@@ -7,7 +7,7 @@
     --background: 0 0% 100%;
     --foreground: 210 20% 20%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 210 20% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 244 76% 59%;
@@ -33,6 +33,7 @@
     /* Custom colors */
     --link-foreground: 244 76% 59%;
     --logo-foreground: 0 0% 16%;
+    --ring-primary: 244 76% 59%;
   }
 
   .dark {

@@ -60,7 +60,7 @@ export default function UserAuthForm() {
               alt="Sign In Logo"
               unoptimized={true}
             />
-            <span className="text-xl font-bold tracking-normal text-logo-foreground">
+            <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
               Foundation Formation Kit
             </span>
           </Link>
@@ -90,6 +90,7 @@ export default function UserAuthForm() {
                         {...field}
                         disabled={isLoading}
                         placeholder="email..."
+                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       />
                     </FormControl>
                     <FormMessage />
@@ -107,13 +108,18 @@ export default function UserAuthForm() {
                         {...field}
                         disabled={isLoading}
                         placeholder="password..."
+                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="focus-visible:ring-ringPrimary"
+              >
                 Sign in
               </Button>
             </form>
