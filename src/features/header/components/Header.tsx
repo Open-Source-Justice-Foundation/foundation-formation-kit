@@ -7,12 +7,13 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "~/components/ui/sheet";
+import { GetStartedButton } from "~/features/buttons";
+import { ThemeToggle } from "~/features/theme-toggle";
 import { Menu } from "lucide-react";
 // import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-import { GetStartedButton } from "./GetStartedButton";
-import { HomeButton } from "./HomeButton";
+import { NavbarHomeButton } from "./NavbarHomeButton";
 
 export async function Header() {
   // const session = await getServerSession(authOptions);
@@ -33,7 +34,10 @@ export async function Header() {
             </SheetTrigger>
             <SheetContent side="left">
               <SheetHeader>
-                <HomeButton />
+                <div className="flex items-center justify-between pt-4">
+                  <NavbarHomeButton />
+                  <ThemeToggle />
+                </div>
               </SheetHeader>
               <div className="flex flex-col gap-1.5 py-4">
                 <Link
@@ -52,13 +56,14 @@ export async function Header() {
             </SheetContent>
           </Sheet>
         </div>
-        <HomeButton />
+        <NavbarHomeButton />
       </div>
       <div className="hidden items-center gap-6 md:flex">
         <Link href="/login">
           <span className="font-medium text-link-foreground">Sign in</span>
         </Link>
         <GetStartedButton />
+        <ThemeToggle />
       </div>
     </header>
   );

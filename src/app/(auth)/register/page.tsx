@@ -14,8 +14,8 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { CardHomeButton } from "~/features/auth";
 import { signIn } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -61,18 +61,7 @@ export default function RegisterForm() {
     <Card className="flex w-[360px] flex-col sm:w-[425px]">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle>
-          <Link href="/" className="flex items-center justify-center gap-2">
-            <Image
-              src="/images/logos/logo.svg"
-              width={25}
-              height={25}
-              alt="Create Account Logo"
-              unoptimized={true}
-            />
-            <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
-              Foundation Formation Kit
-            </span>
-          </Link>
+          <CardHomeButton />
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">

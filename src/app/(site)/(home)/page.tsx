@@ -1,4 +1,4 @@
-import { GetStartedButton } from "~/features/header/components/GetStartedButton";
+import { GetStartedButton } from "~/features/buttons";
 import Image from "next/image";
 
 export default function Home() {

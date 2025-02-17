@@ -1,4 +1,5 @@
 import AuthProvider from "~/components/auth-provider";
+import { ThemeProvider } from "~/components/theme-provider";
 import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";
@@ -75,7 +76,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="m-0 min-h-screen bg-background p-0 antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          enableColorScheme={true}
+          disableTransitionOnChange={true}
+        >
+          <AuthProvider>{children}</AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

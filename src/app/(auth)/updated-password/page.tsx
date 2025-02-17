@@ -2,7 +2,7 @@
 
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import Image from "next/image";
+import { CardHomeButton } from "~/features/auth";
 import Link from "next/link";
 
 export default function UpdatedPasswordCard() {
@@ -11,18 +11,7 @@ export default function UpdatedPasswordCard() {
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle>
           <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center justify-center gap-2">
-              <Image
-                src="/images/logos/logo.svg"
-                width={25}
-                height={25}
-                alt="Password Updated Logo"
-                unoptimized={true}
-              />
-              <span className="text-base font-bold tracking-normal text-logo-foreground sm:text-xl">
-                Foundation Formation Kit
-              </span>
-            </Link>
+            <CardHomeButton />
             <span className="text-base font-medium sm:text-xl">
               New password saved
             </span>

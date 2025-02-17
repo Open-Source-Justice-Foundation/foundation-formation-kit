@@ -1,18 +1,12 @@
 "use client";
 
-import Image from "next/image";
+import { FFKLogo } from "~/features/logos";
 import Link from "next/link";
 
-export function HomeButton() {
+export function NavbarHomeButton() {
   return (
     <Link href="/" className="flex items-center gap-2">
-      <Image
-        src="/images/logos/logo.svg"
-        width={25}
-        height={25}
-        alt="Home Button Logo"
-        unoptimized={true}
-      />
+      <FFKLogo />
       <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
         Foundation Formation Kit
       </span>
