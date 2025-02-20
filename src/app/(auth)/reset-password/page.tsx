@@ -4,7 +4,13 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -50,6 +56,9 @@ export default function ResetPasswordForm() {
         <CardTitle>
           <CardHomeButton />
         </CardTitle>
+        <CardDescription>
+          🚧 Under construction, accounts may be deleted and not work 🚧
+        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>

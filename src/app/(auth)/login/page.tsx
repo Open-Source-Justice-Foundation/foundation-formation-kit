@@ -4,7 +4,13 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -20,27 +26,30 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-const formSchema = z.object({
+const FormSchema = z.object({
   email: z.string(),
   password: z.string(),
+  // .min(8, { message: "Password must be at least 8 characters" }),
 });
+
+type FormData = z.infer<typeof FormSchema>;
 
 export default function UserAuthForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormData>({
+    resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormData) {
     setIsLoading(true);
     const { email, password } = values;
 
-    await signIn("credentials", {
+    signIn("credentials", {
       email,
       password,
       redirect: true,
@@ -54,6 +63,9 @@ export default function UserAuthForm() {
         <CardTitle>
           <CardHomeButton />
         </CardTitle>
+        <CardDescription>
+          🚧 Under construction, accounts may be deleted and not work 🚧
+        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <div className="flex flex-col gap-5">
@@ -77,9 +89,10 @@ export default function UserAuthForm() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isLoading}
+                        type="email"
                         placeholder="email..."
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -91,13 +104,14 @@ export default function UserAuthForm() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Enter your password</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isLoading}
+                        type="password"
                         placeholder="password..."
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />

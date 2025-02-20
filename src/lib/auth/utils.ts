@@ -6,6 +6,7 @@ export async function saltAndHashPassword(password: string) {
     const hash = await argon2.hash(password);
     return hash;
   } catch (err) {
+    console.error(err);
     throw new Error("Failed to salt and hash password");
   }
 }
@@ -19,6 +20,7 @@ export async function verifyPassword(hash: string, password: string) {
       return false;
     }
   } catch (err) {
+    console.error(err);
     throw new Error("Failed to verify password");
   }
 }

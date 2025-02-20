@@ -1,7 +1,13 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { CardHomeButton } from "~/features/auth";
 import Link from "next/link";
 
@@ -17,6 +23,9 @@ export default function UpdatedPasswordCard() {
             </span>
           </div>
         </CardTitle>
+        <CardDescription>
+          🚧 Under construction, accounts may be deleted and not work 🚧
+        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Button asChild className="w-full focus-visible:ring-ringPrimary">
