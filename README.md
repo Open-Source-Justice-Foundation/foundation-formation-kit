@@ -49,11 +49,11 @@ The tax-exempt foundation structure has previously been the exclusive privilege 
 
 The following links can be used to download, print, and copy the OSJF redacted forms and templates:
 
-- [1023 Form](https://drive.google.com/file/d/1vbNi7d8l4ZwriWKeL6utbMwxj6MTS6Hf/view "1023 Form")
+- [1023 Form](https://drive.proton.me/urls/4K0GCP5084#xICKGCmhmkvv "1023 Form")
 
-- [Articles of Incorporation](https://drive.google.com/file/d/1NR5mAyL8gJFLxkD093u6AKE8LixTtpBX/view "Articles of Incorporation")
+- [Articles of Incorporation](https://drive.proton.me/urls/BVQ39YN5K0#yp2PbfDjgo4x "Articles of Incorporation")
 
-- [Non-profit Bylaws Template](https://docs.google.com/document/d/1dFw4dC5FL8eHn69-4eVtR49bxylIpan_/view "Non-profit Bylaws Template")
+- [Non-profit Bylaws Template](https://drive.proton.me/urls/F03YG7FDWM#dwP1b9sXYGaU "Non-profit Bylaws Template")
 
 # Contribute
 
