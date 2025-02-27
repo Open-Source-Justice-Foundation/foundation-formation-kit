@@ -24,37 +24,65 @@ import { CardHomeButton } from "~/features/auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { toast } from "sonner";
+import { z } from "zod";
 
-const FormSchema = z.object({
+const formSchema = z.object({
   email: z.string(),
   password: z.string(),
-  // .min(8, { message: "Password must be at least 8 characters" }),
 });
 
-type FormData = z.infer<typeof FormSchema>;
+type FormValues = z.infer<typeof formSchema>;
 
-export default function UserAuthForm() {
+export default function SignInForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: FormData) {
+  async function onSubmit(values: FormValues) {
     setIsLoading(true);
     const { email, password } = values;
 
-    signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    // TODO
+    // Zod validation will check email format and password format
+    const url = "/api/auth/login";
+    let loginResponse: Response = new Response();
+
+    try {
+      loginResponse = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (loginResponse.status !== 200) {
+        throw new Error(`Login response status: ${loginResponse.status}`);
+      }
+
+      await signIn("resend", {
+        email,
+        redirect: true,
+        redirectTo: "/",
+      });
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Login error");
+    }
+
+    setIsLoading(false);
   }
 
   return (
@@ -90,7 +118,6 @@ export default function UserAuthForm() {
                       <Input
                         {...field}
                         type="email"
-                        placeholder="email..."
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                         disabled={isLoading}
                       />
@@ -109,7 +136,6 @@ export default function UserAuthForm() {
                       <Input
                         {...field}
                         type="password"
-                        placeholder="password..."
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                         disabled={isLoading}
                       />
@@ -120,8 +146,8 @@ export default function UserAuthForm() {
               />
               <Button
                 type="submit"
-                disabled={isLoading}
                 className="focus-visible:ring-ringPrimary"
+                disabled={isLoading}
               >
                 Sign in
               </Button>

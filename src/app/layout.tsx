@@ -1,5 +1,6 @@
 import AuthProvider from "~/components/auth-provider";
 import { ThemeProvider } from "~/components/theme-provider";
+import { Toaster } from "~/components/ui/sonner";
 import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";
@@ -83,7 +84,10 @@ export default function RootLayout({
           enableColorScheme={true}
           disableTransitionOnChange={true}
         >
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <Toaster richColors />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

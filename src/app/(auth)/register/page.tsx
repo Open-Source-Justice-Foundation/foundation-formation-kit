@@ -24,18 +24,22 @@ import { CardHomeButton } from "~/features/auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string(),
   password: z.string(),
+  // .min(12, { message: "Password must be at least 12 characters" }),
   passwordConfirmation: z.string(),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
@@ -47,20 +51,47 @@ export default function RegisterForm() {
   const { reset } = form;
 
   useEffect(() => {
-    reset({});
+    reset({ email: "", password: "", passwordConfirmation: "" });
   }, [reset]);
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { email, password, passwordConfirmation } = values;
+    const { email, password } = values;
 
-    await signIn("credentials", {
-      email,
-      password,
-      passwordConfirmation,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    // TODO
+    // Zod validation will check email format, password format, and if the password was confirmed
+    const url = "/api/auth/register";
+    let registerResponse: Response = new Response();
+
+    try {
+      registerResponse = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (registerResponse.status !== 201) {
+        throw new Error(`Register response status: ${registerResponse.status}`);
+      }
+
+      await signIn("resend", {
+        email,
+        redirect: true,
+        redirectTo: "/",
+      });
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Registration error");
+    }
+
+    setIsLoading(false);
   }
 
   return (
@@ -95,9 +126,9 @@ export default function RegisterForm() {
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isLoading}
-                        placeholder="email..."
+                        type="email"
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -109,13 +140,13 @@ export default function RegisterForm() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Enter your password</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isLoading}
-                        placeholder="password..."
+                        type="password"
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -127,13 +158,13 @@ export default function RegisterForm() {
                 name="passwordConfirmation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm your password</FormLabel>
+                    <FormLabel>Confirm password</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        disabled={isLoading}
-                        placeholder="password..."
+                        type="password"
                         className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -143,8 +174,8 @@ export default function RegisterForm() {
 
               <Button
                 type="submit"
-                disabled={isLoading}
                 className="focus-visible:ring-ringPrimary"
+                disabled={isLoading}
               >
                 Create account
               </Button>

@@ -1,8 +1,10 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
-// import { saltAndHashPassword } from "~/lib/auth/utils";
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import Resend from "next-auth/providers/resend";
+
+// *DO NOT* create a `Pool` here, outside the request handler.
+// Neon's Postgres cannot keep a pool alive between requests.
 
 export const { auth, handlers, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -20,45 +22,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
       // (used for check email message)
       // verifyRequest: "/auth/verify-request",
       // New users will be directed here on first sign in (leave the property out if not of interest)
-      newUser: "/register",
+      // newUser: "/",
     },
     adapter: PostgresAdapter(pool),
     providers: [
-      Credentials({
-        // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-        // e.g. domain, username, password, 2FA token, etc.
-        credentials: {
-          email: {
-            label: "Email address",
-            type: "email",
-            placeholder: "email...",
-          },
-          password: {
-            label: "Password",
-            type: "password",
-            placeholder: "password...",
-          },
-        },
-        authorize: async (credentials) => {
-          console.log("credentials", credentials);
-          const user = null;
-
-          if (typeof credentials.password === "string") {
-            // logic to salt and hash password
-            // const pwHash = await saltAndHashPassword(credentials.password);
-            // logic to verify if the user exists
-            // user = await getUserFromDb(credentials.email, pwHash);
-          }
-
-          if (!user) {
-            // No user found, so this is their first attempt to login
-            // Optionally, this is also the place you could do a user registration
-            throw new Error("Invalid credentials");
-          }
-
-          // return user object with their profile data
-          return user;
-        },
+      Resend({
+        // TODO
+        // Update from to use foundationformationkit.org
+        // from: "no-reply@foundationformationkit.org",
+        from: "no-reply@testrelay.xyz",
       }),
     ],
   };

@@ -17,7 +17,7 @@ export async function verifyPassword(hash: string, password: string) {
     if (passwordVerified) {
       return true;
     } else {
-      return false;
+      throw new Error("Invalid password");
     }
   } catch (err) {
     console.error(err);
