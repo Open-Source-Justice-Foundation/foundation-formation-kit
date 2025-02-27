@@ -27,10 +27,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     adapter: PostgresAdapter(pool),
     providers: [
       Resend({
-        // TODO
-        // Update from to use foundationformationkit.org
-        // from: "no-reply@foundationformationkit.org",
-        from: "no-reply@testrelay.xyz",
+        from: "auth@foundationformationkit.org",
       }),
     ],
   };
