@@ -1,0 +1,3 @@
+{
+  "installCommand": "npm install && npm rebuild argon2 --build-from-source"
+}
