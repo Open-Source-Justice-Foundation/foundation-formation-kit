@@ -20,15 +20,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
       console.log("emailExistsResponse", emailExistsResponse);
 
-      // if (emailExistsResponse === undefined) {
-      //   throw new Error("Failed to select user from database");
-      // } else if (emailExistsResponse.length !== 1) {
-      //   throw new Error("Failed to check if email exists in database");
-      // } else if (!emailExistsResponse[0].hasOwnProperty("exists")) {
-      //   throw new Error("Failed to check for exists property");
-      // } else if (emailExistsResponse[0].exists !== false) {
-      //   throw new Error("Email already exists");
-      // }
+      if (emailExistsResponse === undefined) {
+        throw new Error("Failed to select user from database");
+      } else if (emailExistsResponse.length !== 1) {
+        throw new Error("Failed to check if email exists in database");
+      } else if (!emailExistsResponse[0].hasOwnProperty("exists")) {
+        throw new Error("Failed to check for exists property");
+      } else if (emailExistsResponse[0].exists !== false) {
+        throw new Error("Email already exists");
+      }
 
       // const passwordHash = await saltAndHashPassword(password);
       //
