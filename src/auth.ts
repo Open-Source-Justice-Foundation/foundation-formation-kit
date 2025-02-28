@@ -12,7 +12,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
   return {
     // debug: process.env.NODE_ENV === "development",
     session: {
-      strategy: "jwt",
+      strategy: "database",
     },
     pages: {
       signIn: "/login",
