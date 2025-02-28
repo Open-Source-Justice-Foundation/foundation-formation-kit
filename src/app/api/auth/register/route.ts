@@ -7,7 +7,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const { email, password } = await request.json();
+      const { email } = await request.json();
 
       // TODO
       // Validate email and password here on the server using zod
