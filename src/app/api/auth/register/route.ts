@@ -18,6 +18,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         [email],
       );
 
+      console.log("emailExistsResponse", emailExistsResponse);
+
       if (emailExistsResponse === undefined) {
         throw new Error("Failed to select user from database");
       } else if (emailExistsResponse.length !== 1) {
