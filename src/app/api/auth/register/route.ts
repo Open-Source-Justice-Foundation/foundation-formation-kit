@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-import { saltAndHashPassword } from "~/lib/auth/utils";
+// import { saltAndHashPassword } from "~/lib/auth/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -28,12 +28,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         throw new Error("Email already exists");
       }
 
-      const passwordHash = await saltAndHashPassword(password);
-
-      await sql("INSERT INTO users (email, password_hash) VALUES ($1, $2)", [
-        email,
-        passwordHash,
-      ]);
+      // const passwordHash = await saltAndHashPassword(password);
+      //
+      // await sql("INSERT INTO users (email, password_hash) VALUES ($1, $2)", [
+      //   email,
+      //   passwordHash,
+      // ]);
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
