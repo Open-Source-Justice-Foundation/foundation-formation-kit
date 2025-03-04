@@ -39,18 +39,7 @@ export async function Header() {
               <SheetHeader>
                 <div className="flex items-center justify-between pt-4">
                   <SheetClose asChild>
-                    {/* TODO */}
-                    {/* Use HeaderHomeButton here by setting up asChild */}
-                    {/* <HeaderHomeButton /> */}
-                    <Link href="/" className="flex items-center gap-2">
-                      <FFKLogo />
-                      <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
-                        Foundation Formation Kit
-                      </span>
-                      <span className="rounded-lg border border-border p-1 text-[0.6rem]">
-                        ALPHA
-                      </span>
-                    </Link>
+                    <HeaderHomeButton />
                   </SheetClose>
                   <ThemeToggle />
                 </div>
