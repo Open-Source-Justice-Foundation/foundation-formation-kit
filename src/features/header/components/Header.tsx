@@ -3,6 +3,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -45,6 +46,9 @@ export async function Header() {
                     <ThemeToggle />
                   </div>
                 </SheetTitle>
+                <SheetDescription className="sr-only">
+                  Sheet Menu
+                </SheetDescription>
               </SheetHeader>
               <>
                 {user === null ? (
