@@ -1,1 +1,1 @@
-export { CardHomeButton } from "./components/CardHomeButton";
+export { AuthCardHomeButton } from "./components/AuthCardHomeButton";

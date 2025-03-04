@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { CardHomeButton } from "~/features/auth";
+import { AuthCardHomeButton } from "~/features/auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -36,7 +36,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function RegisterForm() {
+export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -106,7 +106,7 @@ export default function RegisterForm() {
     <Card className="flex w-[360px] flex-col sm:w-[425px]">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle>
-          <CardHomeButton />
+          <AuthCardHomeButton />
         </CardTitle>
         <CardDescription>
           🚧 Under construction, accounts may be deleted and not work 🚧

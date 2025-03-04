@@ -17,7 +17,7 @@ import { getUser } from "~/server/auth";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 
-import { NavbarHomeButton } from "./NavbarHomeButton";
+import { HeaderHomeButton } from "./HeaderHomeButton";
 
 export async function Header() {
   const user = await getUser();
@@ -40,8 +40,8 @@ export async function Header() {
                 <div className="flex items-center justify-between pt-4">
                   <SheetClose asChild>
                     {/* TODO */}
-                    {/* Use NavbarHomeButton here by setting up asChild */}
-                    {/* <NavbarHomeButton /> */}
+                    {/* Use HeaderHomeButton here by setting up asChild */}
+                    {/* <HeaderHomeButton /> */}
                     <Link href="/" className="flex items-center gap-2">
                       <FFKLogo />
                       <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
@@ -94,7 +94,7 @@ export async function Header() {
             </SheetContent>
           </Sheet>
         </div>
-        <NavbarHomeButton />
+        <HeaderHomeButton />
       </div>
       <div className="hidden items-center gap-6 md:flex">
         {user === null ? (

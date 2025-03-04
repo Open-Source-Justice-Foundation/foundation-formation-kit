@@ -1,7 +1,7 @@
 import { FFKLogo } from "~/features/logos";
 import Link from "next/link";
 
-export function CardHomeButton() {
+export function AuthCardHomeButton() {
   return (
     <Link href="/" className="flex items-center justify-center gap-2">
       <FFKLogo />

@@ -1,6 +1,6 @@
 import { Header } from "~/features/header";
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

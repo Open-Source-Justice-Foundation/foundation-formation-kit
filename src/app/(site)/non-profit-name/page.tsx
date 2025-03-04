@@ -29,7 +29,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function NonProfitNameForm() {
+export default function NonProfitNamePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({

@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import { redirect } from "next/navigation";
 
-export default async function NonProfitLayout({
+export default async function NonProfitNameLayout({
   children,
 }: {
   children: React.ReactNode;

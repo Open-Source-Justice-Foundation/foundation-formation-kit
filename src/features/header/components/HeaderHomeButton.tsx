@@ -1,7 +1,7 @@
 import { FFKLogo } from "~/features/logos";
 import Link from "next/link";
 
-export function NavbarHomeButton() {
+export function HeaderHomeButton() {
   return (
     <Link href="/" className="flex items-center gap-2">
       <FFKLogo />
