@@ -76,7 +76,7 @@ export default function SignInPage() {
         redirectTo: "/",
       });
 
-      if (!emailSignInResponse?.ok) {
+      if (emailSignInResponse !== undefined && !emailSignInResponse?.ok) {
         throw new Error(
           `Email sign in response status: ${emailSignInResponse?.status}`,
         );

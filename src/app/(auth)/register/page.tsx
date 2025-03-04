@@ -87,7 +87,7 @@ export default function RegisterPage() {
         redirectTo: "/",
       });
 
-      if (!emailSignInResponse?.ok) {
+      if (emailSignInResponse !== undefined && !emailSignInResponse?.ok) {
         throw new Error(
           `Email sign in response status: ${emailSignInResponse?.status}`,
         );
