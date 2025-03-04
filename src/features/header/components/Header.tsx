@@ -11,7 +11,6 @@ import {
   SheetSignOutButton,
   SignOutButton,
 } from "~/features/buttons";
-import { FFKLogo } from "~/features/logos";
 import { ThemeToggle } from "~/features/theme-toggle";
 import { getUser } from "~/server/auth";
 import { Menu } from "lucide-react";
