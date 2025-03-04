@@ -1,22 +1,26 @@
-// import { auth } from "~/auth";
-
 import { Button } from "~/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTrigger,
 } from "~/components/ui/sheet";
-import { GetStartedButton } from "~/features/buttons";
+import {
+  GetStartedButton,
+  SheetSignOutButton,
+  SignOutButton,
+} from "~/features/buttons";
+import { FFKLogo } from "~/features/logos";
 import { ThemeToggle } from "~/features/theme-toggle";
+import { getUser } from "~/server/auth";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 
 import { NavbarHomeButton } from "./NavbarHomeButton";
 
 export async function Header() {
-  // const session = await auth();
-  // const user = session?.user;
+  const user = await getUser();
 
   return (
     <header className="flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem] dark:drop-shadow-[0_1px_2px_rgba(73,73,80)]">
@@ -34,33 +38,72 @@ export async function Header() {
             <SheetContent side="left">
               <SheetHeader>
                 <div className="flex items-center justify-between pt-4">
-                  <NavbarHomeButton />
+                  <SheetClose asChild>
+                    {/* TODO */}
+                    {/* Use NavbarHomeButton here by setting up asChild */}
+                    {/* <NavbarHomeButton /> */}
+                    <Link href="/" className="flex items-center gap-2">
+                      <FFKLogo />
+                      <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
+                        Foundation Formation Kit
+                      </span>
+                      <span className="rounded-lg border border-border p-1 text-[0.6rem]">
+                        ALPHA
+                      </span>
+                    </Link>
+                  </SheetClose>
                   <ThemeToggle />
                 </div>
               </SheetHeader>
-              <div className="flex flex-col gap-1.5 py-4">
-                <Link
-                  href="/login"
-                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
-                >
-                  <span className="font-medium">Sign in</span>
-                </Link>
-                <Link
-                  href="/login"
-                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
-                >
-                  <span className="font-medium">Get started</span>
-                </Link>
-              </div>
+              <>
+                {user === null ? (
+                  <div className="flex flex-col gap-1.5 py-4">
+                    <SheetClose asChild>
+                      <Link
+                        href="/login"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Sign in</span>
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/login"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Get started</span>
+                      </Link>
+                    </SheetClose>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-1.5 py-4">
+                    <SheetClose asChild>
+                      <SheetSignOutButton />
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/under-construction"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Get started</span>
+                      </Link>
+                    </SheetClose>
+                  </div>
+                )}
+              </>
             </SheetContent>
           </Sheet>
         </div>
         <NavbarHomeButton />
       </div>
       <div className="hidden items-center gap-6 md:flex">
-        <Link href="/login">
-          <span className="font-medium text-link-foreground">Sign in</span>
-        </Link>
+        {user === null ? (
+          <Link href="/login">
+            <span className="font-medium text-link-foreground">Sign in</span>
+          </Link>
+        ) : (
+          <SignOutButton />
+        )}
         <GetStartedButton />
         <ThemeToggle />
       </div>

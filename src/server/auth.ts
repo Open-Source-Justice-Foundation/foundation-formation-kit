@@ -1,19 +1,20 @@
-"use server";
-
 import { auth } from "~/auth";
-import { redirect } from "next/navigation";
+import { UserWithEmailVerified } from "~/types";
 
 export async function getUser() {
-  const session = await auth();
-  console.log("getUser session: ", session);
-  const user = session?.user;
-  return user;
-}
+  try {
+    const session = await auth();
+    const user = <UserWithEmailVerified>session?.user;
 
-export async function redirectIfNotLoggedIn() {
-  const session = await auth();
-  const user = session?.user;
-  if (!user) {
-    redirect("/login");
+    if (user?.emailVerified) {
+      return user;
+    }
+
+    return null;
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to get auth session");
   }
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import { FFKLogo } from "~/features/logos";
 import Link from "next/link";
 

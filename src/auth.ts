@@ -1,6 +1,6 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Resend from "next-auth/providers/resend";
 
 // *DO NOT* create a `Pool` here, outside the request handler.
@@ -10,19 +10,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
   return {
-    // debug: process.env.NODE_ENV === "development",
+    debug: process.env.NODE_ENV === "development",
     session: {
       strategy: "database",
+      maxAge: 2592000, // 30 days
+      updateAge: 86400, // 1 day
     },
     pages: {
       signIn: "/login",
-      // signOut: "/signout",
+      signOut: "/logout",
       // Error code passed in query string as ?error=
       error: "/error",
-      // (used for check email message)
+      // Used for check email message
       // verifyRequest: "/auth/verify-request",
-      // New users will be directed here on first sign in (leave the property out if not of interest)
-      // newUser: "/",
     },
     adapter: PostgresAdapter(pool),
     providers: [
@@ -30,5 +30,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         from: "auth@foundationformationkit.org",
       }),
     ],
-  };
+  } satisfies NextAuthConfig;
 });

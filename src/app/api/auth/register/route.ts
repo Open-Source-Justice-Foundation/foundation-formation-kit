@@ -7,6 +7,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
+      // TODO
+      // Check passwordConfirmation as well
       const { email, password } = await request.json();
 
       // TODO

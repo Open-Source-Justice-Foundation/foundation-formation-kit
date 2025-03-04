@@ -1,23 +1,25 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-// import { signIn } from "next-auth/react";
-
 export function GetStartedButton() {
+  const { data: session } = useSession();
+
+  // TODO
+  // Make sure email is verified
   return (
-    /* <Button */
-    /*   onClick={() => signIn()} */
-    /*   type="submit" */
-    /*   className="focus-visible:ring-ringPrimary" */
-    /* > */
-    /*   <span className="text-base">Get started</span> */
-    /* </Button> */
-    <Button asChild className="focus-visible:ring-ringPrimary">
-      <Link href="/under-construction" className="text-base">
-        Get started
-      </Link>
+    <Button asChild type="button" className="focus-visible:ring-ringPrimary">
+      {session?.user ? (
+        <Link href="/under-construction" className="text-base">
+          Get started
+        </Link>
+      ) : (
+        <Link href="/login" className="text-base">
+          Get started
+        </Link>
+      )}
     </Button>
   );
 }

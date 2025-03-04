@@ -171,7 +171,6 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-
               <Button
                 type="submit"
                 className="focus-visible:ring-ringPrimary"

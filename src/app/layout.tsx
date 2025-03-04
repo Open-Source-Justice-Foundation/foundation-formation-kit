@@ -1,6 +1,6 @@
-import AuthProvider from "~/components/auth-provider";
-import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
+import { AuthProvider } from "~/providers/auth/AuthProvider";
+import { ThemeProvider } from "~/providers/theme/ThemeProvider";
 import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";

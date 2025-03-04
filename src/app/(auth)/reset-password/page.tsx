@@ -21,33 +21,66 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { CardHomeButton } from "~/features/auth";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const formSchema = z.object({
   password: z.string(),
+  passwordConfirmation: z.string(),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       password: "",
+      passwordConfirmation: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { password } = values;
+    const { password, passwordConfirmation } = values;
 
-    await signIn("credentials", {
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    // TODO
+    // Zod validation will check password format and if the password was confirmed
+    const url = "/api/auth/reset-password";
+    let resetPasswordResponse: Response = new Response();
+
+    try {
+      resetPasswordResponse = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+          passwordConfirmation,
+        }),
+      });
+
+      // TODO
+      // Check status code
+      if (resetPasswordResponse.status !== 200) {
+        throw new Error(
+          `Reset password response status: ${resetPasswordResponse.status}`,
+        );
+      }
+
+      // TODO
+      // Redirect user to sign in page on successful reset
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Reset password error");
+    }
+    setIsLoading(false);
   }
 
   return (
@@ -71,13 +104,31 @@ export default function ResetPasswordForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Reset your password</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isLoading}
-                      placeholder="password..."
+                      type="password"
                       className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="passwordConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm password</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="password"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />
@@ -86,8 +137,8 @@ export default function ResetPasswordForm() {
             />
             <Button
               type="submit"
-              disabled={isLoading}
               className="focus-visible:ring-ringPrimary"
+              disabled={isLoading}
             >
               Reset password
             </Button>
