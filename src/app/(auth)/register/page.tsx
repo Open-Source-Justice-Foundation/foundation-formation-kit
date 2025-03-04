@@ -75,15 +75,23 @@ export default function RegisterForm() {
         }),
       });
 
-      if (registerResponse.status !== 201) {
-        throw new Error(`Register response status: ${registerResponse.status}`);
+      if (registerResponse?.status !== 201) {
+        throw new Error(
+          `Register response status: ${registerResponse?.status}`,
+        );
       }
 
-      await signIn("resend", {
+      const emailSignInResponse = await signIn("resend", {
         email,
         redirect: true,
         redirectTo: "/",
       });
+
+      if (!emailSignInResponse?.ok) {
+        throw new Error(
+          `Email sign in response status: ${emailSignInResponse?.status}`,
+        );
+      }
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error

@@ -21,8 +21,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
       signOut: "/logout",
       // Error code passed in query string as ?error=
       error: "/error",
-      // Used for check email message
-      // verifyRequest: "/auth/verify-request",
+      // Used for displaying the check email message
+      verifyRequest: "/verify-request",
     },
     adapter: PostgresAdapter(pool),
     providers: [
