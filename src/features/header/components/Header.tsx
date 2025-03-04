@@ -4,6 +4,7 @@ import {
   SheetClose,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
 import {
@@ -36,12 +37,14 @@ export async function Header() {
             </SheetTrigger>
             <SheetContent side="left">
               <SheetHeader>
-                <div className="flex items-center justify-between pt-4">
-                  <SheetClose asChild>
-                    <HeaderHomeButton />
-                  </SheetClose>
-                  <ThemeToggle />
-                </div>
+                <SheetTitle className="text-base font-normal">
+                  <div className="flex items-center justify-between pt-4">
+                    <SheetClose asChild>
+                      <HeaderHomeButton />
+                    </SheetClose>
+                    <ThemeToggle />
+                  </div>
+                </SheetTitle>
               </SheetHeader>
               <>
                 {user === null ? (

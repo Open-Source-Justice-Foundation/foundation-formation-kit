@@ -8,7 +8,7 @@ export function HeaderHomeButton() {
       <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
         Foundation Formation Kit
       </span>
-      <span className="rounded-lg border border-border p-1 text-[0.6rem]">
+      <span className="rounded-lg border border-border p-1 text-[0.6rem]/[1.5]">
         ALPHA
       </span>
     </Link>
