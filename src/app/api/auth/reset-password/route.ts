@@ -1,9 +1,16 @@
+import { auth } from "~/auth";
 // import { neon } from "@neondatabase/serverless";
 // import { saltAndHashPassword } from "~/lib/auth/utils";
 
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const session = await auth();
+
+  if (session !== null) {
+    throw new Error("Session already exists");
+  }
+
   if (typeof process.env.DATABASE_URL === "string") {
     // const sql = neon(process.env.DATABASE_URL);
 
