@@ -1,4 +1,5 @@
 import * as argon2 from "argon2";
+import { NextRequest } from "next/server";
 
 // Passwords
 export async function saltAndHashPassword(password: string) {
@@ -23,4 +24,20 @@ export async function verifyPassword(hash: string, password: string) {
     console.error(err);
     throw new Error("Failed to verify password");
   }
+}
+
+// Route protection
+export function isRouteProtected(
+  protectedRoutes: string[],
+  request: NextRequest,
+): boolean {
+  const { nextUrl } = request;
+
+  const routeProtected = protectedRoutes.some((protectedRoute) => {
+    if (protectedRoute === nextUrl.pathname) {
+      return true;
+    }
+  });
+
+  return routeProtected;
 }

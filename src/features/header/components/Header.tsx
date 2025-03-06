@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "~/components/ui/button";
 import {
   Sheet,
@@ -14,14 +16,18 @@ import {
   SignOutButton,
 } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
-import { getUser } from "~/server/auth";
+// import { getUser } from "~/server/auth";
 import { Menu } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { HeaderHomeButton } from "./HeaderHomeButton";
 
-export async function Header() {
-  const user = await getUser();
+export function Header() {
+  // const user = await getUser();
+  // TODO
+  // Make sure email is verified
+  const { data: session } = useSession();
 
   return (
     <header className="flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem] dark:drop-shadow-[0_1px_2px_rgba(73,73,80)]">
@@ -51,7 +57,10 @@ export async function Header() {
                 </SheetDescription>
               </SheetHeader>
               <>
-                {user === null ? (
+                {/* TODO */}
+                {/* Try using server session or using a loading skeleton */}
+                {session === undefined && <></>}
+                {session === null && (
                   <div className="flex flex-col gap-1.5 py-4">
                     <SheetClose asChild>
                       <Link
@@ -70,7 +79,8 @@ export async function Header() {
                       </Link>
                     </SheetClose>
                   </div>
-                ) : (
+                )}
+                {session && (
                   <div className="flex flex-col gap-1.5 py-4">
                     <SheetClose asChild>
                       <SheetSignOutButton />
@@ -92,13 +102,15 @@ export async function Header() {
         <HeaderHomeButton />
       </div>
       <div className="hidden items-center gap-6 md:flex">
-        {user === null ? (
+        {/* TODO */}
+        {/* Try using server session or using a loading skeleton */}
+        {session === undefined && <></>}
+        {session === null && (
           <Link href="/login">
             <span className="font-medium text-link-foreground">Sign in</span>
           </Link>
-        ) : (
-          <SignOutButton />
         )}
+        {session && <SignOutButton />}
         <GetStartedButton />
         <ThemeToggle />
       </div>

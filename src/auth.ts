@@ -1,7 +1,10 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
+import { isRouteProtected } from "~/lib/auth/utils";
+import { UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import Resend from "next-auth/providers/resend";
+import { NextResponse } from "next/server";
 
 // *DO NOT* create a `Pool` here, outside the request handler.
 // Neon's Postgres cannot keep a pool alive between requests.
@@ -30,5 +33,48 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         from: "auth@foundationformationkit.org",
       }),
     ],
+    callbacks: {
+      authorized: async ({ request, auth }) => {
+        const user = <UserWithEmailVerified>auth?.user;
+
+        // Set isAuthenticated to true if the user's email is verified by checking if the property is a truthy value
+        // Otherwise set to false
+        const isAuthenticated = !!user?.emailVerified;
+
+        let protectedRoutes: string[] = [];
+
+        if (isAuthenticated) {
+          protectedRoutes = [
+            "/login",
+            "/register",
+            "/reset-password",
+            "/updated-password",
+            "/verify-request",
+          ];
+
+          const routeProtected = isRouteProtected(protectedRoutes, request);
+
+          // Redirect to homepage if route is a protected route and user is authenticated
+          if (routeProtected) {
+            return NextResponse.redirect(new URL("/", request.url));
+          }
+        } else {
+          protectedRoutes = [
+            "/non-profit-name",
+            "/under-construction",
+            "/logout",
+          ];
+
+          const routeProtected = isRouteProtected(protectedRoutes, request);
+
+          // Redirect to login if route is a protected route and user is not authenticated
+          if (routeProtected) {
+            return NextResponse.redirect(new URL("/login", request.url));
+          }
+        }
+
+        return NextResponse.next();
+      },
+    },
   } satisfies NextAuthConfig;
 });

@@ -9,6 +9,7 @@ export function GetStartedButton() {
 
   // TODO
   // Make sure email is verified
+  // Handle when session is undefined
   return (
     <Button asChild type="button" className="focus-visible:ring-ringPrimary">
       {session?.user ? (
