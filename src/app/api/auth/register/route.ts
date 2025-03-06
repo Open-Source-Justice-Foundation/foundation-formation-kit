@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { auth } from "~/auth";
-import { saltAndHashPassword } from "~/lib/auth/utils";
+import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
