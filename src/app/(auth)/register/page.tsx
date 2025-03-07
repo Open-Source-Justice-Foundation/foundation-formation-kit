@@ -27,12 +27,24 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formSchema = z.object({
-  email: z.string(),
-  password: z.string(),
-  // .min(12, { message: "Password must be at least 12 characters" }),
-  passwordConfirmation: z.string(),
-});
+const formSchema = z
+  .object({
+    email: z.string().nonempty({ message: "Email address is required" }).email({
+      message: "Email address is invalid",
+    }),
+    password: z
+      .string()
+      .nonempty({ message: "Password is required" })
+      .min(12, { message: "Password must contain at least 12 characters" }),
+    passwordConfirmation: z
+      .string()
+      .nonempty({ message: "Password is required" })
+      .min(12, { message: "Password must contain at least 12 characters" }),
+  })
+  .refine((values) => values.password === values.passwordConfirmation, {
+    message: "Passwords do not match",
+    path: ["passwordConfirmation"],
+  });
 
 type FormValues = z.infer<typeof formSchema>;
 

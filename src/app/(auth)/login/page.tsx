@@ -28,8 +28,10 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().nonempty({ message: "Email address is required" }).email({
+    message: "Email address is invalid",
+  }),
+  password: z.string().nonempty({ message: "Password is required" }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
