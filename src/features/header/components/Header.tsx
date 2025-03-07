@@ -59,7 +59,6 @@ export function Header() {
               <>
                 {/* TODO */}
                 {/* Try using server session or using a loading skeleton */}
-                {session === undefined && <></>}
                 {session === null && (
                   <div className="flex flex-col gap-1.5 py-4">
                     <SheetClose asChild>
@@ -104,7 +103,6 @@ export function Header() {
       <div className="hidden items-center gap-6 md:flex">
         {/* TODO */}
         {/* Try using server session or using a loading skeleton */}
-        {session === undefined && <></>}
         {session === null && (
           <Link href="/login">
             <span className="font-medium text-link-foreground">Sign in</span>
