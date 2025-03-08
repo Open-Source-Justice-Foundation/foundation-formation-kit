@@ -35,7 +35,8 @@ const formSchema = z
       .max(255, { message: "Email address can be at most 255 characters" })
       .email({
         message: "Email address is invalid",
-      }),
+      })
+      .trim(),
     password: z
       .string()
       .nonempty({ message: "Password is required" })
