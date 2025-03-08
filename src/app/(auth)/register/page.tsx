@@ -29,9 +29,13 @@ import { z } from "zod";
 
 const formSchema = z
   .object({
-    email: z.string().nonempty({ message: "Email address is required" }).email({
-      message: "Email address is invalid",
-    }),
+    email: z
+      .string()
+      .nonempty({ message: "Email address is required" })
+      .max(255, { message: "Email address can be at most 255 characters" })
+      .email({
+        message: "Email address is invalid",
+      }),
     password: z
       .string()
       .nonempty({ message: "Password is required" })
