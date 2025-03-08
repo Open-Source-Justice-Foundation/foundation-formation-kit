@@ -21,31 +21,20 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
+import { signInSchema } from "~/lib/auth/validation/schemas";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formSchema = z.object({
-  email: z
-    .string()
-    .nonempty({ message: "Email address is required" })
-    .max(255, { message: "Email address can be at most 255 characters" })
-    .email({
-      message: "Email address is invalid",
-    })
-    .trim(),
-  password: z.string().nonempty({ message: "Password is required" }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof signInSchema>;
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -56,8 +45,6 @@ export default function SignInPage() {
     setIsLoading(true);
     const { email, password } = values;
 
-    // TODO
-    // Zod validation will check email format and password format
     const url = "/api/auth/login";
     let loginResponse: Response = new Response();
 

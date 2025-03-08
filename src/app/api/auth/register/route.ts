@@ -1,7 +1,9 @@
 import { neon } from "@neondatabase/serverless";
 import { auth } from "~/auth";
 import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
+import { registerSchema } from "~/lib/auth/validation/schemas";
 import { NextRequest, NextResponse } from "next/server";
+import { ZodError } from "zod";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth();
@@ -14,13 +16,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      // TODO
-      // Check passwordConfirmation as well
-      const { email, password } = await request.json();
+      const data = await request.json();
 
-      // TODO
-      // Validate email and password here on the server using zod
-      // Check for email and password existence and format
+      const { email, password } = registerSchema.parse(data);
 
       const emailExistsResponse = await sql(
         "SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)",
@@ -46,6 +44,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
+      if (err instanceof ZodError) {
+        throw new Error("Failed to register user: invalid credentials");
+      }
       console.error(err);
       throw new Error("Failed to register user");
     }

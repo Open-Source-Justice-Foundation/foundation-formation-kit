@@ -21,22 +21,18 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
+import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formSchema = z.object({
-  password: z.string(),
-  passwordConfirmation: z.string(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       password: "",
       passwordConfirmation: "",
@@ -47,8 +43,6 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
     const { password, passwordConfirmation } = values;
 
-    // TODO
-    // Zod validation will check password format and if the password was confirmed
     const url = "/api/auth/reset-password";
     let resetPasswordResponse: Response = new Response();
 
@@ -64,8 +58,6 @@ export default function ResetPasswordPage() {
         }),
       });
 
-      // TODO
-      // Check status code
       if (resetPasswordResponse.status !== 200) {
         throw new Error(
           `Reset password response status: ${resetPasswordResponse.status}`,
