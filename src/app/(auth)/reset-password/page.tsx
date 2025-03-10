@@ -22,6 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -30,6 +31,9 @@ type FormValues = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState<boolean>(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(resetPasswordSchema),
@@ -41,6 +45,8 @@ export default function ResetPasswordPage() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
+    setShowPassword(false);
+    setShowPasswordConfirmation(false);
     const { password, passwordConfirmation } = values;
 
     const url = "/api/auth/reset-password";
@@ -98,12 +104,33 @@ export default function ResetPasswordPage() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="password"
-                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        type={showPassword ? "text" : "password"}
+                        className={
+                          "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        }
+                        autoComplete="new-password"
+                        disabled={isLoading}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        disabled={isLoading}
+                      >
+                        {showPassword ? (
+                          <EyeOffIcon aria-hidden="true" />
+                        ) : (
+                          <EyeIcon aria-hidden="true" />
+                        )}
+                        <span className="sr-only">
+                          {showPassword ? "Hide password" : "Show password"}
+                        </span>
+                      </Button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -116,12 +143,37 @@ export default function ResetPasswordPage() {
                 <FormItem>
                   <FormLabel>Confirm password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="password"
-                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        type={showPasswordConfirmation ? "text" : "password"}
+                        className={
+                          "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                        }
+                        autoComplete="new-password"
+                        disabled={isLoading}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                        onClick={() =>
+                          setShowPasswordConfirmation((prev) => !prev)
+                        }
+                        disabled={isLoading}
+                      >
+                        {showPasswordConfirmation ? (
+                          <EyeOffIcon aria-hidden="true" />
+                        ) : (
+                          <EyeIcon aria-hidden="true" />
+                        )}
+                        <span className="sr-only">
+                          {showPasswordConfirmation
+                            ? "Hide password"
+                            : "Show password"}
+                        </span>
+                      </Button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

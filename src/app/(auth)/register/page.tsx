@@ -22,6 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { registerSchema } from "~/lib/auth/validation/schemas";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -32,6 +33,9 @@ type FormValues = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState<boolean>(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(registerSchema),
@@ -50,6 +54,8 @@ export default function RegisterPage() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
+    setShowPassword(false);
+    setShowPasswordConfirmation(false);
     const { email, password, passwordConfirmation } = values;
 
     const url = "/api/auth/register";
@@ -143,12 +149,33 @@ export default function RegisterPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="password"
-                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        disabled={isLoading}
-                      />
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          className={
+                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                          }
+                          autoComplete="new-password"
+                          disabled={isLoading}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          disabled={isLoading}
+                        >
+                          {showPassword ? (
+                            <EyeOffIcon aria-hidden="true" />
+                          ) : (
+                            <EyeIcon aria-hidden="true" />
+                          )}
+                          <span className="sr-only">
+                            {showPassword ? "Hide password" : "Show password"}
+                          </span>
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,12 +188,37 @@ export default function RegisterPage() {
                   <FormItem>
                     <FormLabel>Confirm password</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="password"
-                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        disabled={isLoading}
-                      />
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={showPasswordConfirmation ? "text" : "password"}
+                          className={
+                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                          }
+                          autoComplete="new-password"
+                          disabled={isLoading}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                          onClick={() =>
+                            setShowPasswordConfirmation((prev) => !prev)
+                          }
+                          disabled={isLoading}
+                        >
+                          {showPasswordConfirmation ? (
+                            <EyeOffIcon aria-hidden="true" />
+                          ) : (
+                            <EyeIcon aria-hidden="true" />
+                          )}
+                          <span className="sr-only">
+                            {showPasswordConfirmation
+                              ? "Hide password"
+                              : "Show password"}
+                          </span>
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
