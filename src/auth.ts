@@ -3,6 +3,7 @@ import { Pool } from "@neondatabase/serverless";
 import { isRouteProtected } from "~/lib/auth/utils";
 import { UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
+import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
 import { NextResponse } from "next/server";
 
@@ -32,6 +33,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
       Resend({
         from: "auth@foundationformationkit.org",
       }),
+      GitHub,
     ],
     callbacks: {
       authorized: async ({ request, auth }) => {

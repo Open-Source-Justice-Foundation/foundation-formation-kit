@@ -22,7 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { registerSchema } from "~/lib/auth/validation/schemas";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -89,6 +89,30 @@ export default function RegisterPage() {
       if (emailSignInResponse !== undefined && !emailSignInResponse?.ok) {
         throw new Error(
           `Email sign in response status: ${emailSignInResponse?.status}`,
+        );
+      }
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Registration error");
+    }
+
+    setIsLoading(false);
+  }
+
+  async function oAuthSignIn(provider: string) {
+    setIsLoading(true);
+
+    try {
+      const oAuthSignInResponse = await signIn(provider, {
+        redirect: true,
+        redirectTo: "/",
+      });
+
+      if (oAuthSignInResponse !== undefined && !oAuthSignInResponse?.ok) {
+        throw new Error(
+          `OAuth sign in response status: ${oAuthSignInResponse?.status}`,
         );
       }
     } catch (err) {
@@ -233,6 +257,26 @@ export default function RegisterPage() {
               </Button>
             </form>
           </Form>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-3 text-muted-foreground">
+                Or
+              </span>
+            </div>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            className="flex gap-x-1"
+            disabled={isLoading}
+            onClick={() => oAuthSignIn("github")}
+          >
+            <Github aria-hidden="true" />
+            Register with GitHub
+          </Button>
         </div>
       </CardContent>
     </Card>
