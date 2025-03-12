@@ -1,4 +1,4 @@
-"use client";
+import { Suspense } from "react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -8,66 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { AuthCardHomeButton } from "~/features/auth";
+import { AuthCardHomeButton, AuthErrorMessage } from "~/features/auth";
 import { OctagonAlert } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-enum Error {
-  Configuration = "Configuration",
-  AccessDenied = "AccessDenied",
-  Verification = "Verification",
+function AuthErrorMessageFallback() {
+  return <></>;
 }
 
-const errorMap = {
-  [Error.Configuration]: (
-    <>
-      <p>
-        There was a problem when trying to authenticate with the server. Please
-        contact us if this error persists.
-      </p>
-      <p className="pt-2 text-destructive-foreground">
-        Unique error code:{" "}
-        <code className="rounded-sm bg-destructive p-1 text-xs text-destructive-foreground">
-          Configuration
-        </code>
-      </p>
-    </>
-  ),
-  [Error.AccessDenied]: (
-    <>
-      <p>
-        You do not have permission to access that page. Try signing in to gain
-        the proper permissions.
-      </p>
-      <p className="pt-2 text-destructive-foreground">
-        Unique error code:{" "}
-        <code className="rounded-sm bg-destructive p-1 text-xs text-destructive-foreground">
-          AccessDenied
-        </code>
-      </p>
-    </>
-  ),
-  [Error.Verification]: (
-    <>
-      <p>
-        The sign in link is no longer valid. It may have been used already or it
-        may have expired. Try signing in again to get a valid link.
-      </p>
-      <p className="pt-2 text-destructive-foreground">
-        Unique error code:{" "}
-        <code className="rounded-sm bg-destructive p-1 text-xs text-destructive-foreground">
-          Verification
-        </code>
-      </p>
-    </>
-  ),
-};
-
 export default function AuthErrorPage() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error") as Error;
-
   return (
     <Card className="flex w-[360px] flex-col sm:w-[425px]">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
@@ -81,7 +30,9 @@ export default function AuthErrorPage() {
           </div>
         </CardTitle>
         <CardDescription>
-          {errorMap[error] || "Please contact us if this error persists."}
+          <Suspense fallback={<AuthErrorMessageFallback />}>
+            <AuthErrorMessage />
+          </Suspense>
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
