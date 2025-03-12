@@ -8,12 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { Skeleton } from "~/components/ui/skeleton";
 import { AuthCardHomeButton, AuthErrorMessage } from "~/features/auth";
 import { OctagonAlert } from "lucide-react";
 import Link from "next/link";
 
 function AuthErrorMessageFallback() {
-  return <></>;
+  return (
+    <div className="space-y-2">
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-[90%]" />
+      <Skeleton className="h-4 w-4/5" />
+    </div>
+  );
 }
 
 export default function AuthErrorPage() {
