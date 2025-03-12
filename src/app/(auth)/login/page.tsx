@@ -83,9 +83,8 @@ export default function SignInPage() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Login error");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   async function oAuthSignIn(provider: string) {
@@ -107,9 +106,8 @@ export default function SignInPage() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Login error");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return (

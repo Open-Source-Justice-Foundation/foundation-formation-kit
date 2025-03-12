@@ -23,6 +23,7 @@ import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -71,14 +72,20 @@ export default function ResetPasswordPage() {
       }
 
       // TODO
-      // Redirect user to sign in page on successful reset
+      // Redirect user to sign in page or updated password page on successful reset
+      // Currently the password doesn't get reset and the user is just redirected to the sign in page
+      const emailSignInResponse = await signIn();
+
+      if (emailSignInResponse !== undefined) {
+        throw new Error("Failed to redirect to sign in page");
+      }
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Reset password error");
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   return (

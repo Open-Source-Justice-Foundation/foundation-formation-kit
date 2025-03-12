@@ -13,9 +13,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   if (typeof process.env.DATABASE_URL === "string") {
-    const sql = neon(process.env.DATABASE_URL);
-
     try {
+      const sql = neon(process.env.DATABASE_URL);
+
       const data = await request.json();
 
       const { email, password } = registerSchema.parse(data);
@@ -50,6 +50,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       console.error(err);
       throw new Error("Failed to register user");
     }
+  } else {
+    throw new Error("Incorrect database URL type");
   }
 
   return NextResponse.json(

@@ -96,9 +96,8 @@ export default function RegisterPage() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Registration error");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   async function oAuthSignIn(provider: string) {
@@ -120,9 +119,8 @@ export default function RegisterPage() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Registration error");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return (
