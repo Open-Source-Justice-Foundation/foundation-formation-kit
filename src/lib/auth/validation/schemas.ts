@@ -46,6 +46,17 @@ export const signInSchema = object({
 });
 
 export const resetPasswordSchema = object({
+  email: string({
+    required_error: "Email address is required",
+    invalid_type_error: "Email address must be a string",
+  })
+    .nonempty({ message: "Email address is required" })
+    .max(255, { message: "Email address can be at most 255 characters" })
+    .email({ message: "Email address is invalid" })
+    .trim(),
+});
+
+export const updatePasswordSchema = object({
   password: string({
     required_error: "Password is required",
     invalid_type_error: "Password must be a string",

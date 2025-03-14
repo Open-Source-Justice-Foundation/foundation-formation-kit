@@ -50,6 +50,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/login",
             "/register",
             "/reset-password",
+            "/update-password",
             "/updated-password",
             "/verify-request",
           ];

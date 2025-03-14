@@ -160,7 +160,15 @@ export default function SignInPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="flex justify-between">
+                        Password
+                        <Link
+                          href="/reset-password"
+                          className="text-link-foreground"
+                        >
+                          Forgot your password?
+                        </Link>
+                      </FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input
