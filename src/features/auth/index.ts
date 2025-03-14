@@ -1,2 +1,2 @@
 export { AuthCardHomeButton } from "./components/AuthCardHomeButton";
-export { AuthErrorMessage } from "./components/AuthErrorMessage";
+export { AuthErrorPageErrorMessages } from "./components/AuthErrorPageErrorMessages";

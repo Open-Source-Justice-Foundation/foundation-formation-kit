@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
@@ -21,10 +21,15 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
+import {
+  AuthSignInPageErrorMessageMap,
+  AuthSignInPageErrors,
+} from "~/lib/auth/messages";
 import { signInSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -32,8 +37,22 @@ import { z } from "zod";
 type FormValues = z.infer<typeof signInSchema>;
 
 export default function SignInPage() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error") as AuthSignInPageErrors;
+  const mountedRef = useRef<boolean | undefined>();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (error !== null && !mountedRef.current) {
+      setTimeout(() => {
+        toast.error(AuthSignInPageErrorMessageMap[error] || "Login error");
+      }, 0);
+    }
+
+    mountedRef.current = true;
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(signInSchema),

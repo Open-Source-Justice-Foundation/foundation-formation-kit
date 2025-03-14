@@ -53,7 +53,7 @@ const errorMap = {
   ),
 };
 
-export function AuthErrorMessage() {
+export function AuthErrorPageErrorMessages() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error") as Error;
 

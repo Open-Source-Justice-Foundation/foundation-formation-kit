@@ -6,7 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { AuthCardHomeButton, AuthErrorMessage } from "~/features/auth";
+import {
+  AuthCardHomeButton,
+  AuthErrorPageErrorMessages,
+} from "~/features/auth";
 import { OctagonAlert } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +29,7 @@ export default function AuthErrorPage() {
           </div>
         </CardTitle>
         <CardDescription>
-          <AuthErrorMessage />
+          <AuthErrorPageErrorMessages />
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
