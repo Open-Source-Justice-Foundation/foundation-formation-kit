@@ -1,3 +1,10 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+
 // TODO:
 // These NextAuth error codes may not be used/correct, see
 // https://github.com/nextauthjs/next-auth/blob/main/packages/core/src/types.ts#L204
@@ -9,7 +16,7 @@
 // https://github.com/nextauthjs/next-auth/blob/main/packages/core/src/types.ts#L204
 // But they're not in the NextAuth.js docs, see
 // https://next-auth.js.org/configuration/pages#error-codes
-export enum AuthSignInPageErrors {
+enum AuthSignInPageErrors {
   Signin = "Signin",
   OAuthCallbackError = "OAuthCallbackError",
   OAuthSignin = "OAuthSignin",
@@ -23,7 +30,7 @@ export enum AuthSignInPageErrors {
   SessionRequired = "SessionRequired",
 }
 
-export const AuthSignInPageErrorMessageMap = {
+const AuthSignInPageErrorMessageMap = {
   [AuthSignInPageErrors.Signin]: "Login error",
   [AuthSignInPageErrors.OAuthCallbackError]: "Login error",
   [AuthSignInPageErrors.OAuthSignin]: "Login error",
@@ -36,3 +43,21 @@ export const AuthSignInPageErrorMessageMap = {
   [AuthSignInPageErrors.CredentialsSignin]: "Invalid credentials",
   [AuthSignInPageErrors.SessionRequired]: "Access denied",
 };
+
+export function AuthSignInPageErrorMessages() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error") as AuthSignInPageErrors;
+  const mountedRef = useRef<boolean | undefined>();
+
+  useEffect(() => {
+    if (error !== null && !mountedRef.current) {
+      setTimeout(() => {
+        toast.error(AuthSignInPageErrorMessageMap[error] || "Login error");
+      }, 0);
+    }
+
+    mountedRef.current = true;
+  }, []);
+
+  return <></>;
+}

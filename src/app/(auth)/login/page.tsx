@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
@@ -20,16 +20,14 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { AuthCardHomeButton } from "~/features/auth";
 import {
-  AuthSignInPageErrorMessageMap,
-  AuthSignInPageErrors,
-} from "~/lib/auth/messages";
+  AuthCardHomeButton,
+  AuthSignInPageErrorMessages,
+} from "~/features/auth";
 import { signInSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -37,22 +35,8 @@ import { z } from "zod";
 type FormValues = z.infer<typeof signInSchema>;
 
 export default function SignInPage() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error") as AuthSignInPageErrors;
-  const mountedRef = useRef<boolean | undefined>();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (error !== null && !mountedRef.current) {
-      setTimeout(() => {
-        toast.error(AuthSignInPageErrorMessageMap[error] || "Login error");
-      }, 0);
-    }
-
-    mountedRef.current = true;
-  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(signInSchema),
@@ -130,116 +114,121 @@ export default function SignInPage() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col sm:w-[425px]">
-      <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
-        <CardTitle>
-          <AuthCardHomeButton />
-        </CardTitle>
-        <CardDescription>
-          🚧 Under construction, accounts may be deleted and not work 🚧
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-        <div className="flex flex-col gap-5">
-          <Link
-            href="/register"
-            className="text-sm font-semibold text-link-foreground"
-          >
-            Create an account
-          </Link>
-          <Form {...form}>
-            <form
-              className="flex flex-col gap-5"
-              onSubmit={form.handleSubmit(onSubmit)}
+    <>
+      <Card className="flex w-[360px] flex-col sm:w-[425px]">
+        <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
+          <CardTitle>
+            <AuthCardHomeButton />
+          </CardTitle>
+          <CardDescription>
+            🚧 Under construction, accounts may be deleted and not work 🚧
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+          <div className="flex flex-col gap-5">
+            <Link
+              href="/register"
+              className="text-sm font-semibold text-link-foreground"
             >
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email address</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="email"
-                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        disabled={isLoading}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <div className="relative">
+              Create an account
+            </Link>
+            <Form {...form}>
+              <form
+                className="flex flex-col gap-5"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email address</FormLabel>
+                      <FormControl>
                         <Input
                           {...field}
-                          type={showPassword ? "text" : "password"}
-                          className={
-                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                          }
-                          autoComplete="current-password"
+                          type="email"
+                          className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                           disabled={isLoading}
                         />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                          onClick={() => setShowPassword((prev) => !prev)}
-                          disabled={isLoading}
-                        >
-                          {showPassword ? (
-                            <EyeOffIcon aria-hidden="true" />
-                          ) : (
-                            <EyeIcon aria-hidden="true" />
-                          )}
-                          <span className="sr-only">
-                            {showPassword ? "Hide password" : "Show password"}
-                          </span>
-                        </Button>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Sign in
-              </Button>
-            </form>
-          </Form>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            {...field}
+                            type={showPassword ? "text" : "password"}
+                            className={
+                              "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                            }
+                            autoComplete="current-password"
+                            disabled={isLoading}
+                          />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            disabled={isLoading}
+                          >
+                            {showPassword ? (
+                              <EyeOffIcon aria-hidden="true" />
+                            ) : (
+                              <EyeIcon aria-hidden="true" />
+                            )}
+                            <span className="sr-only">
+                              {showPassword ? "Hide password" : "Show password"}
+                            </span>
+                          </Button>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="focus-visible:ring-ringPrimary"
+                  disabled={isLoading}
+                >
+                  Sign in
+                </Button>
+              </form>
+            </Form>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-3 text-muted-foreground">
+                  Or
+                </span>
+              </div>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-3 text-muted-foreground">
-                Or
-              </span>
-            </div>
+            <Button
+              type="button"
+              variant="outline"
+              className="flex gap-x-1"
+              disabled={isLoading}
+              onClick={() => oAuthSignIn("github")}
+            >
+              <Github aria-hidden="true" />
+              Sign in with GitHub
+            </Button>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            className="flex gap-x-1"
-            disabled={isLoading}
-            onClick={() => oAuthSignIn("github")}
-          >
-            <Github aria-hidden="true" />
-            Sign in with GitHub
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+      <Suspense fallback={<></>}>
+        <AuthSignInPageErrorMessages />
+      </Suspense>
+    </>
   );
 }
