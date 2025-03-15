@@ -29,9 +29,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         throw new Error("Failed to select user from database");
       } else if (selectEmailAndPasswordHashResponse.length === 0) {
         throw new Error("Email doesn't exist");
-        // TODO
-        // Means no user was found, so this is their first attempt to login
-        // Optionally, this is also the place you could do a user registration redirection
       } else if (selectEmailAndPasswordHashResponse.length > 1) {
         throw new Error("Multiple users exist with the same email");
       } else if (
