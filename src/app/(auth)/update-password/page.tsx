@@ -23,7 +23,7 @@ import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -31,6 +31,7 @@ import { z } from "zod";
 type FormValues = z.infer<typeof updatePasswordSchema>;
 
 export default function UpdatePasswordPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
@@ -72,13 +73,8 @@ export default function UpdatePasswordPage() {
       }
 
       // TODO
-      // Redirect user to sign in page or updated password page after successfully updating password
-      // Currently the password doesn't get updated and the user is just redirected to the sign in page
-      const emailSignInResponse = await signIn();
-
-      if (emailSignInResponse !== undefined) {
-        throw new Error("Failed to redirect to sign in page");
-      }
+      // Currently the password doesn't get updated and the user is just redirected to the updated password page
+      router.push("/updated-password");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
