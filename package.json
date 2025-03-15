@@ -1,6 +1,7 @@
 {
   "name": "foundation-formation-kit",
   "version": "0.1.0",
+  "description": "The Foundation Formation Kit offers a kit of resources to turn any open-source project into a tax-exempt non-profit foundation. ⚖️",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,6 +9,22 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit.git"
+  },
+  "keywords": [
+    "osjf",
+    "justice",
+    "ffk",
+    "nextjs"
+  ],
+  "author": "Open Source Justice Foundation <info@opensourcejustice.org> (https://opensourcejustice.org/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit/issues"
+  },
+  "homepage": "https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit#readme",
   "dependencies": {
     "@auth/pg-adapter": "^1.7.4",
     "@hookform/resolvers": "^3.10.0",
