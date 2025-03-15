@@ -22,7 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -30,6 +30,7 @@ import { z } from "zod";
 type FormValues = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -64,13 +65,8 @@ export default function ResetPasswordPage() {
       }
 
       // TODO
-      // Redirect user to verify request page
-      // Currently the password reset instructions are not sent and the user is just redirected to the sign in page
-      const emailSignInResponse = await signIn();
-
-      if (emailSignInResponse !== undefined) {
-        throw new Error("Failed to redirect to sign in page");
-      }
+      // Need to send password reset instructions
+      router.push("/verify-reset-password-request");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
