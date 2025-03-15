@@ -4,8 +4,6 @@ import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-// TODO
-// Check method
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth();
 

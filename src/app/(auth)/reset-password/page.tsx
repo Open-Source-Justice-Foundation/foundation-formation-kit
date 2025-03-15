@@ -46,8 +46,6 @@ export default function ResetPasswordPage() {
     const url = "/api/auth/reset-password";
     let resetPasswordResponse: Response = new Response();
 
-    // TODO
-    // Check method
     try {
       resetPasswordResponse = await fetch(url, {
         method: "POST",
@@ -59,8 +57,6 @@ export default function ResetPasswordPage() {
         }),
       });
 
-      // TODO
-      // Check status code
       if (resetPasswordResponse.status !== 200) {
         throw new Error(
           `Reset password response status: ${resetPasswordResponse.status}`,
