@@ -76,6 +76,10 @@
     @apply bg-background text-foreground;
   }
 
+  ::selection {
+    @apply bg-primary/40;
+  }
+
   /* Hides browser password toggles */
   .hide-password-toggle::-ms-reveal,
   .hide-password-toggle::-ms-clear {

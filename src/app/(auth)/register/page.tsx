@@ -46,12 +46,6 @@ export default function RegisterPage() {
     },
   });
 
-  const { reset } = form;
-
-  useEffect(() => {
-    reset({ email: "", password: "", passwordConfirmation: "" });
-  }, [reset]);
-
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
     setShowPassword(false);
