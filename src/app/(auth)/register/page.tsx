@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
@@ -45,6 +45,39 @@ export default function RegisterPage() {
       passwordConfirmation: "",
     },
   });
+
+  const {
+    watch,
+    setError,
+    clearErrors,
+    formState: { isSubmitted },
+  } = form;
+
+  const watchPassword = watch("password");
+  const watchPasswordConfirmation = watch("passwordConfirmation");
+
+  useEffect(() => {
+    if (
+      isSubmitted &&
+      watchPasswordConfirmation.length >= 16 &&
+      watchPasswordConfirmation.length <= 256
+    ) {
+      if (watchPassword !== watchPasswordConfirmation) {
+        setError(
+          "passwordConfirmation",
+          {
+            type: "manual",
+            message: "Passwords do not match",
+          },
+          {
+            shouldFocus: false,
+          },
+        );
+      } else {
+        clearErrors("passwordConfirmation");
+      }
+    }
+  }, [watchPassword]);
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
