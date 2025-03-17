@@ -21,6 +21,10 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
+import {
+  PASSWORD_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+} from "~/lib/auth/constants/constants";
 import { registerSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -59,8 +63,8 @@ export default function RegisterPage() {
   useEffect(() => {
     if (
       isSubmitted &&
-      watchPasswordConfirmation.length >= 16 &&
-      watchPasswordConfirmation.length <= 256
+      watchPasswordConfirmation.length >= PASSWORD_MIN_LENGTH &&
+      watchPasswordConfirmation.length <= PASSWORD_MAX_LENGTH
     ) {
       if (watchPassword !== watchPasswordConfirmation) {
         setError(
