@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
@@ -21,10 +21,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
-import {
-  PASSWORD_MAX_LENGTH,
-  PASSWORD_MIN_LENGTH,
-} from "~/lib/auth/constants/constants";
+import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { registerSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -60,28 +57,14 @@ export default function RegisterPage() {
   const watchPassword = watch("password");
   const watchPasswordConfirmation = watch("passwordConfirmation");
 
-  useEffect(() => {
-    if (
-      isSubmitted &&
-      watchPasswordConfirmation.length >= PASSWORD_MIN_LENGTH &&
-      watchPasswordConfirmation.length <= PASSWORD_MAX_LENGTH
-    ) {
-      if (watchPassword !== watchPasswordConfirmation) {
-        setError(
-          "passwordConfirmation",
-          {
-            type: "manual",
-            message: "Passwords do not match",
-          },
-          {
-            shouldFocus: false,
-          },
-        );
-      } else {
-        clearErrors("passwordConfirmation");
-      }
-    }
-  }, [watchPassword]);
+  usePasswordConfirmation(
+    isSubmitted,
+    watchPassword,
+    watchPasswordConfirmation,
+    setError,
+    clearErrors,
+    "passwordConfirmation",
+  );
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);

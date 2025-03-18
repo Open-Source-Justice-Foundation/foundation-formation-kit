@@ -21,6 +21,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
+import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -44,6 +45,25 @@ export default function UpdatePasswordPage() {
       passwordConfirmation: "",
     },
   });
+
+  const {
+    watch,
+    setError,
+    clearErrors,
+    formState: { isSubmitted },
+  } = form;
+
+  const watchPassword = watch("password");
+  const watchPasswordConfirmation = watch("passwordConfirmation");
+
+  usePasswordConfirmation(
+    isSubmitted,
+    watchPassword,
+    watchPasswordConfirmation,
+    setError,
+    clearErrors,
+    "passwordConfirmation",
+  );
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
