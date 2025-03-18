@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import {
+  PASSWORD_CONFIRMATION_ERR_MSG,
   PASSWORD_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
 } from "~/lib/auth/constants/constants";
@@ -32,7 +33,7 @@ export function usePasswordConfirmation<
           name,
           {
             type: "manual",
-            message: "Passwords do not match",
+            message: PASSWORD_CONFIRMATION_ERR_MSG,
           },
           {
             shouldFocus: false,
