@@ -116,6 +116,7 @@ export function CustomSendVerificationRequestEmailTemplate(
               width="49"
               height="56"
               style={{
+                textAlign: "center",
                 margin: "0 auto",
               }}
             />

@@ -9,6 +9,10 @@ export async function customSendVerificationRequest(
 
   if (provider.from && provider.apiKey) {
     try {
+      const resendAPIEndpoint = "https://api.resend.com/emails";
+
+      const from = `FFK Team <${provider.from}>`;
+
       const html = await render(
         CustomSendVerificationRequestEmailTemplate({ url, theme }),
         {
@@ -25,8 +29,6 @@ export async function customSendVerificationRequest(
         },
       );
 
-      const resendAPIEndpoint = "https://api.resend.com/emails";
-
       const resendResponse = await fetch(resendAPIEndpoint, {
         method: "POST",
         headers: {
@@ -34,7 +36,7 @@ export async function customSendVerificationRequest(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: provider.from,
+          from,
           to,
           subject: "Welcome to the Foundation Formation Kit! 📃",
           html,
