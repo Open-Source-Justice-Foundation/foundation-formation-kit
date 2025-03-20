@@ -1,5 +1,6 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
+import { customSendVerificationRequest } from "~/lib/auth/providers/email/resend/emails/custom-send-verification-request";
 import { isRouteProtected } from "~/lib/auth/utils";
 import { UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
@@ -32,6 +33,30 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     providers: [
       Resend({
         from: "auth@foundationformationkit.org",
+        sendVerificationRequest({
+          identifier,
+          url,
+          provider: { from, apiKey },
+        }) {
+          const theme = {
+            background: "#ffffff",
+            foreground: "#29333d",
+            primary: "#5247e6",
+            primaryForeground: "#f0f3ff",
+            secondaryForeground: "#364c63",
+            border: "#e4e4e7",
+            linkForeground: "#5247e6",
+          };
+
+          const params = {
+            identifier,
+            url,
+            provider: { from, apiKey },
+            theme,
+          };
+
+          customSendVerificationRequest(params);
+        },
       }),
       GitHub,
     ],
