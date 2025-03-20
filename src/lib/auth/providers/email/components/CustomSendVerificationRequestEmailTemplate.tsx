@@ -113,10 +113,10 @@ export function CustomSendVerificationRequestEmailTemplate(
             <Img
               src="https://foundationformationkit.org/images/logos/emails/logo.png"
               alt="Foundation Formation Kit Logo"
-              width="80"
-              height="80"
+              width="49"
+              height="56"
               style={{
-                textAlign: "center",
+                margin: "0 auto",
               }}
             />
           </Row>
