@@ -5,16 +5,15 @@ import { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/typ
 export async function customSendVerificationRequest(
   params: CustomEmailProviderSendVerificationRequestParams,
 ) {
-  const { identifier: to, url, provider, theme } = params;
-
+  const { identifier: to, url, provider } = params;
   if (provider.from && provider.apiKey) {
     try {
       const resendAPIEndpoint = "https://api.resend.com/emails";
-
       const from = `FFK Team <${provider.from}>`;
+      const subject = "Welcome to the Foundation Formation Kit! 📃";
 
       const html = await render(
-        CustomSendVerificationRequestEmailTemplate({ url, theme }),
+        CustomSendVerificationRequestEmailTemplate({ url }),
         {
           pretty: true,
         },
@@ -23,7 +22,7 @@ export async function customSendVerificationRequest(
       // Email text body
       // Fallback for email clients that don't render HTML, e.g. feature phones
       const text = await render(
-        CustomSendVerificationRequestEmailTemplate({ url, theme }),
+        CustomSendVerificationRequestEmailTemplate({ url }),
         {
           plainText: true,
         },
@@ -38,7 +37,7 @@ export async function customSendVerificationRequest(
         body: JSON.stringify({
           from,
           to,
-          subject: "Welcome to the Foundation Formation Kit! 📃",
+          subject,
           html,
           text,
         }),

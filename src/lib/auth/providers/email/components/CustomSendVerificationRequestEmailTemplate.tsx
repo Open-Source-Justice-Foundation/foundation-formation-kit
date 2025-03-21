@@ -13,12 +13,13 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { emailStyles } from "~/lib/auth/styles/emails";
 import { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
 
 export function CustomSendVerificationRequestEmailTemplate(
   props: Readonly<CustomSendVerificationRequestEmailTemplateProps>,
 ) {
-  const { url, theme } = props;
+  const { url } = props;
 
   return (
     <Html lang="en" dir="ltr">
@@ -36,74 +37,53 @@ export function CustomSendVerificationRequestEmailTemplate(
         />
       </Head>
       <Preview>Verify your email address to get started!</Preview>
-      <Container style={{ backgroundColor: theme.background }}>
+      <Container style={emailStyles.container}>
         <Section>
           <Row>
-            <Heading
-              as="h1"
-              m={24}
-              style={{
-                fontWeight: 600,
-                fontSize: "24px",
-                color: theme.foreground,
-                textAlign: "center",
-              }}
-            >
+            <Heading as="h1" m={24} style={emailStyles.heading}>
               Welcome to the Foundation Formation Kit!
             </Heading>
           </Row>
         </Section>
-        <Section style={{ color: theme.secondaryForeground }}>
+        <Section style={emailStyles.sectionContent}>
           <Row>
-            <Text style={{ fontSize: "16px" }}>Hi,</Text>
+            <Text style={emailStyles.textContent}>Hi,</Text>
           </Row>
           <Row>
-            <Text style={{ fontSize: "16px" }}>
+            <Text style={emailStyles.textContent}>
               The Foundation Formation Kit offers a kit of resources to turn any
               open-source project into a tax-exempt non-profit foundation.
             </Text>
           </Row>
           <Row>
-            <Text style={{ fontSize: "16px" }}>
+            <Text style={emailStyles.textContent}>
               Verify your email address by clicking the link below and then get
               started with your application!
             </Text>
           </Row>
         </Section>
-        <Section style={{ textAlign: "center", marginTop: "16px" }}>
+        <Section style={emailStyles.sectionButton}>
           <Row>
             <Button
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                backgroundColor: theme.primary,
-                color: theme.primaryForeground,
-                padding: "8px 16px",
-                borderRadius: "6px",
-                fontSize: "16px",
-              }}
+              style={emailStyles.button}
             >
               Verify email address
             </Button>
           </Row>
         </Section>
-        <Hr style={{ borderColor: theme.border, margin: "32px 0px 16px" }} />
+        <Hr style={emailStyles.hr} />
         <Section>
           <Row>
-            <Text
-              style={{
-                fontSize: "14px",
-                color: theme.secondaryForeground,
-                marginBottom: "24px",
-              }}
-            >
+            <Text style={emailStyles.textFooterHelp}>
               Need help?{" "}
               <Link
                 href="mailto:info@opensourcejustice.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ fontSize: "14px", color: theme.linkForeground }}
+                style={emailStyles.linkFooter}
               >
                 Contact us
               </Link>
@@ -115,20 +95,11 @@ export function CustomSendVerificationRequestEmailTemplate(
               alt="Foundation Formation Kit Logo"
               width="49"
               height="56"
-              style={{
-                textAlign: "center",
-                margin: "0 auto",
-              }}
+              style={emailStyles.imgFooter}
             />
           </Row>
           <Row>
-            <Text
-              style={{
-                fontSize: "14px",
-                color: theme.secondaryForeground,
-                textAlign: "center",
-              }}
-            >
+            <Text style={emailStyles.textFooterCopyright}>
               © {new Date().getFullYear()} Open Source Justice Foundation, Inc.
               ⚖️
             </Text>

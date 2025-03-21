@@ -38,21 +38,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
           url,
           provider: { from, apiKey },
         }) {
-          const theme = {
-            background: "#ffffff",
-            foreground: "#29333d",
-            primary: "#5247e6",
-            primaryForeground: "#f0f3ff",
-            secondaryForeground: "#364c63",
-            border: "#e4e4e7",
-            linkForeground: "#5247e6",
-          };
-
           const params = {
             identifier,
             url,
             provider: { from, apiKey },
-            theme,
           };
 
           customSendVerificationRequest(params);
