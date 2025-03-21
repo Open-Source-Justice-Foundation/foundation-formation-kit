@@ -1,8 +1,8 @@
 import { render } from "@react-email/render";
-import { CustomSendVerificationRequestEmailTemplate } from "~/lib/auth/providers/email";
+import { SignInRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/types";
 
-export async function customSendVerificationRequest(
+export async function signInRequest(
   params: CustomEmailProviderSendVerificationRequestParams,
 ) {
   const { identifier: to, url, provider } = params;
@@ -10,23 +10,17 @@ export async function customSendVerificationRequest(
     try {
       const resendAPIEndpoint = "https://api.resend.com/emails";
       const from = `FFK Team <${provider.from}>`;
-      const subject = "Welcome to the Foundation Formation Kit! 📃";
+      const subject = "Sign in link";
 
-      const html = await render(
-        CustomSendVerificationRequestEmailTemplate({ url }),
-        {
-          pretty: true,
-        },
-      );
+      const html = await render(SignInRequestEmailTemplate({ url }), {
+        pretty: true,
+      });
 
       // Email text body
       // Fallback for email clients that don't render HTML, e.g. feature phones
-      const text = await render(
-        CustomSendVerificationRequestEmailTemplate({ url }),
-        {
-          plainText: true,
-        },
-      );
+      const text = await render(SignInRequestEmailTemplate({ url }), {
+        plainText: true,
+      });
 
       const resendResponse = await fetch(resendAPIEndpoint, {
         method: "POST",
@@ -45,14 +39,14 @@ export async function customSendVerificationRequest(
 
       if (!resendResponse?.ok) {
         throw new Error(
-          `Custom send verification request resend status: ${resendResponse?.status}`,
+          `Sign in request resend status: ${resendResponse?.status}`,
         );
       }
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
-      throw new Error("Failed to send verification email");
+      throw new Error("Failed to send sign in email");
     }
   } else {
     throw new Error("Invalid provider from and/or apiKey properties");

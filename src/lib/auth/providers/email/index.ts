@@ -1,1 +1,2 @@
-export { CustomSendVerificationRequestEmailTemplate } from "./components/CustomSendVerificationRequestEmailTemplate";
+export { VerificationRequestEmailTemplate } from "./components/VerificationRequestEmailTemplate";
+export { SignInRequestEmailTemplate } from "./components/SignInRequestEmailTemplate";

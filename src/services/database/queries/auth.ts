@@ -92,3 +92,37 @@ export async function insertEmailAndPasswordHashIntoUsers(
     throw new Error("Incorrect database URL type");
   }
 }
+
+export async function checkIfEmailIsVerifiedUsingEmail(
+  email: string,
+): Promise<boolean> {
+  if (typeof process.env.DATABASE_URL === "string") {
+    try {
+      const sql = neon(process.env.DATABASE_URL);
+
+      const emailIsVerifiedResponse = await sql(
+        `SELECT EXISTS(SELECT 1 FROM users WHERE email = $1 AND "emailVerified" IS NOT NULL)`,
+        [email],
+      );
+
+      if (emailIsVerifiedResponse === undefined) {
+        throw new Error("Failed to select user from database");
+      } else if (emailIsVerifiedResponse.length !== 1) {
+        throw new Error("Failed to check if email exists in database");
+      } else if (!emailIsVerifiedResponse[0].hasOwnProperty("exists")) {
+        throw new Error("Failed to check for exists property");
+      } else if (typeof emailIsVerifiedResponse[0].exists !== "boolean") {
+        throw new Error("Incorrect data type");
+      }
+
+      return emailIsVerifiedResponse[0].exists;
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      throw new Error("Failed to check database");
+    }
+  } else {
+    throw new Error("Incorrect database URL type");
+  }
+}

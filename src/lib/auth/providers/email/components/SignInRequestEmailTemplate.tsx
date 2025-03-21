@@ -3,7 +3,6 @@ import {
   Container,
   Font,
   Head,
-  Heading,
   Hr,
   Html,
   Img,
@@ -16,7 +15,7 @@ import {
 import { emailStyles } from "~/lib/auth/styles/emails";
 import { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
 
-export function CustomSendVerificationRequestEmailTemplate(
+export function SignInRequestEmailTemplate(
   props: Readonly<CustomSendVerificationRequestEmailTemplateProps>,
 ) {
   const { url } = props;
@@ -24,7 +23,7 @@ export function CustomSendVerificationRequestEmailTemplate(
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Email Verification</title>
+        <title>Email Sign In</title>
         <Font
           fontFamily="Inter"
           fallbackFontFamily={["Arial", "Helvetica", "sans-serif"]}
@@ -36,29 +35,15 @@ export function CustomSendVerificationRequestEmailTemplate(
           fontStyle="normal"
         />
       </Head>
-      <Preview>Verify your email address to get started!</Preview>
+      <Preview>Here's your requested sign in link</Preview>
       <Container style={emailStyles.container}>
-        <Section>
-          <Row>
-            <Heading as="h1" m={24} style={emailStyles.heading}>
-              Welcome to the Foundation Formation Kit!
-            </Heading>
-          </Row>
-        </Section>
         <Section style={emailStyles.sectionContent}>
           <Row>
-            <Text style={emailStyles.textContent}>Hi,</Text>
+            <Text style={emailStyles.textContent}>Hey there,</Text>
           </Row>
           <Row>
             <Text style={emailStyles.textContent}>
-              The Foundation Formation Kit offers a kit of resources to turn any
-              open-source project into a tax-exempt non-profit foundation.
-            </Text>
-          </Row>
-          <Row>
-            <Text style={emailStyles.textContent}>
-              Verify your email address by clicking the link below and then get
-              started with your application!
+              Sign in to your account by clicking the link below.
             </Text>
           </Row>
         </Section>
@@ -70,7 +55,7 @@ export function CustomSendVerificationRequestEmailTemplate(
               rel="noopener noreferrer"
               style={emailStyles.button}
             >
-              Verify email address
+              Sign in
             </Button>
           </Row>
         </Section>

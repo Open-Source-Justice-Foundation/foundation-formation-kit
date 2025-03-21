@@ -1,7 +1,11 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
-import { customSendVerificationRequest } from "~/lib/auth/providers/email/resend/emails/custom-send-verification-request";
+import {
+  signInRequest,
+  verificationRequest,
+} from "~/lib/auth/providers/email/resend";
 import { isRouteProtected } from "~/lib/auth/utils";
+import { checkIfEmailIsVerifiedUsingEmail } from "~/services/database/queries/auth";
 import { UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
@@ -33,7 +37,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     providers: [
       Resend({
         from: "auth@foundationformationkit.org",
-        sendVerificationRequest({
+        async sendVerificationRequest({
           identifier,
           url,
           provider: { from, apiKey },
@@ -44,7 +48,22 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             provider: { from, apiKey },
           };
 
-          customSendVerificationRequest(params);
+          try {
+            const emailVerified =
+              await checkIfEmailIsVerifiedUsingEmail(identifier);
+
+            if (emailVerified) {
+              await signInRequest(params);
+            } else {
+              await verificationRequest(params);
+            }
+          } catch (err) {
+            // TODO
+            // If an error is thrown and not handled then the error page with a configuration query parameter is shown to the user, look into handling the error differently
+            // Don't log the err value, do something else with it to avoid deployment error
+            console.error(err);
+            throw new Error("Send verification request failed");
+          }
         },
       }),
       GitHub,
