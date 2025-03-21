@@ -33,7 +33,7 @@ export async function selectPasswordHashUsingEmail(
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
-      throw new Error("Failed to access database");
+      throw new Error("Failed to login user");
     }
   } else {
     throw new Error("Incorrect database URL type");
@@ -63,7 +63,7 @@ export async function checkIfEmailAlreadyExists(email: string): Promise<void> {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
-      throw new Error("Failed to access database");
+      throw new Error("Failed to register user");
     }
   } else {
     throw new Error("Incorrect database URL type");
