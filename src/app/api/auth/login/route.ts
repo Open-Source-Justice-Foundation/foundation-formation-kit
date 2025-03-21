@@ -1,7 +1,7 @@
-import { neon } from "@neondatabase/serverless";
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import { signInSchema } from "~/lib/auth/validation/schemas";
+import { selectPasswordHashUsingEmail } from "~/services/database/queries/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -12,51 +12,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     throw new Error("Session already exists");
   }
 
-  if (typeof process.env.DATABASE_URL === "string") {
-    try {
-      const sql = neon(process.env.DATABASE_URL);
+  try {
+    const data = await request.json();
 
-      const data = await request.json();
+    const { email, password } = signInSchema.parse(data);
 
-      const { email, password } = signInSchema.parse(data);
+    const password_hash = await selectPasswordHashUsingEmail(email);
 
-      const selectEmailAndPasswordHashResponse = await sql(
-        "SELECT email, password_hash FROM users WHERE email = $1",
-        [email],
-      );
-
-      if (selectEmailAndPasswordHashResponse === undefined) {
-        throw new Error("Failed to select user from database");
-      } else if (selectEmailAndPasswordHashResponse.length === 0) {
-        throw new Error("Email doesn't exist");
-      } else if (selectEmailAndPasswordHashResponse.length > 1) {
-        throw new Error("Multiple users exist with the same email");
-      } else if (
-        !selectEmailAndPasswordHashResponse[0].hasOwnProperty("email") ||
-        !selectEmailAndPasswordHashResponse[0].hasOwnProperty("password_hash")
-      ) {
-        throw new Error("Credential properties don't exist");
-      } else if (
-        typeof selectEmailAndPasswordHashResponse[0].password_hash !== "string"
-      ) {
-        throw new Error("Incorrect credential types");
-      }
-
-      await verifyPassword(
-        selectEmailAndPasswordHashResponse[0].password_hash,
-        password,
-      );
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      if (err instanceof ZodError) {
-        throw new Error("Failed to login user: invalid credentials");
-      }
-      console.error(err);
-      throw new Error("Failed to login user");
+    await verifyPassword(password_hash, password);
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    if (err instanceof ZodError) {
+      throw new Error("Failed to login user: invalid credentials");
     }
-  } else {
-    throw new Error("Incorrect database URL type");
+    console.error(err);
+    throw new Error("Failed to login user");
   }
 
   return NextResponse.json(

@@ -16,7 +16,7 @@ import {
   SignOutButton,
 } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
-// import { getUser } from "~/server/auth";
+// import { getUser } from "~/services/auth";
 import { Menu } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
