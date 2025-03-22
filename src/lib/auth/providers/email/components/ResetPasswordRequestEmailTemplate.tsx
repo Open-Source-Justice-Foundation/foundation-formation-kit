@@ -15,7 +15,7 @@ import {
 import { emailStyles } from "~/lib/auth/styles/emails";
 import { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
 
-export function SignInRequestEmailTemplate(
+export function ResetPasswordRequestEmailTemplate(
   props: Readonly<CustomSendVerificationRequestEmailTemplateProps>,
 ) {
   const { url } = props;
@@ -23,7 +23,7 @@ export function SignInRequestEmailTemplate(
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Email Sign In</title>
+        <title>Password Reset</title>
         <Font
           fontFamily="Inter"
           fallbackFontFamily={["Arial", "Helvetica", "sans-serif"]}
@@ -35,7 +35,7 @@ export function SignInRequestEmailTemplate(
           fontStyle="normal"
         />
       </Head>
-      <Preview>Here&apos;s your requested sign in link</Preview>
+      <Preview>Here's your requested password reset link</Preview>
       <Container style={emailStyles.container}>
         <Section style={emailStyles.sectionContent}>
           <Row>
@@ -43,7 +43,12 @@ export function SignInRequestEmailTemplate(
           </Row>
           <Row>
             <Text style={emailStyles.textContent}>
-              Sign in to your account by clicking the link below.
+              🚧 Under construction, password resets don't work yet! 🚧
+            </Text>
+          </Row>
+          <Row>
+            <Text style={emailStyles.textContent}>
+              Reset the password for your account by clicking the link below.
             </Text>
           </Row>
         </Section>
@@ -55,7 +60,7 @@ export function SignInRequestEmailTemplate(
               rel="noopener noreferrer"
               style={emailStyles.button}
             >
-              Sign in
+              Reset password
             </Button>
           </Row>
         </Section>
