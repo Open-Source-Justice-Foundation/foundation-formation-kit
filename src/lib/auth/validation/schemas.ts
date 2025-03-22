@@ -1,10 +1,12 @@
 import {
   EMAIL_INVALID_ERR_MSG,
   EMAIL_INVALID_TYPE_ERR_MSG,
+  EMAIL_LOWERCASE_ERR_MSG,
   EMAIL_MAX_LENGTH,
   EMAIL_MAX_LENGTH_ERR_MSG,
   EMAIL_NON_EMPTY_ERR_MSG,
   EMAIL_REQUIRED_ERR_MSG,
+  EMAIL_VALIDATION_PATH,
   PASSWORD_CONFIRMATION_ERR_MSG,
   PASSWORD_CONFIRMATION_VALIDATION_PATH,
   PASSWORD_INVALID_TYPE_ERR_MSG,
@@ -50,10 +52,15 @@ export const registerSchema = object({
     .max(PASSWORD_MAX_LENGTH, {
       message: PASSWORD_MAX_LENGTH_ERR_MSG,
     }),
-}).refine((values) => values.password === values.passwordConfirmation, {
-  message: PASSWORD_CONFIRMATION_ERR_MSG,
-  path: [PASSWORD_CONFIRMATION_VALIDATION_PATH],
-});
+})
+  .refine((values) => values.email === values.email.toLowerCase(), {
+    message: EMAIL_LOWERCASE_ERR_MSG,
+    path: [EMAIL_VALIDATION_PATH],
+  })
+  .refine((values) => values.password === values.passwordConfirmation, {
+    message: PASSWORD_CONFIRMATION_ERR_MSG,
+    path: [PASSWORD_CONFIRMATION_VALIDATION_PATH],
+  });
 
 export const signInSchema = object({
   email: string({
@@ -74,6 +81,9 @@ export const signInSchema = object({
     .max(PASSWORD_MAX_LENGTH, {
       message: PASSWORD_MAX_LENGTH_ERR_MSG,
     }),
+}).refine((values) => values.email === values.email.toLowerCase(), {
+  message: EMAIL_LOWERCASE_ERR_MSG,
+  path: [EMAIL_VALIDATION_PATH],
 });
 
 export const resetPasswordSchema = object({
@@ -87,6 +97,9 @@ export const resetPasswordSchema = object({
     })
     .email({ message: EMAIL_INVALID_ERR_MSG })
     .trim(),
+}).refine((values) => values.email === values.email.toLowerCase(), {
+  message: EMAIL_LOWERCASE_ERR_MSG,
+  path: [EMAIL_VALIDATION_PATH],
 });
 
 export const updatePasswordSchema = object({
