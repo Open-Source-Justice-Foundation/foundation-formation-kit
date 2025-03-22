@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
           <AuthCardHomeButton />
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, password resets don't work yet! 🚧
+          🚧 Under construction, password resets don&apos;t work yet! 🚧
           <br />
           <br />
           Enter the email address associated with your account to receive an

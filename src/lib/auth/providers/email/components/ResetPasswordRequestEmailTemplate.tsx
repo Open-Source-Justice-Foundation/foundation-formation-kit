@@ -35,7 +35,7 @@ export function ResetPasswordRequestEmailTemplate(
           fontStyle="normal"
         />
       </Head>
-      <Preview>Here's your requested password reset link</Preview>
+      <Preview>Here&apos;s your requested password reset link</Preview>
       <Container style={emailStyles.container}>
         <Section style={emailStyles.sectionContent}>
           <Row>
@@ -43,7 +43,7 @@ export function ResetPasswordRequestEmailTemplate(
           </Row>
           <Row>
             <Text style={emailStyles.textContent}>
-              🚧 Under construction, password resets don't work yet! 🚧
+              🚧 Under construction, password resets don&apos;t work yet! 🚧
             </Text>
           </Row>
           <Row>
