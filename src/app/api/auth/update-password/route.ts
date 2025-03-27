@@ -41,21 +41,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       throw new Error("Expired token");
     }
 
-    const user = await getUserByEmail(existingToken.email);
+    if (typeof existingToken.email === "string") {
+      const user = await getUserByEmail(existingToken.email);
+      const passwordHash = await saltAndHashPassword(password);
 
-    const passwordHash = await saltAndHashPassword(password);
+      // TODO
+      // Look into preventing password update if the password is the same as the previous password
+      if (typeof user?.id === "number") {
+        const passwordUpdated = await updatePasswordHashByUserId(
+          passwordHash,
+          user.id,
+        );
 
-    // TODO
-    // Look into preventing password update if the password is the same as the previous password
-    const passwordUpdated = await updatePasswordHashByUserId(
-      passwordHash,
-      user.id,
-    );
+        if (passwordUpdated) {
+          if (typeof existingToken.id === "string") {
+            deletePasswordResetTokenById(existingToken.id);
+          }
 
-    if (passwordUpdated) {
-      deletePasswordResetTokenById(existingToken.id);
-      deleteAllSessionsForUserByUserId(user.id);
-      deleteAllVerificationTokensForUserByUserIdentifier(user.email);
+          if (typeof user?.id === "number") {
+            deleteAllSessionsForUserByUserId(user.id);
+          }
+
+          if (typeof user?.email === "string") {
+            deleteAllVerificationTokensForUserByUserIdentifier(user.email);
+          }
+        }
+      }
     }
   } catch (err) {
     // TODO
