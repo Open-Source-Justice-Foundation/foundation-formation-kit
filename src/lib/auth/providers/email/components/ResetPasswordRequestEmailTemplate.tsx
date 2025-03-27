@@ -43,11 +43,6 @@ export function ResetPasswordRequestEmailTemplate(
           </Row>
           <Row>
             <Text style={emailStyles.textContent}>
-              🚧 Under construction, password resets don&apos;t work yet! 🚧
-            </Text>
-          </Row>
-          <Row>
-            <Text style={emailStyles.textContent}>
               Reset the password for your account by clicking the link below.
             </Text>
           </Row>

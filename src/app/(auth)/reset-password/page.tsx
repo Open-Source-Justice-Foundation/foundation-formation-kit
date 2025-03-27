@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
           <AuthCardHomeButton />
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, password resets don&apos;t work yet! 🚧
+          🚧 Under construction, accounts may be deleted and not work 🚧
           <br />
           <br />
           Enter the email address associated with your account to receive an
