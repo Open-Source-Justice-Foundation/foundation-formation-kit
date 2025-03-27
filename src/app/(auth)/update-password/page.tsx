@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
@@ -110,113 +110,115 @@ export default function UpdatePasswordPage() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col sm:w-[425px]">
-      <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
-        <CardTitle>
-          <AuthCardHomeButton />
-        </CardTitle>
-        <CardDescription>
-          🚧 Under construction, accounts may be deleted and not work 🚧
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-        <Form {...form}>
-          <form
-            className="flex flex-col gap-5"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        className={
-                          "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        }
-                        autoComplete="new-password"
-                        disabled={isLoading}
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        disabled={isLoading}
-                      >
-                        {showPassword ? (
-                          <EyeOffIcon aria-hidden="true" />
-                        ) : (
-                          <EyeIcon aria-hidden="true" />
-                        )}
-                        <span className="sr-only">
-                          {showPassword ? "Hide password" : "Show password"}
-                        </span>
-                      </Button>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="passwordConfirmation"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type={showPasswordConfirmation ? "text" : "password"}
-                        className={
-                          "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        }
-                        autoComplete="new-password"
-                        disabled={isLoading}
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                        onClick={() =>
-                          setShowPasswordConfirmation((prev) => !prev)
-                        }
-                        disabled={isLoading}
-                      >
-                        {showPasswordConfirmation ? (
-                          <EyeOffIcon aria-hidden="true" />
-                        ) : (
-                          <EyeIcon aria-hidden="true" />
-                        )}
-                        <span className="sr-only">
-                          {showPasswordConfirmation
-                            ? "Hide password"
-                            : "Show password"}
-                        </span>
-                      </Button>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              className="focus-visible:ring-ringPrimary"
-              disabled={isLoading}
+    <Suspense fallback={<></>}>
+      <Card className="flex w-[360px] flex-col sm:w-[425px]">
+        <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
+          <CardTitle>
+            <AuthCardHomeButton />
+          </CardTitle>
+          <CardDescription>
+            🚧 Under construction, accounts may be deleted and not work 🚧
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+          <Form {...form}>
+            <form
+              className="flex flex-col gap-5"
+              onSubmit={form.handleSubmit(onSubmit)}
             >
-              Update password
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          className={
+                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                          }
+                          autoComplete="new-password"
+                          disabled={isLoading}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          disabled={isLoading}
+                        >
+                          {showPassword ? (
+                            <EyeOffIcon aria-hidden="true" />
+                          ) : (
+                            <EyeIcon aria-hidden="true" />
+                          )}
+                          <span className="sr-only">
+                            {showPassword ? "Hide password" : "Show password"}
+                          </span>
+                        </Button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="passwordConfirmation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm password</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={showPasswordConfirmation ? "text" : "password"}
+                          className={
+                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                          }
+                          autoComplete="new-password"
+                          disabled={isLoading}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                          onClick={() =>
+                            setShowPasswordConfirmation((prev) => !prev)
+                          }
+                          disabled={isLoading}
+                        >
+                          {showPasswordConfirmation ? (
+                            <EyeOffIcon aria-hidden="true" />
+                          ) : (
+                            <EyeIcon aria-hidden="true" />
+                          )}
+                          <span className="sr-only">
+                            {showPasswordConfirmation
+                              ? "Hide password"
+                              : "Show password"}
+                          </span>
+                        </Button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                className="focus-visible:ring-ringPrimary"
+                disabled={isLoading}
+              >
+                Update password
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </Suspense>
   );
 }
