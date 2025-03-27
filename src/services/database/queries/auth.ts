@@ -71,7 +71,7 @@ export async function updatePasswordHashByUserId(
 
 export async function getUserByEmail(
   email: string,
-): Promise<Record<string, any>> {
+): Promise<Record<string, number | string | Date | null>> {
   if (typeof process.env.DATABASE_URL === "string") {
     try {
       const sql = neon(process.env.DATABASE_URL);
@@ -277,7 +277,7 @@ export async function createPasswordResetToken(
 
 export async function getPasswordResetTokenByTokenHash(
   tokenHash: string,
-): Promise<Record<string, any>> {
+): Promise<Record<string, string | Date>> {
   if (typeof process.env.DATABASE_URL === "string") {
     try {
       const sql = neon(process.env.DATABASE_URL);
