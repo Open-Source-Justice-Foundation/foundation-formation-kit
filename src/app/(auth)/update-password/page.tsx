@@ -24,7 +24,7 @@ import { AuthCardHomeButton } from "~/features/auth";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -32,6 +32,8 @@ import { z } from "zod";
 type FormValues = z.infer<typeof updatePasswordSchema>;
 
 export default function UpdatePasswordPage() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -75,26 +77,29 @@ export default function UpdatePasswordPage() {
     let updatePasswordResponse: Response = new Response();
 
     try {
-      updatePasswordResponse = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          password,
-          passwordConfirmation,
-        }),
-      });
+      if (token !== null) {
+        updatePasswordResponse = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token,
+            password,
+            passwordConfirmation,
+          }),
+        });
 
-      if (updatePasswordResponse.status !== 200) {
-        throw new Error(
-          `Update password response status: ${updatePasswordResponse.status}`,
-        );
+        if (updatePasswordResponse.status !== 200) {
+          throw new Error(
+            `Update password response status: ${updatePasswordResponse.status}`,
+          );
+        }
+
+        router.push("/updated-password");
+      } else {
+        throw new Error("Invalid token");
       }
-
-      // TODO
-      // Currently the password doesn't get updated and the user is just redirected to the updated password page
-      router.push("/updated-password");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error

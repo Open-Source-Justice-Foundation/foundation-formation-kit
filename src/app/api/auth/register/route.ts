@@ -3,7 +3,7 @@ import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
 import { registerSchema } from "~/lib/auth/validation/schemas";
 import {
   checkIfEmailAlreadyExists,
-  insertEmailAndPasswordHashIntoUsers,
+  createEmailAndPasswordHashInUsers,
 } from "~/services/database/queries/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     await checkIfEmailAlreadyExists(email);
 
     const passwordHash = await saltAndHashPassword(password);
-    await insertEmailAndPasswordHashIntoUsers(email, passwordHash);
+    await createEmailAndPasswordHashInUsers(email, passwordHash);
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

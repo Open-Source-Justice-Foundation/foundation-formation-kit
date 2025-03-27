@@ -5,7 +5,7 @@ import {
   verificationRequest,
 } from "~/lib/auth/providers/email/resend";
 import { isRouteProtected } from "~/lib/auth/utils";
-import { checkIfEmailIsVerifiedUsingEmail } from "~/services/database/queries/auth";
+import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import { UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
@@ -49,8 +49,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
           };
 
           try {
-            const emailVerified =
-              await checkIfEmailIsVerifiedUsingEmail(identifier);
+            const emailVerified = await checkEmailIsVerifiedByEmail(identifier);
 
             if (emailVerified) {
               await signInRequest(params);

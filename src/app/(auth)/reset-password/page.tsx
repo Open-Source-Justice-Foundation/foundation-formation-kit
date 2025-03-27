@@ -64,8 +64,6 @@ export default function ResetPasswordPage() {
         );
       }
 
-      // TODO
-      // Need to send password reset instructions
       router.push("/verify-reset-password-request");
     } catch (err) {
       // TODO

@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import { signInSchema } from "~/lib/auth/validation/schemas";
-import { selectPasswordHashUsingEmail } from "~/services/database/queries/auth";
+import { getPasswordHashByEmail } from "~/services/database/queries/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { email, password } = signInSchema.parse(data);
 
-    const password_hash = await selectPasswordHashUsingEmail(email);
+    const password_hash = await getPasswordHashByEmail(email);
 
     await verifyPassword(password_hash, password);
   } catch (err) {

@@ -1,7 +1,9 @@
 import { render } from "@react-email/render";
 import { auth } from "~/auth";
+import { generatePasswordResetToken } from "~/lib/auth/passwords/utils";
 import { ResetPasswordRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
+import { checkPasswordHashNotNullByEmail } from "~/services/database/queries/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -17,48 +19,60 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { email } = resetPasswordSchema.parse(data);
 
-    // TODO
-    // Update with password reset link
-    const url = "https://foundationformationkit.org/";
+    const passwordHashNotNull = await checkPasswordHashNotNullByEmail(email);
 
-    const resendAPIEndpoint = "https://api.resend.com/emails";
+    if (passwordHashNotNull) {
+      const token = await generatePasswordResetToken(email);
 
-    const fromEmailAddress = "auth@foundationformationkit.org";
-    const from = `FFK Team <${fromEmailAddress}>`;
+      const resetLink = `${process.env.DOMAIN}/update-password?token=${token}`;
 
-    const to = email;
+      const resendAPIEndpoint = "https://api.resend.com/emails";
 
-    const subject = "Password reset link";
+      const fromEmailAddress = "auth@foundationformationkit.org";
+      const from = `FFK Team <${fromEmailAddress}>`;
 
-    const html = await render(ResetPasswordRequestEmailTemplate({ url }), {
-      pretty: true,
-    });
+      const to = email;
 
-    // Email text body
-    // Fallback for email clients that don't render HTML, e.g. feature phones
-    const text = await render(ResetPasswordRequestEmailTemplate({ url }), {
-      plainText: true,
-    });
+      const subject = "Password reset link";
 
-    const resendResponse = await fetch(resendAPIEndpoint, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.AUTH_RESEND_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to,
-        subject,
-        html,
-        text,
-      }),
-    });
-
-    if (!resendResponse?.ok) {
-      throw new Error(
-        `Reset password request resend status: ${resendResponse?.status}`,
+      const html = await render(
+        ResetPasswordRequestEmailTemplate({ url: resetLink }),
+        {
+          pretty: true,
+        },
       );
+
+      // Email text body
+      // Fallback for email clients that don't render HTML, e.g. feature phones
+      const text = await render(
+        ResetPasswordRequestEmailTemplate({ url: resetLink }),
+        {
+          plainText: true,
+        },
+      );
+
+      const resendResponse = await fetch(resendAPIEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.AUTH_RESEND_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to,
+          subject,
+          html,
+          text,
+        }),
+      });
+
+      if (!resendResponse?.ok) {
+        throw new Error(
+          `Reset password request resend status: ${resendResponse?.status}`,
+        );
+      }
+    } else {
+      throw new Error("Failed to reset password");
     }
   } catch (err) {
     // TODO

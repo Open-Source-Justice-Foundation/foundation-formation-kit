@@ -18,3 +18,6 @@ export const PASSWORD_MIN_LENGTH_ERR_MSG = `Password must contain at least ${PAS
 export const PASSWORD_MAX_LENGTH_ERR_MSG = `Password can be at most ${PASSWORD_MAX_LENGTH} characters`;
 export const PASSWORD_CONFIRMATION_ERR_MSG = "Passwords do not match";
 export const PASSWORD_CONFIRMATION_VALIDATION_PATH = "passwordConfirmation";
+
+// Password reset tokens
+export const PASSWORD_RESET_TOKEN_BYTE_SIZE = 32;
