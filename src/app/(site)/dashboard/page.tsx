@@ -210,12 +210,12 @@ export default function DashboardPage() {
                           </span>
                         </Button>
                       </AlertDialogTrigger>
-                      <AlertDialogContent>
+                      <AlertDialogContent className="w-3/4 max-[430px]:p-5">
                         <AlertDialogHeader>
-                          <AlertDialogTitle>
+                          <AlertDialogTitle className="max-[430px]:text-base">
                             Are you sure you want to delete your foundation?
                           </AlertDialogTitle>
-                          <AlertDialogDescription>
+                          <AlertDialogDescription className="max-[430px]:text-xs">
                             This action cannot be undone. This will permanently
                             delete your foundation and remove your data from our
                             servers. Be sure to download any documents related
@@ -223,12 +223,18 @@ export default function DashboardPage() {
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel disabled={isLoading}>
+                          <AlertDialogCancel
+                            className="mt-4 max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
+                            disabled={isLoading}
+                          >
                             Cancel
                           </AlertDialogCancel>
                           <AlertDialogAction
                             className={cn(
                               buttonVariants({ variant: "destructive" }),
+                              "max-[430px]:h-8",
+                              "max-[430px]:py-1.5",
+                              "max-[430px]:px-3",
                             )}
                             onClick={() => deleteFoundation()}
                             disabled={isLoading}
