@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { PopoverClose } from "@radix-ui/react-popover";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -145,51 +146,60 @@ export default function DashboardPage() {
                 </PopoverTrigger>
                 <PopoverContent className="w-28 p-2 sm:w-48 sm:p-2.5 md:w-64 md:p-3">
                   <div className="flex flex-col">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      className="w-full justify-start p-2"
-                      onClick={() => someButton()}
-                      disabled={isLoading}
-                    >
-                      <Archive aria-hidden="true" className="text-foreground" />
-                      <span className="sr-only">Archive</span>
-                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                        Some button
-                      </span>
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      className="w-full justify-start p-2"
-                      onClick={() => downloadTaxForm()}
-                      disabled={isLoading}
-                    >
-                      <Download
-                        aria-hidden="true"
-                        className="text-foreground"
-                      />
-                      <span className="sr-only">Download</span>
-                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                        {foundation.taxForm}
-                      </span>
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      className="w-full justify-start p-2"
-                      onClick={() => downloadArticlesOfIncorporation()}
-                      disabled={isLoading}
-                    >
-                      <Download
-                        aria-hidden="true"
-                        className="text-foreground"
-                      />
-                      <span className="sr-only">Download</span>
-                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                        {foundation.articlesOfIncorporationForm}
-                      </span>
-                    </Button>
+                    <PopoverClose asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="w-full justify-start p-2"
+                        onClick={() => someButton()}
+                        disabled={isLoading}
+                      >
+                        <Archive
+                          aria-hidden="true"
+                          className="text-foreground"
+                        />
+                        <span className="sr-only">Archive</span>
+                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                          Some button
+                        </span>
+                      </Button>
+                    </PopoverClose>
+                    <PopoverClose asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="w-full justify-start p-2"
+                        onClick={() => downloadTaxForm()}
+                        disabled={isLoading}
+                      >
+                        <Download
+                          aria-hidden="true"
+                          className="text-foreground"
+                        />
+                        <span className="sr-only">Download</span>
+                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                          {foundation.taxForm}
+                        </span>
+                      </Button>
+                    </PopoverClose>
+                    <PopoverClose asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="w-full justify-start p-2"
+                        onClick={() => downloadArticlesOfIncorporation()}
+                        disabled={isLoading}
+                      >
+                        <Download
+                          aria-hidden="true"
+                          className="text-foreground"
+                        />
+                        <span className="sr-only">Download</span>
+                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                          {foundation.articlesOfIncorporationForm}
+                        </span>
+                      </Button>
+                    </PopoverClose>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button
@@ -223,24 +233,28 @@ export default function DashboardPage() {
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel
-                            className="mt-4 max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
-                            disabled={isLoading}
-                          >
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction
-                            className={cn(
-                              buttonVariants({ variant: "destructive" }),
-                              "max-[430px]:h-8",
-                              "max-[430px]:py-1.5",
-                              "max-[430px]:px-3",
-                            )}
-                            onClick={() => deleteFoundation()}
-                            disabled={isLoading}
-                          >
-                            Delete
-                          </AlertDialogAction>
+                          <PopoverClose asChild>
+                            <AlertDialogCancel
+                              className="mt-4 max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
+                              disabled={isLoading}
+                            >
+                              Cancel
+                            </AlertDialogCancel>
+                          </PopoverClose>
+                          <PopoverClose asChild>
+                            <AlertDialogAction
+                              className={cn(
+                                buttonVariants({ variant: "destructive" }),
+                                "max-[430px]:h-8",
+                                "max-[430px]:py-1.5",
+                                "max-[430px]:px-3",
+                              )}
+                              onClick={() => deleteFoundation()}
+                              disabled={isLoading}
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </PopoverClose>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
