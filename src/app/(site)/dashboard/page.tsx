@@ -2,14 +2,26 @@
 
 import { useState } from "react";
 
-import { Button } from "~/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
+import { Button, buttonVariants } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Archive, Download, Ellipsis } from "lucide-react";
+import { cn } from "~/lib/utils";
+import { Archive, Download, Ellipsis, Trash } from "lucide-react";
 import { toast } from "sonner";
 
 const foundations = [
@@ -91,6 +103,21 @@ export default function DashboardPage() {
     }
   }
 
+  async function deleteFoundation() {
+    setIsLoading(true);
+
+    try {
+      console.log("Deleting foundation...");
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Deletion error");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <>
       {foundations.map((foundation) => (
@@ -127,7 +154,7 @@ export default function DashboardPage() {
                     >
                       <Archive aria-hidden="true" className="text-foreground" />
                       <span className="sr-only">Archive</span>
-                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
                         Some button
                       </span>
                     </Button>
@@ -143,7 +170,7 @@ export default function DashboardPage() {
                         className="text-foreground"
                       />
                       <span className="sr-only">Download</span>
-                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
                         {foundation.taxForm}
                       </span>
                     </Button>
@@ -159,10 +186,58 @@ export default function DashboardPage() {
                         className="text-foreground"
                       />
                       <span className="sr-only">Download</span>
-                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                      <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
                         {foundation.articlesOfIncorporationForm}
                       </span>
                     </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="w-full justify-start p-2"
+                          disabled={isLoading}
+                        >
+                          <Trash
+                            aria-hidden="true"
+                            className="text-foreground"
+                          />
+                          <span className="sr-only">
+                            Delete your foundation
+                          </span>
+                          <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                            Delete
+                          </span>
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Are you sure you want to delete your foundation?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently
+                            delete your foundation and remove your data from our
+                            servers. Be sure to download any documents related
+                            to the foundation for your records.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel disabled={isLoading}>
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction
+                            className={cn(
+                              buttonVariants({ variant: "destructive" }),
+                            )}
+                            onClick={() => deleteFoundation()}
+                            disabled={isLoading}
+                          >
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </PopoverContent>
               </Popover>
