@@ -4,7 +4,12 @@ import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Download, Ellipsis } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
+import { Archive, Download, Ellipsis } from "lucide-react";
 import { toast } from "sonner";
 
 const foundations = [
@@ -39,6 +44,21 @@ export default function DashboardPage() {
 
   function showCardOptions() {
     console.log("Showing card options...");
+  }
+
+  async function someButton() {
+    setIsLoading(true);
+
+    try {
+      console.log("Doing something with a button...");
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Some button error");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function downloadTaxForm() {
@@ -83,16 +103,69 @@ export default function DashboardPage() {
               <CardTitle className="text-2xl sm:text-3xl md:text-4xl">
                 {foundation.name}
               </CardTitle>
-              <Button
-                type="button"
-                variant="ghost"
-                className="rounded-full px-3"
-                onClick={() => showCardOptions()}
-                disabled={isLoading}
-              >
-                <Ellipsis aria-hidden="true" className="text-foreground" />
-                <span className="sr-only">Show card options</span>
-              </Button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="rounded-full px-3"
+                    onClick={() => showCardOptions()}
+                    disabled={isLoading}
+                  >
+                    <Ellipsis aria-hidden="true" className="text-foreground" />
+                    <span className="sr-only">Show card options</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-28 p-2 sm:w-48 sm:p-2.5 md:w-64 md:p-3">
+                  <div className="flex flex-col">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="w-full justify-start p-2"
+                      onClick={() => someButton()}
+                      disabled={isLoading}
+                    >
+                      <Archive aria-hidden="true" className="text-foreground" />
+                      <span className="sr-only">Archive</span>
+                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                        Some button
+                      </span>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="w-full justify-start p-2"
+                      onClick={() => downloadTaxForm()}
+                      disabled={isLoading}
+                    >
+                      <Download
+                        aria-hidden="true"
+                        className="text-foreground"
+                      />
+                      <span className="sr-only">Download</span>
+                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                        {foundation.taxForm}
+                      </span>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="w-full justify-start p-2"
+                      onClick={() => downloadArticlesOfIncorporation()}
+                      disabled={isLoading}
+                    >
+                      <Download
+                        aria-hidden="true"
+                        className="text-foreground"
+                      />
+                      <span className="sr-only">Download</span>
+                      <span className="truncate text-xs text-secondary-foreground sm:text-sm md:text-base">
+                        {foundation.articlesOfIncorporationForm}
+                      </span>
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </CardHeader>
           <CardContent className="flex px-4 pb-4 md:px-6 md:pb-6">
@@ -129,7 +202,7 @@ export default function DashboardPage() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col justify-between gap-6 sm:basis-1/2 sm:items-end sm:py-2 md:flex-row md:gap-0 md:py-0">
+              <div className="flex flex-col justify-between gap-6 sm:basis-1/2 sm:items-start sm:py-2 md:flex-row md:items-center md:gap-0 md:py-0">
                 <span className="text-sm text-secondary-foreground sm:text-base">
                   {foundation.typeOfFoundation}
                 </span>
