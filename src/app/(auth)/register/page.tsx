@@ -97,7 +97,7 @@ export default function RegisterPage() {
       const emailSignInResponse = await signIn("resend", {
         email,
         redirect: true,
-        redirectTo: "/",
+        redirectTo: "/dashboard",
       });
 
       if (emailSignInResponse !== undefined && !emailSignInResponse?.ok) {
@@ -120,7 +120,7 @@ export default function RegisterPage() {
     try {
       const oAuthSignInResponse = await signIn(provider, {
         redirect: true,
-        redirectTo: "/",
+        redirectTo: "/dashboard",
       });
 
       if (oAuthSignInResponse !== undefined && !oAuthSignInResponse?.ok) {
