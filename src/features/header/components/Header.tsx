@@ -81,6 +81,14 @@ export function Header() {
                   <div className="flex flex-col gap-1.5 py-4">
                     <SheetClose asChild>
                       <Link
+                        href="/under-construction"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Get started</span>
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
                         href="/dashboard"
                         className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                       >
@@ -93,14 +101,6 @@ export function Header() {
                         className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                       >
                         <span className="font-medium">Profile</span>
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/under-construction"
-                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
-                      >
-                        <span className="font-medium">Get started</span>
                       </Link>
                     </SheetClose>
                     <Separator />
