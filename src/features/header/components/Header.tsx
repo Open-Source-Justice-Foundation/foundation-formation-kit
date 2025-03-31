@@ -154,9 +154,9 @@ export function Header() {
             <span className="font-medium text-link-foreground">Sign in</span>
           </Link>
         )}
-        {session && <HeaderDropdownMenu />}
         <GetStartedButton />
         <ThemeToggle />
+        {session && <HeaderDropdownMenu />}
       </div>
     </header>
   );
