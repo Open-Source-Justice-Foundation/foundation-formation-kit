@@ -10,17 +10,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
-import {
-  GetStartedButton,
-  SheetSignOutButton,
-  SignOutButton,
-} from "~/features/buttons";
+import { GetStartedButton, SheetSignOutButton } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
 // import { getUser } from "~/services/auth";
 import { Menu } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
+import { HeaderDropdownMenu } from "./HeaderDropdownMenu";
 import { HeaderHomeButton } from "./HeaderHomeButton";
 
 export function Header() {
@@ -108,7 +105,7 @@ export function Header() {
             <span className="font-medium text-link-foreground">Sign in</span>
           </Link>
         )}
-        {session && <SignOutButton />}
+        {session && <HeaderDropdownMenu />}
         <GetStartedButton />
         <ThemeToggle />
       </div>
