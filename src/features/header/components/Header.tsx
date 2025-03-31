@@ -64,7 +64,7 @@ export function Header() {
                         href="/login"
                         className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                       >
-                        <span className="font-medium">Sign in</span>
+                        <span className="font-medium">Get started</span>
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
@@ -72,7 +72,7 @@ export function Header() {
                         href="/login"
                         className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                       >
-                        <span className="font-medium">Get started</span>
+                        <span className="font-medium">Sign in</span>
                       </Link>
                     </SheetClose>
                   </div>
@@ -149,13 +149,13 @@ export function Header() {
       <div className="hidden items-center gap-6 md:flex">
         {/* TODO */}
         {/* Try using server session or using a loading skeleton or just hiding the element */}
+        <GetStartedButton />
+        <ThemeToggle />
         {session === null && (
           <Link href="/login">
             <span className="font-medium text-link-foreground">Sign in</span>
           </Link>
         )}
-        <GetStartedButton />
-        <ThemeToggle />
         {session && <HeaderDropdownMenu />}
       </div>
     </header>
