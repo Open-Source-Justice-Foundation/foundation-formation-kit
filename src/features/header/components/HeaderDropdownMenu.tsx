@@ -43,7 +43,7 @@ export function HeaderDropdownMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
+        <Avatar className="mr-3 cursor-pointer">
           {typeof session?.user?.name === "string" &&
           session?.user?.name.length > 0 ? (
             <AvatarFallback>{session?.user?.name[0]}</AvatarFallback>

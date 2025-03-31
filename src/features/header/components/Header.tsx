@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -79,7 +80,20 @@ export function Header() {
                 {session && (
                   <div className="flex flex-col gap-1.5 py-4">
                     <SheetClose asChild>
-                      <SheetSignOutButton />
+                      <Link
+                        href="/dashboard"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Dashboard</span>
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/profile"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Profile</span>
+                      </Link>
                     </SheetClose>
                     <SheetClose asChild>
                       <Link
@@ -88,6 +102,41 @@ export function Header() {
                       >
                         <span className="font-medium">Get started</span>
                       </Link>
+                    </SheetClose>
+                    <Separator />
+                    <SheetClose asChild>
+                      <a
+                        href="https://docs.foundationformationkit.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Docs</span>
+                      </a>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <a
+                        href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">GitHub</span>
+                      </a>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <a
+                        href="mailto:info@opensourcejustice.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <span className="font-medium">Support</span>
+                      </a>
+                    </SheetClose>
+                    <Separator />
+                    <SheetClose asChild>
+                      <SheetSignOutButton />
                     </SheetClose>
                   </div>
                 )}
