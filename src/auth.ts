@@ -99,6 +99,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/under-construction",
             "/logout",
             "/dashboard",
+            "/profile",
           ];
 
           const routeProtected = isRouteProtected(protectedRoutes, request);
