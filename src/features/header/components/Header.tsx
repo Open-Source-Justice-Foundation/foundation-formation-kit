@@ -2,6 +2,7 @@
 
 import { GetStartedButton } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
+import { LogIn } from "lucide-react";
 // import { getUser } from "~/services/auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -31,7 +32,11 @@ export function Header() {
         <ThemeToggle />
         {session === null && (
           <Link href="/login">
-            <span className="font-medium text-link-foreground">Sign in</span>
+            <div className="flex gap-2 text-link-foreground">
+              <span className="font-medium">Sign in</span>
+              <LogIn aria-hidden="true" />
+              <span className="sr-only">{"Sign in"}</span>
+            </div>
           </Link>
         )}
         {session && <HeaderDropdownMenu />}
