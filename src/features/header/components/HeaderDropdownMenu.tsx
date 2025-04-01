@@ -54,7 +54,10 @@ export function HeaderDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         {session?.user?.name && (
-          <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
+          <>
+            <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+          </>
         )}
         <DropdownMenuGroup>
           <Link href="/dashboard">
@@ -69,29 +72,33 @@ export function HeaderDropdownMenu() {
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <a
-          href="https://docs.foundationformationkit.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <DropdownMenuItem className="cursor-pointer">Docs</DropdownMenuItem>
-        </a>
-        <a
-          href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <DropdownMenuItem className="cursor-pointer">GitHub</DropdownMenuItem>
-        </a>
-        <a
-          href="mailto:info@opensourcejustice.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <DropdownMenuItem className="cursor-pointer">
-            Support
-          </DropdownMenuItem>
-        </a>
+        <DropdownMenuGroup>
+          <a
+            href="https://docs.foundationformationkit.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <DropdownMenuItem className="cursor-pointer">Docs</DropdownMenuItem>
+          </a>
+          <a
+            href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <DropdownMenuItem className="cursor-pointer">
+              GitHub
+            </DropdownMenuItem>
+          </a>
+          <a
+            href="mailto:info@opensourcejustice.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <DropdownMenuItem className="cursor-pointer">
+              Support
+            </DropdownMenuItem>
+          </a>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
