@@ -91,6 +91,14 @@ export function HeaderSheet() {
           )}
           {session && (
             <div className="flex flex-col gap-1.5 py-4">
+              {session?.user?.name && (
+                <>
+                  <span className="px-3 py-1.5 font-medium">
+                    {session?.user?.name}
+                  </span>
+                  <Separator />
+                </>
+              )}
               <SheetClose asChild>
                 <Link
                   href="/under-construction"
