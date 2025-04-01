@@ -12,6 +12,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import {
+  BookText,
+  Gauge,
+  Github,
+  HandHelping,
+  LogOut,
+  UserPen,
+} from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -62,12 +70,20 @@ export function HeaderDropdownMenu() {
         <DropdownMenuGroup>
           <Link href="/dashboard">
             <DropdownMenuItem className="cursor-pointer">
-              Dashboard
+              <div className="flex grow items-center justify-between">
+                Dashboard
+                <Gauge aria-hidden="true" />
+                <span className="sr-only">{"Dashboard"}</span>
+              </div>
             </DropdownMenuItem>
           </Link>
           <Link href="/profile">
             <DropdownMenuItem className="cursor-pointer">
-              Profile
+              <div className="flex grow items-center justify-between">
+                Profile
+                <UserPen aria-hidden="true" />
+                <span className="sr-only">{"Profile"}</span>
+              </div>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
@@ -78,7 +94,13 @@ export function HeaderDropdownMenu() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <DropdownMenuItem className="cursor-pointer">Docs</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <div className="flex grow items-center justify-between">
+                Docs
+                <BookText aria-hidden="true" />
+                <span className="sr-only">{"Docs"}</span>
+              </div>
+            </DropdownMenuItem>
           </a>
           <a
             href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
@@ -86,7 +108,11 @@ export function HeaderDropdownMenu() {
             rel="noopener noreferrer"
           >
             <DropdownMenuItem className="cursor-pointer">
-              GitHub
+              <div className="flex grow items-center justify-between">
+                GitHub
+                <Github aria-hidden="true" />
+                <span className="sr-only">{"GitHub"}</span>
+              </div>
             </DropdownMenuItem>
           </a>
           <a
@@ -95,7 +121,11 @@ export function HeaderDropdownMenu() {
             rel="noopener noreferrer"
           >
             <DropdownMenuItem className="cursor-pointer">
-              Support
+              <div className="flex grow items-center justify-between">
+                Support
+                <HandHelping aria-hidden="true" />
+                <span className="sr-only">{"Support"}</span>
+              </div>
             </DropdownMenuItem>
           </a>
         </DropdownMenuGroup>
@@ -105,7 +135,11 @@ export function HeaderDropdownMenu() {
           onClick={handleSignOutOnClick}
           disabled={isLoading}
         >
-          Sign out
+          <div className="flex grow items-center justify-between">
+            Sign out
+            <LogOut aria-hidden="true" />
+            <span className="sr-only">{"Sign out"}</span>
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
