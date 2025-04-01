@@ -1,4 +1,4 @@
-export default async function NonProfitNameLayout({
+export default function NonProfitNameLayout({
   children,
 }: {
   children: React.ReactNode;
