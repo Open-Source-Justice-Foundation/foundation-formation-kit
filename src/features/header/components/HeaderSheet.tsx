@@ -14,7 +14,16 @@ import {
 import { SheetSignOutButton } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
 // import { getUser } from "~/services/auth";
-import { Menu } from "lucide-react";
+import {
+  BookText,
+  Gauge,
+  Github,
+  HandHelping,
+  LogIn,
+  Menu,
+  Pen,
+  UserPen,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -25,6 +34,7 @@ export function HeaderSheet() {
   // TODO
   // Make sure email is verified
   const { data: session } = useSession();
+  const iconSize = 16;
 
   return (
     <Sheet>
@@ -58,7 +68,11 @@ export function HeaderSheet() {
                   href="/login"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Get started</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Get started</span>
+                    <Pen size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Get started"}</span>
+                  </div>
                 </Link>
               </SheetClose>
               <SheetClose asChild>
@@ -66,7 +80,11 @@ export function HeaderSheet() {
                   href="/login"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Sign in</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Sign in</span>
+                    <LogIn size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Sign in"}</span>
+                  </div>
                 </Link>
               </SheetClose>
             </div>
@@ -78,7 +96,11 @@ export function HeaderSheet() {
                   href="/under-construction"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Get started</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Get started</span>
+                    <Pen size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Get started"}</span>
+                  </div>
                 </Link>
               </SheetClose>
               <SheetClose asChild>
@@ -86,7 +108,11 @@ export function HeaderSheet() {
                   href="/dashboard"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Dashboard</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Dashboard</span>
+                    <Gauge size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Dashboard"}</span>
+                  </div>
                 </Link>
               </SheetClose>
               <SheetClose asChild>
@@ -94,7 +120,11 @@ export function HeaderSheet() {
                   href="/profile"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Profile</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Profile</span>
+                    <UserPen size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Profile"}</span>
+                  </div>
                 </Link>
               </SheetClose>
               <Separator />
@@ -105,7 +135,11 @@ export function HeaderSheet() {
                   rel="noopener noreferrer"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Docs</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Docs</span>
+                    <BookText size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Docs"}</span>
+                  </div>
                 </a>
               </SheetClose>
               <SheetClose asChild>
@@ -115,7 +149,11 @@ export function HeaderSheet() {
                   rel="noopener noreferrer"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">GitHub</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">GitHub</span>
+                    <Github size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"GitHub"}</span>
+                  </div>
                 </a>
               </SheetClose>
               <SheetClose asChild>
@@ -125,7 +163,11 @@ export function HeaderSheet() {
                   rel="noopener noreferrer"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span className="font-medium">Support</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Support</span>
+                    <HandHelping size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Support"}</span>
+                  </div>
                 </a>
               </SheetClose>
               <Separator />

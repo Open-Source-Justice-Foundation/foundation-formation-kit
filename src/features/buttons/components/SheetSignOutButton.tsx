@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
+import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { toast } from "sonner";
 
@@ -33,11 +34,15 @@ export function SheetSignOutButton() {
     <Button
       type="button"
       variant="ghost"
-      className="h-9 justify-start px-3 py-1.5 text-base focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+      className="h-9 px-3 py-1.5 text-base focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
       onClick={handleSignOutOnClick}
       disabled={isLoading}
     >
-      Sign out
+      <div className="flex grow items-center justify-between">
+        Sign out
+        <LogOut size={16} aria-hidden="true" />
+        <span className="sr-only">{"Sign out"}</span>
+      </div>
     </Button>
   );
 }
