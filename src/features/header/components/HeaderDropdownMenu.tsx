@@ -69,7 +69,7 @@ export function HeaderDropdownMenu() {
         )}
         <DropdownMenuGroup>
           <Link href="/dashboard">
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
               <div className="flex grow items-center justify-between">
                 Dashboard
                 <Gauge aria-hidden="true" />
@@ -78,7 +78,7 @@ export function HeaderDropdownMenu() {
             </DropdownMenuItem>
           </Link>
           <Link href="/profile">
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
               <div className="flex grow items-center justify-between">
                 Profile
                 <UserPen aria-hidden="true" />
