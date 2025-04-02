@@ -39,10 +39,7 @@ export function HeaderSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant="outline"
-          className="h-8 px-[0.6875rem] sm:h-10 sm:px-4"
-        >
+        <Button variant="outline" className="h-8 px-3">
           <Menu />
         </Button>
       </SheetTrigger>
