@@ -1,15 +1,19 @@
+import { Badge } from "~/components/ui/badge";
 import { FFKLogo } from "~/features/logos";
 import Link from "next/link";
 
 export function HeaderHomeButton() {
   return (
-    <Link href="/" className="flex items-center gap-2">
+    <Link href="/" className="flex items-center gap-2 max-[397px]:grow">
       <FFKLogo />
-      <span className="pr-4 text-base font-bold text-logo-foreground sm:text-xl">
+      <span className="hidden text-base font-bold text-logo-foreground min-[398px]:flex sm:text-xl">
         Foundation Formation Kit
       </span>
-      <span className="rounded-lg border border-border p-1 text-[0.6rem]/[1.5]">
-        ALPHA
+      <span className="hidden text-base font-bold text-logo-foreground max-[397px]:flex">
+        FFK
+      </span>
+      <span className="flex max-[397px]:grow max-[397px]:justify-end">
+        <Badge variant="outline">Alpha</Badge>
       </span>
     </Link>
   );
