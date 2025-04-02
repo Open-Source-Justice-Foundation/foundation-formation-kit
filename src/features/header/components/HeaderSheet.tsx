@@ -101,7 +101,7 @@ export function HeaderSheet() {
               )}
               <SheetClose asChild>
                 <Link
-                  href="/under-construction"
+                  href="/formation/step-1"
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center justify-between">

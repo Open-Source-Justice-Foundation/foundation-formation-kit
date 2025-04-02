@@ -100,6 +100,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/logout",
             "/dashboard",
             "/profile",
+            "/formation",
           ];
 
           const routeProtected = isRouteProtected(protectedRoutes, request);

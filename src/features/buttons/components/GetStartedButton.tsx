@@ -13,7 +13,7 @@ export function GetStartedButton() {
   return (
     <Button asChild type="button" className="focus-visible:ring-ringPrimary">
       {session?.user ? (
-        <Link href="/under-construction" className="text-base">
+        <Link href="/formation/step-1" className="text-base">
           Get started
         </Link>
       ) : (
