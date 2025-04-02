@@ -77,9 +77,11 @@ export default function FormationStep1Page() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col border-0 sm:w-[425px]">
+    <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
-        <CardTitle>Legal Name</CardTitle>
+        <CardTitle className="text-base sm:text-xl md:text-2xl">
+          Legal Name
+        </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
         </CardDescription>
@@ -130,7 +132,7 @@ export default function FormationStep1Page() {
             />
             <Button
               type="submit"
-              className="w-1/4 gap-3 self-end focus-visible:ring-ringPrimary"
+              className="w-1/4 min-w-[92px] gap-3 self-end focus-visible:ring-ringPrimary"
               disabled={isLoading}
             >
               Next

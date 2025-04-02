@@ -78,9 +78,11 @@ export default function FormationStep4Page() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col border-0 sm:w-[425px]">
+    <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
-        <CardTitle>Step 4</CardTitle>
+        <CardTitle className="text-base sm:text-xl md:text-2xl">
+          Step 4
+        </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
         </CardDescription>
@@ -133,7 +135,7 @@ export default function FormationStep4Page() {
               <Button
                 asChild
                 type="button"
-                className="w-1/4 gap-3 focus-visible:ring-ringPrimary"
+                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
                 <Link href="/formation/step-3" className="text-base">
@@ -144,7 +146,7 @@ export default function FormationStep4Page() {
               </Button>
               <Button
                 type="submit"
-                className="w-1/4 gap-3 focus-visible:ring-ringPrimary"
+                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
                 Next
