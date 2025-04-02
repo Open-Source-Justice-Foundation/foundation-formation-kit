@@ -60,7 +60,7 @@ export function HeaderDropdownMenu() {
           )}
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent align="end" className="w-56">
         {session?.user?.name && (
           <>
             <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>

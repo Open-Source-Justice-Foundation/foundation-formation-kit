@@ -18,7 +18,7 @@ export function Header() {
   const { data: session } = useSession();
 
   return (
-    <header className="flex items-center justify-between border-b px-5 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] md:px-20 lg:px-[7.5rem] dark:drop-shadow-[0_1px_2px_rgba(73,73,80)]">
+    <header className="flex items-center justify-between border-b px-6 py-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)] lg:px-8 dark:drop-shadow-[0_1px_2px_rgba(73,73,80)]">
       <div className="flex items-center gap-4">
         <div className="flex md:hidden">
           <HeaderSheet />

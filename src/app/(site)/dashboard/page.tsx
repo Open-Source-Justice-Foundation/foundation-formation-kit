@@ -144,7 +144,10 @@ export default function DashboardPage() {
                     <span className="sr-only">Show card options</span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-28 p-2 sm:w-48 sm:p-2.5 md:w-64 md:p-3">
+                <PopoverContent
+                  align="end"
+                  className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
+                >
                   <div className="flex flex-col">
                     <PopoverClose asChild>
                       <Button
