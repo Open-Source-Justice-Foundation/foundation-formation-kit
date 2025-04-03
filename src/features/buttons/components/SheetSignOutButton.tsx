@@ -39,9 +39,9 @@ export function SheetSignOutButton() {
       disabled={isLoading}
     >
       <div className="flex grow items-center justify-between">
-        Sign out
+        Logout
         <LogOut size={16} aria-hidden="true" />
-        <span className="sr-only">{"Sign out"}</span>
+        <span className="sr-only">{"Logout"}</span>
       </div>
     </Button>
   );

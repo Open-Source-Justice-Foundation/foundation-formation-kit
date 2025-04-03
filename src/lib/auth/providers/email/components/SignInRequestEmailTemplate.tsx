@@ -23,7 +23,7 @@ export function SignInRequestEmailTemplate(
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Email Sign In</title>
+        <title>Email Login</title>
         <Font
           fontFamily="Inter"
           fallbackFontFamily={["Arial", "Helvetica", "sans-serif"]}
@@ -43,7 +43,7 @@ export function SignInRequestEmailTemplate(
           </Row>
           <Row>
             <Text style={emailStyles.textContent}>
-              Sign in to your account by clicking the link below.
+              Login to your account by clicking the link below.
             </Text>
           </Row>
         </Section>
@@ -55,7 +55,7 @@ export function SignInRequestEmailTemplate(
               rel="noopener noreferrer"
               style={emailStyles.button}
             >
-              Sign in
+              Login
             </Button>
           </Row>
         </Section>

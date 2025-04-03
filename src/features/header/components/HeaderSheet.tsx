@@ -78,9 +78,9 @@ export function HeaderSheet() {
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-medium">Sign in</span>
+                    <span className="font-medium">Login</span>
                     <LogIn size={iconSize} aria-hidden="true" />
-                    <span className="sr-only">{"Sign in"}</span>
+                    <span className="sr-only">{"Login"}</span>
                   </div>
                 </Link>
               </SheetClose>

@@ -146,9 +146,9 @@ export function HeaderDropdownMenu() {
           disabled={isLoading}
         >
           <div className="flex grow items-center justify-between">
-            Sign out
+            Logout
             <LogOut aria-hidden="true" />
-            <span className="sr-only">{"Sign out"}</span>
+            <span className="sr-only">{"Logout"}</span>
           </div>
         </DropdownMenuItem>
       </DropdownMenuContent>

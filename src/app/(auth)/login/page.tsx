@@ -207,7 +207,7 @@ export default function SignInPage() {
                   className="focus-visible:ring-ringPrimary"
                   disabled={isLoading}
                 >
-                  Sign in
+                  Login
                 </Button>
               </form>
             </Form>
@@ -229,7 +229,7 @@ export default function SignInPage() {
               onClick={() => oAuthSignIn("github")}
             >
               <Github aria-hidden="true" />
-              Sign in with GitHub
+              Login with GitHub
             </Button>
           </div>
         </CardContent>
