@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import {
@@ -11,7 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
-import { SheetSignOutButton } from "~/features/buttons";
 import { ThemeToggle } from "~/features/theme-toggle";
 // import { getUser } from "~/services/auth";
 import {
@@ -20,21 +21,45 @@ import {
   Github,
   HandHelping,
   LogIn,
+  LogOut,
   Menu,
   Pen,
   UserPen,
 } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 import { HeaderHomeButton } from "./HeaderHomeButton";
+
+const iconSize = 16;
 
 export function HeaderSheet() {
   // const user = await getUser();
   // TODO
   // Make sure email is verified
   const { data: session } = useSession();
-  const iconSize = 16;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  async function handleSignOutOnClick() {
+    setIsLoading(true);
+    try {
+      const signOutResponse = await signOut({
+        redirect: true,
+        redirectTo: "/",
+      });
+
+      if (signOutResponse !== undefined) {
+        throw new Error("Failed to redirect to homepage");
+      }
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Logout error");
+      setIsLoading(false);
+    }
+  }
 
   return (
     <Sheet>
@@ -99,7 +124,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/formation/step-1"
-                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium">New foundation</span>
@@ -111,7 +136,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/dashboard"
-                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium">Dashboard</span>
@@ -123,7 +148,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/profile"
-                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
+                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium">Profile</span>
@@ -177,7 +202,19 @@ export function HeaderSheet() {
               </SheetClose>
               <Separator />
               <SheetClose asChild>
-                <SheetSignOutButton />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="h-9 px-3 py-1.5 text-base focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  onClick={handleSignOutOnClick}
+                  disabled={isLoading}
+                >
+                  <div className="flex grow items-center justify-between">
+                    Logout
+                    <LogOut size={iconSize} aria-hidden="true" />
+                    <span className="sr-only">{"Logout"}</span>
+                  </div>
+                </Button>
               </SheetClose>
             </div>
           )}
