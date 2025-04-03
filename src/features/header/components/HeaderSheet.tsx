@@ -30,7 +30,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { toast } from "sonner";
 
-import { HeaderHomeButton } from "./HeaderHomeButton";
+import { HeaderSheetHomeButton } from "./HeaderSheetHomeButton";
 
 const iconSize = 16;
 
@@ -73,7 +73,7 @@ export function HeaderSheet() {
           <SheetTitle className="text-base font-normal">
             <div className="flex items-center justify-between pt-4">
               <SheetClose asChild>
-                <HeaderHomeButton />
+                <HeaderSheetHomeButton />
               </SheetClose>
               <ThemeToggle />
             </div>
