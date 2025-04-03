@@ -4,15 +4,15 @@ import Link from "next/link";
 
 export function HeaderHomeButton() {
   return (
-    <Link href="/" className="flex items-center gap-2 max-[397px]:grow">
+    <Link href="/" className="flex items-center gap-2 max-[399px]:grow">
       <FFKLogo />
-      <span className="hidden text-base font-bold text-logo-foreground min-[398px]:flex sm:text-xl">
+      <span className="hidden text-base font-bold text-logo-foreground min-[400px]:flex sm:text-xl">
         Foundation Formation Kit
       </span>
-      <span className="hidden text-base font-bold text-logo-foreground max-[397px]:flex">
+      <span className="hidden text-base font-bold text-logo-foreground max-[399px]:flex">
         FFK
       </span>
-      <span className="flex max-[397px]:grow max-[397px]:justify-end">
+      <span className="flex max-[399px]:grow max-[399px]:justify-end">
         <Badge variant="outline">Alpha</Badge>
       </span>
     </Link>
