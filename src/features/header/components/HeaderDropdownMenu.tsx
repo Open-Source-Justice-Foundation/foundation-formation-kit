@@ -18,6 +18,7 @@ import {
   Github,
   HandHelping,
   LogOut,
+  Pen,
   UserPen,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
@@ -68,6 +69,15 @@ export function HeaderDropdownMenu() {
           </>
         )}
         <DropdownMenuGroup>
+          <Link href="/formation/step-1">
+            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
+              <div className="flex grow items-center justify-between">
+                New Foundation
+                <Pen aria-hidden="true" />
+                <span className="sr-only">{"New foundation"}</span>
+              </div>
+            </DropdownMenuItem>
+          </Link>
           <Link href="/dashboard">
             <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
               <div className="flex grow items-center justify-between">
