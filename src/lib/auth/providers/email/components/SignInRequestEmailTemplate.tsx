@@ -12,6 +12,10 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import {
+  INTER_FONT_URL,
+  SUPPORT_EMAIL_URI,
+} from "~/lib/auth/constants/constants";
 import { emailStyles } from "~/lib/auth/styles/emails";
 import { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
 
@@ -28,7 +32,7 @@ export function SignInRequestEmailTemplate(
           fontFamily="Inter"
           fallbackFontFamily={["Arial", "Helvetica", "sans-serif"]}
           webFont={{
-            url: "https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2",
+            url: INTER_FONT_URL,
             format: "woff2",
           }}
           fontWeight="100 900"
@@ -65,7 +69,7 @@ export function SignInRequestEmailTemplate(
             <Text style={emailStyles.textFooterHelp}>
               Need help?{" "}
               <Link
-                href="mailto:info@opensourcejustice.org"
+                href={SUPPORT_EMAIL_URI}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={emailStyles.linkFooter}

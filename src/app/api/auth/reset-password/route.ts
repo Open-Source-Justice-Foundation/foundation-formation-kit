@@ -1,5 +1,6 @@
 import { render } from "@react-email/render";
 import { auth } from "~/auth";
+import { RESEND_API_ENDPOINT } from "~/lib/auth/constants/constants";
 import { generatePasswordResetToken } from "~/lib/auth/passwords/utils";
 import { ResetPasswordRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
@@ -26,8 +27,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
       const resetLink = `${process.env.DOMAIN}/update-password?token=${token}`;
 
-      const resendAPIEndpoint = "https://api.resend.com/emails";
-
       const fromEmailAddress = "auth@foundationformationkit.org";
       const from = `FFK Team <${fromEmailAddress}>`;
 
@@ -51,7 +50,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         },
       );
 
-      const resendResponse = await fetch(resendAPIEndpoint, {
+      const resendResponse = await fetch(RESEND_API_ENDPOINT, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${process.env.AUTH_RESEND_KEY}`,

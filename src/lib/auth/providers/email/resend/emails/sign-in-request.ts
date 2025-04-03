@@ -1,4 +1,5 @@
 import { render } from "@react-email/render";
+import { RESEND_API_ENDPOINT } from "~/lib/auth/constants/constants";
 import { SignInRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/types";
 
@@ -8,7 +9,6 @@ export async function signInRequest(
   const { identifier: to, url, provider } = params;
   if (provider.from && provider.apiKey) {
     try {
-      const resendAPIEndpoint = "https://api.resend.com/emails";
       const from = `FFK Team <${provider.from}>`;
       const subject = "Sign in link";
 
@@ -22,7 +22,7 @@ export async function signInRequest(
         plainText: true,
       });
 
-      const resendResponse = await fetch(resendAPIEndpoint, {
+      const resendResponse = await fetch(RESEND_API_ENDPOINT, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${provider.apiKey}`,

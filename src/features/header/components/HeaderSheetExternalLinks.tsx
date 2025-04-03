@@ -3,6 +3,11 @@ import {
   HEADER_SHEET_ICON_BASE_SIZE,
   HEADER_SHEET_ICON_SMALL_SIZE,
 } from "~/features/header/constants/constants";
+import {
+  FFK_DOCS_URL,
+  FFK_GITHUB_URL,
+  SUPPORT_EMAIL_URI,
+} from "~/lib/auth/constants/constants";
 import { BookText, Github, HandHelping } from "lucide-react";
 
 export function HeaderSheetExternalLinks() {
@@ -10,7 +15,7 @@ export function HeaderSheetExternalLinks() {
     <>
       <SheetClose asChild>
         <a
-          href="https://docs.foundationformationkit.org"
+          href={FFK_DOCS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
@@ -33,7 +38,7 @@ export function HeaderSheetExternalLinks() {
       </SheetClose>
       <SheetClose asChild>
         <a
-          href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
+          href={FFK_GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
@@ -56,7 +61,7 @@ export function HeaderSheetExternalLinks() {
       </SheetClose>
       <SheetClose asChild>
         <a
-          href="mailto:info@opensourcejustice.org"
+          href={SUPPORT_EMAIL_URI}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"

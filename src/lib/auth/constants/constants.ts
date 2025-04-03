@@ -1,3 +1,18 @@
+// External links
+export const FFK_DOCS_URL = "https://docs.foundationformationkit.org";
+export const FFK_GITHUB_URL =
+  "https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit";
+
+// Support email
+export const SUPPORT_EMAIL_URI = "mailto:info@opensourcejustice.org";
+
+// Font links
+export const INTER_FONT_URL =
+  "https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2";
+
+// Email API endpoints
+export const RESEND_API_ENDPOINT = "https://api.resend.com/emails";
+
 // Email addresses
 export const EMAIL_MAX_LENGTH = 255;
 export const EMAIL_REQUIRED_ERR_MSG = "Email address is required";

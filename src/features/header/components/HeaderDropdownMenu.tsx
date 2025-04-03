@@ -13,6 +13,11 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
+  FFK_DOCS_URL,
+  FFK_GITHUB_URL,
+  SUPPORT_EMAIL_URI,
+} from "~/lib/auth/constants/constants";
+import {
   BookText,
   Gauge,
   Github,
@@ -99,11 +104,7 @@ export function HeaderDropdownMenu() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <a
-            href="https://docs.foundationformationkit.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={FFK_DOCS_URL} target="_blank" rel="noopener noreferrer">
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Docs
@@ -112,11 +113,7 @@ export function HeaderDropdownMenu() {
               </div>
             </DropdownMenuItem>
           </a>
-          <a
-            href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={FFK_GITHUB_URL} target="_blank" rel="noopener noreferrer">
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 GitHub
@@ -125,11 +122,7 @@ export function HeaderDropdownMenu() {
               </div>
             </DropdownMenuItem>
           </a>
-          <a
-            href="mailto:info@opensourcejustice.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={SUPPORT_EMAIL_URI} target="_blank" rel="noopener noreferrer">
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Support

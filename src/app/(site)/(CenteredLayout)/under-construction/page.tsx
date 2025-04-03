@@ -1,4 +1,5 @@
 import { Button } from "~/components/ui/button";
+import { FFK_DOCS_URL, FFK_GITHUB_URL } from "~/lib/auth/constants/constants";
 import Link from "next/link";
 
 export default function UnderConstructionPage() {
@@ -12,7 +13,7 @@ export default function UnderConstructionPage() {
         <p className="sm:text-lg">
           Check out the{" "}
           <a
-            href="https://docs.foundationformationkit.org"
+            href={FFK_DOCS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-link-foreground"
@@ -23,7 +24,7 @@ export default function UnderConstructionPage() {
         <p className="sm:text-lg">
           Look for updates and open issues on{" "}
           <a
-            href="https://github.com/Open-Source-Justice-Foundation/foundation-formation-kit"
+            href={FFK_GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-link-foreground"
