@@ -102,9 +102,9 @@ export function HeaderSheet() {
                   className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-medium">Get started</span>
+                    <span className="font-medium">New foundation</span>
                     <Pen size={iconSize} aria-hidden="true" />
-                    <span className="sr-only">{"Get started"}</span>
+                    <span className="sr-only">{"New foundation"}</span>
                   </div>
                 </Link>
               </SheetClose>

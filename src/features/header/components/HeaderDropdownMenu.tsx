@@ -72,7 +72,7 @@ export function HeaderDropdownMenu() {
           <Link href="/formation/step-1">
             <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
               <div className="flex grow items-center justify-between">
-                New Foundation
+                New foundation
                 <Pen aria-hidden="true" />
                 <span className="sr-only">{"New foundation"}</span>
               </div>
