@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { AVATAR_ICON_LARGE_SIZE } from "~/features/header/constants/constants";
 import {
   FFK_DOCS_URL,
   FFK_GITHUB_URL,
@@ -24,6 +25,7 @@ import {
   HandHelping,
   LogOut,
   Pen,
+  User,
   UserPen,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
@@ -60,19 +62,25 @@ export function HeaderDropdownMenu() {
         <Avatar className="cursor-pointer">
           {typeof session?.user?.name === "string" &&
           session?.user?.name.length > 0 ? (
-            <AvatarFallback>{session?.user?.name[0]}</AvatarFallback>
+            <AvatarFallback className="bg-accent">
+              {session?.user?.name[0]}
+            </AvatarFallback>
           ) : (
-            <AvatarFallback>NN</AvatarFallback>
+            <AvatarFallback className="bg-accent">
+              <User size={AVATAR_ICON_LARGE_SIZE} aria-hidden="true" />
+              <span className="sr-only">{"Avatar"}</span>
+            </AvatarFallback>
           )}
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        {session?.user?.name && (
-          <>
-            <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-          </>
-        )}
+        {typeof session?.user?.name === "string" &&
+          session?.user?.name.length > 0 && (
+            <>
+              <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+            </>
+          )}
         <DropdownMenuGroup>
           <Link href="/formation/step-1">
             <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
