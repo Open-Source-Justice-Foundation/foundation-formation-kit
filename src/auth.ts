@@ -1,5 +1,6 @@
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
+import { AUTH_FROM_EMAIL_ADDRESS } from "~/lib/auth/constants/constants";
 import {
   signInRequest,
   verificationRequest,
@@ -36,16 +37,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     adapter: PostgresAdapter(pool),
     providers: [
       Resend({
-        from: "auth@foundationformationkit.org",
+        from: AUTH_FROM_EMAIL_ADDRESS,
         async sendVerificationRequest({
           identifier,
           url,
-          provider: { from, apiKey },
+          provider: { apiKey },
         }) {
           const params = {
             identifier,
             url,
-            provider: { from, apiKey },
+            provider: { apiKey },
           };
 
           try {

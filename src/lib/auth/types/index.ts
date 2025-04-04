@@ -1,5 +1,5 @@
 interface CustomEmailConfig {
-  from: string | undefined;
+  from?: string | undefined;
   apiKey: string | undefined;
 }
 

@@ -1,5 +1,8 @@
 import { render } from "@react-email/render";
-import { RESEND_API_ENDPOINT } from "~/lib/auth/constants/constants";
+import {
+  AUTH_FROM_FIELD,
+  RESEND_API_ENDPOINT,
+} from "~/lib/auth/constants/constants";
 import { VerificationRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/types";
 
@@ -7,9 +10,8 @@ export async function verificationRequest(
   params: CustomEmailProviderSendVerificationRequestParams,
 ) {
   const { identifier: to, url, provider } = params;
-  if (provider.from && provider.apiKey) {
+  if (provider.apiKey) {
     try {
-      const from = `FFK Team <${provider.from}>`;
       const subject = "Welcome to the Foundation Formation Kit! 📃";
 
       const html = await render(VerificationRequestEmailTemplate({ url }), {
@@ -29,7 +31,7 @@ export async function verificationRequest(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from,
+          from: AUTH_FROM_FIELD,
           to,
           subject,
           html,

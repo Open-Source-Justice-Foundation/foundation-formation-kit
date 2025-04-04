@@ -13,6 +13,7 @@ import {
   Text,
 } from "@react-email/components";
 import {
+  FFK_EMAIL_FOOTER_LOGO,
   INTER_FONT_URL,
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
@@ -80,7 +81,7 @@ export function ResetPasswordRequestEmailTemplate(
           </Row>
           <Row>
             <Img
-              src="https://foundationformationkit.org/images/logos/emails/logo.png"
+              src={FFK_EMAIL_FOOTER_LOGO}
               alt="Foundation Formation Kit Logo"
               width="49"
               height="56"

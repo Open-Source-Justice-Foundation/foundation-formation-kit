@@ -10,8 +10,16 @@ export const SUPPORT_EMAIL_URI = "mailto:info@opensourcejustice.org";
 export const INTER_FONT_URL =
   "https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2";
 
+// Email images
+export const FFK_EMAIL_FOOTER_LOGO =
+  "https://foundationformationkit.org/images/logos/emails/logo.png";
+
 // Email API endpoints
 export const RESEND_API_ENDPOINT = "https://api.resend.com/emails";
+
+// Auth email
+export const AUTH_FROM_EMAIL_ADDRESS = "auth@foundationformationkit.org";
+export const AUTH_FROM_FIELD = `FFK Team <${AUTH_FROM_EMAIL_ADDRESS}>`;
 
 // Email addresses
 export const EMAIL_MAX_LENGTH = 255;
