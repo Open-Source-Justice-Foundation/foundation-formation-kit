@@ -20,8 +20,8 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="h-7 w-7 rounded-full border-0 min-[1020px]:h-10 min-[1020px]:w-10 min-[1020px]:rounded-md min-[1020px]:border"
-          variant="outline"
+          className="h-4 w-4 ring-offset-transparent hover:bg-transparent hover:text-accent-foreground/60 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+          variant="ghost"
           size="icon"
         >
           <Sun className="scale-100 transition-all dark:scale-0" />

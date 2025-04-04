@@ -11,7 +11,7 @@ import {
   FFK_DOCS_URL,
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
-import { LogIn } from "lucide-react";
+import { ExternalLink, LogIn } from "lucide-react";
 // import { getUser } from "~/services/auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export function Header() {
         </div>
         <HeaderHomeButton />
       </div>
-      <div className="hidden items-center gap-4 min-[1020px]:flex">
+      <div className="hidden items-center gap-6 min-[1020px]:flex">
         {/* TODO */}
         {/* Try using server session or using a loading skeleton or just hiding the element */}
         {session === null && <GetStartedButton />}
@@ -48,14 +48,30 @@ export function Header() {
           ) : (
             <NewFoundationButton />
           ))}
-        <Button type="button" variant="outline" className="text-base">
+        <Button
+          type="button"
+          variant="link"
+          className="p-0 text-base text-foreground underline-offset-0 hover:text-primary hover:no-underline"
+        >
           <a href={FFK_DOCS_URL} target="_blank" rel="noopener noreferrer">
-            Docs
+            <div className="flex items-center gap-2">
+              Docs
+              <ExternalLink aria-hidden="true" />
+              <span className="sr-only">{"External link"}</span>
+            </div>
           </a>
         </Button>
-        <Button type="button" variant="outline" className="text-base">
+        <Button
+          type="button"
+          variant="link"
+          className="p-0 text-base text-foreground underline-offset-0 hover:text-primary hover:no-underline"
+        >
           <a href={SUPPORT_EMAIL_URI} target="_blank" rel="noopener noreferrer">
-            Support
+            <div className="flex items-center gap-2">
+              Support
+              <ExternalLink aria-hidden="true" />
+              <span className="sr-only">{"External link"}</span>
+            </div>
           </a>
         </Button>
         <ThemeToggle />
