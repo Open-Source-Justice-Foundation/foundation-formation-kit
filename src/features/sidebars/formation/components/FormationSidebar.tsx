@@ -58,7 +58,7 @@ export function FormationSidebar() {
                       <SidebarMenuButton
                         asChild
                         isActive={item.url === pathname}
-                        className="data-[active=true]:bg-sidebar-primary/40"
+                        className="data-[active=true]:bg-sidebar-primary/80 dark:data-[active=true]:bg-sidebar-primary/40"
                       >
                         <Link
                           className="my-1"
@@ -67,11 +67,15 @@ export function FormationSidebar() {
                           }}
                         >
                           <div
-                            className={`w-[1.5rem] rounded-full ${item.url === pathname ? "bg-transparent" : "bg-sidebar-accent"} text-center text-primary-foreground sm:text-base`}
+                            className={`w-[1.5rem] rounded-full ${item.url === pathname ? "text-primary-foreground" : "bg-sidebar-accent"} text-center sm:text-base`}
                           >
                             {item.step}
                           </div>
-                          <span className="sm:text-lg">{item.title}</span>
+                          <span
+                            className={`sm:text-lg ${item.url === pathname ? "text-primary-foreground" : "text-foreground"}`}
+                          >
+                            {item.title}
+                          </span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
