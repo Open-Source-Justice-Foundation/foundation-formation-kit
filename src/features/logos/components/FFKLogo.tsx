@@ -1,24 +1,11 @@
-import Image from "next/image";
+import LogoDark from "/images/svgs/logos/logo-dark.svg";
+import Logo from "/images/svgs/logos/logo.svg";
 
 export function FFKLogo() {
   return (
     <>
-      <Image
-        src={"/images/logos/logo.svg"}
-        width={25}
-        height={25}
-        alt="Foundation Formation Kit Logo"
-        unoptimized={true}
-        className="dark:hidden"
-      />
-      <Image
-        src={"/images/logos/logo-dark.svg"}
-        width={25}
-        height={25}
-        alt="Foundation Formation Kit Dark Logo"
-        unoptimized={true}
-        className="hidden dark:block"
-      />
+      <Logo width="25" height="31" className="dark:hidden" />
+      <LogoDark width="25" height="31" className="hidden dark:block" />
     </>
   );
 }
