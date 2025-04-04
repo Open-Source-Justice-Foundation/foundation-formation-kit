@@ -113,21 +113,21 @@ export function HeaderDropdownMenu() {
               </div>
             </DropdownMenuItem>
           </a>
-          <a href={FFK_GITHUB_URL} target="_blank" rel="noopener noreferrer">
-            <DropdownMenuItem className="cursor-pointer">
-              <div className="flex grow items-center justify-between">
-                GitHub
-                <Github aria-hidden="true" />
-                <span className="sr-only">{"GitHub"}</span>
-              </div>
-            </DropdownMenuItem>
-          </a>
           <a href={SUPPORT_EMAIL_URI} target="_blank" rel="noopener noreferrer">
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Support
                 <HandHelping aria-hidden="true" />
                 <span className="sr-only">{"Support"}</span>
+              </div>
+            </DropdownMenuItem>
+          </a>
+          <a href={FFK_GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            <DropdownMenuItem className="cursor-pointer">
+              <div className="flex grow items-center justify-between">
+                GitHub
+                <Github aria-hidden="true" />
+                <span className="sr-only">{"GitHub"}</span>
               </div>
             </DropdownMenuItem>
           </a>

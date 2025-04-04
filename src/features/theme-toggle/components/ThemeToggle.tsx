@@ -20,7 +20,7 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="h-7 w-7 rounded-full border-0 md:h-10 md:w-10 md:rounded-md md:border"
+          className="h-7 w-7 rounded-full border-0 min-[1020px]:h-10 min-[1020px]:w-10 min-[1020px]:rounded-md min-[1020px]:border"
           variant="outline"
           size="icon"
         >

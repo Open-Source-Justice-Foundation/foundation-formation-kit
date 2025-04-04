@@ -5,10 +5,10 @@ export function HeaderSheetHomeButton() {
   return (
     <Link href="/" className="flex items-center gap-2">
       <FFKLogo />
-      <span className="hidden text-base font-bold text-logo-foreground min-[420px]:flex min-[463px]:text-lg sm:text-xl">
+      <span className="hidden text-lg font-bold text-logo-foreground min-[463px]:flex sm:text-xl">
         Foundation Formation Kit
       </span>
-      <span className="hidden text-base font-bold text-logo-foreground max-[419px]:flex">
+      <span className="hidden text-lg font-bold text-logo-foreground max-[462px]:flex">
         FFK
       </span>
     </Link>

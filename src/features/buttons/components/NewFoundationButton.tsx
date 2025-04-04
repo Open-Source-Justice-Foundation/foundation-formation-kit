@@ -4,7 +4,7 @@ import { Button } from "~/components/ui/button";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-export function GetStartedButton() {
+export function NewFoundationButton() {
   const { data: session } = useSession();
 
   // TODO
@@ -16,7 +16,7 @@ export function GetStartedButton() {
       type="button"
       className="text-base focus-visible:ring-ringPrimary"
     >
-      {session === null && <Link href="/login">Get started</Link>}
+      {session?.user && <Link href="/formation/step-1">New foundation</Link>}
     </Button>
   );
 }
