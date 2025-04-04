@@ -3,7 +3,5 @@ export default function ProfileLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex h-full justify-center p-8 sm:p-16">{children}</div>
-  );
+  return <div className="flex justify-center p-8 sm:p-16">{children}</div>;
 }

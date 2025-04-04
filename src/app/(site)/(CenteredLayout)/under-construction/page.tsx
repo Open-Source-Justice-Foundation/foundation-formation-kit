@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function UnderConstructionPage() {
   return (
-    <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[75%]">
+    <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[56%]">
       <div className="flex flex-col items-center gap-6 text-center">
         <h2 className="text-xl font-medium sm:text-2xl">
           🚧 The Foundation Formation Kit is currently under construction. 🚧

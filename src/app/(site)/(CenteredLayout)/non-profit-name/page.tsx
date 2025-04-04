@@ -52,49 +52,51 @@ export default function NonProfitNamePage() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col sm:w-[425px]">
-      <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
-        <CardTitle>Non-profit Name</CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-        <div className="flex flex-col gap-5">
-          <Form {...form}>
-            <form
-              className="flex flex-col gap-5"
-              onSubmit={form.handleSubmit(onSubmit)}
-            >
-              <FormField
-                control={form.control}
-                name="nonProfitName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Non-profit Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        disabled={isLoading}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="focus-visible:ring-ringPrimary"
-                disabled={isLoading}
+    <div className="flex grow items-center justify-center px-5 sm:px-0">
+      <Card className="flex w-[360px] flex-col sm:w-[425px]">
+        <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
+          <CardTitle>Non-profit Name</CardTitle>
+          <CardDescription>
+            🚧 Under construction, applications may be deleted and not work 🚧
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+          <div className="flex flex-col gap-5">
+            <Form {...form}>
+              <form
+                className="flex flex-col gap-5"
+                onSubmit={form.handleSubmit(onSubmit)}
               >
-                Next
-              </Button>
-            </form>
-          </Form>
-        </div>
-      </CardContent>
-    </Card>
+                <FormField
+                  control={form.control}
+                  name="nonProfitName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Non-profit Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                          disabled={isLoading}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="focus-visible:ring-ringPrimary"
+                  disabled={isLoading}
+                >
+                  Next
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

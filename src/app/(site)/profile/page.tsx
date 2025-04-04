@@ -79,7 +79,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="flex w-3/4 flex-col items-center">
+    <div className="flex w-3/4 flex-col">
       <h1 className="mb-6 self-start text-3xl font-medium sm:mb-10">Profile</h1>
       <Card className="mb-6 flex w-full flex-col px-2 py-2 sm:mb-10 sm:px-4 sm:py-4 md:px-9">
         <CardHeader className="px-4 py-4 md:px-6 md:py-6">

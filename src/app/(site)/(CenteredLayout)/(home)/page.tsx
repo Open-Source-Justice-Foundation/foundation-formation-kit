@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Homepage() {
   return (
-    <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[75%]">
+    <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[56%]">
       <div className="flex flex-col items-center gap-10">
         <Image
           src="/images/home/tax-free.svg"

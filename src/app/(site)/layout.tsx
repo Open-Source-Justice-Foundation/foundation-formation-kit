@@ -6,9 +6,9 @@ export default function SiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="h-full">{children}</main>
+      <main className="flex grow flex-col justify-center">{children}</main>
     </div>
   );
 }

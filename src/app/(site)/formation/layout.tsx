@@ -7,9 +7,9 @@ export default function FoundationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider className="h-full min-h-full px-5 pb-10">
+    <SidebarProvider className="min-h-full grow px-5">
       <FormationSidebar />
-      <div className="flex h-full w-full items-center justify-center md:items-start md:justify-start md:px-6 min-[800px]:px-10 min-[850px]:px-16">
+      <div className="flex grow items-center justify-center py-5 md:items-start md:justify-start md:px-6 md:pt-0 min-[800px]:px-10 min-[850px]:px-16">
         {children}
       </div>
     </SidebarProvider>

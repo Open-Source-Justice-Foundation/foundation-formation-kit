@@ -124,7 +124,7 @@ export default function DashboardPage() {
       {foundations.map((foundation) => (
         <Card
           key={foundation.id}
-          className="mb-6 flex w-full flex-col px-2 py-2 last:mb-0 sm:mb-10 sm:px-4 sm:py-4 md:px-9"
+          className="mb-6 flex flex-col px-2 py-2 last:mb-0 sm:mb-10 sm:px-4 sm:py-4 md:px-9"
         >
           <CardHeader className="px-4 pb-6 pt-4 md:px-6 md:pb-8 md:pt-6">
             <div className="flex items-center justify-between gap-2">
