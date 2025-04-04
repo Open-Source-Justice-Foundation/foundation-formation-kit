@@ -59,16 +59,16 @@ export default function DashboardPage() {
     console.log("Showing card options...");
   }
 
-  async function someButton() {
+  async function handleArchiveFoundationOnClick() {
     setIsLoading(true);
 
     try {
-      console.log("Doing something with a button...");
+      console.log("Archiving foundation...");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
-      toast.error("Some button error");
+      toast.error("Archive error");
     } finally {
       setIsLoading(false);
     }
@@ -154,24 +154,6 @@ export default function DashboardPage() {
                         type="button"
                         variant="ghost"
                         className="w-full justify-start p-2"
-                        onClick={() => someButton()}
-                        disabled={isLoading}
-                      >
-                        <Archive
-                          aria-hidden="true"
-                          className="text-foreground"
-                        />
-                        <span className="sr-only">Archive</span>
-                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                          Some button
-                        </span>
-                      </Button>
-                    </PopoverClose>
-                    <PopoverClose asChild>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="w-full justify-start p-2"
                         onClick={() => downloadTaxForm()}
                         disabled={isLoading}
                       >
@@ -200,6 +182,24 @@ export default function DashboardPage() {
                         <span className="sr-only">Download</span>
                         <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
                           {foundation.articlesOfIncorporationForm}
+                        </span>
+                      </Button>
+                    </PopoverClose>
+                    <PopoverClose asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="w-full justify-start p-2"
+                        onClick={() => handleArchiveFoundationOnClick()}
+                        disabled={isLoading}
+                      >
+                        <Archive
+                          aria-hidden="true"
+                          className="text-foreground"
+                        />
+                        <span className="sr-only">Archive</span>
+                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                          Archive
                         </span>
                       </Button>
                     </PopoverClose>

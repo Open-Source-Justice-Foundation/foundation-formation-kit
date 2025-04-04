@@ -165,6 +165,7 @@ export default function SignInPage() {
                         <Link
                           href="/reset-password"
                           className="text-link-foreground"
+                          tabIndex={-1}
                         >
                           Forgot your password?
                         </Link>
