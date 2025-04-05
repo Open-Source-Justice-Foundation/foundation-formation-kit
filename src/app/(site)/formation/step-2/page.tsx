@@ -135,7 +135,7 @@ export default function FormationStep2Page() {
               <Button
                 asChild
                 type="button"
-                className="w-1/4 gap-3 min-w-[92px] focus-visible:ring-ringPrimary"
+                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
                 <Link href="/formation/step-1" className="text-base">
