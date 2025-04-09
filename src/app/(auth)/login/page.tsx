@@ -93,7 +93,23 @@ export default function SignInPage() {
   async function oAuthSignIn(provider: string) {
     setIsLoading(true);
 
+    const url = "/api/auth/is-session-status-logged-out";
+    let oAuthLoginResponse: Response = new Response();
+
     try {
+      oAuthLoginResponse = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (oAuthLoginResponse?.status !== 200) {
+        throw new Error(
+          `OAuth login response status: ${oAuthLoginResponse?.status}`,
+        );
+      }
+
       const oAuthSignInResponse = await signIn(provider, {
         redirect: true,
         redirectTo: "/dashboard",
