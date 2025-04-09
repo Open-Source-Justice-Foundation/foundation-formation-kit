@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import OSJFLogoDark from "/images/svgs/logos/osjf-logo-dark.svg";
+import OSJFLogo from "/images/svgs/logos/osjf-logo.svg";
 import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -12,10 +14,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { AVATAR_ICON_LARGE_SIZE } from "~/features/header/constants/constants";
+import {
+  AVATAR_ICON_LARGE_SIZE,
+  HEADER_DROPDOWN_MENU_ICON_BASE_SIZE,
+} from "~/features/header/constants/constants";
 import {
   FFK_DOCS_URL,
   FFK_GITHUB_URL,
+  OSJF_URL,
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
 import {
@@ -127,6 +133,28 @@ export function HeaderDropdownMenu() {
                 Support
                 <HandHelping aria-hidden="true" />
                 <span className="sr-only">{"Support"}</span>
+              </div>
+            </DropdownMenuItem>
+          </a>
+          <a href={OSJF_URL} target="_blank" rel="noopener noreferrer">
+            <DropdownMenuItem className="cursor-pointer">
+              <div className="flex grow items-center justify-between">
+                OSJF
+                <OSJFLogo
+                  width={HEADER_DROPDOWN_MENU_ICON_BASE_SIZE}
+                  height={HEADER_DROPDOWN_MENU_ICON_BASE_SIZE}
+                  className="dark:hidden"
+                  aria-hidden="true"
+                />
+                <OSJFLogoDark
+                  width={HEADER_DROPDOWN_MENU_ICON_BASE_SIZE}
+                  height={HEADER_DROPDOWN_MENU_ICON_BASE_SIZE}
+                  className="hidden dark:block"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">
+                  {"Open Source Justice Foundation"}
+                </span>
               </div>
             </DropdownMenuItem>
           </a>
