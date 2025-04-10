@@ -78,20 +78,25 @@ export default function ProfilePage() {
     setIsLoading(false);
   }
 
+  // min-[421px], sm: min-[640px], md: min-[768px]
   return (
-    <div className="flex w-3/4 flex-col">
-      <h1 className="mb-6 self-start text-3xl font-medium sm:mb-10">Profile</h1>
-      <Card className="mb-6 flex w-full flex-col px-2 py-2 sm:mb-10 sm:px-4 sm:py-4 md:px-9">
-        <CardHeader className="px-4 py-4 md:px-6 md:py-6">
-          <CardTitle>Email Address</CardTitle>
+    <div className="flex w-full flex-col min-[421px]:w-[85%] sm:w-[80%] md:w-3/4">
+      <h1 className="mb-5 self-start text-xl font-medium min-[421px]:mb-6 min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
+        Profile
+      </h1>
+      <Card className="mb-5 flex w-full flex-col min-[421px]:mb-6 min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
+        <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+          <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
+            Email Address
+          </CardTitle>
           <CardDescription>
             🚧 Under construction, accounts may be deleted and not work 🚧
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex px-4 pb-4 md:px-6 md:pb-6">
+        <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
           <Form {...updateEmailAddressForm}>
             <form
-              className="flex w-full flex-col gap-4 md:gap-6"
+              className="flex w-full flex-col gap-5 sm:gap-6"
               onSubmit={updateEmailAddressForm.handleSubmit(
                 onUpdateEmailAddressSubmit,
               )}
@@ -106,7 +111,7 @@ export default function ProfilePage() {
                       <Input
                         {...field}
                         type="email"
-                        className="w-full text-sm focus-visible:ring-ringPrimary sm:text-base md:max-w-[376px] md:text-base"
+                        className="w-full text-sm focus-visible:ring-ringPrimary sm:max-w-[376px] sm:text-base md:text-base"
                         disabled={isLoading}
                       />
                     </FormControl>
@@ -116,7 +121,7 @@ export default function ProfilePage() {
               />
               <Button
                 type="submit"
-                className="w-full focus-visible:ring-ringPrimary md:max-w-[182px]"
+                className="w-full focus-visible:ring-ringPrimary sm:max-w-[182px]"
                 disabled={isLoading}
               >
                 Update email address
@@ -125,17 +130,19 @@ export default function ProfilePage() {
           </Form>
         </CardContent>
       </Card>
-      <Card className="mb-6 flex w-full flex-col px-2 py-2 sm:mb-10 sm:px-4 sm:py-4 md:px-9">
-        <CardHeader className="px-4 py-4 sm:px-6 sm:py-6">
-          <CardTitle>Password</CardTitle>
+      <Card className="flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 md:px-2 md:py-2">
+        <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+          <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
+            Password
+          </CardTitle>
           <CardDescription>
             🚧 Under construction, accounts may be deleted and not work 🚧
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex px-4 pb-4 md:px-6 md:pb-6">
+        <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
           <Form {...updatePasswordForm}>
             <form
-              className="flex w-full flex-col gap-4 md:gap-6"
+              className="flex w-full flex-col gap-5 sm:gap-6"
               onSubmit={updatePasswordForm.handleSubmit(onUpdatePasswordSubmit)}
             >
               <FormField
@@ -145,7 +152,7 @@ export default function ProfilePage() {
                   <FormItem>
                     <FormLabel>Current Password</FormLabel>
                     <FormControl>
-                      <div className="relative w-full md:max-w-[376px]">
+                      <div className="relative w-full sm:max-w-[376px]">
                         <Input
                           {...field}
                           type={showCurrentPassword ? "text" : "password"}
@@ -165,9 +172,15 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showCurrentPassword ? (
-                            <EyeOffIcon aria-hidden="true" />
+                            <EyeOffIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           ) : (
-                            <EyeIcon aria-hidden="true" />
+                            <EyeIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           )}
                           <span className="sr-only">
                             {showCurrentPassword
@@ -188,7 +201,7 @@ export default function ProfilePage() {
                   <FormItem>
                     <FormLabel>New Password</FormLabel>
                     <FormControl>
-                      <div className="relative w-full md:max-w-[376px]">
+                      <div className="relative w-full sm:max-w-[376px]">
                         <Input
                           {...field}
                           type={showPassword ? "text" : "password"}
@@ -206,9 +219,15 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showPassword ? (
-                            <EyeOffIcon aria-hidden="true" />
+                            <EyeOffIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           ) : (
-                            <EyeIcon aria-hidden="true" />
+                            <EyeIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           )}
                           <span className="sr-only">
                             {showPassword ? "Hide password" : "Show password"}
@@ -227,7 +246,7 @@ export default function ProfilePage() {
                   <FormItem>
                     <FormLabel>Confirm new password</FormLabel>
                     <FormControl>
-                      <div className="relative w-full md:max-w-[376px]">
+                      <div className="relative w-full sm:max-w-[376px]">
                         <Input
                           {...field}
                           type={showPasswordConfirmation ? "text" : "password"}
@@ -247,9 +266,15 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showPasswordConfirmation ? (
-                            <EyeOffIcon aria-hidden="true" />
+                            <EyeOffIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           ) : (
-                            <EyeIcon aria-hidden="true" />
+                            <EyeIcon
+                              className="text-foreground"
+                              aria-hidden="true"
+                            />
                           )}
                           <span className="sr-only">
                             {showPasswordConfirmation
@@ -265,7 +290,7 @@ export default function ProfilePage() {
               />
               <Button
                 type="submit"
-                className="w-full focus-visible:ring-ringPrimary md:max-w-[156px]"
+                className="w-full focus-visible:ring-ringPrimary sm:max-w-[156px]"
                 disabled={isLoading}
               >
                 Update password
