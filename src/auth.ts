@@ -6,12 +6,14 @@ import {
   verificationRequest,
 } from "~/lib/auth/providers/email/resend";
 import { isRouteProtected } from "~/lib/auth/utils";
+import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
 import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
-import { UserWithEmailVerified } from "~/types";
+import { type SignInCallbackParams, type UserWithEmailVerified } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
 import { NextResponse } from "next/server";
+import { ZodError } from "zod";
 
 // *DO NOT* create a `Pool` here, outside the request handler.
 // Neon's Postgres cannot keep a pool alive between requests.
@@ -113,6 +115,35 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         }
 
         return NextResponse.next();
+      },
+      signIn: async (params: SignInCallbackParams) => {
+        const { user, account } = params;
+        if (account) {
+          if (
+            account?.type === "oidc" ||
+            account?.type === "oauth" ||
+            account?.type === "email" ||
+            account?.type === "credentials" ||
+            account?.type === "webauthn"
+          ) {
+            if (account?.type === "oauth") {
+              try {
+                oAuthEmailSchema.parse({ email: user?.email });
+              } catch (err) {
+                if (err instanceof ZodError) {
+                  throw new Error("Failed to login user: invalid oauth email");
+                }
+                throw new Error("Failed to login user");
+              }
+            }
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+
+        return true;
       },
     },
   } satisfies NextAuthConfig;
