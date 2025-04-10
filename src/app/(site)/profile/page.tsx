@@ -78,13 +78,12 @@ export default function ProfilePage() {
     setIsLoading(false);
   }
 
-  // min-[421px], sm: min-[640px], md: min-[768px]
   return (
     <div className="flex w-full flex-col min-[421px]:w-[85%] sm:w-[80%] md:w-3/4">
-      <h1 className="mb-5 self-start text-xl font-medium min-[421px]:mb-6 min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
+      <h1 className="mb-6 self-start text-xl font-medium min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
         Profile
       </h1>
-      <Card className="mb-5 flex w-full flex-col min-[421px]:mb-6 min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
+      <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
         <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
           <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
             Email Address
