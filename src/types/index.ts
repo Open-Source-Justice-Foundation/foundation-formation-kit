@@ -4,6 +4,11 @@ export interface UserWithEmailVerified extends User {
   emailVerified: string | null;
 }
 
+export interface UserWithEmailVerifiedAndPasswordHash extends User {
+  emailVerified: string | null;
+  password_hash: string | null;
+}
+
 export interface AdapterUser extends User {
   /** A unique identifier for the user. */
   id: string;

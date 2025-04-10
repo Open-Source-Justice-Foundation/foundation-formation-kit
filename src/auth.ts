@@ -8,7 +8,10 @@ import {
 import { isRouteProtected } from "~/lib/auth/utils";
 import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
 import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
-import { type SignInCallbackParams, type UserWithEmailVerified } from "~/types";
+import {
+  type SignInCallbackParams,
+  type UserWithEmailVerifiedAndPasswordHash,
+} from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
@@ -72,11 +75,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     ],
     callbacks: {
       authorized: async ({ request, auth }) => {
-        const user = <UserWithEmailVerified>auth?.user;
+        const user = <UserWithEmailVerifiedAndPasswordHash>auth?.user;
 
-        // Set isAuthenticated to true if the user's email is verified by checking if the property is a truthy value
-        // Otherwise set to false
-        const isAuthenticated = !!user?.emailVerified;
+        let isAuthenticated;
+        if (user?.password_hash === null) {
+          // Set isAuthenticated to true if the password hash is null which can happen if a user is only using oauth
+          // If a user is using email and password, the password hash won't be null
+          isAuthenticated = true;
+        } else {
+          // Set isAuthenticated to true if the user's email is verified by checking if the property is a truthy value
+          // Otherwise set to false
+          isAuthenticated = !!user?.emailVerified;
+        }
 
         let protectedRoutes: string[] = [];
 
