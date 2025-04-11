@@ -171,15 +171,9 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showCurrentPassword ? (
-                            <EyeOffIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeOffIcon aria-hidden="true" />
                           ) : (
-                            <EyeIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeIcon aria-hidden="true" />
                           )}
                           <span className="sr-only">
                             {showCurrentPassword
@@ -218,15 +212,9 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showPassword ? (
-                            <EyeOffIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeOffIcon aria-hidden="true" />
                           ) : (
-                            <EyeIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeIcon aria-hidden="true" />
                           )}
                           <span className="sr-only">
                             {showPassword ? "Hide password" : "Show password"}
@@ -265,15 +253,9 @@ export default function ProfilePage() {
                           disabled={isLoading}
                         >
                           {showPasswordConfirmation ? (
-                            <EyeOffIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeOffIcon aria-hidden="true" />
                           ) : (
-                            <EyeIcon
-                              className="text-foreground"
-                              aria-hidden="true"
-                            />
+                            <EyeIcon aria-hidden="true" />
                           )}
                           <span className="sr-only">
                             {showPasswordConfirmation
