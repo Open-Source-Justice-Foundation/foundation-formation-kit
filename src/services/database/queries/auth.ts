@@ -381,21 +381,22 @@ export async function getEmailAddressResetTokenByTokenHash(
   }
 }
 
-export async function updateEmailAddressByUserId(
+export async function updateEmailAddressAndEmailVerifiedByUserId(
   email: string,
+  emailVerified: Date,
   id: number,
 ): Promise<boolean> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
-    const response = await sql("UPDATE users SET email = $1 WHERE id = $2", [
-      email,
-      id,
-    ]);
+    const response = await sql(
+      `UPDATE users SET email = $1, "emailVerified" = $2 WHERE id = $3`,
+      [email, emailVerified, id],
+    );
 
     if (response === undefined) {
       throw new Error(
-        "Failed to update email address in users row in database",
+        "Failed to update email address and emailVerified in users row in database",
       );
     } else if (!Array.isArray(response)) {
       throw new Error("Response data type must be an array");

@@ -13,7 +13,7 @@ import {
   getEmailAddressResetTokenByTokenHash,
   getPasswordHashByEmail,
   getUserByEmail,
-  updateEmailAddressByUserId,
+  updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
 import { type UserWithEmailVerified } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
@@ -68,12 +68,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         typeof existingToken?.email === "string" &&
         typeof user?.id === "number"
       ) {
-        const emailAddressUpdated = await updateEmailAddressByUserId(
-          existingToken.email,
-          user.id,
-        );
+        const emailVerified = new Date();
 
-        if (emailAddressUpdated) {
+        const emailAddressAndEmailVerifiedUpdated =
+          await updateEmailAddressAndEmailVerifiedByUserId(
+            existingToken.email,
+            emailVerified,
+            user.id,
+          );
+
+        if (emailAddressAndEmailVerifiedUpdated) {
           if (typeof existingToken?.id === "string") {
             deleteEmailAddressResetTokenById(existingToken.id);
           }
