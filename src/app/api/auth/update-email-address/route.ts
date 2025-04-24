@@ -64,7 +64,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (typeof userEmail === "string") {
       const user = await getUserByEmail(userEmail);
 
-      if (existingToken?.email === "string" && typeof user?.id === "number") {
+      if (
+        typeof existingToken?.email === "string" &&
+        typeof user?.id === "number"
+      ) {
         const emailAddressUpdated = await updateEmailAddressByUserId(
           existingToken.email,
           user.id,
