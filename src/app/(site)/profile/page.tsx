@@ -28,6 +28,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import {
   passwordRequestSchema,
   resetEmailAddressSchema,
@@ -83,6 +84,25 @@ export default function ProfilePage() {
       passwordConfirmation: "",
     },
   });
+
+  const {
+    watch,
+    setError,
+    clearErrors,
+    formState: { isSubmitted },
+  } = updatePasswordForm;
+
+  const watchPassword = watch("password");
+  const watchPasswordConfirmation = watch("passwordConfirmation");
+
+  usePasswordConfirmation(
+    isSubmitted,
+    watchPassword,
+    watchPasswordConfirmation,
+    setError,
+    clearErrors,
+    "passwordConfirmation",
+  );
 
   async function onResetEmailAddressSubmit(
     values: ResetEmailAddressFormValues,
@@ -156,11 +176,42 @@ export default function ProfilePage() {
     setShowCurrentPassword(false);
     setShowPassword(false);
     setShowPasswordConfirmation(false);
-    const {} = values;
 
-    console.log("Updating password...");
+    const { currentPassword, password, passwordConfirmation } = values;
 
-    setIsLoading(false);
+    const url = "/api/auth/update-password-from-profile";
+    let updatePasswordResponse: Response = new Response();
+
+    try {
+      updatePasswordResponse = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentPassword,
+          password,
+          passwordConfirmation,
+        }),
+      });
+
+      if (updatePasswordResponse.status !== 200) {
+        throw new Error(
+          `Update password response status: ${updatePasswordResponse.status}`,
+        );
+      }
+
+      toast.success("Password update successful");
+    } catch (err) {
+      // TODO
+      // Don't log the err value, do something else with it to avoid deployment error
+      console.error(err);
+      toast.error("Failed to update password");
+    } finally {
+      setIsLoading(false);
+    }
+
+    updatePasswordForm.reset();
   }
 
   return (

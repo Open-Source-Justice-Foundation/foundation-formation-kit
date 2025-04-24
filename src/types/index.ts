@@ -1,4 +1,8 @@
-import type { Account, Profile, User } from "@auth/core/types";
+import type { Account, Profile, Session, User } from "@auth/core/types";
+
+export interface SessionWithId extends Session {
+  id: number;
+}
 
 export interface UserWithEmailVerified extends User {
   emailVerified: string | null;
