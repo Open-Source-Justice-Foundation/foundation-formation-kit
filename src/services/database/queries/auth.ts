@@ -308,6 +308,138 @@ export async function deletePasswordResetTokenById(id: string): Promise<void> {
   }
 }
 
+export async function createEmailAddressResetToken(
+  email: string,
+  tokenHash: string,
+  expires: Date,
+  userId: number,
+): Promise<boolean> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `INSERT INTO email_address_reset_tokens (email, token_hash, expires, "userId") VALUES ($1, $2, $3, $4)`,
+      [email, tokenHash, expires, userId],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to insert row into database");
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+
+    return true;
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to insert data into database");
+  }
+}
+
+export async function getEmailAddressResetTokenByTokenHash(
+  tokenHash: string,
+): Promise<Record<string, string | Date | number>> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "SELECT * FROM email_address_reset_tokens WHERE token_hash = $1",
+      [tokenHash],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to select email_address_reset_tokens row from database",
+      );
+    } else if (response.length === 0) {
+      throw new Error("Email address reset token row doesn't exist");
+    } else if (response.length > 1) {
+      throw new Error(
+        "Multiple email address reset token rows exist with the same token hash",
+      );
+    } else if (!response[0].hasOwnProperty("id")) {
+      throw new Error("Failed to check for id property");
+    } else if (!response[0].hasOwnProperty("email")) {
+      throw new Error("Failed to check for email property");
+    } else if (!response[0].hasOwnProperty("token_hash")) {
+      throw new Error("Failed to check for token_hash property");
+    } else if (!response[0].hasOwnProperty("expires")) {
+      throw new Error("Failed to check for expires property");
+    } else if (!response[0].hasOwnProperty("userId")) {
+      throw new Error("Failed to check for userId property");
+    }
+
+    return response[0];
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
+export async function updateEmailAddressByUserId(
+  email: string,
+  id: number,
+): Promise<boolean> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql("UPDATE users SET email = $1 WHERE id = $2", [
+      email,
+      id,
+    ]);
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to update email address in users row in database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+
+    return true;
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to update data in database");
+  }
+}
+
+export async function deleteEmailAddressResetTokenById(
+  id: string,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "DELETE FROM email_address_reset_tokens WHERE id = $1",
+      [id],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to delete email_address_reset_tokens row from database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
+
 export async function deleteAllSessionsForUserByUserId(
   id: number,
 ): Promise<void> {
@@ -347,6 +479,34 @@ export async function deleteAllVerificationTokensForUserByUserIdentifier(
     if (response === undefined) {
       throw new Error(
         "Failed to delete verification_token row(s) from database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
+
+export async function deleteAllPasswordResetTokensByEmail(
+  email: string,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "DELETE FROM password_reset_tokens WHERE email = $1",
+      [email],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to delete password_reset_tokens row(s) from database",
       );
     } else if (!Array.isArray(response)) {
       throw new Error("Response data type must be an array");

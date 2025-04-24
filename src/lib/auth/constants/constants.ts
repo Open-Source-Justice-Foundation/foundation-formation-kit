@@ -43,5 +43,6 @@ export const PASSWORD_MAX_LENGTH_ERR_MSG = `Password can be at most ${PASSWORD_M
 export const PASSWORD_CONFIRMATION_ERR_MSG = "Passwords do not match";
 export const PASSWORD_CONFIRMATION_VALIDATION_PATH = "passwordConfirmation";
 
-// Password reset tokens
+// Email address and password reset tokens
+export const EMAIL_ADDRESS_RESET_TOKEN_BYTE_SIZE = 32;
 export const PASSWORD_RESET_TOKEN_BYTE_SIZE = 32;

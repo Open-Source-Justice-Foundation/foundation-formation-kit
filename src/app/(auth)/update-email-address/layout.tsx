@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-export default function UpdatePasswordLayout({
+export default function UpdateEmailAddressLayout({
   children,
 }: {
   children: React.ReactNode;

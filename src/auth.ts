@@ -96,8 +96,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/register",
             "/reset-password",
             "/update-password",
+            "/updated-email-address",
             "/updated-password",
             "/verify-request",
+            "/verify-reset-password",
           ];
 
           const routeProtected = isRouteProtected(protectedRoutes, request);
@@ -108,12 +110,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
           }
         } else {
           protectedRoutes = [
+            "/logout",
+            "/update-email-address",
             "/non-profit-name",
             "/under-construction",
-            "/logout",
             "/dashboard",
+            "/formation/step-1",
+            "/formation/step-2",
+            "/formation/step-3",
+            "/formation/step-4",
+            "/formation/step-5",
             "/profile",
-            "/formation",
           ];
 
           const routeProtected = isRouteProtected(protectedRoutes, request);
