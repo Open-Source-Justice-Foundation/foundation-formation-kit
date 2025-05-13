@@ -1,9 +1,8 @@
 import { auth } from "~/auth";
-import {
-  hashEmailAddressOrPasswordResetToken,
-  verifyPassword,
-} from "~/lib/auth/passwords/utils";
+import { verifyPassword } from "~/lib/auth/passwords/utils";
+import { hashResetToken } from "~/lib/auth/tokens/utils";
 import { passwordRequestSchema } from "~/lib/auth/validation/schemas";
+import { isDate } from "~/lib/utils";
 import {
   checkIfEmailAlreadyExists,
   deleteAllPasswordResetTokensByEmail,
@@ -11,22 +10,22 @@ import {
   deleteAllVerificationTokensForUserByUserIdentifier,
   deleteEmailAddressResetTokenById,
   getEmailAddressResetTokenByTokenHash,
-  getPasswordHashByEmail,
-  getUserByEmail,
+  getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
-import { type UserWithEmailVerified } from "~/types";
+import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth();
 
-  const user = <UserWithEmailVerified>session?.user;
+  const user = <UserWithEmailVerifiedAndPasswordHash>session?.user;
 
+  const userId = user?.id;
   const userEmail = user?.email;
 
-  if (!userEmail || !user?.emailVerified) {
+  if (!userEmail || !user?.emailVerified || !user?.password_hash) {
     throw new Error("Invalid session");
   }
 
@@ -41,55 +40,60 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     passwordRequestSchema.parse({ password });
 
-    const tokenHash = hashEmailAddressOrPasswordResetToken(token);
+    const tokenHash = hashResetToken(token);
 
     const existingToken = await getEmailAddressResetTokenByTokenHash(tokenHash);
 
-    if (user.id !== existingToken.userId) {
-      throw new Error("Invalid session");
+    const existingTokenUserId = existingToken?.userId;
+    const existingTokenEmail = existingToken?.email;
+    const existingTokenExpires = existingToken?.expires;
+    const existingTokenId = existingToken?.id;
+
+    if (typeof userId === "number" && typeof existingTokenUserId === "number") {
+      if (userId !== existingTokenUserId) {
+        throw new Error("Invalid session");
+      }
+    } else {
+      throw new Error(
+        "Incorrect user id data type and/or incorrect existing token user id data type",
+      );
     }
 
-    if (typeof existingToken?.email === "string") {
-      await checkIfEmailAlreadyExists(existingToken.email);
+    if (typeof existingTokenEmail === "string") {
+      await checkIfEmailAlreadyExists(existingTokenEmail);
+    } else {
+      throw new Error("Incorrect existing token email data type");
     }
 
-    if (new Date(existingToken.expires) < new Date()) {
-      throw new Error("Expired token");
+    if (isDate(existingTokenExpires)) {
+      if (new Date(existingTokenExpires) < new Date()) {
+        throw new Error("Expired token");
+      }
+    } else {
+      throw new Error("Incorrect existing token expires data type");
     }
 
-    const password_hash = await getPasswordHashByEmail(userEmail);
+    const password_hash = await getPasswordHashById(userId);
 
     await verifyPassword(password_hash, password);
 
-    if (typeof userEmail === "string") {
-      const user = await getUserByEmail(userEmail);
+    const emailVerified = new Date();
 
-      if (
-        typeof existingToken?.email === "string" &&
-        typeof user?.id === "number"
-      ) {
-        const emailVerified = new Date();
+    const emailAddressAndEmailVerifiedUpdated =
+      await updateEmailAddressAndEmailVerifiedByUserId(
+        existingTokenEmail,
+        emailVerified,
+        userId,
+      );
 
-        const emailAddressAndEmailVerifiedUpdated =
-          await updateEmailAddressAndEmailVerifiedByUserId(
-            existingToken.email,
-            emailVerified,
-            user.id,
-          );
-
-        if (emailAddressAndEmailVerifiedUpdated) {
-          if (typeof existingToken?.id === "string") {
-            deleteEmailAddressResetTokenById(existingToken.id);
-          }
-
-          deleteAllSessionsForUserByUserId(user.id);
-
-          if (typeof user?.email === "string") {
-            deleteAllVerificationTokensForUserByUserIdentifier(user.email);
-            deleteAllPasswordResetTokensByEmail(userEmail);
-          }
-        }
+    if (emailAddressAndEmailVerifiedUpdated) {
+      if (typeof existingTokenId === "string") {
+        deleteEmailAddressResetTokenById(existingTokenId);
       }
+
+      deleteAllSessionsForUserByUserId(userId);
+      deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
+      deleteAllPasswordResetTokensByEmail(userEmail);
     }
   } catch (err) {
     // TODO

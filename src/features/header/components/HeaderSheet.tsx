@@ -15,7 +15,6 @@ import {
 } from "~/components/ui/sheet";
 import { HEADER_SHEET_ICON_BASE_SIZE } from "~/features/header/constants/constants";
 import { ThemeToggle } from "~/features/theme-toggle";
-// import { getUser } from "~/services/auth";
 import { Gauge, LogIn, LogOut, Menu, Pen, UserPen } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -25,7 +24,6 @@ import { HeaderSheetExternalLinks } from "./HeaderSheetExternalLinks";
 import { HeaderSheetHomeButton } from "./HeaderSheetHomeButton";
 
 export function HeaderSheet() {
-  // const user = await getUser();
   // TODO
   // Make sure email is verified
   const { data: session } = useSession();

@@ -31,10 +31,40 @@ export async function getPasswordHashByEmail(email: string): Promise<string> {
   }
 }
 
+export async function getPasswordHashById(id: number): Promise<string> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `SELECT password_hash FROM users WHERE "id" = $1`,
+      [id],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to select users row from database");
+    } else if (response.length === 0) {
+      throw new Error("User row doesn't exist");
+    } else if (response.length > 1) {
+      throw new Error("Multiple user rows exist with the same id");
+    } else if (!response[0].hasOwnProperty("password_hash")) {
+      throw new Error("Failed to check for password_hash property");
+    } else if (typeof response[0].password_hash !== "string") {
+      throw new Error("Incorrect password_hash data type");
+    }
+
+    return response[0].password_hash;
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
 export async function updatePasswordHashByUserId(
   passwordHash: string,
   id: number,
-): Promise<boolean> {
+): Promise<void> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
@@ -52,8 +82,6 @@ export async function updatePasswordHashByUserId(
     } else if (response.length !== 0) {
       throw new Error("Response data length must be 0");
     }
-
-    return true;
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error
@@ -110,8 +138,6 @@ export async function checkIfEmailAlreadyExists(email: string): Promise<void> {
 
     if (response === undefined) {
       throw new Error("Failed to select users row from database");
-    } else if (response.length !== 1) {
-      throw new Error("Failed to check for email existence in database");
     } else if (!response[0].hasOwnProperty("exists")) {
       throw new Error("Failed to check for exists property");
     } else if (response[0].exists !== false) {
@@ -165,8 +191,6 @@ export async function checkEmailIsVerifiedByEmail(
 
     if (response === undefined) {
       throw new Error("Failed to select users row from database");
-    } else if (response.length !== 1) {
-      throw new Error("Failed to check for email existence in database");
     } else if (!response[0].hasOwnProperty("exists")) {
       throw new Error("Failed to check for exists property");
     } else if (typeof response[0].exists !== "boolean") {
@@ -195,8 +219,6 @@ export async function checkPasswordHashNotNullByEmail(
 
     if (response === undefined) {
       throw new Error("Failed to select users row from database");
-    } else if (response.length !== 1) {
-      throw new Error("Failed to check for email existence in database");
     } else if (!response[0].hasOwnProperty("exists")) {
       throw new Error("Failed to check for exists property");
     } else if (typeof response[0].exists !== "boolean") {
@@ -313,7 +335,7 @@ export async function createEmailAddressResetToken(
   tokenHash: string,
   expires: Date,
   userId: number,
-): Promise<boolean> {
+): Promise<void> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
@@ -329,8 +351,6 @@ export async function createEmailAddressResetToken(
     } else if (response.length !== 0) {
       throw new Error("Response data length must be 0");
     }
-
-    return true;
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error
@@ -442,13 +462,13 @@ export async function deleteEmailAddressResetTokenById(
 }
 
 export async function deleteAllSessionsForUserByUserId(
-  id: number,
+  userId: number,
 ): Promise<void> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
     const response = await sql(`DELETE FROM sessions WHERE "userId" = $1`, [
-      id,
+      userId,
     ]);
 
     if (response === undefined) {
@@ -546,5 +566,34 @@ export async function deleteAllSessionsExceptCurrentForUserByUserId(
     // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
+  }
+}
+
+export async function checkOAuthAccountAlreadyLinkedByUserIdAndProvider(
+  userId: number,
+  provider: string,
+): Promise<boolean> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `SELECT EXISTS(SELECT 1 FROM accounts WHERE "userId" = $1 AND "provider" = $2)`,
+      [userId, provider],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to select accounts row from database");
+    } else if (!response[0].hasOwnProperty("exists")) {
+      throw new Error("Failed to check for exists property");
+    } else if (typeof response[0].exists !== "boolean") {
+      throw new Error("Exists property data type must be a boolean");
+    }
+
+    return response[0].exists;
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to select data from database");
   }
 }

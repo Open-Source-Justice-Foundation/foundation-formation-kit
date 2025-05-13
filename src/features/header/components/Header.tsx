@@ -12,7 +12,6 @@ import {
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
 import { ExternalLink, LogIn } from "lucide-react";
-// import { getUser } from "~/services/auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,7 +21,6 @@ import { HeaderHomeButton } from "./HeaderHomeButton";
 import { HeaderSheet } from "./HeaderSheet";
 
 export function Header() {
-  // const user = await getUser();
   // TODO
   // Make sure email is verified
   // Make sure session is being handled properly

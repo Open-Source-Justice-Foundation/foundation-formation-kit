@@ -1,8 +1,6 @@
 import { auth } from "~/auth";
-import {
-  hashEmailAddressOrPasswordResetToken,
-  saltAndHashPassword,
-} from "~/lib/auth/passwords/utils";
+import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
+import { hashResetToken } from "~/lib/auth/tokens/utils";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import {
   deleteAllSessionsForUserByUserId,
@@ -33,7 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     updatePasswordSchema.parse({ password, passwordConfirmation });
 
-    const tokenHash = hashEmailAddressOrPasswordResetToken(token);
+    const tokenHash = hashResetToken(token);
 
     const existingToken = await getPasswordResetTokenByTokenHash(tokenHash);
 
@@ -48,23 +46,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // TODO
       // Look into preventing password update if the password is the same as the previous password
       if (typeof user?.id === "number") {
-        const passwordUpdated = await updatePasswordHashByUserId(
-          passwordHash,
-          user.id,
-        );
+        await updatePasswordHashByUserId(passwordHash, user.id);
 
-        if (passwordUpdated) {
-          if (typeof existingToken.id === "string") {
-            deletePasswordResetTokenById(existingToken.id);
-          }
+        if (typeof existingToken.id === "string") {
+          deletePasswordResetTokenById(existingToken.id);
+        }
 
-          if (typeof user?.id === "number") {
-            deleteAllSessionsForUserByUserId(user.id);
-          }
+        if (typeof user?.id === "number") {
+          deleteAllSessionsForUserByUserId(user.id);
+        }
 
-          if (typeof user?.email === "string") {
-            deleteAllVerificationTokensForUserByUserIdentifier(user.email);
-          }
+        if (typeof user?.email === "string") {
+          deleteAllVerificationTokensForUserByUserIdentifier(user.email);
         }
       }
     }

@@ -12,3 +12,18 @@ export function checkDatabaseUrlType(): string {
     throw new Error("Incorrect database URL type");
   }
 }
+
+export function isDate(value: unknown): boolean {
+  if (
+    Object.prototype.toString.call(value) === "[object Date]" &&
+    value instanceof Date
+  ) {
+    if (!isNaN(value.getTime())) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}

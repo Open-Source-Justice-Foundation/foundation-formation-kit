@@ -4,10 +4,8 @@ import {
   AUTH_FROM_FIELD,
   RESEND_API_ENDPOINT,
 } from "~/lib/auth/constants/constants";
-import {
-  generateEmailAddressResetToken,
-  verifyPassword,
-} from "~/lib/auth/passwords/utils";
+import { generateEmailAddressResetToken } from "~/lib/auth/emails/utils";
+import { verifyPassword } from "~/lib/auth/passwords/utils";
 import {
   ResetEmailAddressRequestEmailTemplate,
   ResetEmailAddressWarningEmailTemplate,
@@ -18,18 +16,21 @@ import {
 } from "~/lib/auth/validation/schemas";
 import {
   checkIfEmailAlreadyExists,
-  getPasswordHashByEmail,
+  getPasswordHashById,
 } from "~/services/database/queries/auth";
-import { type UserWithEmailVerified } from "~/types";
+import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth();
 
-  const user = <UserWithEmailVerified>session?.user;
+  const user = <UserWithEmailVerifiedAndPasswordHash>session?.user;
 
-  if (!user?.email || !user?.emailVerified) {
+  const userEmail = user?.email;
+  const userId = user?.id;
+
+  if (!userEmail || !user?.emailVerified || !user?.password_hash) {
     throw new Error("Invalid session");
   }
 
@@ -43,9 +44,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     await checkIfEmailAlreadyExists(email);
 
-    const password_hash = await getPasswordHashByEmail(user?.email);
+    if (typeof userId === "number") {
+      const password_hash = await getPasswordHashById(userId);
 
-    await verifyPassword(password_hash, password);
+      await verifyPassword(password_hash, password);
+    } else {
+      throw new Error("Incorrect user id data type");
+    }
 
     const resetEmailAddressWarningSubject = "Email address reset requested";
 
@@ -75,7 +80,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         },
         body: JSON.stringify({
           from: AUTH_FROM_FIELD,
-          to: user?.email,
+          to: userEmail,
           subject: resetEmailAddressWarningSubject,
           html: resetEmailAddressWarningHtml,
           text: resetEmailAddressWarningText,
@@ -89,49 +94,47 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    if (typeof user?.id === "number") {
-      const token = await generateEmailAddressResetToken(email, user?.id);
+    const token = await generateEmailAddressResetToken(email, userId);
 
-      const resetLink = `${process.env.DOMAIN}/update-email-address?token=${token}`;
+    const resetLink = `${process.env.DOMAIN}/update-email-address?token=${token}`;
 
-      const resetEmailAddressSubject = "Email address reset link";
+    const resetEmailAddressSubject = "Email address reset link";
 
-      const resetEmailAddressHtml = await render(
-        ResetEmailAddressRequestEmailTemplate({ url: resetLink }),
-        {
-          pretty: true,
-        },
+    const resetEmailAddressHtml = await render(
+      ResetEmailAddressRequestEmailTemplate({ url: resetLink }),
+      {
+        pretty: true,
+      },
+    );
+
+    // Email text body
+    // Fallback for email clients that don't render HTML, e.g. feature phones
+    const resetEmailAddressText = await render(
+      ResetEmailAddressRequestEmailTemplate({ url: resetLink }),
+      {
+        plainText: true,
+      },
+    );
+
+    const resetEmailAddressResendResponse = await fetch(RESEND_API_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.AUTH_RESEND_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: AUTH_FROM_FIELD,
+        to: email,
+        subject: resetEmailAddressSubject,
+        html: resetEmailAddressHtml,
+        text: resetEmailAddressText,
+      }),
+    });
+
+    if (!resetEmailAddressResendResponse?.ok) {
+      throw new Error(
+        `Reset email address request resend status: ${resetEmailAddressResendResponse?.status}`,
       );
-
-      // Email text body
-      // Fallback for email clients that don't render HTML, e.g. feature phones
-      const resetEmailAddressText = await render(
-        ResetEmailAddressRequestEmailTemplate({ url: resetLink }),
-        {
-          plainText: true,
-        },
-      );
-
-      const resetEmailAddressResendResponse = await fetch(RESEND_API_ENDPOINT, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.AUTH_RESEND_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: AUTH_FROM_FIELD,
-          to: email,
-          subject: resetEmailAddressSubject,
-          html: resetEmailAddressHtml,
-          text: resetEmailAddressText,
-        }),
-      });
-
-      if (!resetEmailAddressResendResponse?.ok) {
-        throw new Error(
-          `Reset email address request resend status: ${resetEmailAddressResendResponse?.status}`,
-        );
-      }
     }
   } catch (err) {
     // TODO

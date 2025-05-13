@@ -9,12 +9,14 @@ import { isRouteProtected } from "~/lib/auth/utils";
 import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
 import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import {
+  type SessionWithSessionToken,
   type SignInCallbackParams,
   type UserWithEmailVerifiedAndPasswordHash,
 } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -135,6 +137,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
       },
       signIn: async (params: SignInCallbackParams) => {
         const { user, account } = params;
+
+        const session = await auth();
+        const sessionUserId = session?.user?.id;
+        const paramsUserId = params?.user?.id;
+
         if (account) {
           if (
             account?.type === "oidc" ||
@@ -143,15 +150,54 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             account?.type === "credentials" ||
             account?.type === "webauthn"
           ) {
+            let requestFromProfilePage = false;
+
             if (account?.type === "oauth") {
               try {
                 oAuthEmailSchema.parse({ email: user?.email });
+
+                if (
+                  typeof sessionUserId === "number" &&
+                  typeof paramsUserId === "number"
+                ) {
+                  if (sessionUserId !== paramsUserId) {
+                    const headersList = headers();
+                    const sessionWithSessionToken = <SessionWithSessionToken>(
+                      session
+                    );
+                    const sessionToken = sessionWithSessionToken?.sessionToken;
+
+                    const authjsSessionTokenHeader = `authjs.session-token=${sessionToken};`;
+
+                    let authjsProfilePageCallbackUrl: string;
+
+                    if (process.env.NODE_ENV === "development") {
+                      authjsProfilePageCallbackUrl =
+                        "authjs.callback-url=http%3A%2F%2Flocalhost%3A3000%2Fprofile;";
+                    } else if (process.env.NODE_ENV === "production") {
+                      authjsProfilePageCallbackUrl =
+                        "authjs.callback-url=https%3A%2F%2Ffoundationformationkit.org%2Fprofile;";
+                    }
+
+                    headersList.forEach((header) => {
+                      if (
+                        header.includes(authjsSessionTokenHeader) &&
+                        header.includes(authjsProfilePageCallbackUrl)
+                      ) {
+                        requestFromProfilePage = true;
+                      }
+                    });
+                  }
+                }
               } catch (err) {
                 if (err instanceof ZodError) {
-                  throw new Error("Failed to login user: invalid oauth email");
+                  throw new Error("Failed to login user: invalid OAuth email");
                 }
                 throw new Error("Failed to login user");
               }
+            }
+            if (requestFromProfilePage) {
+              return "/profile-error?error=OAuthAccountNotLinkedFromProfile";
             }
           } else {
             return false;
@@ -159,7 +205,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         } else {
           return false;
         }
-
         return true;
       },
     },

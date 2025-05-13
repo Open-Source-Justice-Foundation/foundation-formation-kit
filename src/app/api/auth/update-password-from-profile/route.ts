@@ -8,7 +8,7 @@ import {
   deleteAllPasswordResetTokensByEmail,
   deleteAllSessionsExceptCurrentForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
-  getPasswordHashByEmail,
+  getPasswordHashById,
   updatePasswordHashByUserId,
 } from "~/services/database/queries/auth";
 import {
@@ -23,8 +23,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   const sessionWithId = <SessionWithId>session;
 
+  const sessionId = sessionWithId?.id;
+
   const user = <UserWithEmailVerifiedAndPasswordHash>session?.user;
 
+  const userId = user?.id;
   const userEmail = user?.email;
 
   if (!userEmail || !user?.emailVerified || !user?.password_hash) {
@@ -42,28 +45,26 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       passwordConfirmation,
     });
 
-    const password_hash = await getPasswordHashByEmail(userEmail);
+    if (typeof userId === "number") {
+      const currentPasswordHash = await getPasswordHashById(userId);
 
-    await verifyPassword(password_hash, currentPassword);
+      await verifyPassword(currentPasswordHash, currentPassword);
+    } else {
+      throw new Error("Incorrect user id data type");
+    }
 
     const passwordHash = await saltAndHashPassword(password);
 
     // TODO
     // Look into preventing password update if the password is the same as the previous password
-    if (typeof sessionWithId?.id === "number" && typeof user?.id === "number") {
-      const passwordUpdated = await updatePasswordHashByUserId(
-        passwordHash,
-        user.id,
-      );
+    if (typeof sessionId === "number") {
+      await updatePasswordHashByUserId(passwordHash, userId);
 
-      if (passwordUpdated) {
-        deleteAllSessionsExceptCurrentForUserByUserId(
-          sessionWithId.id,
-          user.id,
-        );
-        deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
-        deleteAllPasswordResetTokensByEmail(userEmail);
-      }
+      deleteAllSessionsExceptCurrentForUserByUserId(sessionId, userId);
+      deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
+      deleteAllPasswordResetTokensByEmail(userEmail);
+    } else {
+      throw new Error("Incorrect session id data type");
     }
   } catch (err) {
     // TODO
