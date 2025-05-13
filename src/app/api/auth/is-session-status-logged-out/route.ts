@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import { NextResponse } from "next/server";
 
-export async function POST(): Promise<NextResponse> {
+export async function GET(): Promise<NextResponse> {
   const session = await auth();
 
   if (session !== null) {

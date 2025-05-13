@@ -238,7 +238,7 @@ export async function createPasswordResetToken(
   email: string,
   tokenHash: string,
   expires: Date,
-): Promise<boolean> {
+): Promise<void> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
@@ -254,8 +254,6 @@ export async function createPasswordResetToken(
     } else if (response.length !== 0) {
       throw new Error("Response data length must be 0");
     }
-
-    return true;
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error
@@ -405,7 +403,7 @@ export async function updateEmailAddressAndEmailVerifiedByUserId(
   email: string,
   emailVerified: Date,
   id: number,
-): Promise<boolean> {
+): Promise<void> {
   try {
     const sql = neon(checkDatabaseUrlType());
 
@@ -416,15 +414,13 @@ export async function updateEmailAddressAndEmailVerifiedByUserId(
 
     if (response === undefined) {
       throw new Error(
-        "Failed to update email address and emailVerified in users row in database",
+        "Failed to update email and emailVerified in users row in database",
       );
     } else if (!Array.isArray(response)) {
       throw new Error("Response data type must be an array");
     } else if (response.length !== 0) {
       throw new Error("Response data length must be 0");
     }
-
-    return true;
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

@@ -17,9 +17,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { email, password } = signInSchema.parse(data);
 
-    const password_hash = await getPasswordHashByEmail(email);
+    const passwordHash = await getPasswordHashByEmail(email);
 
-    await verifyPassword(password_hash, password);
+    await verifyPassword(passwordHash, password);
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

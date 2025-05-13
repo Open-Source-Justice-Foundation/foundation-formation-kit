@@ -30,8 +30,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
       const resetLink = `${process.env.DOMAIN}/update-password?token=${token}`;
 
-      const to = email;
-
       const subject = "Password reset link";
 
       const html = await render(
@@ -58,7 +56,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         },
         body: JSON.stringify({
           from: AUTH_FROM_FIELD,
-          to,
+          to: email,
           subject,
           html,
           text,

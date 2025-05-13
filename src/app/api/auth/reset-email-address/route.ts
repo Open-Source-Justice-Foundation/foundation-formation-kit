@@ -45,9 +45,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     await checkIfEmailAlreadyExists(email);
 
     if (typeof userId === "number") {
-      const password_hash = await getPasswordHashById(userId);
+      const passwordHash = await getPasswordHashById(userId);
 
-      await verifyPassword(password_hash, password);
+      await verifyPassword(passwordHash, password);
     } else {
       throw new Error("Incorrect user id data type");
     }

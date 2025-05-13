@@ -2,6 +2,7 @@ import { auth } from "~/auth";
 import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
 import { hashResetToken } from "~/lib/auth/tokens/utils";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
+import { isDate } from "~/lib/utils";
 import {
   deleteAllSessionsForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
@@ -35,29 +36,38 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const existingToken = await getPasswordResetTokenByTokenHash(tokenHash);
 
-    if (new Date(existingToken.expires) < new Date()) {
-      throw new Error("Expired token");
+    const existingTokenEmail = existingToken?.email;
+    const existingTokenExpires = existingToken?.expires;
+    const existingTokenId = existingToken?.id;
+
+    if (isDate(existingTokenExpires)) {
+      if (new Date(existingTokenExpires) < new Date()) {
+        throw new Error("Expired token");
+      }
+    } else {
+      throw new Error("Incorrect existing token expires data type");
     }
 
-    if (typeof existingToken.email === "string") {
-      const user = await getUserByEmail(existingToken.email);
+    if (typeof existingTokenEmail === "string") {
+      const user = await getUserByEmail(existingTokenEmail);
+      const userId = user?.id;
+      const userEmail = user?.email;
+
       const passwordHash = await saltAndHashPassword(password);
 
       // TODO
       // Look into preventing password update if the password is the same as the previous password
-      if (typeof user?.id === "number") {
-        await updatePasswordHashByUserId(passwordHash, user.id);
+      if (typeof userId === "number") {
+        await updatePasswordHashByUserId(passwordHash, userId);
 
-        if (typeof existingToken.id === "string") {
-          deletePasswordResetTokenById(existingToken.id);
+        if (typeof existingTokenId === "string") {
+          await deletePasswordResetTokenById(existingTokenId);
         }
 
-        if (typeof user?.id === "number") {
-          deleteAllSessionsForUserByUserId(user.id);
-        }
+        await deleteAllSessionsForUserByUserId(userId);
 
-        if (typeof user?.email === "string") {
-          deleteAllVerificationTokensForUserByUserIdentifier(user.email);
+        if (typeof userEmail === "string") {
+          await deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
         }
       }
     }

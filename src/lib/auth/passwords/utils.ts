@@ -44,13 +44,9 @@ export async function generatePasswordResetToken(
 
     const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-    const response = await createPasswordResetToken(email, tokenHash, expires);
+    await createPasswordResetToken(email, tokenHash, expires);
 
-    if (response === true) {
-      return token;
-    } else {
-      throw new Error("Failed to create password reset token");
-    }
+    return token;
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

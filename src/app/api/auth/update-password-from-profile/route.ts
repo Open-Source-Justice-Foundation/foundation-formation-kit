@@ -60,9 +60,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (typeof sessionId === "number") {
       await updatePasswordHashByUserId(passwordHash, userId);
 
-      deleteAllSessionsExceptCurrentForUserByUserId(sessionId, userId);
-      deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
-      deleteAllPasswordResetTokensByEmail(userEmail);
+      await deleteAllSessionsExceptCurrentForUserByUserId(sessionId, userId);
+      await deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
+      await deleteAllPasswordResetTokensByEmail(userEmail);
     } else {
       throw new Error("Incorrect session id data type");
     }

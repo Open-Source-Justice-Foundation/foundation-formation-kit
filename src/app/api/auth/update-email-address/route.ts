@@ -73,28 +73,25 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       throw new Error("Incorrect existing token expires data type");
     }
 
-    const password_hash = await getPasswordHashById(userId);
+    const passwordHash = await getPasswordHashById(userId);
 
-    await verifyPassword(password_hash, password);
+    await verifyPassword(passwordHash, password);
 
     const emailVerified = new Date();
 
-    const emailAddressAndEmailVerifiedUpdated =
-      await updateEmailAddressAndEmailVerifiedByUserId(
-        existingTokenEmail,
-        emailVerified,
-        userId,
-      );
+    await updateEmailAddressAndEmailVerifiedByUserId(
+      existingTokenEmail,
+      emailVerified,
+      userId,
+    );
 
-    if (emailAddressAndEmailVerifiedUpdated) {
-      if (typeof existingTokenId === "string") {
-        deleteEmailAddressResetTokenById(existingTokenId);
-      }
-
-      deleteAllSessionsForUserByUserId(userId);
-      deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
-      deleteAllPasswordResetTokensByEmail(userEmail);
+    if (typeof existingTokenId === "string") {
+      await deleteEmailAddressResetTokenById(existingTokenId);
     }
+
+    await deleteAllSessionsForUserByUserId(userId);
+    await deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
+    await deleteAllPasswordResetTokensByEmail(userEmail);
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

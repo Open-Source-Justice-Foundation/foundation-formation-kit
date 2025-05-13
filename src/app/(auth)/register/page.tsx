@@ -122,7 +122,7 @@ export default function RegisterPage() {
 
     try {
       oAuthLoginResponse = await fetch(url, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
