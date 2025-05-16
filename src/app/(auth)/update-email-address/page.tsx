@@ -65,9 +65,9 @@ export default function UpdateEmailAddressPage() {
           }),
         });
 
-        if (updateEmailAddressResponse.status !== 200) {
+        if (updateEmailAddressResponse?.status !== 200) {
           throw new Error(
-            `Update email address response status: ${updateEmailAddressResponse.status}`,
+            `Update email address response status: ${updateEmailAddressResponse?.status}`,
           );
         }
 

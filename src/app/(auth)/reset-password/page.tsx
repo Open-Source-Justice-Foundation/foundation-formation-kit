@@ -58,9 +58,9 @@ export default function ResetPasswordPage() {
         }),
       });
 
-      if (resetPasswordResponse.status !== 200) {
+      if (resetPasswordResponse?.status !== 200) {
         throw new Error(
-          `Reset password response status: ${resetPasswordResponse.status}`,
+          `Reset password response status: ${resetPasswordResponse?.status}`,
         );
       }
 
@@ -70,6 +70,7 @@ export default function ResetPasswordPage() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Failed to send password reset instructions");
+    } finally {
       setIsLoading(false);
     }
   }

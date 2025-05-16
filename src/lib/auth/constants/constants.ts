@@ -46,3 +46,6 @@ export const PASSWORD_CONFIRMATION_VALIDATION_PATH = "passwordConfirmation";
 // Email address and password reset tokens
 export const EMAIL_ADDRESS_RESET_TOKEN_BYTE_SIZE = 32;
 export const PASSWORD_RESET_TOKEN_BYTE_SIZE = 32;
+
+// Email address verification tokens
+export const EMAIL_ADDRESS_VERIFICATION_TOKEN_BYTE_SIZE = 32;

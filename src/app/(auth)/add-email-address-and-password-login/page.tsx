@@ -21,64 +21,40 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
-import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
-import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
+import { passwordRequestSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof updatePasswordSchema>;
+type FormValues = z.infer<typeof passwordRequestSchema>;
 
-export default function UpdatePasswordPage() {
+export default function AddEmailAddressAndPasswordLoginPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(updatePasswordSchema),
+    resolver: zodResolver(passwordRequestSchema),
     defaultValues: {
       password: "",
-      passwordConfirmation: "",
     },
   });
-
-  const {
-    watch,
-    setError,
-    clearErrors,
-    formState: { isSubmitted },
-  } = form;
-
-  const watchPassword = watch("password");
-  const watchPasswordConfirmation = watch("passwordConfirmation");
-
-  usePasswordConfirmation(
-    isSubmitted,
-    watchPassword,
-    watchPasswordConfirmation,
-    setError,
-    clearErrors,
-    "passwordConfirmation",
-  );
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
     setShowPassword(false);
-    setShowPasswordConfirmation(false);
-    const { password, passwordConfirmation } = values;
+    const { password } = values;
 
-    const url = "/api/auth/update-password";
-    let updatePasswordResponse: Response = new Response();
+    const url = "/api/auth/add-email-address-and-password-login";
+    let addEmailAddressAndPasswordLoginResponse: Response = new Response();
 
     try {
       if (token !== null) {
-        updatePasswordResponse = await fetch(url, {
+        addEmailAddressAndPasswordLoginResponse = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -86,17 +62,16 @@ export default function UpdatePasswordPage() {
           body: JSON.stringify({
             token,
             password,
-            passwordConfirmation,
           }),
         });
 
-        if (updatePasswordResponse?.status !== 200) {
+        if (addEmailAddressAndPasswordLoginResponse?.status !== 200) {
           throw new Error(
-            `Update password response status: ${updatePasswordResponse?.status}`,
+            `Add email address and password login response status: ${addEmailAddressAndPasswordLoginResponse?.status}`,
           );
         }
 
-        router.push("/updated-password");
+        router.push("/added-email-address-and-password-login");
       } else {
         throw new Error("Invalid token");
       }
@@ -104,7 +79,7 @@ export default function UpdatePasswordPage() {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
-      toast.error("Failed to update password");
+      toast.error("Failed to add email address and password login");
     } finally {
       setIsLoading(false);
     }
@@ -118,6 +93,8 @@ export default function UpdatePasswordPage() {
         </CardTitle>
         <CardDescription>
           🚧 Under construction, accounts may be deleted and not work 🚧
+          <br />
+          Enter your password to verify your login email address.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -140,7 +117,7 @@ export default function UpdatePasswordPage() {
                         className={
                           "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                         }
-                        autoComplete="new-password"
+                        autoComplete="current-password"
                         disabled={isLoading}
                       />
                       <Button
@@ -165,55 +142,12 @@ export default function UpdatePasswordPage() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="passwordConfirmation"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type={showPasswordConfirmation ? "text" : "password"}
-                        className={
-                          "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                        }
-                        autoComplete="new-password"
-                        disabled={isLoading}
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                        onClick={() =>
-                          setShowPasswordConfirmation((prev) => !prev)
-                        }
-                        disabled={isLoading}
-                      >
-                        {showPasswordConfirmation ? (
-                          <EyeOffIcon aria-hidden="true" />
-                        ) : (
-                          <EyeIcon aria-hidden="true" />
-                        )}
-                        <span className="sr-only">
-                          {showPasswordConfirmation
-                            ? "Hide password"
-                            : "Show password"}
-                        </span>
-                      </Button>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Button
               type="submit"
               className="focus-visible:ring-ringPrimary"
               disabled={isLoading}
             >
-              Update password
+              Verify email address
             </Button>
           </form>
         </Form>

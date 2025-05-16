@@ -39,6 +39,10 @@ export interface AdapterUser extends User {
   emailVerified: Date | null;
 }
 
+export interface UserWithPasswordHash extends User {
+  password_hash: string | null;
+}
+
 export interface SignInCallbackParams {
   user: User | AdapterUser;
   account: Account | null;

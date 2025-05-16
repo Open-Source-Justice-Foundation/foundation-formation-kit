@@ -4,13 +4,9 @@ import { hashResetToken } from "~/lib/auth/tokens/utils";
 import { passwordRequestSchema } from "~/lib/auth/validation/schemas";
 import { isDate } from "~/lib/utils";
 import {
-  checkIfEmailAlreadyExists,
-  deleteAllEmailAddressVerificationTokensByUserId,
-  deleteAllPasswordResetTokensByEmail,
-  deleteAllSessionsForUserByUserId,
-  deleteAllVerificationTokensForUserByUserIdentifier,
-  deleteEmailAddressResetTokenById,
-  getEmailAddressResetTokenByTokenHash,
+  checkIfEmailAlreadyExistsForAnotherUser,
+  deleteEmailAddressVerificationTokenById,
+  getEmailAddressVerificationTokenByTokenHash,
   getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
@@ -26,7 +22,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const userId = user?.id;
   const userEmail = user?.email;
 
-  if (!userEmail || !user?.emailVerified || !user?.password_hash) {
+  if (!userEmail || user?.emailVerified || !user?.password_hash) {
     throw new Error("Invalid session");
   }
 
@@ -43,7 +39,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const tokenHash = hashResetToken(token);
 
-    const existingToken = await getEmailAddressResetTokenByTokenHash(tokenHash);
+    const existingToken =
+      await getEmailAddressVerificationTokenByTokenHash(tokenHash);
 
     const existingTokenUserId = existingToken?.userId;
     const existingTokenEmail = existingToken?.email;
@@ -61,7 +58,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     if (typeof existingTokenEmail === "string") {
-      await checkIfEmailAlreadyExists(existingTokenEmail);
+      await checkIfEmailAlreadyExistsForAnotherUser(existingTokenEmail, userId);
     } else {
       throw new Error("Incorrect existing token email data type");
     }
@@ -80,32 +77,31 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const emailVerified = new Date();
 
-    await updateEmailAddressAndEmailVerifiedByUserId(
-      existingTokenEmail,
-      emailVerified,
-      userId,
-    );
-
-    if (typeof existingTokenId === "string") {
-      await deleteEmailAddressResetTokenById(existingTokenId);
+    if (typeof existingTokenEmail === "string") {
+      await updateEmailAddressAndEmailVerifiedByUserId(
+        existingTokenEmail,
+        emailVerified,
+        userId,
+      );
     }
 
-    await deleteAllSessionsForUserByUserId(userId);
-    await deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
-    await deleteAllPasswordResetTokensByEmail(userEmail);
-    await deleteAllEmailAddressVerificationTokensByUserId(userId);
+    if (typeof existingTokenId === "string") {
+      await deleteEmailAddressVerificationTokenById(existingTokenId);
+    }
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error
     if (err instanceof ZodError) {
-      throw new Error("Failed to update email address: invalid credentials");
+      throw new Error(
+        "Failed to add email address and password login: invalid credentials",
+      );
     }
     console.error(err);
-    throw new Error("Failed to update email address");
+    throw new Error("Failed to add email address and password login");
   }
 
   return NextResponse.json(
-    { message: "Email address update successful" },
+    { message: "Email address and password login added successfully" },
     { status: 200 },
   );
 }

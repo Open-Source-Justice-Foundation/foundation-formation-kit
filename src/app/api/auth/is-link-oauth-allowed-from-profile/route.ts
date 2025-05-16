@@ -2,6 +2,8 @@ import { auth } from "~/auth";
 import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextResponse } from "next/server";
 
+// TODO
+// Try linking multiple github accounts, should only be able to link one github account per user
 export async function GET(): Promise<NextResponse> {
   const session = await auth();
 

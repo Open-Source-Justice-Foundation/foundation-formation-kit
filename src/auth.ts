@@ -9,9 +9,9 @@ import { isRouteProtected } from "~/lib/auth/utils";
 import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
 import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import {
+  UserWithPasswordHash,
   type SessionWithSessionToken,
   type SignInCallbackParams,
-  type UserWithEmailVerifiedAndPasswordHash,
 } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
@@ -77,17 +77,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     ],
     callbacks: {
       authorized: async ({ request, auth }) => {
-        const user = <UserWithEmailVerifiedAndPasswordHash>auth?.user;
+        const expires = auth?.expires;
 
         let isAuthenticated;
-        if (user?.password_hash === null) {
-          // Set isAuthenticated to true if the password hash is null which can happen if a user is only using oauth
-          // If a user is using email and password, the password hash won't be null
-          isAuthenticated = true;
+        if (typeof expires === "string") {
+          if (new Date(expires) < new Date()) {
+            isAuthenticated = false;
+          } else {
+            isAuthenticated = true;
+          }
         } else {
-          // Set isAuthenticated to true if the user's email is verified by checking if the property is a truthy value
-          // Otherwise set to false
-          isAuthenticated = !!user?.emailVerified;
+          isAuthenticated = false;
         }
 
         let protectedRoutes: string[] = [];
@@ -123,6 +123,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/formation/step-4",
             "/formation/step-5",
             "/profile",
+            "/profile-error",
+            "/add-email-address-and-password-login",
+            "/added-email-address-and-password-login",
           ];
 
           const routeProtected = isRouteProtected(protectedRoutes, request);
@@ -150,9 +153,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             account?.type === "credentials" ||
             account?.type === "webauthn"
           ) {
-            let requestFromProfilePage = false;
-
-            if (account?.type === "oauth") {
+            if (account?.type === "email") {
+              const userWithPasswordHash = <UserWithPasswordHash>params?.user;
+              if (!userWithPasswordHash?.password_hash) {
+                return "/error?error=Verification";
+              }
+            } else if (account?.type === "oauth") {
+              let requestFromProfilePage = false;
               try {
                 oAuthEmailSchema.parse({ email: user?.email });
 
@@ -195,9 +202,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
                 }
                 throw new Error("Failed to login user");
               }
-            }
-            if (requestFromProfilePage) {
-              return "/profile-error?error=OAuthAccountNotLinkedFromProfile";
+              if (requestFromProfilePage) {
+                return "/profile-error?error=OAuthAccountNotLinkedFromProfile";
+              }
             }
           } else {
             return false;

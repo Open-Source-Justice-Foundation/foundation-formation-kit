@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import { signInSchema } from "~/lib/auth/validation/schemas";
-import { getPasswordHashByEmail } from "~/services/database/queries/auth";
+import { getUserByEmail } from "~/services/database/queries/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -17,9 +17,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { email, password } = signInSchema.parse(data);
 
-    const passwordHash = await getPasswordHashByEmail(email);
+    const user = await getUserByEmail(email);
 
-    await verifyPassword(passwordHash, password);
+    const userEmailVerified = user?.emailVerified;
+    const userPasswordHash = user?.password_hash;
+
+    if (!userEmailVerified) {
+      throw new Error("Unverified email");
+    }
+
+    if (typeof userPasswordHash === "string") {
+      await verifyPassword(userPasswordHash, password);
+    } else {
+      throw new Error("Incorrect password hash data type");
+    }
   } catch (err) {
     // TODO
     // Don't log the err value, do something else with it to avoid deployment error

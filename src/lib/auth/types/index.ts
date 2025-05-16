@@ -12,3 +12,5 @@ export type CustomEmailProviderSendVerificationRequestParams = {
 export type CustomSendVerificationRequestEmailTemplateProps = {
   url: string;
 };
+
+export type SupportedOAuthProvider = "github";

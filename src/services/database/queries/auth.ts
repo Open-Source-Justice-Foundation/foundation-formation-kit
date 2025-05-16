@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import { type SupportedOAuthProvider } from "~/lib/auth/types";
 import { checkDatabaseUrlType } from "~/lib/utils";
 
 export async function getPasswordHashByEmail(email: string): Promise<string> {
@@ -142,6 +143,33 @@ export async function checkIfEmailAlreadyExists(email: string): Promise<void> {
       throw new Error("Failed to check for exists property");
     } else if (response[0].exists !== false) {
       throw new Error("Email already exists");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
+export async function checkIfEmailAlreadyExistsForAnotherUser(
+  email: string,
+  id: number,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "SELECT EXISTS(SELECT 1 FROM users WHERE email = $1 AND id != $2)",
+      [email, id],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to select users row from database");
+    } else if (!response[0].hasOwnProperty("exists")) {
+      throw new Error("Failed to check for exists property");
+    } else if (response[0].exists !== false) {
+      throw new Error("Email already exists for another user");
     }
   } catch (err) {
     // TODO
@@ -567,10 +595,14 @@ export async function deleteAllSessionsExceptCurrentForUserByUserId(
 
 export async function checkOAuthAccountAlreadyLinkedByUserIdAndProvider(
   userId: number,
-  provider: string,
+  provider: SupportedOAuthProvider,
 ): Promise<boolean> {
   try {
     const sql = neon(checkDatabaseUrlType());
+
+    if (provider !== "github") {
+      throw new Error("Invalid OAuth provider");
+    }
 
     const response = await sql(
       `SELECT EXISTS(SELECT 1 FROM accounts WHERE "userId" = $1 AND "provider" = $2)`,
@@ -591,5 +623,132 @@ export async function checkOAuthAccountAlreadyLinkedByUserIdAndProvider(
     // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
+  }
+}
+
+export async function deleteAllEmailAddressVerificationTokensByUserId(
+  userId: number,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `DELETE FROM email_address_verification_tokens WHERE "userId" = $1`,
+      [userId],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to delete email_address_verification_tokens row(s) from database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
+
+export async function createEmailAddressVerificationToken(
+  email: string,
+  tokenHash: string,
+  expires: Date,
+  userId: number,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `INSERT INTO email_address_verification_tokens (email, token_hash, expires, "userId") VALUES ($1, $2, $3, $4)`,
+      [email, tokenHash, expires, userId],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to insert row into database");
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to insert data into database");
+  }
+}
+
+export async function getEmailAddressVerificationTokenByTokenHash(
+  tokenHash: string,
+): Promise<Record<string, string | Date | number>> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "SELECT * FROM email_address_verification_tokens WHERE token_hash = $1",
+      [tokenHash],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to select email_address_verification_tokens row from database",
+      );
+    } else if (response.length === 0) {
+      throw new Error("Email address verification token row doesn't exist");
+    } else if (response.length > 1) {
+      throw new Error(
+        "Multiple email address verification token rows exist with the same token hash",
+      );
+    } else if (!response[0].hasOwnProperty("id")) {
+      throw new Error("Failed to check for id property");
+    } else if (!response[0].hasOwnProperty("email")) {
+      throw new Error("Failed to check for email property");
+    } else if (!response[0].hasOwnProperty("token_hash")) {
+      throw new Error("Failed to check for token_hash property");
+    } else if (!response[0].hasOwnProperty("expires")) {
+      throw new Error("Failed to check for expires property");
+    } else if (!response[0].hasOwnProperty("userId")) {
+      throw new Error("Failed to check for userId property");
+    }
+
+    return response[0];
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
+export async function deleteEmailAddressVerificationTokenById(
+  id: string,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      "DELETE FROM email_address_verification_tokens WHERE id = $1",
+      [id],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to delete email_address_verification_tokens row from database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    // TODO
+    // Don't log the err value, do something else with it to avoid deployment error
+    console.error(err);
+    throw new Error("Failed to delete data from database");
   }
 }

@@ -307,10 +307,10 @@ export default function ProfilePage() {
 
     if (session?.user?.email) {
       const url = "/api/auth/update-password-from-profile";
-      let updatePasswordResponse: Response = new Response();
+      let updatePasswordFromProfileResponse: Response = new Response();
 
       try {
-        updatePasswordResponse = await fetch(url, {
+        updatePasswordFromProfileResponse = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -322,9 +322,9 @@ export default function ProfilePage() {
           }),
         });
 
-        if (updatePasswordResponse?.status !== 200) {
+        if (updatePasswordFromProfileResponse?.status !== 200) {
           throw new Error(
-            `Update password response status: ${updatePasswordResponse?.status}`,
+            `Update password from profile response status: ${updatePasswordFromProfileResponse?.status}`,
           );
         }
 
@@ -354,14 +354,13 @@ export default function ProfilePage() {
 
     const { email, password, passwordConfirmation } = values;
 
-    // TODO
-    // Add API route
     if (session?.user?.email) {
-      const url = "/api/auth/add-email-address-and-password-login-from-profile";
-      let addEmailAddressAndPasswordLoginResponse: Response = new Response();
+      const url = "/api/auth/add-email-address-and-password-login-instructions";
+      let addEmailAddressAndPasswordLoginInstructionsResponse: Response =
+        new Response();
 
       try {
-        addEmailAddressAndPasswordLoginResponse = await fetch(url, {
+        addEmailAddressAndPasswordLoginInstructionsResponse = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -373,24 +372,27 @@ export default function ProfilePage() {
           }),
         });
 
-        if (addEmailAddressAndPasswordLoginResponse?.status !== 200) {
+        if (
+          addEmailAddressAndPasswordLoginInstructionsResponse?.status !== 200
+        ) {
           throw new Error(
-            `Add email address and password login response status: ${addEmailAddressAndPasswordLoginResponse?.status}`,
+            `Add email address and password login instructions response status: ${addEmailAddressAndPasswordLoginInstructionsResponse?.status}`,
           );
         }
 
-        toast.success("Email login added");
+        setPasswordPresent(true);
+        toast.success("Email login instructions sent");
       } catch (err) {
         // TODO
         // Don't log the err value, do something else with it to avoid deployment error
         console.error(err);
-        toast.error("Failed to add email login under construction...");
+        toast.error("Failed to send email login instructions");
       } finally {
         setIsLoading(false);
       }
     } else {
       setIsLoading(false);
-      toast.error("Failed to add email login under construction...");
+      toast.error("Failed to send email login instructions");
     }
 
     addEmailAddressAndPasswordLoginForm.reset();
@@ -428,12 +430,12 @@ export default function ProfilePage() {
         // TODO
         // Don't log the err value, do something else with it to avoid deployment error
         console.error(err);
-        toast.error("Failed to link account");
         setIsLoading(false);
+        toast.error("Failed to link account");
       }
     } else {
       setIsLoading(false);
-      toast.error("Failed to add email login");
+      toast.error("Failed to link account");
     }
   }
 

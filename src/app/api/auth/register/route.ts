@@ -23,6 +23,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     await checkIfEmailAlreadyExists(email);
 
     const passwordHash = await saltAndHashPassword(password);
+
     await createEmailAndPasswordHashInUsers(email, passwordHash);
   } catch (err) {
     // TODO

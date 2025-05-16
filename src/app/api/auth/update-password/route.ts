@@ -69,6 +69,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         if (typeof userEmail === "string") {
           await deleteAllVerificationTokensForUserByUserIdentifier(userEmail);
         }
+      } else {
+        throw new Error("Incorrect user id data type");
       }
     }
   } catch (err) {

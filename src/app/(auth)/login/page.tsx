@@ -98,7 +98,7 @@ export default function SignInPage() {
 
     try {
       oAuthLoginResponse = await fetch(url, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
