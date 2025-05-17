@@ -1,9 +1,7 @@
 import { auth } from "~/auth";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { checkOAuthAccountAlreadyLinkedByUserIdAndProvider } from "~/services/database/queries/auth";
-import type {
-  ProfileState,
-  UserWithEmailVerifiedAndPasswordHash,
-} from "~/types";
+import type { ProfileState } from "~/types";
 import { NextResponse } from "next/server";
 
 export async function GET(): Promise<NextResponse> {
@@ -38,7 +36,7 @@ export async function GET(): Promise<NextResponse> {
 
       if (userPasswordHash) {
         profileState.passwordPresent = true;
-      } else if (user.password_hash === null) {
+      } else if (userPasswordHash === null) {
         profileState.passwordPresent = false;
       }
 

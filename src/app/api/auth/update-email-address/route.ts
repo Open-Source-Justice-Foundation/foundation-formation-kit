@@ -14,7 +14,7 @@ import {
   getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
-import type { UserWithEmailVerifiedAndPasswordHash } from "~/types";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

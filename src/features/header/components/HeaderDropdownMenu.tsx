@@ -44,6 +44,7 @@ export function HeaderDropdownMenu() {
 
   async function handleSignOutOnClick() {
     setIsLoading(true);
+
     try {
       const signOutResponse = await signOut({
         redirect: true,
@@ -58,6 +59,7 @@ export function HeaderDropdownMenu() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Logout error");
+    } finally {
       setIsLoading(false);
     }
   }
@@ -67,7 +69,7 @@ export function HeaderDropdownMenu() {
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
           {typeof session?.user?.name === "string" &&
-          session?.user?.name.length > 0 ? (
+            session?.user?.name.length > 0 ? (
             <AvatarFallback className="bg-accent">
               {session?.user?.name[0]}
             </AvatarFallback>

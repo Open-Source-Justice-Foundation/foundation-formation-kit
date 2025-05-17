@@ -30,6 +30,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Spinner } from "~/components/ui/spinner";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
+import { SupportedOAuthProvider } from "~/lib/auth/types";
 import {
   addEmailAddressAndPasswordLoginFromProfileSchema,
   passwordRequestSchema,
@@ -107,26 +108,28 @@ export default function ProfilePage() {
 
           const profileStateData = await getProfileStateResponse.json();
 
-          if (profileStateData.profileState.emailVerified === true) {
+          if (profileStateData?.profileState?.emailVerified === true) {
             setEmailVerified(true);
-          } else if (profileStateData.profileState.emailVerified === false) {
+          } else if (profileStateData?.profileState?.emailVerified === false) {
             setEmailVerified(false);
           } else {
             router.push("/profile-error");
           }
 
-          if (profileStateData.profileState.passwordPresent === true) {
+          if (profileStateData?.profileState?.passwordPresent === true) {
             setPasswordPresent(true);
-          } else if (profileStateData.profileState.passwordPresent === false) {
+          } else if (
+            profileStateData?.profileState?.passwordPresent === false
+          ) {
             setPasswordPresent(false);
           } else {
             router.push("/profile-error");
           }
 
-          if (profileStateData.profileState.githubAccountLinked === true) {
+          if (profileStateData?.profileState?.githubAccountLinked === true) {
             setGithubAccountLinked(true);
           } else if (
-            profileStateData.profileState.githubAccountLinked === false
+            profileStateData?.profileState?.githubAccountLinked === false
           ) {
             setGithubAccountLinked(false);
           } else {
@@ -136,7 +139,6 @@ export default function ProfilePage() {
           // TODO
           // Don't log the err value, do something else with it to avoid deployment error
           console.error(err);
-          setIsLoading(false);
           router.push("/profile-error");
         }
       };
@@ -398,7 +400,7 @@ export default function ProfilePage() {
     addEmailAddressAndPasswordLoginForm.reset();
   }
 
-  async function handleLinkOAuth(provider: string) {
+  async function handleLinkOAuth(provider: SupportedOAuthProvider) {
     setIsLoading(true);
 
     if (session?.user?.email) {
@@ -439,7 +441,7 @@ export default function ProfilePage() {
     }
   }
 
-  async function handleUnlinkOAuth(provider: string) {
+  async function handleUnlinkOAuth(provider: SupportedOAuthProvider) {
     setIsLoading(true);
 
     toast.error(`Unlinking ${provider} OAuth account under construction...`);

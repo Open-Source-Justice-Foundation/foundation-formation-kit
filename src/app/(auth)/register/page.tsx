@@ -22,6 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { AuthCardHomeButton } from "~/features/auth";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
+import type { SupportedOAuthProvider } from "~/lib/auth/types";
 import { registerSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -114,7 +115,7 @@ export default function RegisterPage() {
     }
   }
 
-  async function oAuthSignIn(provider: string) {
+  async function oAuthSignIn(provider: SupportedOAuthProvider) {
     setIsLoading(true);
 
     const url = "/api/auth/is-session-status-logged-out";

@@ -1,6 +1,7 @@
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import { hashToken } from "~/lib/auth/tokens/utils";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { passwordRequestSchema } from "~/lib/auth/validation/schemas";
 import { isDate } from "~/lib/utils";
 import {
@@ -10,7 +11,6 @@ import {
   getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
-import type { UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

@@ -2,36 +2,6 @@ import { neon } from "@neondatabase/serverless";
 import type { SupportedOAuthProvider } from "~/lib/auth/types";
 import { checkDatabaseUrlType } from "~/lib/utils";
 
-export async function getPasswordHashByEmail(email: string): Promise<string> {
-  try {
-    const sql = neon(checkDatabaseUrlType());
-
-    const response = await sql(
-      "SELECT password_hash FROM users WHERE email = $1",
-      [email],
-    );
-
-    if (response === undefined) {
-      throw new Error("Failed to select users row from database");
-    } else if (response.length === 0) {
-      throw new Error("User row doesn't exist");
-    } else if (response.length > 1) {
-      throw new Error("Multiple user rows exist with the same email");
-    } else if (!response[0].hasOwnProperty("password_hash")) {
-      throw new Error("Failed to check for password_hash property");
-    } else if (typeof response[0].password_hash !== "string") {
-      throw new Error("Incorrect password_hash data type");
-    }
-
-    return response[0].password_hash;
-  } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
-    console.error(err);
-    throw new Error("Failed to select data from database");
-  }
-}
-
 export async function getPasswordHashById(id: number): Promise<string> {
   try {
     const sql = neon(checkDatabaseUrlType());

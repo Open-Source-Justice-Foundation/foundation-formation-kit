@@ -10,7 +10,7 @@ export async function signInRequest(
   params: CustomEmailProviderSendVerificationRequestParams,
 ) {
   const { identifier: to, url, provider } = params;
-  if (provider.apiKey) {
+  if (provider?.apiKey) {
     try {
       const subject = "Sign in link";
 

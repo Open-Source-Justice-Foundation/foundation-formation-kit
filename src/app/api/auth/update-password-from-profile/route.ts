@@ -14,7 +14,7 @@ import {
 import type {
   SessionWithId,
   UserWithEmailVerifiedAndPasswordHash,
-} from "~/types";
+} from "~/lib/auth/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

@@ -10,7 +10,7 @@ export async function verificationRequest(
   params: CustomEmailProviderSendVerificationRequestParams,
 ) {
   const { identifier: to, url, provider } = params;
-  if (provider.apiKey) {
+  if (provider?.apiKey) {
     try {
       const subject = "Welcome to the Foundation Formation Kit! 📃";
 

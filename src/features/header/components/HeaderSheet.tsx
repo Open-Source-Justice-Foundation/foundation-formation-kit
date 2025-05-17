@@ -31,6 +31,7 @@ export function HeaderSheet() {
 
   async function handleSignOutOnClick() {
     setIsLoading(true);
+
     try {
       const signOutResponse = await signOut({
         redirect: true,
@@ -45,6 +46,7 @@ export function HeaderSheet() {
       // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       toast.error("Logout error");
+    } finally {
       setIsLoading(false);
     }
   }

@@ -24,6 +24,7 @@ import {
   AuthCardHomeButton,
   AuthSignInPageErrorMessages,
 } from "~/features/auth";
+import type { SupportedOAuthProvider } from "~/lib/auth/types";
 import { signInSchema } from "~/lib/auth/validation/schemas";
 import { EyeIcon, EyeOffIcon, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -90,7 +91,7 @@ export default function SignInPage() {
     }
   }
 
-  async function oAuthSignIn(provider: string) {
+  async function oAuthSignIn(provider: SupportedOAuthProvider) {
     setIsLoading(true);
 
     const url = "/api/auth/is-session-status-logged-out";
