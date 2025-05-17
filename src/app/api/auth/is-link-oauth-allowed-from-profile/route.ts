@@ -1,5 +1,5 @@
 import { auth } from "~/auth";
-import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextResponse } from "next/server";
 
 // TODO

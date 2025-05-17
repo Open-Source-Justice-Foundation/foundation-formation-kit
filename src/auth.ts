@@ -8,10 +8,11 @@ import {
 import { isRouteProtected } from "~/lib/auth/utils";
 import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
 import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
-import {
+import type {
+  SessionWithSessionToken,
+  SignInCallbackParams,
+  UserWithEmailVerifiedAndPasswordHash,
   UserWithPasswordHash,
-  type SessionWithSessionToken,
-  type SignInCallbackParams,
 } from "~/types";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
@@ -79,6 +80,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
       authorized: async ({ request, auth }) => {
         const expires = auth?.expires;
 
+        const user = <UserWithEmailVerifiedAndPasswordHash>auth?.user;
+
+        const userEmail = user?.email;
+        const userEmailVerified = user?.emailVerified;
+        const userPasswordHash = user?.password_hash;
+
         let isAuthenticated;
         if (typeof expires === "string") {
           if (new Date(expires) < new Date()) {
@@ -103,6 +110,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/verify-request",
             "/verify-reset-password",
           ];
+
+          if (!userEmail || !userEmailVerified || !userPasswordHash) {
+            protectedRoutes.push("/update-email-address");
+          }
+
+          if (!userEmail || userEmailVerified || !userPasswordHash) {
+            protectedRoutes.push("/add-email-address-and-password-login");
+          }
+
+          if (!userEmail || !userEmailVerified || !userPasswordHash) {
+            protectedRoutes.push("/added-email-address-and-password-login");
+          }
 
           const routeProtected = isRouteProtected(protectedRoutes, request);
 

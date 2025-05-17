@@ -15,7 +15,7 @@ import {
   checkIfEmailAlreadyExistsForAnotherUser,
   updatePasswordHashByUserId,
 } from "~/services/database/queries/auth";
-import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

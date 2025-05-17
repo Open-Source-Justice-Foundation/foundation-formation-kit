@@ -19,7 +19,7 @@ import {
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
 import { emailStyles } from "~/lib/auth/styles/emails";
-import { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
+import type { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
 
 export function VerificationRequestEmailTemplate(
   props: Readonly<CustomSendVerificationRequestEmailTemplateProps>,

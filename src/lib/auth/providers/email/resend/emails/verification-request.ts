@@ -4,7 +4,7 @@ import {
   RESEND_API_ENDPOINT,
 } from "~/lib/auth/constants/constants";
 import { VerificationRequestEmailTemplate } from "~/lib/auth/providers/email";
-import { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/types";
+import type { CustomEmailProviderSendVerificationRequestParams } from "~/lib/auth/types";
 
 export async function verificationRequest(
   params: CustomEmailProviderSendVerificationRequestParams,

@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto";
 
 import { PASSWORD_RESET_TOKEN_BYTE_SIZE } from "~/lib/auth/constants/constants";
-import { hashResetToken } from "~/lib/auth/tokens/utils";
+import { hashToken } from "~/lib/auth/tokens/utils";
 import { createPasswordResetToken } from "~/services/database/queries/auth";
 import * as argon2 from "argon2";
 
@@ -40,7 +40,7 @@ export async function generatePasswordResetToken(
     const buf = randomBytes(PASSWORD_RESET_TOKEN_BYTE_SIZE);
     const token = buf.toString("base64url");
 
-    const tokenHash = hashResetToken(token);
+    const tokenHash = hashToken(token);
 
     const expires = new Date(new Date().getTime() + 3600 * 1000);
 

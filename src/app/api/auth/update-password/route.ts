@@ -1,6 +1,6 @@
 import { auth } from "~/auth";
 import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
-import { hashResetToken } from "~/lib/auth/tokens/utils";
+import { hashToken } from "~/lib/auth/tokens/utils";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import { isDate } from "~/lib/utils";
 import {
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     updatePasswordSchema.parse({ password, passwordConfirmation });
 
-    const tokenHash = hashResetToken(token);
+    const tokenHash = hashToken(token);
 
     const existingToken = await getPasswordResetTokenByTokenHash(tokenHash);
 

@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-import { type SupportedOAuthProvider } from "~/lib/auth/types";
+import type { SupportedOAuthProvider } from "~/lib/auth/types";
 import { checkDatabaseUrlType } from "~/lib/utils";
 
 export async function getPasswordHashByEmail(email: string): Promise<string> {

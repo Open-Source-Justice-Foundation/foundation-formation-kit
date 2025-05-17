@@ -1,6 +1,6 @@
 import { createHash } from "crypto";
 
-export function hashResetToken(token: string): string {
+export function hashToken(token: string): string {
   try {
     const tokenHash = createHash("sha512").update(token).digest("base64");
 

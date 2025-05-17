@@ -4,7 +4,7 @@ import {
   EMAIL_ADDRESS_RESET_TOKEN_BYTE_SIZE,
   EMAIL_ADDRESS_VERIFICATION_TOKEN_BYTE_SIZE,
 } from "~/lib/auth/constants/constants";
-import { hashResetToken } from "~/lib/auth/tokens/utils";
+import { hashToken } from "~/lib/auth/tokens/utils";
 import {
   createEmailAddressResetToken,
   createEmailAddressVerificationToken,
@@ -18,7 +18,7 @@ export async function generateEmailAddressResetToken(
     const buf = randomBytes(EMAIL_ADDRESS_RESET_TOKEN_BYTE_SIZE);
     const token = buf.toString("base64url");
 
-    const tokenHash = hashResetToken(token);
+    const tokenHash = hashToken(token);
 
     const expires = new Date(new Date().getTime() + 3600 * 1000);
 
@@ -41,7 +41,7 @@ export async function generateEmailAddressVerificationToken(
     const buf = randomBytes(EMAIL_ADDRESS_VERIFICATION_TOKEN_BYTE_SIZE);
     const token = buf.toString("base64url");
 
-    const tokenHash = hashResetToken(token);
+    const tokenHash = hashToken(token);
 
     const expires = new Date(new Date().getTime() + 3600 * 1000);
 

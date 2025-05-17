@@ -1,6 +1,6 @@
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
-import { hashResetToken } from "~/lib/auth/tokens/utils";
+import { hashToken } from "~/lib/auth/tokens/utils";
 import { passwordRequestSchema } from "~/lib/auth/validation/schemas";
 import { isDate } from "~/lib/utils";
 import {
@@ -14,7 +14,7 @@ import {
   getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
-import { type UserWithEmailVerifiedAndPasswordHash } from "~/types";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     passwordRequestSchema.parse({ password });
 
-    const tokenHash = hashResetToken(token);
+    const tokenHash = hashToken(token);
 
     const existingToken = await getEmailAddressResetTokenByTokenHash(tokenHash);
 

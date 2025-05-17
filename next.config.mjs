@@ -4,7 +4,7 @@
 const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
-    // @ts-ignore
+    // @ts-expect-error: Used to handle the type error - Parameter 'rule' implicitly has 'any' type.
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
     );

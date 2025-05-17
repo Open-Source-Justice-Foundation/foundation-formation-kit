@@ -1,8 +1,8 @@
 import { auth } from "~/auth";
 import { checkOAuthAccountAlreadyLinkedByUserIdAndProvider } from "~/services/database/queries/auth";
-import {
-  type ProfileState,
-  type UserWithEmailVerifiedAndPasswordHash,
+import type {
+  ProfileState,
+  UserWithEmailVerifiedAndPasswordHash,
 } from "~/types";
 import { NextResponse } from "next/server";
 

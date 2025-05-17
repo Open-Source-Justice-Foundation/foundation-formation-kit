@@ -30,7 +30,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof legalNameSchema>;
 
-export default function FormationStep4Page() {
+export default function FormationStep5Page() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
