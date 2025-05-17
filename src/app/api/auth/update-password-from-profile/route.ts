@@ -3,6 +3,10 @@ import {
   saltAndHashPassword,
   verifyPassword,
 } from "~/lib/auth/passwords/utils";
+import type {
+  SessionWithId,
+  UserWithEmailVerifiedAndPasswordHash,
+} from "~/lib/auth/types";
 import { updatePasswordFromProfileSchema } from "~/lib/auth/validation/schemas";
 import {
   deleteAllPasswordResetTokensByEmail,
@@ -11,10 +15,6 @@ import {
   getPasswordHashById,
   updatePasswordHashByUserId,
 } from "~/services/database/queries/auth";
-import type {
-  SessionWithId,
-  UserWithEmailVerifiedAndPasswordHash,
-} from "~/lib/auth/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

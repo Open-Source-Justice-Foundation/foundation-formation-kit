@@ -10,6 +10,7 @@ import {
   ResetEmailAddressRequestEmailTemplate,
   ResetEmailAddressWarningEmailTemplate,
 } from "~/lib/auth/providers/email";
+import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import {
   passwordRequestSchema,
   resetEmailAddressSchema,
@@ -18,7 +19,6 @@ import {
   checkIfEmailAlreadyExists,
   getPasswordHashById,
 } from "~/services/database/queries/auth";
-import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
