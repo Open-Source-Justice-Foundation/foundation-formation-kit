@@ -5,15 +5,15 @@ import {
   signInRequest,
   verificationRequest,
 } from "~/lib/auth/providers/email/resend";
-import { isRouteProtected } from "~/lib/auth/utils";
-import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
-import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import type {
   SessionWithSessionToken,
   SignInCallbackParams,
   UserWithEmailVerifiedAndPasswordHash,
   UserWithPasswordHash,
-} from "~/types";
+} from "~/lib/auth/types";
+import { isRouteProtected } from "~/lib/auth/utils";
+import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
+import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
