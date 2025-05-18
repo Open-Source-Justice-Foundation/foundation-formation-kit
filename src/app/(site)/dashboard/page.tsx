@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PopoverClose } from "@radix-ui/react-popover";
 import {
@@ -21,11 +21,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import { Spinner } from "~/components/ui/spinner";
+import type { Foundation } from "~/lib/foundations/types";
 import { cn } from "~/lib/utils";
 import { Archive, Download, Ellipsis, Trash } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const foundations = [
+const foundations: Foundation[] = [
   {
     id: "1",
     name: "Open Source Justice Foundation",
@@ -53,7 +57,51 @@ const foundations = [
 ];
 
 export default function DashboardPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (session === null) {
+      router.push("/");
+    } else if (session) {
+      const getUserFoundations = async () => {
+        const url = "/api/foundations/get-user-foundations";
+        let getUserFoundationsResponse: Response = new Response();
+
+        try {
+          getUserFoundationsResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (getUserFoundationsResponse?.status !== 200) {
+            throw new Error(
+              `Get user foundations response status: ${getUserFoundationsResponse?.status}`,
+            );
+          }
+
+          const userFoundationsData = await getUserFoundationsResponse.json();
+
+          console.log("userFoundationsData", userFoundationsData);
+        } catch (err) {
+          // TODO
+          // Don't log the err value, do something else with it to avoid deployment error
+          console.error(err);
+          // TODO
+          // Create error page for dashboard
+          router.push("/error");
+        }
+      };
+
+      getUserFoundations();
+
+      return () => { };
+    }
+  }, [session, router]);
 
   function showCardOptions() {
     console.log("Showing card options...");
@@ -121,197 +169,220 @@ export default function DashboardPage() {
 
   return (
     <>
-      {foundations.map((foundation) => (
-        <Card
-          key={foundation.id}
-          className="mb-6 flex flex-col px-2 py-2 last:mb-0 sm:mb-10 sm:px-4 sm:py-4 md:px-9"
-        >
-          <CardHeader className="px-4 pb-6 pt-4 md:px-6 md:pb-8 md:pt-6">
-            <div className="flex items-center justify-between gap-2">
-              <CardTitle className="text-2xl sm:text-3xl md:text-4xl">
-                {foundation.name}
-              </CardTitle>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="rounded-full px-3"
-                    onClick={() => showCardOptions()}
-                    disabled={isLoading}
+      {session === undefined && (
+        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
+          <span className="text-center text-base">Loading...</span>
+        </Spinner>
+      )}
+      {session === null && (
+        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
+          <span className="text-center text-base">
+            Redirecting to homepage...
+          </span>
+        </Spinner>
+      )}
+      {session &&
+        foundations.map((foundation: Foundation) => (
+          <Card
+            key={foundation.id}
+            className="mb-6 flex flex-col px-2 py-2 last:mb-0 sm:mb-10 sm:px-4 sm:py-4 md:px-9"
+          >
+            <CardHeader className="px-4 pb-6 pt-4 md:px-6 md:pb-8 md:pt-6">
+              <div className="flex items-center justify-between gap-2">
+                <CardTitle className="text-2xl sm:text-3xl md:text-4xl">
+                  {foundation.name}
+                </CardTitle>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="rounded-full px-3"
+                      onClick={() => showCardOptions()}
+                      disabled={isLoading}
+                    >
+                      <Ellipsis
+                        aria-hidden="true"
+                        className="text-foreground"
+                      />
+                      <span className="sr-only">Show card options</span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align="end"
+                    className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
                   >
-                    <Ellipsis aria-hidden="true" className="text-foreground" />
-                    <span className="sr-only">Show card options</span>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                  align="end"
-                  className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
-                >
-                  <div className="flex flex-col">
-                    <PopoverClose asChild>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="w-full justify-start p-2"
-                        onClick={() => downloadTaxForm()}
-                        disabled={isLoading}
-                      >
-                        <Download
-                          aria-hidden="true"
-                          className="text-foreground"
-                        />
-                        <span className="sr-only">Download</span>
-                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                          {foundation.taxForm}
-                        </span>
-                      </Button>
-                    </PopoverClose>
-                    <PopoverClose asChild>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="w-full justify-start p-2"
-                        onClick={() => downloadArticlesOfIncorporation()}
-                        disabled={isLoading}
-                      >
-                        <Download
-                          aria-hidden="true"
-                          className="text-foreground"
-                        />
-                        <span className="sr-only">Download</span>
-                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                          {foundation.articlesOfIncorporationForm}
-                        </span>
-                      </Button>
-                    </PopoverClose>
-                    <PopoverClose asChild>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        className="w-full justify-start p-2"
-                        onClick={() => handleArchiveFoundationOnClick()}
-                        disabled={isLoading}
-                      >
-                        <Archive
-                          aria-hidden="true"
-                          className="text-foreground"
-                        />
-                        <span className="sr-only">Archive</span>
-                        <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                          Archive
-                        </span>
-                      </Button>
-                    </PopoverClose>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
+                    <div className="flex flex-col">
+                      <PopoverClose asChild>
                         <Button
                           type="button"
                           variant="ghost"
                           className="w-full justify-start p-2"
+                          onClick={() => downloadTaxForm()}
                           disabled={isLoading}
                         >
-                          <Trash
+                          <Download
                             aria-hidden="true"
                             className="text-foreground"
                           />
-                          <span className="sr-only">
-                            Delete your foundation
-                          </span>
+                          <span className="sr-only">Download</span>
                           <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
-                            Delete
+                            {foundation.taxForm}
                           </span>
                         </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent className="w-3/4 max-[430px]:p-5">
-                        <AlertDialogHeader>
-                          <AlertDialogTitle className="max-[430px]:text-base">
-                            Are you sure you want to delete your foundation?
-                          </AlertDialogTitle>
-                          <AlertDialogDescription className="max-[430px]:text-xs">
-                            This action cannot be undone. This will permanently
-                            delete your foundation and remove your data from our
-                            servers. Be sure to download any documents related
-                            to the foundation for your records.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <PopoverClose asChild>
-                            <AlertDialogCancel
-                              className="mt-4 max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
-                              disabled={isLoading}
-                            >
-                              Cancel
-                            </AlertDialogCancel>
-                          </PopoverClose>
-                          <PopoverClose asChild>
-                            <AlertDialogAction
-                              className={cn(
-                                buttonVariants({ variant: "destructive" }),
-                                "max-[430px]:h-8",
-                                "max-[430px]:py-1.5",
-                                "max-[430px]:px-3",
-                              )}
-                              onClick={() => deleteFoundation()}
-                              disabled={isLoading}
-                            >
+                      </PopoverClose>
+                      <PopoverClose asChild>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="w-full justify-start p-2"
+                          onClick={() => downloadArticlesOfIncorporation()}
+                          disabled={isLoading}
+                        >
+                          <Download
+                            aria-hidden="true"
+                            className="text-foreground"
+                          />
+                          <span className="sr-only">Download</span>
+                          <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                            {foundation.articlesOfIncorporationForm}
+                          </span>
+                        </Button>
+                      </PopoverClose>
+                      <PopoverClose asChild>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="w-full justify-start p-2"
+                          onClick={() => handleArchiveFoundationOnClick()}
+                          disabled={isLoading}
+                        >
+                          <Archive
+                            aria-hidden="true"
+                            className="text-foreground"
+                          />
+                          <span className="sr-only">Archive</span>
+                          <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
+                            Archive
+                          </span>
+                        </Button>
+                      </PopoverClose>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            className="w-full justify-start p-2"
+                            disabled={isLoading}
+                          >
+                            <Trash
+                              aria-hidden="true"
+                              className="text-foreground"
+                            />
+                            <span className="sr-only">
+                              Delete your foundation
+                            </span>
+                            <span className="truncate text-wrap text-xs text-secondary-foreground sm:text-sm md:text-base">
                               Delete
-                            </AlertDialogAction>
-                          </PopoverClose>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                            </span>
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="w-3/4 max-[430px]:p-5">
+                          <AlertDialogHeader>
+                            <AlertDialogTitle className="max-[430px]:text-base">
+                              Are you sure you want to delete your foundation?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="max-[430px]:text-xs">
+                              This action cannot be undone. This will
+                              permanently delete your foundation and remove your
+                              data from our servers. Be sure to download any
+                              documents related to the foundation for your
+                              records.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <PopoverClose asChild>
+                              <AlertDialogCancel
+                                className="mt-4 max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
+                                disabled={isLoading}
+                              >
+                                Cancel
+                              </AlertDialogCancel>
+                            </PopoverClose>
+                            <PopoverClose asChild>
+                              <AlertDialogAction
+                                className={cn(
+                                  buttonVariants({ variant: "destructive" }),
+                                  "max-[430px]:h-8",
+                                  "max-[430px]:py-1.5",
+                                  "max-[430px]:px-3",
+                                )}
+                                onClick={() => deleteFoundation()}
+                                disabled={isLoading}
+                              >
+                                Delete
+                              </AlertDialogAction>
+                            </PopoverClose>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </CardHeader>
+            <CardContent className="flex px-4 pb-4 md:px-6 md:pb-6">
+              <div className="flex w-full md:items-center md:justify-between">
+                <div className="hidden sm:flex sm:basis-1/2 sm:flex-col sm:gap-6 md:mr-8 md:flex-row md:gap-12">
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="rounded-full px-3"
+                      onClick={() => downloadTaxForm()}
+                      disabled={isLoading}
+                    >
+                      <Download
+                        aria-hidden="true"
+                        className="text-foreground"
+                      />
+                      <span className="sr-only">Download</span>
+                    </Button>
+                    <span className="text-sm text-secondary-foreground sm:text-base">
+                      {foundation.taxForm}
+                    </span>
                   </div>
-                </PopoverContent>
-              </Popover>
-            </div>
-          </CardHeader>
-          <CardContent className="flex px-4 pb-4 md:px-6 md:pb-6">
-            <div className="flex w-full md:items-center md:justify-between">
-              <div className="hidden sm:flex sm:basis-1/2 sm:flex-col sm:gap-6 md:mr-8 md:flex-row md:gap-12">
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="rounded-full px-3"
-                    onClick={() => downloadTaxForm()}
-                    disabled={isLoading}
-                  >
-                    <Download aria-hidden="true" className="text-foreground" />
-                    <span className="sr-only">Download</span>
-                  </Button>
-                  <span className="text-sm text-secondary-foreground sm:text-base">
-                    {foundation.taxForm}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="rounded-full px-3"
+                      onClick={() => downloadArticlesOfIncorporation()}
+                      disabled={isLoading}
+                    >
+                      <Download
+                        aria-hidden="true"
+                        className="text-foreground"
+                      />
+                      <span className="sr-only">Download</span>
+                    </Button>
+                    <span className="text-sm text-secondary-foreground sm:text-base">
+                      {foundation.articlesOfIncorporationForm}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="rounded-full px-3"
-                    onClick={() => downloadArticlesOfIncorporation()}
-                    disabled={isLoading}
-                  >
-                    <Download aria-hidden="true" className="text-foreground" />
-                    <span className="sr-only">Download</span>
-                  </Button>
+                <div className="flex flex-col justify-between gap-6 sm:basis-1/2 sm:items-start sm:py-2 md:flex-row md:items-center md:gap-0 md:py-0">
                   <span className="text-sm text-secondary-foreground sm:text-base">
-                    {foundation.articlesOfIncorporationForm}
+                    {foundation.typeOfFoundation}
+                  </span>
+                  <span className="text-sm text-secondary-foreground sm:text-base">
+                    {foundation.timeSinceSubmission}
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col justify-between gap-6 sm:basis-1/2 sm:items-start sm:py-2 md:flex-row md:items-center md:gap-0 md:py-0">
-                <span className="text-sm text-secondary-foreground sm:text-base">
-                  {foundation.typeOfFoundation}
-                </span>
-                <span className="text-sm text-secondary-foreground sm:text-base">
-                  {foundation.timeSinceSubmission}
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </CardContent>
+          </Card>
+        ))}
     </>
   );
 }
