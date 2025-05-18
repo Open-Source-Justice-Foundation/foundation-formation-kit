@@ -15,10 +15,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const data = await request.json();
 
-    const {} = legalNameSchema.parse(data);
+    const { } = legalNameSchema.parse(data);
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     if (err instanceof ZodError) {
       throw new Error("Failed to process formation step 3: invalid data");
     }

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { randomBytes } from "crypto";
 
 import {
@@ -26,8 +28,6 @@ export async function generateEmailAddressResetToken(
 
     return token;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to generate email address reset token");
   }
@@ -54,8 +54,6 @@ export async function generateEmailAddressVerificationToken(
 
     return token;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to generate email address verification token");
   }

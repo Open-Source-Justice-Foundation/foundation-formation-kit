@@ -1,3 +1,5 @@
+import "server-only";
+
 import { randomBytes } from "crypto";
 
 import { PASSWORD_RESET_TOKEN_BYTE_SIZE } from "~/lib/auth/constants/constants";
@@ -10,8 +12,6 @@ export async function saltAndHashPassword(password: string) {
     const hash = await argon2.hash(password);
     return hash;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to salt and hash password");
   }
@@ -26,8 +26,6 @@ export async function verifyPassword(hash: string, password: string) {
       throw new Error("Invalid password");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to verify password");
   }
@@ -48,8 +46,6 @@ export async function generatePasswordResetToken(
 
     return token;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to generate password reset token");
   }

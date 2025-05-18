@@ -1,3 +1,5 @@
+import "server-only";
+
 import { neon } from "@neondatabase/serverless";
 import type { SupportedOAuthProvider } from "~/lib/auth/types";
 import { checkDatabaseUrlType } from "~/lib/utils";
@@ -25,8 +27,6 @@ export async function getPasswordHashById(id: number): Promise<string> {
 
     return response[0].password_hash;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -54,8 +54,6 @@ export async function updatePasswordHashByUserId(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to update data in database");
   }
@@ -91,8 +89,6 @@ export async function getUserByEmail(
 
     return response[0];
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -115,8 +111,6 @@ export async function checkIfEmailAlreadyExists(email: string): Promise<void> {
       throw new Error("Email already exists");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -142,8 +136,6 @@ export async function checkIfEmailAlreadyExistsForAnotherUser(
       throw new Error("Email already exists for another user");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -169,8 +161,6 @@ export async function createEmailAndPasswordHashInUsers(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to insert data into database");
   }
@@ -197,8 +187,6 @@ export async function checkEmailIsVerifiedByEmail(
 
     return response[0].exists;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -225,8 +213,6 @@ export async function checkPasswordHashNotNullByEmail(
 
     return response[0].exists;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -253,8 +239,6 @@ export async function createPasswordResetToken(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to insert data into database");
   }
@@ -293,8 +277,6 @@ export async function getPasswordResetTokenByTokenHash(
 
     return response[0];
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -319,8 +301,6 @@ export async function deletePasswordResetTokenById(id: string): Promise<void> {
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -348,8 +328,6 @@ export async function createEmailAddressResetToken(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to insert data into database");
   }
@@ -390,8 +368,6 @@ export async function getEmailAddressResetTokenByTokenHash(
 
     return response[0];
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -420,8 +396,6 @@ export async function updateEmailAddressAndEmailVerifiedByUserId(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to update data in database");
   }
@@ -448,8 +422,6 @@ export async function deleteEmailAddressResetTokenById(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -473,8 +445,6 @@ export async function deleteAllSessionsForUserByUserId(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -501,8 +471,6 @@ export async function deleteAllVerificationTokensForUserByUserIdentifier(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -529,8 +497,6 @@ export async function deleteAllPasswordResetTokensByEmail(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -556,8 +522,6 @@ export async function deleteAllSessionsExceptCurrentForUserByUserId(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -589,8 +553,6 @@ export async function checkOAuthAccountAlreadyLinkedByUserIdAndProvider(
 
     return response[0].exists;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -617,8 +579,6 @@ export async function deleteAllEmailAddressVerificationTokensByUserId(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }
@@ -646,8 +606,6 @@ export async function createEmailAddressVerificationToken(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to insert data into database");
   }
@@ -688,8 +646,6 @@ export async function getEmailAddressVerificationTokenByTokenHash(
 
     return response[0];
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to select data from database");
   }
@@ -716,8 +672,6 @@ export async function deleteEmailAddressVerificationTokenById(
       throw new Error("Response data length must be 0");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to delete data from database");
   }

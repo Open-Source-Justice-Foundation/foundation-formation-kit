@@ -1,3 +1,5 @@
+import "server-only";
+
 import { createHash } from "crypto";
 
 export function hashToken(token: string): string {
@@ -6,8 +8,6 @@ export function hashToken(token: string): string {
 
     return tokenHash;
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     console.error(err);
     throw new Error("Failed to hash reset token");
   }

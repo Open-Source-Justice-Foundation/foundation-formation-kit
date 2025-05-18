@@ -1,3 +1,5 @@
+import "server-only";
+
 import { render } from "@react-email/render";
 import {
   AUTH_FROM_FIELD,
@@ -45,8 +47,6 @@ export async function signInRequest(
         );
       }
     } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
       console.error(err);
       throw new Error("Failed to send sign in email");
     }

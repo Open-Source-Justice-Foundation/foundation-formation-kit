@@ -32,8 +32,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       throw new Error("Incorrect password hash data type");
     }
   } catch (err) {
-    // TODO
-    // Don't log the err value, do something else with it to avoid deployment error
     if (err instanceof ZodError) {
       throw new Error("Failed to login user: invalid credentials");
     }
