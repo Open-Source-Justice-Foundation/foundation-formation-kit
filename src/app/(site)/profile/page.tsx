@@ -463,6 +463,7 @@ export default function ProfilePage() {
         }
 
         setGithubAccountLinked(false);
+        toast.success("Account unlink successful");
       } catch (err) {
         // TODO
         // Don't log the err value, do something else with it to avoid deployment error
