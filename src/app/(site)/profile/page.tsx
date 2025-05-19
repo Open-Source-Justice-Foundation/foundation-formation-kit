@@ -441,12 +441,40 @@ export default function ProfilePage() {
     }
   }
 
-  async function handleUnlinkOAuth(provider: SupportedOAuthProvider) {
+  async function handleUnlinkOAuth() {
     setIsLoading(true);
 
-    toast.error(`Unlinking ${provider} OAuth account under construction...`);
+    if (session?.user?.email) {
+      const url = "/api/auth/unlink-oauth-from-profile";
+      let unlinkOAuthFromProfileResponse: Response = new Response();
 
-    setIsLoading(false);
+      try {
+        unlinkOAuthFromProfileResponse = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (unlinkOAuthFromProfileResponse?.status !== 200) {
+          throw new Error(
+            `Unlink OAuth from profile response status: ${unlinkOAuthFromProfileResponse?.status}`,
+          );
+        }
+
+        setGithubAccountLinked(false);
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        toast.error("Failed to unlink account");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setIsLoading(false);
+      toast.error("Failed to unlink account");
+    }
   }
 
   return (
@@ -819,7 +847,7 @@ export default function ProfilePage() {
                           type="button"
                           className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
                           disabled={isLoading}
-                          onClick={() => handleUnlinkOAuth("github")}
+                          onClick={() => handleUnlinkOAuth()}
                         >
                           Unlink GitHub
                         </Button>
@@ -1008,7 +1036,7 @@ export default function ProfilePage() {
                         type="button"
                         className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
                         disabled={true}
-                        onClick={() => handleUnlinkOAuth("github")}
+                        onClick={() => handleUnlinkOAuth()}
                       >
                         Unlink GitHub
                       </Button>

@@ -676,3 +676,28 @@ export async function deleteEmailAddressVerificationTokenById(
     throw new Error("Failed to delete data from database");
   }
 }
+
+export async function deleteOAuthAccountForUserByUserIdAndProvider(
+  userId: number,
+  provider: SupportedOAuthProvider,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `DELETE FROM accounts WHERE "userId" = $1 AND provider = $2`,
+      [userId, provider],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to delete account row from database");
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
