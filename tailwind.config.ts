@@ -62,6 +62,16 @@ const config: Config = {
         logo: {
           foreground: "hsl(var(--logo-foreground))",
         },
+        verified: {
+          "badge-background": "hsl(var(--verified-badge-background))",
+          "badge-border": "hsl(var(--verified-badge-border))",
+          "badge-foreground": "hsl(var(--verified-badge-foreground))",
+        },
+        unverified: {
+          "badge-background": "hsl(var(--unverified-badge-background))",
+          "badge-border": "hsl(var(--unverified-badge-border))",
+          "badge-foreground": "hsl(var(--unverified-badge-foreground))",
+        },
         // Sidebar
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

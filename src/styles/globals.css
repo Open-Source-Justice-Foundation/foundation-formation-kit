@@ -34,6 +34,12 @@
     --link-foreground: 244 76% 59%;
     --logo-foreground: 0 0% 16%;
     --ring-primary: 244 76% 59%;
+    --verified-badge-background: 143 85% 96%;
+    --verified-badge-border: 145 92% 87%;
+    --verified-badge-foreground: 140 100% 27%;
+    --unverified-badge-background: 208 100% 97%;
+    --unverified-badge-border: 221 91% 93%;
+    --unverified-badge-foreground: 210 92% 45%;
 
     /* Sidebar colors */
     --sidebar-background: 0 0% 100%;
@@ -76,6 +82,12 @@
     --link-foreground: 244 76% 65%;
     --logo-foreground: 0 0% 100%;
     --ring-primary: 244 76% 59%;
+    --verified-badge-background: 150 100% 6%;
+    --verified-badge-border: 147 100% 12%;
+    --verified-badge-foreground: 150 86% 65%;
+    --unverified-badge-background: 215 100% 6%;
+    --unverified-badge-border: 223 43% 17%;
+    --unverified-badge-foreground: 216 87% 65%;
 
     /* Sidebar colors */
     --sidebar-background: 244 76% 0%;
