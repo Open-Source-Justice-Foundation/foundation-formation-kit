@@ -72,6 +72,11 @@ const config: Config = {
           "badge-border": "hsl(var(--unverified-badge-border))",
           "badge-foreground": "hsl(var(--unverified-badge-foreground))",
         },
+        pending: {
+          "badge-background": "hsl(var(--pending-badge-background))",
+          "badge-border": "hsl(var(--pending-badge-border))",
+          "badge-foreground": "hsl(var(--pending-badge-foreground))",
+        },
         // Sidebar
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

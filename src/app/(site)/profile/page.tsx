@@ -35,7 +35,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { Spinner } from "~/components/ui/spinner";
-import { EmailAddressCard } from "~/features/profile";
+import { AddEmailLoginPendingCard, EmailAddressCard } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { SupportedOAuthProvider } from "~/lib/auth/types";
@@ -98,6 +98,8 @@ export default function ProfilePage() {
     showPasswordConfirmationForLoginForm,
     setShowPasswordConfirmationForLoginForm,
   ] = useState<boolean>(false);
+  const [newEmailAddressForLoginForm, setNewEmailAddressForLoginForm] =
+    useState<string>("");
 
   useEffect(() => {
     if (session === null) {
@@ -404,6 +406,7 @@ export default function ProfilePage() {
         }
 
         setPasswordPresent(true);
+        setNewEmailAddressForLoginForm(email);
         toast.success("Email login instructions sent");
       } catch (err) {
         // TODO
@@ -554,9 +557,11 @@ export default function ProfilePage() {
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Email Address
+                        Reset Email Address
                       </CardTitle>
-                      <CardDescription></CardDescription>
+                      <CardDescription>
+                        Reset your login and notification email address.
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...resetEmailAddressForm}>
@@ -683,9 +688,11 @@ export default function ProfilePage() {
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Password
+                        Update Password
                       </CardTitle>
-                      <CardDescription></CardDescription>
+                      <CardDescription>
+                        Update your login password.
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...updatePasswordForm}>
@@ -970,9 +977,12 @@ export default function ProfilePage() {
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Email Login
+                        Add Email Login
                       </CardTitle>
-                      <CardDescription></CardDescription>
+                      <CardDescription>
+                        Add the option to login using an email address and
+                        password.
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...addEmailAddressAndPasswordLoginForm}>
@@ -1225,17 +1235,9 @@ export default function ProfilePage() {
                     passwordPresent={passwordPresent}
                     githubAccountLinked={githubAccountLinked}
                   />
-                  <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
-                      <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Email Login
-                      </CardTitle>
-                      <CardDescription></CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
-                      Waiting for email verification...
-                    </CardContent>
-                  </Card>
+                  <AddEmailLoginPendingCard
+                    newEmail={newEmailAddressForLoginForm}
+                  />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">

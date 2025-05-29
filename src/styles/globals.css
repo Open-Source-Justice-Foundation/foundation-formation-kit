@@ -40,6 +40,9 @@
     --unverified-badge-background: 208 100% 97%;
     --unverified-badge-border: 221 91% 93%;
     --unverified-badge-foreground: 210 92% 45%;
+    --pending-badge-background: 49 100% 97%;
+    --pending-badge-border: 49 91% 84%;
+    --pending-badge-foreground: 31 92% 45%;
 
     /* Sidebar colors */
     --sidebar-background: 0 0% 100%;
@@ -88,6 +91,9 @@
     --unverified-badge-background: 215 100% 6%;
     --unverified-badge-border: 223 43% 17%;
     --unverified-badge-foreground: 216 87% 65%;
+    --pending-badge-background: 64 100% 6%;
+    --pending-badge-border: 60 100% 9%;
+    --pending-badge-foreground: 46 87% 65%;
 
     /* Sidebar colors */
     --sidebar-background: 244 76% 0%;
