@@ -13,6 +13,7 @@ export function checkDatabaseUrlType(): string {
   }
 }
 
+// Dates
 export function isDate(value: unknown): boolean {
   if (
     Object.prototype.toString.call(value) === "[object Date]" &&
@@ -26,4 +27,18 @@ export function isDate(value: unknown): boolean {
   } else {
     return false;
   }
+}
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  const month = date.toLocaleString("default", { month: "long" });
+
+  const dayOfMonth = date.getDate();
+
+  const year = date.getFullYear();
+
+  const formattedDate = `${month}, ${dayOfMonth} ${year}`;
+
+  return formattedDate;
 }

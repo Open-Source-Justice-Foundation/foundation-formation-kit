@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PopoverClose } from "@radix-ui/react-popover";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -28,7 +29,13 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
 import { Spinner } from "~/components/ui/spinner";
+import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { SupportedOAuthProvider } from "~/lib/auth/types";
 import {
@@ -37,7 +44,8 @@ import {
   resetEmailAddressSchema,
   updatePasswordFromProfileSchema,
 } from "~/lib/auth/validation/schemas";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { formatDate } from "~/lib/utils";
+import { Ellipsis, EyeIcon, EyeOffIcon, Github, Trash } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -61,6 +69,12 @@ export default function ProfilePage() {
   const [passwordPresent, setPasswordPresent] = useState<boolean | null>(null);
   const [githubAccountLinked, setGithubAccountLinked] = useState<
     boolean | null
+  >(null);
+  const [githubAccountUsername, setGithubAccountUsername] = useState<
+    string | null
+  >(null);
+  const [githubAccountConnectedOn, setGithubAccountConnectedOn] = useState<
+    string | null
   >(null);
 
   const [newEmailAddress, setNewEmailAddress] = useState<string>("");
@@ -128,6 +142,12 @@ export default function ProfilePage() {
 
           if (profileStateData?.profileState?.githubAccountLinked === true) {
             setGithubAccountLinked(true);
+            setGithubAccountUsername(
+              profileStateData?.profileState?.githubAccountUsername,
+            );
+            setGithubAccountConnectedOn(
+              profileStateData?.profileState?.githubAccountConnectedOn,
+            );
           } else if (
             profileStateData?.profileState?.githubAccountLinked === false
           ) {
@@ -445,32 +465,39 @@ export default function ProfilePage() {
     setIsLoading(true);
 
     if (session?.user?.email) {
-      const url = "/api/auth/unlink-oauth-from-profile";
-      let unlinkOAuthFromProfileResponse: Response = new Response();
+      if (emailVerified && passwordPresent) {
+        const url = "/api/auth/unlink-oauth-from-profile";
+        let unlinkOAuthFromProfileResponse: Response = new Response();
 
-      try {
-        unlinkOAuthFromProfileResponse = await fetch(url, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        try {
+          unlinkOAuthFromProfileResponse = await fetch(url, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
-        if (unlinkOAuthFromProfileResponse?.status !== 200) {
-          throw new Error(
-            `Unlink OAuth from profile response status: ${unlinkOAuthFromProfileResponse?.status}`,
-          );
+          if (unlinkOAuthFromProfileResponse?.status !== 200) {
+            throw new Error(
+              `Unlink OAuth from profile response status: ${unlinkOAuthFromProfileResponse?.status}`,
+            );
+          }
+
+          setGithubAccountLinked(false);
+          setGithubAccountUsername(null);
+          setGithubAccountConnectedOn(null);
+          toast.success("Account unlink successful");
+        } catch (err) {
+          // TODO
+          // Don't log the err value, do something else with it to avoid deployment error
+          console.error(err);
+          toast.error("Failed to unlink account");
+        } finally {
+          setIsLoading(false);
         }
-
-        setGithubAccountLinked(false);
-        toast.success("Account unlink successful");
-      } catch (err) {
-        // TODO
-        // Don't log the err value, do something else with it to avoid deployment error
-        console.error(err);
-        toast.error("Failed to unlink account");
-      } finally {
+      } else {
         setIsLoading(false);
+        toast.error("User must have at least 1 identity after unlinking");
       }
     } else {
       setIsLoading(false);
@@ -523,10 +550,7 @@ export default function ProfilePage() {
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
                         Email Address
                       </CardTitle>
-                      <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                      </CardDescription>
+                      <CardDescription></CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...resetEmailAddressForm}>
@@ -655,10 +679,7 @@ export default function ProfilePage() {
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
                         Password
                       </CardTitle>
-                      <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                      </CardDescription>
+                      <CardDescription></CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...updatePasswordForm}>
@@ -819,15 +840,11 @@ export default function ProfilePage() {
                     </CardContent>
                   </Card>
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+                    <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Login Methods
+                        Authentication
                       </CardTitle>
                       <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                        <br />
-                        <br />
                         Link your account to third-party authentication
                         providers.
                       </CardDescription>
@@ -844,14 +861,85 @@ export default function ProfilePage() {
                         </Button>
                       )}
                       {githubAccountLinked && (
-                        <Button
-                          type="button"
-                          className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
-                          disabled={isLoading}
-                          onClick={() => handleUnlinkOAuth()}
-                        >
-                          Unlink GitHub
-                        </Button>
+                        <div className="flex w-full flex-col gap-5 sm:gap-6">
+                          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                            <div className="flex grow flex-wrap items-center justify-between gap-1.5">
+                              <div className="mr-7 flex items-center gap-2">
+                                <Github
+                                  size={PROFILE_ICON_BASE_SIZE}
+                                  aria-hidden="true"
+                                />
+                                <span className="sr-only">{"GitHub"}</span>
+                                <div className="flex flex-col">
+                                  <span className="text-sm font-medium text-secondary-foreground sm:text-base">
+                                    GitHub
+                                  </span>
+                                  {githubAccountUsername && (
+                                    <span className="text-xs text-muted-foreground sm:text-sm">
+                                      @{githubAccountUsername}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              {githubAccountConnectedOn && (
+                                <span className="ml-6 text-xs text-muted-foreground sm:text-sm">
+                                  Connected on{" "}
+                                  {formatDate(githubAccountConnectedOn)}
+                                </span>
+                              )}
+                            </div>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  className="rounded-full px-3"
+                                  disabled={isLoading}
+                                >
+                                  <Ellipsis
+                                    aria-hidden="true"
+                                    className="text-foreground"
+                                  />
+                                  <span className="sr-only">
+                                    Show OAuth account options
+                                  </span>
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                align="end"
+                                className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
+                              >
+                                <div className="flex flex-col">
+                                  <PopoverClose asChild>
+                                    <Button
+                                      type="button"
+                                      variant="ghost"
+                                      className="justify-start p-1 sm:p-1.5 md:p-2"
+                                      onClick={() => handleUnlinkOAuth()}
+                                      disabled={isLoading}
+                                    >
+                                      <Trash
+                                        aria-hidden="true"
+                                        className="text-foreground"
+                                      />
+                                      <span className="sr-only">Trash</span>
+                                      <span className="text-xs text-secondary-foreground sm:text-sm md:text-base">
+                                        Unlink Account
+                                      </span>
+                                    </Button>
+                                  </PopoverClose>
+                                </div>
+                              </PopoverContent>
+                            </Popover>
+                          </div>
+                          <Button
+                            type="button"
+                            className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
+                            disabled={true}
+                          >
+                            Link GitHub
+                          </Button>
+                        </div>
                       )}
                     </CardContent>
                   </Card>
@@ -872,10 +960,7 @@ export default function ProfilePage() {
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
                         Email Login
                       </CardTitle>
-                      <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                      </CardDescription>
+                      <CardDescription></CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       <Form {...addEmailAddressAndPasswordLoginForm}>
@@ -1019,28 +1104,95 @@ export default function ProfilePage() {
                     </CardContent>
                   </Card>
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+                    <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Login Methods
+                        Authentication
                       </CardTitle>
                       <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                        <br />
-                        <br />
                         Link your account to third-party authentication
                         providers.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
-                      <Button
-                        type="button"
-                        className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
-                        disabled={true}
-                        onClick={() => handleUnlinkOAuth()}
-                      >
-                        Unlink GitHub
-                      </Button>
+                      <div className="flex w-full flex-col gap-5 sm:gap-6">
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                          <div className="flex grow flex-wrap items-center justify-between gap-1.5">
+                            <div className="mr-7 flex items-center gap-2">
+                              <Github
+                                size={PROFILE_ICON_BASE_SIZE}
+                                aria-hidden="true"
+                              />
+                              <span className="sr-only">{"GitHub"}</span>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-medium text-secondary-foreground sm:text-base">
+                                  GitHub
+                                </span>
+                                {githubAccountUsername && (
+                                  <span className="text-xs text-muted-foreground sm:text-sm">
+                                    @{githubAccountUsername}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            {githubAccountConnectedOn && (
+                              <span className="ml-6 text-xs text-muted-foreground sm:text-sm">
+                                Connected on{" "}
+                                {formatDate(githubAccountConnectedOn)}
+                              </span>
+                            )}
+                          </div>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                className="rounded-full px-3"
+                                disabled={isLoading}
+                              >
+                                <Ellipsis
+                                  aria-hidden="true"
+                                  className="text-foreground"
+                                />
+                                <span className="sr-only">
+                                  Show OAuth account options
+                                </span>
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              align="end"
+                              className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
+                            >
+                              <div className="flex flex-col">
+                                <PopoverClose asChild>
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    className="justify-start p-1 sm:p-1.5 md:p-2"
+                                    onClick={() => handleUnlinkOAuth()}
+                                    disabled={isLoading}
+                                  >
+                                    <Trash
+                                      aria-hidden="true"
+                                      className="text-foreground"
+                                    />
+                                    <span className="sr-only">Trash</span>
+                                    <span className="text-xs text-secondary-foreground sm:text-sm md:text-base">
+                                      Unlink Account
+                                    </span>
+                                  </Button>
+                                </PopoverClose>
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+                        <Button
+                          type="button"
+                          className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
+                          disabled={true}
+                        >
+                          Link GitHub
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 </>
@@ -1060,37 +1212,102 @@ export default function ProfilePage() {
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
                         Email Login
                       </CardTitle>
-                      <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                      </CardDescription>
+                      <CardDescription></CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
                       Waiting for email verification...
                     </CardContent>
                   </Card>
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
+                    <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Login Methods
+                        Authentication
                       </CardTitle>
                       <CardDescription>
-                        🚧 Under construction, accounts may be deleted and not
-                        work 🚧
-                        <br />
-                        <br />
                         Link your account to third-party authentication
                         providers.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
-                      <Button
-                        type="button"
-                        className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
-                        disabled={true}
-                      >
-                        Unlink GitHub
-                      </Button>
+                      <div className="flex w-full flex-col gap-5 sm:gap-6">
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                          <div className="flex grow flex-wrap items-center justify-between gap-1.5">
+                            <div className="mr-7 flex items-center gap-2">
+                              <Github
+                                size={PROFILE_ICON_BASE_SIZE}
+                                aria-hidden="true"
+                              />
+                              <span className="sr-only">{"GitHub"}</span>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-medium text-secondary-foreground sm:text-base">
+                                  GitHub
+                                </span>
+                                {githubAccountUsername && (
+                                  <span className="text-xs text-muted-foreground sm:text-sm">
+                                    @{githubAccountUsername}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            {githubAccountConnectedOn && (
+                              <span className="ml-6 text-xs text-muted-foreground sm:text-sm">
+                                Connected on{" "}
+                                {formatDate(githubAccountConnectedOn)}
+                              </span>
+                            )}
+                          </div>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                className="rounded-full px-3"
+                                disabled={isLoading}
+                              >
+                                <Ellipsis
+                                  aria-hidden="true"
+                                  className="text-foreground"
+                                />
+                                <span className="sr-only">
+                                  Show OAuth account options
+                                </span>
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              align="end"
+                              className="w-52 p-2 sm:w-60 sm:p-2.5 md:w-64 md:p-3"
+                            >
+                              <div className="flex flex-col">
+                                <PopoverClose asChild>
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    className="justify-start p-1 sm:p-1.5 md:p-2"
+                                    onClick={() => handleUnlinkOAuth()}
+                                    disabled={isLoading}
+                                  >
+                                    <Trash
+                                      aria-hidden="true"
+                                      className="text-foreground"
+                                    />
+                                    <span className="sr-only">Trash</span>
+                                    <span className="text-xs text-secondary-foreground sm:text-sm md:text-base">
+                                      Unlink Account
+                                    </span>
+                                  </Button>
+                                </PopoverClose>
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+                        <Button
+                          type="button"
+                          className="w-full focus-visible:ring-ringPrimary sm:max-w-[116px]"
+                          disabled={true}
+                        >
+                          Link GitHub
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 </>

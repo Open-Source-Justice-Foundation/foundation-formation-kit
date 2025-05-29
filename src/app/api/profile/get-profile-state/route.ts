@@ -1,6 +1,10 @@
 import { auth } from "~/auth";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
-import { checkOAuthAccountAlreadyLinkedByUserIdAndProvider } from "~/services/database/queries/auth";
+import { isDate } from "~/lib/utils";
+import {
+  checkOAuthAccountAlreadyLinkedByUserIdAndProvider,
+  getUsernameAndConnectedOnInAccountsByUserIdAndProvider,
+} from "~/services/database/queries/auth";
 import type { ProfileState } from "~/types";
 import { NextResponse } from "next/server";
 
@@ -22,6 +26,8 @@ export async function GET(): Promise<NextResponse> {
     emailVerified: null,
     passwordPresent: null,
     githubAccountLinked: null,
+    githubAccountUsername: null,
+    githubAccountConnectedOn: null,
   };
 
   try {
@@ -48,6 +54,28 @@ export async function GET(): Promise<NextResponse> {
 
       if (oAuthAccountAlreadyLinked) {
         profileState.githubAccountLinked = true;
+
+        const githubAccountUsernameAndConnectedOn =
+          await getUsernameAndConnectedOnInAccountsByUserIdAndProvider(
+            userId,
+            provider,
+          );
+
+        const githubAccountUsername =
+          githubAccountUsernameAndConnectedOn?.username;
+        const githubAccountConnectedOn =
+          githubAccountUsernameAndConnectedOn?.connected_on;
+
+        if (typeof githubAccountUsername === "string") {
+          profileState.githubAccountUsername = githubAccountUsername;
+        }
+
+        if (
+          isDate(githubAccountConnectedOn) &&
+          typeof githubAccountConnectedOn !== "string"
+        ) {
+          profileState.githubAccountConnectedOn = githubAccountConnectedOn;
+        }
       } else {
         profileState.githubAccountLinked = false;
       }

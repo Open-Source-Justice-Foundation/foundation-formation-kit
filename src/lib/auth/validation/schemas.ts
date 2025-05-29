@@ -7,6 +7,24 @@ import {
   EMAIL_NON_EMPTY_ERR_MSG,
   EMAIL_REQUIRED_ERR_MSG,
   EMAIL_VALIDATION_PATH,
+  OAUTH_PROVIDER_ACCOUNT_ID_INVALID_TYPE_ERR_MSG,
+  OAUTH_PROVIDER_ACCOUNT_ID_MAX_LENGTH,
+  OAUTH_PROVIDER_ACCOUNT_ID_MAX_LENGTH_ERR_MSG,
+  OAUTH_PROVIDER_ACCOUNT_ID_NON_EMPTY_ERR_MSG,
+  OAUTH_PROVIDER_ACCOUNT_ID_REQUIRED_ERR_MSG,
+  OAUTH_PROVIDER_INVALID_TYPE_ERR_MSG,
+  OAUTH_PROVIDER_MAX_LENGTH,
+  OAUTH_PROVIDER_MAX_LENGTH_ERR_MSG,
+  OAUTH_PROVIDER_NON_EMPTY_ERR_MSG,
+  OAUTH_PROVIDER_REQUIRED_ERR_MSG,
+  OAUTH_SUPPORTED_PROVIDER,
+  OAUTH_SUPPORTED_PROVIDER_ERR_MSG,
+  OAUTH_SUPPORTED_PROVIDER_VALIDATION_PATH,
+  OAUTH_USERNAME_INVALID_TYPE_ERR_MSG,
+  OAUTH_USERNAME_MAX_LENGTH,
+  OAUTH_USERNAME_MAX_LENGTH_ERR_MSG,
+  OAUTH_USERNAME_NON_EMPTY_ERR_MSG,
+  OAUTH_USERNAME_REQUIRED_ERR_MSG,
   PASSWORD_CONFIRMATION_ERR_MSG,
   PASSWORD_CONFIRMATION_VALIDATION_PATH,
   PASSWORD_INVALID_TYPE_ERR_MSG,
@@ -130,22 +148,6 @@ export const updatePasswordSchema = object({
   path: [PASSWORD_CONFIRMATION_VALIDATION_PATH],
 });
 
-export const oAuthEmailSchema = object({
-  email: string({
-    required_error: EMAIL_REQUIRED_ERR_MSG,
-    invalid_type_error: EMAIL_INVALID_TYPE_ERR_MSG,
-  })
-    .nonempty({ message: EMAIL_NON_EMPTY_ERR_MSG })
-    .max(EMAIL_MAX_LENGTH, {
-      message: EMAIL_MAX_LENGTH_ERR_MSG,
-    })
-    .email({ message: EMAIL_INVALID_ERR_MSG })
-    .trim(),
-}).refine((values) => values.email === values.email.toLowerCase(), {
-  message: EMAIL_LOWERCASE_ERR_MSG,
-  path: [EMAIL_VALIDATION_PATH],
-});
-
 export const resetEmailAddressSchema = object({
   email: string({
     required_error: EMAIL_REQUIRED_ERR_MSG,
@@ -254,3 +256,49 @@ export const addEmailAddressAndPasswordLoginFromProfileSchema = object({
     message: PASSWORD_CONFIRMATION_ERR_MSG,
     path: [PASSWORD_CONFIRMATION_VALIDATION_PATH],
   });
+
+// OAuth
+export const oAuthEmailSchema = object({
+  email: string({
+    required_error: EMAIL_REQUIRED_ERR_MSG,
+    invalid_type_error: EMAIL_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: EMAIL_NON_EMPTY_ERR_MSG })
+    .max(EMAIL_MAX_LENGTH, {
+      message: EMAIL_MAX_LENGTH_ERR_MSG,
+    })
+    .email({ message: EMAIL_INVALID_ERR_MSG }),
+}).refine((values) => values.email === values.email.toLowerCase(), {
+  message: EMAIL_LOWERCASE_ERR_MSG,
+  path: [EMAIL_VALIDATION_PATH],
+});
+
+export const oAuthUsernameSchema = object({
+  provider: string({
+    required_error: OAUTH_PROVIDER_REQUIRED_ERR_MSG,
+    invalid_type_error: OAUTH_PROVIDER_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: OAUTH_PROVIDER_NON_EMPTY_ERR_MSG })
+    .max(OAUTH_PROVIDER_MAX_LENGTH, {
+      message: OAUTH_PROVIDER_MAX_LENGTH_ERR_MSG,
+    }),
+  providerAccountId: string({
+    required_error: OAUTH_PROVIDER_ACCOUNT_ID_REQUIRED_ERR_MSG,
+    invalid_type_error: OAUTH_PROVIDER_ACCOUNT_ID_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: OAUTH_PROVIDER_ACCOUNT_ID_NON_EMPTY_ERR_MSG })
+    .max(OAUTH_PROVIDER_ACCOUNT_ID_MAX_LENGTH, {
+      message: OAUTH_PROVIDER_ACCOUNT_ID_MAX_LENGTH_ERR_MSG,
+    }),
+  username: string({
+    required_error: OAUTH_USERNAME_REQUIRED_ERR_MSG,
+    invalid_type_error: OAUTH_USERNAME_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: OAUTH_USERNAME_NON_EMPTY_ERR_MSG })
+    .max(OAUTH_USERNAME_MAX_LENGTH, {
+      message: OAUTH_USERNAME_MAX_LENGTH_ERR_MSG,
+    }),
+}).refine((values) => values.provider === OAUTH_SUPPORTED_PROVIDER, {
+  message: OAUTH_SUPPORTED_PROVIDER_ERR_MSG,
+  path: [OAUTH_SUPPORTED_PROVIDER_VALIDATION_PATH],
+});

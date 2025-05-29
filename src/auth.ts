@@ -12,8 +12,15 @@ import type {
   UserWithPasswordHash,
 } from "~/lib/auth/types";
 import { isRouteProtected } from "~/lib/auth/utils";
-import { oAuthEmailSchema } from "~/lib/auth/validation/schemas";
-import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
+import {
+  oAuthEmailSchema,
+  oAuthUsernameSchema,
+} from "~/lib/auth/validation/schemas";
+import {
+  checkEmailIsVerifiedByEmail,
+  updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId,
+  updateUsernameInAccountsByProviderAndProviderAccountId,
+} from "~/services/database/queries/auth";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
@@ -158,7 +165,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         return NextResponse.next();
       },
       signIn: async (params: SignInCallbackParams) => {
-        const { user, account } = params;
+        const { user, account, profile } = params;
 
         const session = await auth();
         const sessionUserId = session?.user?.id;
@@ -180,7 +187,21 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             } else if (account?.type === "oauth") {
               let requestFromProfilePage = false;
               try {
-                oAuthEmailSchema.parse({ email: user?.email });
+                // OAuth email should only need to be checked when registering with OAuth
+                if (!session && typeof paramsUserId !== "number") {
+                  const userEmail = user?.email;
+                  oAuthEmailSchema.parse({ email: userEmail });
+                }
+
+                const accountProvider = account?.provider;
+                const accountProviderAccountId = account?.providerAccountId;
+                const profileLogin = profile?.login;
+
+                oAuthUsernameSchema.parse({
+                  provider: accountProvider,
+                  providerAccountId: accountProviderAccountId,
+                  username: profileLogin,
+                });
 
                 if (
                   typeof sessionUserId === "number" &&
@@ -217,7 +238,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
                 }
               } catch (err) {
                 if (err instanceof ZodError) {
-                  throw new Error("Failed to login user: invalid OAuth email");
+                  throw new Error(
+                    "Failed to login user: invalid OAuth credentials",
+                  );
                 }
                 throw new Error("Failed to login user");
               }
@@ -232,6 +255,40 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
           return false;
         }
         return true;
+      },
+    },
+    events: {
+      signIn: async (message) => {
+        const oAuthProfileLogin = message?.profile?.login;
+        const accountType = message?.account?.type;
+        const accountProvider = message?.account?.provider;
+        const accountProviderAccountId =
+          message?.account?.providerAccountId.toString();
+        const isNewUser = message?.isNewUser;
+
+        if (
+          typeof oAuthProfileLogin === "string" &&
+          accountType === "oauth" &&
+          accountProvider === "github" &&
+          typeof accountProviderAccountId === "string"
+        ) {
+          if (isNewUser) {
+            const connectedOn = new Date();
+
+            await updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId(
+              oAuthProfileLogin,
+              connectedOn,
+              accountProvider,
+              accountProviderAccountId,
+            );
+          } else {
+            await updateUsernameInAccountsByProviderAndProviderAccountId(
+              oAuthProfileLogin,
+              accountProvider,
+              accountProviderAccountId,
+            );
+          }
+        }
       },
     },
   } satisfies NextAuthConfig;
