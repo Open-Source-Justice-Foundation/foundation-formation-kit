@@ -174,6 +174,38 @@ export async function getEmailAddressVerificationTokenByTokenHash(
   }
 }
 
+export async function getEmailAddressVerificationTokenEmailByUserId(
+  userId: number,
+): Promise<Record<string, string>> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `SELECT * FROM email_address_verification_tokens WHERE "userId" = $1`,
+      [userId],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to select email_address_verification_tokens row from database",
+      );
+    } else if (response.length === 0) {
+      throw new Error("Email address verification token row doesn't exist");
+    } else if (response.length > 1) {
+      throw new Error(
+        "Multiple email address verification token rows exist with the same user id",
+      );
+    } else if (!response[0].hasOwnProperty("email")) {
+      throw new Error("Failed to check for email property");
+    }
+
+    return response[0];
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
 export async function deleteEmailAddressVerificationTokenById(
   id: string,
 ): Promise<void> {

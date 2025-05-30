@@ -5,4 +5,5 @@ export type ProfileState = {
   githubAccountLinked: boolean | null;
   githubAccountUsername: string | null;
   githubAccountConnectedOn: Date | null;
+  addEmailAddressAndPasswordLoginEmail: string | null;
 };

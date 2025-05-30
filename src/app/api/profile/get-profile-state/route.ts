@@ -3,6 +3,7 @@ import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { isDate } from "~/lib/utils";
 import {
   checkOAuthAccountAlreadyLinkedByUserIdAndProvider,
+  getEmailAddressVerificationTokenEmailByUserId,
   getUsernameAndConnectedOnInAccountsByUserIdAndProvider,
 } from "~/services/database/queries/auth";
 import type { ProfileState } from "~/types";
@@ -28,6 +29,7 @@ export async function GET(): Promise<NextResponse> {
     githubAccountLinked: null,
     githubAccountUsername: null,
     githubAccountConnectedOn: null,
+    addEmailAddressAndPasswordLoginEmail: null,
   };
 
   try {
@@ -75,6 +77,19 @@ export async function GET(): Promise<NextResponse> {
           typeof githubAccountConnectedOn !== "string"
         ) {
           profileState.githubAccountConnectedOn = githubAccountConnectedOn;
+        }
+
+        if (!userEmailVerified && userPasswordHash) {
+          const emailAddressVerificationTokenEmail =
+            await getEmailAddressVerificationTokenEmailByUserId(userId);
+
+          const addEmailAddressAndPasswordLoginEmail =
+            emailAddressVerificationTokenEmail?.email;
+
+          if (typeof addEmailAddressAndPasswordLoginEmail === "string") {
+            profileState.addEmailAddressAndPasswordLoginEmail =
+              addEmailAddressAndPasswordLoginEmail;
+          }
         }
       } else {
         profileState.githubAccountLinked = false;

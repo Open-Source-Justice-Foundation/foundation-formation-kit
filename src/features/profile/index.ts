@@ -1,2 +1,2 @@
 export { EmailAddressCard } from "./components/EmailAddressCard";
-export { AddEmailLoginPendingCard } from "./components/AddEmailLoginPendingCard";
+export { AddEmailAddressAndPasswordLoginPendingCard } from "./components/AddEmailAddressAndPasswordLoginPendingCard";

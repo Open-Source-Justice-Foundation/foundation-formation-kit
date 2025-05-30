@@ -35,7 +35,10 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { Spinner } from "~/components/ui/spinner";
-import { AddEmailLoginPendingCard, EmailAddressCard } from "~/features/profile";
+import {
+  AddEmailAddressAndPasswordLoginPendingCard,
+  EmailAddressCard,
+} from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { SupportedOAuthProvider } from "~/lib/auth/types";
@@ -99,7 +102,7 @@ export default function ProfilePage() {
     setShowPasswordConfirmationForLoginForm,
   ] = useState<boolean>(false);
   const [newEmailAddressForLoginForm, setNewEmailAddressForLoginForm] =
-    useState<string>("");
+    useState<string | null>("");
 
   useEffect(() => {
     if (session === null) {
@@ -157,6 +160,17 @@ export default function ProfilePage() {
             setGithubAccountLinked(false);
           } else {
             router.push("/profile-error");
+          }
+
+          if (
+            profileStateData?.profileState?.emailVerified === false &&
+            profileStateData?.profileState?.passwordPresent === true &&
+            profileStateData?.profileState?.githubAccountLinked === true
+          ) {
+            setNewEmailAddressForLoginForm(
+              profileStateData?.profileState
+                ?.addEmailAddressAndPasswordLoginEmail,
+            );
           }
         } catch (err) {
           // TODO
@@ -1235,7 +1249,7 @@ export default function ProfilePage() {
                     passwordPresent={passwordPresent}
                     githubAccountLinked={githubAccountLinked}
                   />
-                  <AddEmailLoginPendingCard
+                  <AddEmailAddressAndPasswordLoginPendingCard
                     newEmail={newEmailAddressForLoginForm}
                   />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
