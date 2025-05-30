@@ -7,7 +7,7 @@ import {
 import { generatePasswordResetToken } from "~/lib/auth/passwords/utils";
 import { ResetPasswordRequestEmailTemplate } from "~/lib/auth/providers/email";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
-import { checkPasswordHashNotNullByEmail } from "~/services/database/queries/auth";
+import { checkPasswordHashNotNullByEmail } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

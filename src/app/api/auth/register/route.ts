@@ -1,10 +1,8 @@
 import { auth } from "~/auth";
 import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
 import { registerSchema } from "~/lib/auth/validation/schemas";
-import {
-  checkIfEmailAlreadyExists,
-  createEmailAndPasswordHashInUsers,
-} from "~/services/database/queries/auth";
+import { checkIfEmailAlreadyExists } from "~/services/database/queries/auth";
+import { createEmailAndPasswordHashInUsers } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

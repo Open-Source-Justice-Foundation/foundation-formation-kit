@@ -15,10 +15,8 @@ import {
   passwordRequestSchema,
   resetEmailAddressSchema,
 } from "~/lib/auth/validation/schemas";
-import {
-  checkIfEmailAlreadyExists,
-  getPasswordHashById,
-} from "~/services/database/queries/auth";
+import { checkIfEmailAlreadyExists } from "~/services/database/queries/auth";
+import { getPasswordHashById } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

@@ -7,14 +7,16 @@ import { isDate } from "~/lib/utils";
 import {
   checkIfEmailAlreadyExists,
   deleteAllEmailAddressVerificationTokensByUserId,
-  deleteAllPasswordResetTokensByEmail,
   deleteAllSessionsForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
   deleteEmailAddressResetTokenById,
   getEmailAddressResetTokenByTokenHash,
-  getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
+import {
+  deleteAllPasswordResetTokensByEmail,
+  getPasswordHashById,
+} from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

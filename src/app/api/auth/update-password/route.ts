@@ -6,11 +6,13 @@ import { isDate } from "~/lib/utils";
 import {
   deleteAllSessionsForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
+} from "~/services/database/queries/auth";
+import {
   deletePasswordResetTokenById,
   getPasswordResetTokenByTokenHash,
-  getUserByEmail,
   updatePasswordHashByUserId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/passwords";
+import { getUserByEmail } from "~/services/database/queries/auth/users";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

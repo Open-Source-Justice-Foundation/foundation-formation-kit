@@ -9,12 +9,14 @@ import type {
 } from "~/lib/auth/types";
 import { updatePasswordFromProfileSchema } from "~/lib/auth/validation/schemas";
 import {
-  deleteAllPasswordResetTokensByEmail,
   deleteAllSessionsExceptCurrentForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
+} from "~/services/database/queries/auth";
+import {
+  deleteAllPasswordResetTokensByEmail,
   getPasswordHashById,
   updatePasswordHashByUserId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

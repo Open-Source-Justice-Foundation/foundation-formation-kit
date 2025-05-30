@@ -8,9 +8,9 @@ import {
   checkIfEmailAlreadyExistsForAnotherUser,
   deleteEmailAddressVerificationTokenById,
   getEmailAddressVerificationTokenByTokenHash,
-  getPasswordHashById,
   updateEmailAddressAndEmailVerifiedByUserId,
 } from "~/services/database/queries/auth";
+import { getPasswordHashById } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

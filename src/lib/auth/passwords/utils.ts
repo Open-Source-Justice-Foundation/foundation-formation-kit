@@ -4,7 +4,7 @@ import { randomBytes } from "crypto";
 
 import { PASSWORD_RESET_TOKEN_BYTE_SIZE } from "~/lib/auth/constants/constants";
 import { hashToken } from "~/lib/auth/tokens/utils";
-import { createPasswordResetToken } from "~/services/database/queries/auth";
+import { createPasswordResetToken } from "~/services/database/queries/auth/passwords";
 import * as argon2 from "argon2";
 
 export async function saltAndHashPassword(password: string) {

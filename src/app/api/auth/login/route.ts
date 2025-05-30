@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import { signInSchema } from "~/lib/auth/validation/schemas";
-import { getUserByEmail } from "~/services/database/queries/auth";
+import { getUserByEmail } from "~/services/database/queries/auth/users";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
