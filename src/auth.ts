@@ -17,6 +17,7 @@ import {
   oAuthUsernameSchema,
 } from "~/lib/auth/validation/schemas";
 import {
+  checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId,
   checkEmailIsVerifiedByEmail,
   updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId,
   updateUsernameInAccountsByProviderAndProviderAccountId,
@@ -282,11 +283,28 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
               accountProviderAccountId,
             );
           } else {
-            await updateUsernameInAccountsByProviderAndProviderAccountId(
-              oAuthProfileLogin,
-              accountProvider,
-              accountProviderAccountId,
-            );
+            const isConnectedOnNull =
+              await checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId(
+                accountProvider,
+                accountProviderAccountId,
+              );
+
+            if (isConnectedOnNull) {
+              const connectedOn = new Date();
+
+              await updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId(
+                oAuthProfileLogin,
+                connectedOn,
+                accountProvider,
+                accountProviderAccountId,
+              );
+            } else {
+              await updateUsernameInAccountsByProviderAndProviderAccountId(
+                oAuthProfileLogin,
+                accountProvider,
+                accountProviderAccountId,
+              );
+            }
           }
         }
       },

@@ -719,6 +719,33 @@ export async function deleteOAuthAccountForUserByUserIdAndProvider(
   }
 }
 
+export async function checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId(
+  provider: SupportedOAuthProvider,
+  providerAccountId: string,
+): Promise<boolean> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `SELECT EXISTS(SELECT 1 FROM accounts WHERE provider = $1 AND "providerAccountId" = $2 AND connected_on IS NULL)`,
+      [provider, providerAccountId],
+    );
+
+    if (response === undefined) {
+      throw new Error("Failed to select accounts row from database");
+    } else if (!response[0].hasOwnProperty("exists")) {
+      throw new Error("Failed to check for exists property");
+    } else if (typeof response[0].exists !== "boolean") {
+      throw new Error("Exists property data type must be a boolean");
+    }
+
+    return response[0].exists;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to select data from database");
+  }
+}
+
 export async function checkOAuthAccountAlreadyLinkedByUserIdAndProvider(
   userId: number,
   provider: SupportedOAuthProvider,
