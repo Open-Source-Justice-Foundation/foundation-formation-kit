@@ -58,7 +58,7 @@ export function DeleteAccountCard() {
             <Button
               type="button"
               variant="destructive"
-              className="w-full sm:max-w-[152px]"
+              className="w-full sm:max-w-[164px]"
               disabled={isLoading}
             >
               <Trash

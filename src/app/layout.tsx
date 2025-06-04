@@ -60,7 +60,6 @@ export const viewport: Viewport = {
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  weight: "variable",
   fallback: ["Arial", "Helvetica", "sans-serif"],
   variable: "--font-inter",
 });
