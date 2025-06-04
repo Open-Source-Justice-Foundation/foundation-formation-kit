@@ -37,3 +37,22 @@ export async function getUserByEmail(
     throw new Error("Failed to select data from database");
   }
 }
+
+export async function deleteUserById(id: number): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql("DELETE FROM users WHERE id = $1", [id]);
+
+    if (response === undefined) {
+      throw new Error("Failed to delete users row from database");
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}

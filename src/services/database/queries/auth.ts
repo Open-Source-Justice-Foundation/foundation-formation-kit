@@ -352,6 +352,32 @@ export async function deleteEmailAddressResetTokenById(
   }
 }
 
+export async function deleteAllEmailAddressResetTokensByUserId(
+  userId: string | number,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(
+      `DELETE FROM email_address_reset_tokens WHERE "userId" = $1`,
+      [userId],
+    );
+
+    if (response === undefined) {
+      throw new Error(
+        "Failed to delete email_address_reset_tokens row(s) from database",
+      );
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
+
 // Verification tokens
 export async function deleteAllVerificationTokensForUserByUserIdentifier(
   identifier: string,
@@ -482,6 +508,29 @@ export async function deleteOAuthAccountForUserByUserIdAndProvider(
 
     if (response === undefined) {
       throw new Error("Failed to delete account row from database");
+    } else if (!Array.isArray(response)) {
+      throw new Error("Response data type must be an array");
+    } else if (response.length !== 0) {
+      throw new Error("Response data length must be 0");
+    }
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to delete data from database");
+  }
+}
+
+export async function deleteAllOAuthAccountsForUserByUserId(
+  userId: number,
+): Promise<void> {
+  try {
+    const sql = neon(checkDatabaseUrlType());
+
+    const response = await sql(`DELETE FROM accounts WHERE "userId" = $1`, [
+      userId,
+    ]);
+
+    if (response === undefined) {
+      throw new Error("Failed to delete accounts row(s) from database");
     } else if (!Array.isArray(response)) {
       throw new Error("Response data type must be an array");
     } else if (response.length !== 0) {

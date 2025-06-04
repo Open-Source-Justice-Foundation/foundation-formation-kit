@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import {
   AlertDialog,
@@ -23,24 +21,54 @@ import {
 } from "~/components/ui/card";
 import { cn } from "~/lib/utils";
 import { Trash } from "lucide-react";
-import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export function DeleteAccountCard() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+interface DeleteAccountCardProps {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+export function DeleteAccountCard({
+  isLoading,
+  setIsLoading,
+}: DeleteAccountCardProps) {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleSetIsLoading = (value: boolean) => {
+    setIsLoading(value);
+  };
 
   async function deleteAccount() {
-    setIsLoading(true);
+    handleSetIsLoading(true);
 
-    try {
-      console.log("Deleting account...");
-      toast.warning("Account deletion under construction...");
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Failed to delete account");
-    } finally {
-      setIsLoading(false);
+    if (session?.user?.email) {
+      const url = "/api/auth/delete-account-from-profile";
+      let deleteAccountFromProfileResponse: Response = new Response();
+
+      try {
+        deleteAccountFromProfileResponse = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (deleteAccountFromProfileResponse?.status !== 200) {
+          throw new Error(
+            `Delete account from profile response status: ${deleteAccountFromProfileResponse?.status}`,
+          );
+        }
+        router.push("/");
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        router.push("/error");
+      }
+    } else {
+      router.push("/error");
     }
   }
 

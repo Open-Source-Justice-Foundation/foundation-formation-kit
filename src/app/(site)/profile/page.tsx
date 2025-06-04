@@ -971,7 +971,10 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard />
+                  <DeleteAccountCard
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
                 </>
               );
             } else if (
@@ -1233,7 +1236,10 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard />
+                  <DeleteAccountCard
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
                 </>
               );
             } else if (
@@ -1347,7 +1353,10 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard />
+                  <DeleteAccountCard
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
                 </>
               );
             } else {
