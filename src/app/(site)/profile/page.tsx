@@ -38,6 +38,7 @@ import {
   AddEmailAddressAndPasswordLoginPendingCard,
   DeleteAccountCard,
   EmailAddressCard,
+  ProfileHeading,
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { FullPageLoadingSpinner } from "~/features/spinners";
@@ -551,9 +552,7 @@ export default function ProfilePage() {
             ) {
               return (
                 <>
-                  <h1 className="mb-6 self-start text-xl font-medium min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
-                    Profile
-                  </h1>
+                  <ProfileHeading />
                   <EmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
@@ -974,9 +973,7 @@ export default function ProfilePage() {
             ) {
               return (
                 <>
-                  <h1 className="mb-6 self-start text-xl font-medium min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
-                    Profile
-                  </h1>
+                  <ProfileHeading />
                   <EmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
@@ -1239,9 +1236,7 @@ export default function ProfilePage() {
             ) {
               return (
                 <>
-                  <h1 className="mb-6 self-start text-xl font-medium min-[421px]:text-2xl sm:mb-7 sm:text-[1.75rem] md:mb-8 md:text-3xl">
-                    Profile
-                  </h1>
+                  <ProfileHeading />
                   <EmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
