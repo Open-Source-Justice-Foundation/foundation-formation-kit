@@ -3,10 +3,10 @@ import {
   deleteAllEmailAddressResetTokensByUserId,
   deleteAllEmailAddressVerificationTokensByUserId,
   deleteAllOAuthAccountsForUserByUserId,
-  deleteAllSessionsForUserByUserId,
   deleteAllVerificationTokensForUserByUserIdentifier,
 } from "~/services/database/queries/auth";
 import { deleteAllPasswordResetTokensByEmail } from "~/services/database/queries/auth/passwords";
+import { deleteAllSessionsForUserByUserId } from "~/services/database/queries/auth/sessions";
 import { deleteUserById } from "~/services/database/queries/auth/users";
 import { NextResponse } from "next/server";
 
