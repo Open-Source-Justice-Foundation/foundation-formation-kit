@@ -21,7 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Spinner } from "~/components/ui/spinner";
+import { FullPageLoadingSpinner } from "~/features/spinners";
 import type { Foundation } from "~/lib/foundations/types";
 import { cn } from "~/lib/utils";
 import { Archive, Download, Ellipsis, Trash } from "lucide-react";
@@ -170,16 +170,10 @@ export default function DashboardPage() {
   return (
     <>
       {session === undefined && (
-        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
-          <span className="text-center text-base">Loading...</span>
-        </Spinner>
+        <FullPageLoadingSpinner loadingText={"Loading..."} />
       )}
       {session === null && (
-        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
-          <span className="text-center text-base">
-            Redirecting to homepage...
-          </span>
-        </Spinner>
+        <FullPageLoadingSpinner loadingText={"Redirecting to homepage..."} />
       )}
       {session &&
         foundations.map((foundation: Foundation) => (

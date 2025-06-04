@@ -34,13 +34,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Spinner } from "~/components/ui/spinner";
 import {
   AddEmailAddressAndPasswordLoginPendingCard,
   DeleteAccountCard,
   EmailAddressCard,
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
+import { FullPageLoadingSpinner } from "~/features/spinners";
 import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { SupportedOAuthProvider } from "~/lib/auth/types";
 import {
@@ -527,16 +527,10 @@ export default function ProfilePage() {
   return (
     <div className="flex w-full flex-col min-[421px]:w-[85%] sm:w-[80%] md:w-3/4">
       {session === undefined && (
-        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
-          <span className="text-center text-base">Loading...</span>
-        </Spinner>
+        <FullPageLoadingSpinner loadingText={"Loading..."} />
       )}
       {session === null && (
-        <Spinner className="size-6 min-[421px]:size-8 md:size-12">
-          <span className="text-center text-base">
-            Redirecting to homepage...
-          </span>
-        </Spinner>
+        <FullPageLoadingSpinner loadingText={"Redirecting to homepage..."} />
       )}
       {session && (
         <>
@@ -547,11 +541,7 @@ export default function ProfilePage() {
               githubAccountLinked === null
             ) {
               return (
-                <Spinner className="size-6 min-[421px]:size-8 md:size-12">
-                  <span className="text-center text-base">
-                    Loading profile...
-                  </span>
-                </Spinner>
+                <FullPageLoadingSpinner loadingText={"Loading profile..."} />
               );
             }
             if (
