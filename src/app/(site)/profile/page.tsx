@@ -37,6 +37,7 @@ import {
 import { Spinner } from "~/components/ui/spinner";
 import {
   AddEmailAddressAndPasswordLoginPendingCard,
+  DeleteAccountCard,
   EmailAddressCard,
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
@@ -970,6 +971,7 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                   </Card>
+                  <DeleteAccountCard />
                 </>
               );
             } else if (
@@ -1231,6 +1233,7 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
+                  <DeleteAccountCard />
                 </>
               );
             } else if (
@@ -1344,6 +1347,7 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
+                  <DeleteAccountCard />
                 </>
               );
             } else {
