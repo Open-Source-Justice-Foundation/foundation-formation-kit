@@ -2,12 +2,12 @@ import { auth } from "~/auth";
 import {
   deleteAllEmailAddressResetTokensByUserId,
   deleteAllEmailAddressVerificationTokensByUserId,
-  deleteAllVerificationTokensForUserByUserIdentifier,
 } from "~/services/database/queries/auth";
 import { deleteAllOAuthAccountsForUserByUserId } from "~/services/database/queries/auth/oauth-accounts";
 import { deleteAllPasswordResetTokensByEmail } from "~/services/database/queries/auth/passwords";
 import { deleteAllSessionsForUserByUserId } from "~/services/database/queries/auth/sessions";
 import { deleteUserById } from "~/services/database/queries/auth/users";
+import { deleteAllVerificationTokensForUserByUserIdentifier } from "~/services/database/queries/auth/verification-tokens";
 import { NextResponse } from "next/server";
 
 export async function DELETE(): Promise<NextResponse> {

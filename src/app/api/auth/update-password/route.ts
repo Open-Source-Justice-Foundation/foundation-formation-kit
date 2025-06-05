@@ -3,7 +3,6 @@ import { saltAndHashPassword } from "~/lib/auth/passwords/utils";
 import { hashToken } from "~/lib/auth/tokens/utils";
 import { updatePasswordSchema } from "~/lib/auth/validation/schemas";
 import { isDate } from "~/lib/utils";
-import { deleteAllVerificationTokensForUserByUserIdentifier } from "~/services/database/queries/auth";
 import {
   deletePasswordResetTokenById,
   getPasswordResetTokenByTokenHash,
@@ -11,6 +10,7 @@ import {
 } from "~/services/database/queries/auth/passwords";
 import { deleteAllSessionsForUserByUserId } from "~/services/database/queries/auth/sessions";
 import { getUserByEmail } from "~/services/database/queries/auth/users";
+import { deleteAllVerificationTokensForUserByUserIdentifier } from "~/services/database/queries/auth/verification-tokens";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 

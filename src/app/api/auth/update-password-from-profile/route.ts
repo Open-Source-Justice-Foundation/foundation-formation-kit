@@ -8,13 +8,13 @@ import type {
   UserWithEmailVerifiedAndPasswordHash,
 } from "~/lib/auth/types";
 import { updatePasswordFromProfileSchema } from "~/lib/auth/validation/schemas";
-import { deleteAllVerificationTokensForUserByUserIdentifier } from "~/services/database/queries/auth";
 import {
   deleteAllPasswordResetTokensByEmail,
   getPasswordHashById,
   updatePasswordHashByUserId,
 } from "~/services/database/queries/auth/passwords";
 import { deleteAllSessionsExceptCurrentForUserByUserId } from "~/services/database/queries/auth/sessions";
+import { deleteAllVerificationTokensForUserByUserIdentifier } from "~/services/database/queries/auth/verification-tokens";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
