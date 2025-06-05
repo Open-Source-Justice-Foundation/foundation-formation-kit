@@ -24,15 +24,15 @@ import { Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-interface DeleteAccountCardProps {
+interface ProfileDeleteAccountCardProps {
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export function DeleteAccountCard({
+export function ProfileDeleteAccountCard({
   isLoading,
   setIsLoading,
-}: DeleteAccountCardProps) {
+}: ProfileDeleteAccountCardProps) {
   const { data: session } = useSession();
   const router = useRouter();
 

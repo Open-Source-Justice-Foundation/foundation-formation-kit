@@ -35,9 +35,9 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import {
-  AddEmailAddressAndPasswordLoginPendingCard,
-  DeleteAccountCard,
-  EmailAddressCard,
+  ProfileAddEmailAddressAndPasswordLoginPendingCard,
+  ProfileDeleteAccountCard,
+  ProfileEmailAddressCard,
   ProfileHeading,
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
@@ -553,7 +553,7 @@ export default function ProfilePage() {
               return (
                 <>
                   <ProfileHeading />
-                  <EmailAddressCard
+                  <ProfileEmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
                     passwordPresent={passwordPresent}
@@ -960,7 +960,7 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard
+                  <ProfileDeleteAccountCard
                     isLoading={isLoading}
                     setIsLoading={setIsLoading}
                   />
@@ -974,7 +974,7 @@ export default function ProfilePage() {
               return (
                 <>
                   <ProfileHeading />
-                  <EmailAddressCard
+                  <ProfileEmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
                     passwordPresent={passwordPresent}
@@ -1223,7 +1223,7 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard
+                  <ProfileDeleteAccountCard
                     isLoading={isLoading}
                     setIsLoading={setIsLoading}
                   />
@@ -1237,13 +1237,13 @@ export default function ProfilePage() {
               return (
                 <>
                   <ProfileHeading />
-                  <EmailAddressCard
+                  <ProfileEmailAddressCard
                     email={session?.user?.email}
                     emailVerified={emailVerified}
                     passwordPresent={passwordPresent}
                     githubAccountLinked={githubAccountLinked}
                   />
-                  <AddEmailAddressAndPasswordLoginPendingCard
+                  <ProfileAddEmailAddressAndPasswordLoginPendingCard
                     newEmail={newEmailAddressForLoginForm}
                   />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
@@ -1338,7 +1338,7 @@ export default function ProfilePage() {
                       </div>
                     </CardContent>
                   </Card>
-                  <DeleteAccountCard
+                  <ProfileDeleteAccountCard
                     isLoading={isLoading}
                     setIsLoading={setIsLoading}
                   />

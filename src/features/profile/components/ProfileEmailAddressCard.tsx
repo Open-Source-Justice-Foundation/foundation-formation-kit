@@ -8,19 +8,19 @@ import {
 } from "~/components/ui/card";
 import { Label } from "~/components/ui/label";
 
-interface EmailAddressCardProps {
+interface ProfileEmailAddressCardProps {
   email: string | null | undefined;
   emailVerified: boolean | null;
   passwordPresent: boolean | null;
   githubAccountLinked?: boolean | null;
 }
 
-export function EmailAddressCard({
+export function ProfileEmailAddressCard({
   email,
   emailVerified,
   passwordPresent,
   githubAccountLinked,
-}: EmailAddressCardProps) {
+}: ProfileEmailAddressCardProps) {
   return (
     <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
       <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
