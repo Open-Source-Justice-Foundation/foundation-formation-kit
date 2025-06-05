@@ -1,11 +1,11 @@
 import { auth } from "~/auth";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { isDate } from "~/lib/utils";
+import { getEmailAddressVerificationTokenEmailByUserId } from "~/services/database/queries/auth";
 import {
   checkOAuthAccountAlreadyLinkedByUserIdAndProvider,
-  getEmailAddressVerificationTokenEmailByUserId,
   getUsernameAndConnectedOnInAccountsByUserIdAndProvider,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/oauth-accounts";
 import type { ProfileState } from "~/types";
 import { NextResponse } from "next/server";
 

@@ -16,12 +16,12 @@ import {
   oAuthEmailSchema,
   oAuthUsernameSchema,
 } from "~/lib/auth/validation/schemas";
+import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
 import {
   checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId,
-  checkEmailIsVerifiedByEmail,
   updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId,
   updateUsernameInAccountsByProviderAndProviderAccountId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/oauth-accounts";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";

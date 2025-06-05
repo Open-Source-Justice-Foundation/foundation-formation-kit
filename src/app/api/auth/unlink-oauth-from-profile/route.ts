@@ -3,7 +3,7 @@ import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import {
   checkOAuthAccountAlreadyLinkedByUserIdAndProvider,
   deleteOAuthAccountForUserByUserIdAndProvider,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/oauth-accounts";
 import { NextResponse } from "next/server";
 
 export async function DELETE(): Promise<NextResponse> {
