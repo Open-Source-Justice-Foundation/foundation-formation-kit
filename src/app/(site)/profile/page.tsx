@@ -13,14 +13,6 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormField,
@@ -39,6 +31,7 @@ import {
   ProfileDeleteAccountCard,
   ProfileEmailAddressCard,
   ProfileHeading,
+  ProfileResetEmailAddressCard,
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { FullPageLoadingSpinner } from "~/features/spinners";
@@ -46,8 +39,6 @@ import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmatio
 import { SupportedOAuthProvider } from "~/lib/auth/types";
 import {
   addEmailAddressAndPasswordLoginFromProfileSchema,
-  passwordRequestSchema,
-  resetEmailAddressSchema,
   updatePasswordFromProfileSchema,
 } from "~/lib/auth/validation/schemas";
 import { formatDate } from "~/lib/utils";
@@ -58,8 +49,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type ResetEmailAddressFormValues = z.infer<typeof resetEmailAddressSchema>;
-type PasswordRequestFormValues = z.infer<typeof passwordRequestSchema>;
 type UpdatePasswordFormValues = z.infer<typeof updatePasswordFromProfileSchema>;
 type AddEmailAddressAndPasswordLoginFormValues = z.infer<
   typeof addEmailAddressAndPasswordLoginFromProfileSchema
@@ -82,14 +71,6 @@ export default function ProfilePage() {
   const [githubAccountConnectedOn, setGithubAccountConnectedOn] = useState<
     string | null
   >(null);
-
-  const [newEmailAddress, setNewEmailAddress] = useState<string>("");
-  const [showResetEmailAddressDialog, setShowResetEmailAddressDialog] =
-    useState<boolean>(false);
-  const [
-    showResetEmailAddressPasswordRequest,
-    setShowResetEmailAddressPasswordRequest,
-  ] = useState<boolean>(false);
 
   const [showCurrentPassword, setShowCurrentPassword] =
     useState<boolean>(false);
@@ -188,21 +169,6 @@ export default function ProfilePage() {
     }
   }, [session, router]);
 
-  const resetEmailAddressForm = useForm<ResetEmailAddressFormValues>({
-    resolver: zodResolver(resetEmailAddressSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  const resetEmailAddressPasswordRequestForm =
-    useForm<PasswordRequestFormValues>({
-      resolver: zodResolver(passwordRequestSchema),
-      defaultValues: {
-        password: "",
-      },
-    });
-
   const updatePasswordForm = useForm<UpdatePasswordFormValues>({
     resolver: zodResolver(updatePasswordFromProfileSchema),
     defaultValues: {
@@ -263,80 +229,6 @@ export default function ProfilePage() {
     clearErrorAddEmailAddressAndPasswordLoginForm,
     "passwordConfirmation",
   );
-
-  async function onResetEmailAddressSubmit(
-    values: ResetEmailAddressFormValues,
-  ) {
-    setIsLoading(true);
-    const { email } = values;
-
-    if (session?.user?.email) {
-      setNewEmailAddress(email);
-      setShowResetEmailAddressDialog(true);
-    } else {
-      resetEmailAddressForm.reset();
-      toast.error("Failed to reset email address");
-    }
-
-    setIsLoading(false);
-  }
-
-  async function onResetEmailAddressPasswordRequestSubmit(
-    values: PasswordRequestFormValues,
-  ) {
-    setIsLoading(true);
-    const { password } = values;
-
-    if (session?.user?.email) {
-      const url = "/api/auth/reset-email-address";
-      let resetEmailAddressResponse: Response = new Response();
-
-      try {
-        resetEmailAddressResponse = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: newEmailAddress,
-            password,
-          }),
-        });
-
-        if (resetEmailAddressResponse?.status !== 200) {
-          throw new Error(
-            `Reset email address response status: ${resetEmailAddressResponse?.status}`,
-          );
-        }
-
-        toast.success("Sent email address reset instructions");
-      } catch (err) {
-        // TODO
-        // Don't log the err value, do something else with it to avoid deployment error
-        console.error(err);
-        toast.error("Failed to send email address reset instructions");
-      } finally {
-        setNewEmailAddress("");
-        setIsLoading(false);
-        setShowResetEmailAddressDialog(false);
-      }
-    } else {
-      setNewEmailAddress("");
-      setIsLoading(false);
-      setShowResetEmailAddressDialog(false);
-      toast.error("Failed to send email address reset instructions");
-    }
-
-    resetEmailAddressForm.reset();
-    resetEmailAddressPasswordRequestForm.reset();
-  }
-
-  async function onResetEmailAddressPasswordRequestClose() {
-    setNewEmailAddress("");
-    setShowResetEmailAddressDialog(false);
-    resetEmailAddressForm.reset();
-    resetEmailAddressPasswordRequestForm.reset();
-  }
 
   async function onUpdatePasswordSubmit(values: UpdatePasswordFormValues) {
     setIsLoading(true);
@@ -558,137 +450,10 @@ export default function ProfilePage() {
                     emailVerified={emailVerified}
                     passwordPresent={passwordPresent}
                   />
-                  <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
-                      <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Reset Email Address
-                      </CardTitle>
-                      <CardDescription>
-                        Reset your login and notification email address.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
-                      <Form {...resetEmailAddressForm}>
-                        <form
-                          className="flex w-full flex-col gap-5 sm:gap-6"
-                          onSubmit={resetEmailAddressForm.handleSubmit(
-                            onResetEmailAddressSubmit,
-                          )}
-                        >
-                          <FormField
-                            control={resetEmailAddressForm.control}
-                            name="email"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Email address</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    {...field}
-                                    type="email"
-                                    className="w-full text-sm focus-visible:ring-ringPrimary sm:max-w-[376px] sm:text-base md:text-base"
-                                    disabled={isLoading}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <Button
-                            type="submit"
-                            className="w-full focus-visible:ring-ringPrimary sm:max-w-[182px]"
-                            disabled={isLoading}
-                          >
-                            Reset email address
-                          </Button>
-                        </form>
-                      </Form>
-                      <Dialog
-                        open={showResetEmailAddressDialog}
-                        onOpenChange={onResetEmailAddressPasswordRequestClose}
-                      >
-                        <DialogContent className="w-3/4 max-[430px]:p-5">
-                          <DialogHeader>
-                            <DialogTitle className="max-[430px]:text-base">
-                              Reset email address
-                            </DialogTitle>
-                            <DialogDescription className="max-[430px]:text-xs">
-                              Enter your password to receive an email with
-                              instructions on how to reset your email address.
-                            </DialogDescription>
-                          </DialogHeader>
-                          <Form {...resetEmailAddressPasswordRequestForm}>
-                            <form
-                              className="flex w-full flex-col gap-5 sm:gap-6"
-                              onSubmit={resetEmailAddressPasswordRequestForm.handleSubmit(
-                                onResetEmailAddressPasswordRequestSubmit,
-                              )}
-                            >
-                              <FormField
-                                control={
-                                  resetEmailAddressPasswordRequestForm.control
-                                }
-                                name="password"
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                      <div className="relative w-full sm:max-w-[376px]">
-                                        <Input
-                                          {...field}
-                                          type={
-                                            showResetEmailAddressPasswordRequest
-                                              ? "text"
-                                              : "password"
-                                          }
-                                          className={
-                                            "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                                          }
-                                          autoComplete="current-password"
-                                          disabled={isLoading}
-                                        />
-                                        <Button
-                                          type="button"
-                                          variant="ghost"
-                                          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                                          onClick={() =>
-                                            setShowResetEmailAddressPasswordRequest(
-                                              (prev) => !prev,
-                                            )
-                                          }
-                                          disabled={isLoading}
-                                        >
-                                          {showResetEmailAddressPasswordRequest ? (
-                                            <EyeOffIcon aria-hidden="true" />
-                                          ) : (
-                                            <EyeIcon aria-hidden="true" />
-                                          )}
-                                          <span className="sr-only">
-                                            {showResetEmailAddressPasswordRequest
-                                              ? "Hide password"
-                                              : "Show password"}
-                                          </span>
-                                        </Button>
-                                      </div>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                              <DialogFooter>
-                                <Button
-                                  type="submit"
-                                  className="mt-4 focus-visible:ring-ringPrimary max-[430px]:h-8 max-[430px]:px-3 max-[430px]:py-1.5"
-                                  disabled={isLoading}
-                                >
-                                  Send reset instructions
-                                </Button>
-                              </DialogFooter>
-                            </form>
-                          </Form>
-                        </DialogContent>
-                      </Dialog>
-                    </CardContent>
-                  </Card>
+                  <ProfileResetEmailAddressCard
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
