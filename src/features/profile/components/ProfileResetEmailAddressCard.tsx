@@ -26,6 +26,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { useEmailAddressConfirmation } from "~/lib/auth/hooks/useEmailAddressConfirmation";
 import {
   passwordRequestSchema,
   resetEmailAddressSchema,
@@ -76,6 +77,26 @@ export function ProfileResetEmailAddressCard({
         password: "",
       },
     });
+
+  const {
+    watch: watchResetEmailAddressForm,
+    setError: setErrorResetEmailAddressForm,
+    clearErrors: clearErrorsResetEmailAddressForm,
+    formState: { isSubmitted: isSubmittedResetEmailAddressForm },
+  } = resetEmailAddressForm;
+
+  const watchResetEmailAddressFormEmail = watchResetEmailAddressForm("email");
+  const watchResetEmailAddressFormEmailConfirmation =
+    watchResetEmailAddressForm("emailConfirmation");
+
+  useEmailAddressConfirmation(
+    isSubmittedResetEmailAddressForm,
+    watchResetEmailAddressFormEmail,
+    watchResetEmailAddressFormEmailConfirmation,
+    setErrorResetEmailAddressForm,
+    clearErrorsResetEmailAddressForm,
+    "emailConfirmation",
+  );
 
   async function onResetEmailAddressSubmit(
     values: ResetEmailAddressFormValues,
@@ -153,7 +174,6 @@ export function ProfileResetEmailAddressCard({
 
   return (
     /* TODO */
-    /* Add email confirmation */
     /* Show pending email */
     /* Remove old reset tokens if pending email is changed */
     <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
@@ -179,6 +199,24 @@ export function ProfileResetEmailAddressCard({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email address</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="email"
+                      className="w-full text-sm focus-visible:ring-ringPrimary sm:max-w-[376px] sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={resetEmailAddressForm.control}
+              name="emailConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm email address</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

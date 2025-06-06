@@ -31,6 +31,8 @@ export const EMAIL_MAX_LENGTH_ERR_MSG = `Email address can be at most ${EMAIL_MA
 export const EMAIL_INVALID_ERR_MSG = "Email address is invalid";
 export const EMAIL_LOWERCASE_ERR_MSG = "Email address must be lowercase";
 export const EMAIL_VALIDATION_PATH = "email";
+export const EMAIL_CONFIRMATION_ERR_MSG = "Emails do not match";
+export const EMAIL_CONFIRMATION_VALIDATION_PATH = "emailConfirmation";
 
 // Passwords
 export const PASSWORD_MIN_LENGTH = 16;
