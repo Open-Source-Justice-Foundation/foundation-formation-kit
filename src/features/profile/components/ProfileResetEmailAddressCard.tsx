@@ -52,6 +52,8 @@ export function ProfileResetEmailAddressCard({
   const { data: session } = useSession();
 
   const [newEmailAddress, setNewEmailAddress] = useState<string>("");
+  const [newEmailAddressConfirmation, setNewEmailAddressConfirmation] =
+    useState<string>("");
   const [showResetEmailAddressDialog, setShowResetEmailAddressDialog] =
     useState<boolean>(false);
   const [
@@ -67,6 +69,7 @@ export function ProfileResetEmailAddressCard({
     resolver: zodResolver(resetEmailAddressSchema),
     defaultValues: {
       email: "",
+      emailConfirmation: "",
     },
   });
 
@@ -102,10 +105,11 @@ export function ProfileResetEmailAddressCard({
     values: ResetEmailAddressFormValues,
   ) {
     handleSetIsLoading(true);
-    const { email } = values;
+    const { email, emailConfirmation } = values;
 
     if (session?.user?.email) {
       setNewEmailAddress(email);
+      setNewEmailAddressConfirmation(emailConfirmation);
       setShowResetEmailAddressDialog(true);
     } else {
       resetEmailAddressForm.reset();
@@ -133,6 +137,7 @@ export function ProfileResetEmailAddressCard({
           },
           body: JSON.stringify({
             email: newEmailAddress,
+            emailConfirmation: newEmailAddressConfirmation,
             password,
           }),
         });
@@ -151,11 +156,13 @@ export function ProfileResetEmailAddressCard({
         toast.error("Failed to send email address reset instructions");
       } finally {
         setNewEmailAddress("");
+        setNewEmailAddressConfirmation("");
         handleSetIsLoading(false);
         setShowResetEmailAddressDialog(false);
       }
     } else {
       setNewEmailAddress("");
+      setNewEmailAddressConfirmation("");
       handleSetIsLoading(false);
       setShowResetEmailAddressDialog(false);
       toast.error("Failed to send email address reset instructions");
@@ -167,6 +174,7 @@ export function ProfileResetEmailAddressCard({
 
   async function onResetEmailAddressPasswordRequestClose() {
     setNewEmailAddress("");
+    setNewEmailAddressConfirmation("");
     setShowResetEmailAddressDialog(false);
     resetEmailAddressForm.reset();
     resetEmailAddressPasswordRequestForm.reset();

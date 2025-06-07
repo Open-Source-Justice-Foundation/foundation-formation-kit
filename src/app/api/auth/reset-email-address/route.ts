@@ -35,9 +35,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const data = await request.json();
 
-    const { email, password } = data;
+    const { email, emailConfirmation, password } = data;
 
-    resetEmailAddressSchema.parse({ email });
+    resetEmailAddressSchema.parse({ email, emailConfirmation });
     passwordRequestSchema.parse({ password });
 
     await checkIfEmailAlreadyExists(email);
