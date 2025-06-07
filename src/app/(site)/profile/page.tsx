@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Button } from "~/components/ui/button";
 import {
@@ -13,20 +12,12 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
 import {
+  ProfileAddEmailAddressAndPasswordLoginCard,
   ProfileAddEmailAddressAndPasswordLoginPendingCard,
   ProfileDeleteAccountCard,
   ProfileEmailAddressCard,
@@ -36,20 +27,12 @@ import {
 } from "~/features/profile";
 import { PROFILE_ICON_BASE_SIZE } from "~/features/profile/constants/constants";
 import { FullPageLoadingSpinner } from "~/features/spinners";
-import { usePasswordConfirmation } from "~/lib/auth/hooks/usePasswordConfirmation";
 import { SupportedOAuthProvider } from "~/lib/auth/types";
-import { addEmailAddressAndPasswordLoginFromProfileSchema } from "~/lib/auth/validation/schemas";
 import { formatDate } from "~/lib/utils";
-import { Ellipsis, EyeIcon, EyeOffIcon, Github, Trash } from "lucide-react";
+import { Ellipsis, Github, Trash } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
-
-type AddEmailAddressAndPasswordLoginFormValues = z.infer<
-  typeof addEmailAddressAndPasswordLoginFromProfileSchema
->;
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -69,12 +52,6 @@ export default function ProfilePage() {
     string | null
   >(null);
 
-  const [showPasswordForLoginForm, setShowPasswordForLoginForm] =
-    useState<boolean>(false);
-  const [
-    showPasswordConfirmationForLoginForm,
-    setShowPasswordConfirmationForLoginForm,
-  ] = useState<boolean>(false);
   const [newEmailAddressForLoginForm, setNewEmailAddressForLoginForm] =
     useState<string | null>("");
 
@@ -159,91 +136,6 @@ export default function ProfilePage() {
       return () => { };
     }
   }, [session, router]);
-
-  const addEmailAddressAndPasswordLoginForm =
-    useForm<AddEmailAddressAndPasswordLoginFormValues>({
-      resolver: zodResolver(addEmailAddressAndPasswordLoginFromProfileSchema),
-      defaultValues: {
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-      },
-    });
-
-  const {
-    watch: watchAddEmailAddressAndPasswordLoginForm,
-    setError: setErrorAddEmailAddressAndPasswordLoginForm,
-    clearErrors: clearErrorAddEmailAddressAndPasswordLoginForm,
-    formState: { isSubmitted: isSubmittedAddEmailAddressAndPasswordLoginForm },
-  } = addEmailAddressAndPasswordLoginForm;
-
-  const watchAddEmailAddressAndPasswordLoginFormPassword =
-    watchAddEmailAddressAndPasswordLoginForm("password");
-  const watchAddEmailAddressAndPasswordLoginFormPasswordConfirmation =
-    watchAddEmailAddressAndPasswordLoginForm("passwordConfirmation");
-
-  usePasswordConfirmation(
-    isSubmittedAddEmailAddressAndPasswordLoginForm,
-    watchAddEmailAddressAndPasswordLoginFormPassword,
-    watchAddEmailAddressAndPasswordLoginFormPasswordConfirmation,
-    setErrorAddEmailAddressAndPasswordLoginForm,
-    clearErrorAddEmailAddressAndPasswordLoginForm,
-    "passwordConfirmation",
-  );
-
-  async function onAddEmailAddressAndPasswordLoginSubmit(
-    values: AddEmailAddressAndPasswordLoginFormValues,
-  ) {
-    setIsLoading(true);
-    setShowPasswordForLoginForm(false);
-    setShowPasswordConfirmationForLoginForm(false);
-
-    const { email, password, passwordConfirmation } = values;
-
-    if (session?.user?.email) {
-      const url = "/api/auth/add-email-address-and-password-login-instructions";
-      let addEmailAddressAndPasswordLoginInstructionsResponse: Response =
-        new Response();
-
-      try {
-        addEmailAddressAndPasswordLoginInstructionsResponse = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            passwordConfirmation,
-          }),
-        });
-
-        if (
-          addEmailAddressAndPasswordLoginInstructionsResponse?.status !== 200
-        ) {
-          throw new Error(
-            `Add email address and password login instructions response status: ${addEmailAddressAndPasswordLoginInstructionsResponse?.status}`,
-          );
-        }
-
-        setPasswordPresent(true);
-        setNewEmailAddressForLoginForm(email);
-        toast.success("Email login instructions sent");
-      } catch (err) {
-        // TODO
-        // Don't log the err value, do something else with it to avoid deployment error
-        console.error(err);
-        toast.error("Failed to send email login instructions");
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      setIsLoading(false);
-      toast.error("Failed to send email login instructions");
-    }
-
-    addEmailAddressAndPasswordLoginForm.reset();
-  }
 
   async function handleLinkOAuth(provider: SupportedOAuthProvider) {
     setIsLoading(true);
@@ -495,157 +387,14 @@ export default function ProfilePage() {
                     passwordPresent={passwordPresent}
                     githubAccountLinked={githubAccountLinked}
                   />
-                  <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
-                    <CardHeader className="px-4 pb-6 pt-4 sm:px-6 sm:pt-6">
-                      <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
-                        Add Email Login
-                      </CardTitle>
-                      <CardDescription>
-                        Add the option to login using an email address and
-                        password.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
-                      <Form {...addEmailAddressAndPasswordLoginForm}>
-                        <form
-                          className="flex w-full flex-col gap-5 sm:gap-6"
-                          onSubmit={addEmailAddressAndPasswordLoginForm.handleSubmit(
-                            onAddEmailAddressAndPasswordLoginSubmit,
-                          )}
-                        >
-                          <FormField
-                            control={
-                              addEmailAddressAndPasswordLoginForm.control
-                            }
-                            name="email"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Email address</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    {...field}
-                                    type="email"
-                                    className="w-full text-sm focus-visible:ring-ringPrimary sm:max-w-[376px] sm:text-base md:text-base"
-                                    disabled={isLoading}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <FormField
-                            control={
-                              addEmailAddressAndPasswordLoginForm.control
-                            }
-                            name="password"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Password</FormLabel>
-                                <FormControl>
-                                  <div className="relative w-full sm:max-w-[376px]">
-                                    <Input
-                                      {...field}
-                                      type={
-                                        showPasswordForLoginForm
-                                          ? "text"
-                                          : "password"
-                                      }
-                                      className={
-                                        "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                                      }
-                                      autoComplete="new-password"
-                                      disabled={isLoading}
-                                    />
-                                    <Button
-                                      type="button"
-                                      variant="ghost"
-                                      className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                                      onClick={() =>
-                                        setShowPasswordForLoginForm(
-                                          (prev) => !prev,
-                                        )
-                                      }
-                                      disabled={isLoading}
-                                    >
-                                      {showPasswordForLoginForm ? (
-                                        <EyeOffIcon aria-hidden="true" />
-                                      ) : (
-                                        <EyeIcon aria-hidden="true" />
-                                      )}
-                                      <span className="sr-only">
-                                        {showPasswordForLoginForm
-                                          ? "Hide password"
-                                          : "Show password"}
-                                      </span>
-                                    </Button>
-                                  </div>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <FormField
-                            control={
-                              addEmailAddressAndPasswordLoginForm.control
-                            }
-                            name="passwordConfirmation"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Confirm password</FormLabel>
-                                <FormControl>
-                                  <div className="relative w-full sm:max-w-[376px]">
-                                    <Input
-                                      {...field}
-                                      type={
-                                        showPasswordConfirmationForLoginForm
-                                          ? "text"
-                                          : "password"
-                                      }
-                                      className={
-                                        "hide-password-toggle pr-10 text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                                      }
-                                      autoComplete="new-password"
-                                      disabled={isLoading}
-                                    />
-                                    <Button
-                                      type="button"
-                                      variant="ghost"
-                                      className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                                      onClick={() =>
-                                        setShowPasswordConfirmationForLoginForm(
-                                          (prev) => !prev,
-                                        )
-                                      }
-                                      disabled={isLoading}
-                                    >
-                                      {showPasswordConfirmationForLoginForm ? (
-                                        <EyeOffIcon aria-hidden="true" />
-                                      ) : (
-                                        <EyeIcon aria-hidden="true" />
-                                      )}
-                                      <span className="sr-only">
-                                        {showPasswordConfirmationForLoginForm
-                                          ? "Hide password"
-                                          : "Show password"}
-                                      </span>
-                                    </Button>
-                                  </div>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <Button
-                            type="submit"
-                            className="w-full focus-visible:ring-ringPrimary sm:max-w-[182px]"
-                            disabled={isLoading}
-                          >
-                            Add email login
-                          </Button>
-                        </form>
-                      </Form>
-                    </CardContent>
-                  </Card>
+                  <ProfileAddEmailAddressAndPasswordLoginCard
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    setPasswordPresent={setPasswordPresent}
+                    setNewEmailAddressForLoginForm={
+                      setNewEmailAddressForLoginForm
+                    }
+                  />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">
                       <CardTitle className="text-base min-[421px]:text-lg sm:text-xl md:text-2xl">
