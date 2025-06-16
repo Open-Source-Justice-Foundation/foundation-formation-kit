@@ -10,7 +10,7 @@ import { hashToken } from "~/lib/auth/tokens/utils";
 import {
   createEmailAddressResetToken,
   createEmailAddressVerificationToken,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/email-addresses";
 
 export async function generateEmailAddressResetToken(
   email: string,

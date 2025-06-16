@@ -10,7 +10,7 @@ import {
   deleteEmailAddressResetTokenById,
   getEmailAddressResetTokenByTokenHash,
   updateEmailAddressAndEmailVerifiedByUserId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/email-addresses";
 import {
   deleteAllPasswordResetTokensByEmail,
   getPasswordHashById,

@@ -16,7 +16,7 @@ import {
   oAuthEmailSchema,
   oAuthUsernameSchema,
 } from "~/lib/auth/validation/schemas";
-import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth";
+import { checkEmailIsVerifiedByEmail } from "~/services/database/queries/auth/email-addresses";
 import {
   checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId,
   updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId,

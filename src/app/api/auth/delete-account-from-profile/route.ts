@@ -2,7 +2,7 @@ import { auth } from "~/auth";
 import {
   deleteAllEmailAddressResetTokensByUserId,
   deleteAllEmailAddressVerificationTokensByUserId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/email-addresses";
 import { deleteAllOAuthAccountsForUserByUserId } from "~/services/database/queries/auth/oauth-accounts";
 import { deleteAllPasswordResetTokensByEmail } from "~/services/database/queries/auth/passwords";
 import { deleteAllSessionsForUserByUserId } from "~/services/database/queries/auth/sessions";
