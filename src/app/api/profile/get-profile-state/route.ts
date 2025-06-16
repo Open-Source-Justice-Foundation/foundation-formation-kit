@@ -1,7 +1,7 @@
 import { auth } from "~/auth";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { isDate } from "~/lib/utils";
-import { getEmailAddressVerificationTokenEmailByUserId } from "~/services/database/queries/auth";
+import { getEmailAddressVerificationTokenEmailByUserId } from "~/services/database/queries/auth/email-addresses";
 import {
   checkOAuthAccountAlreadyLinkedByUserIdAndProvider,
   getUsernameAndConnectedOnInAccountsByUserIdAndProvider,

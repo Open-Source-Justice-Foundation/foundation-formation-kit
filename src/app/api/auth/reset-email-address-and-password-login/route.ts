@@ -6,7 +6,7 @@ import {
 } from "~/lib/auth/constants/constants";
 import { ResetEmailAddressAndPasswordLoginWarningEmailTemplate } from "~/lib/auth/providers/email";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
-import { deleteAllEmailAddressVerificationTokensByUserId } from "~/services/database/queries/auth";
+import { deleteAllEmailAddressVerificationTokensByUserId } from "~/services/database/queries/auth/email-addresses";
 import { updatePasswordHashByUserId } from "~/services/database/queries/auth/passwords";
 import { NextResponse } from "next/server";
 

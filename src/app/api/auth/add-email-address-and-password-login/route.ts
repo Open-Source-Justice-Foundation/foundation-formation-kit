@@ -9,7 +9,7 @@ import {
   deleteEmailAddressVerificationTokenById,
   getEmailAddressVerificationTokenByTokenHash,
   updateEmailAddressAndEmailVerifiedByUserId,
-} from "~/services/database/queries/auth";
+} from "~/services/database/queries/auth/email-addresses";
 import { getPasswordHashById } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";

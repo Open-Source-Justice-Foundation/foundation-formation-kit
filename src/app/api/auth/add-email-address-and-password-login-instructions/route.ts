@@ -12,7 +12,7 @@ import {
 } from "~/lib/auth/providers/email";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import { addEmailAddressAndPasswordLoginFromProfileSchema } from "~/lib/auth/validation/schemas";
-import { checkIfEmailAlreadyExistsForAnotherUser } from "~/services/database/queries/auth";
+import { checkIfEmailAlreadyExistsForAnotherUser } from "~/services/database/queries/auth/email-addresses";
 import { updatePasswordHashByUserId } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
