@@ -508,7 +508,13 @@ export default function ProfilePage() {
                     githubAccountLinked={githubAccountLinked}
                   />
                   <ProfileAddEmailAddressAndPasswordLoginPendingCard
-                    newEmail={newEmailAddressForLoginForm}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    setPasswordPresent={setPasswordPresent}
+                    newEmailAddressForLoginForm={newEmailAddressForLoginForm}
+                    setNewEmailAddressForLoginForm={
+                      setNewEmailAddressForLoginForm
+                    }
                   />
                   <Card className="mb-6 flex w-full flex-col min-[421px]:px-1 min-[421px]:py-1 sm:mb-7 md:mb-8 md:px-2 md:py-2">
                     <CardHeader className="px-4 pb-7 pt-4 sm:px-6 sm:pt-6">

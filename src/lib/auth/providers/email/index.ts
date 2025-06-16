@@ -5,3 +5,4 @@ export { ResetEmailAddressRequestEmailTemplate } from "./components/ResetEmailAd
 export { ResetEmailAddressWarningEmailTemplate } from "./components/ResetEmailAddressWarningEmailTemplate";
 export { AddEmailAddressAndPasswordLoginRequestEmailTemplate } from "./components/AddEmailAddressAndPasswordLoginRequestEmailTemplate";
 export { AddEmailAddressAndPasswordLoginWarningEmailTemplate } from "./components/AddEmailAddressAndPasswordLoginWarningEmailTemplate";
+export { ResetEmailAddressAndPasswordLoginWarningEmailTemplate } from "./components/ResetEmailAddressAndPasswordLoginWarningEmailTemplate";

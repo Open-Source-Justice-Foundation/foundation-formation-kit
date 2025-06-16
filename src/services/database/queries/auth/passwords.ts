@@ -58,7 +58,7 @@ export async function getPasswordHashById(id: number): Promise<string> {
 }
 
 export async function updatePasswordHashByUserId(
-  passwordHash: string,
+  passwordHash: string | null,
   id: number,
 ): Promise<void> {
   try {
