@@ -1,5 +1,5 @@
 import { auth } from "~/auth";
-import { legalNameSchema } from "~/lib/formation/validation/schemas";
+import { form1023Part1IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const data = await request.json();
 
-    const { } = legalNameSchema.parse(data);
+    const { } = form1023Part1IdentificationOfApplicantSchema.parse(data);
   } catch (err) {
     if (err instanceof ZodError) {
       throw new Error("Failed to process formation step 1: invalid data");

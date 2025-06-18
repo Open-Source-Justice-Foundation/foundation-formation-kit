@@ -1,5 +1,5 @@
 import { auth } from "~/auth";
-import { form1023Part4IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
+import { form1023Part6IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -15,17 +15,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const data = await request.json();
 
-    const { } = form1023Part4IdentificationOfApplicantSchema.parse(data);
+    const { } = form1023Part6IdentificationOfApplicantSchema.parse(data);
   } catch (err) {
     if (err instanceof ZodError) {
-      throw new Error("Failed to process formation step 4: invalid data");
+      throw new Error("Failed to process formation step 6: invalid data");
     }
     console.error(err);
-    throw new Error("Failed to process formation step 4");
+    throw new Error("Failed to process formation step 6");
   }
 
   return NextResponse.json(
-    { message: "Formation step 4 submitted" },
+    { message: "Formation step 6 submitted" },
     { status: 200 },
   );
 }
