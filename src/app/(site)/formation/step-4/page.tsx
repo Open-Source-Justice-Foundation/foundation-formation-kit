@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { legalNameSchema } from "~/lib/formation/validation/schemas";
+import { form1023Part4IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,23 +28,23 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof legalNameSchema>;
+type FormValues = z.infer<typeof form1023Part4IdentificationOfApplicantSchema>;
 
 export default function FormationStep4Page() {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(legalNameSchema),
+    resolver: zodResolver(form1023Part4IdentificationOfApplicantSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      personToContact: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { firstName, lastName } = values;
+    const { personToContact } = values;
 
     const url = "/api/formation/step-4";
     let response: Response = new Response();
@@ -56,8 +56,7 @@ export default function FormationStep4Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          personToContact,
         }),
       });
 
@@ -81,7 +80,7 @@ export default function FormationStep4Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Step 4
+          Person To Contact
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -95,35 +94,15 @@ export default function FormationStep4Page() {
           >
             <FormField
               control={form.control}
-              name="firstName"
+              name="personToContact"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First name</FormLabel>
+                  <FormLabel>Person to Contact</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type="text"
                       className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      className={
-                        "text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      }
                       disabled={isLoading}
                     />
                   </FormControl>

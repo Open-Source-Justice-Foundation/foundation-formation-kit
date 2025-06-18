@@ -20,31 +20,31 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { legalNameSchema } from "~/lib/formation/validation/schemas";
-import { MoveLeft } from "lucide-react";
+import { form1023Part5IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
+import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof legalNameSchema>;
+type FormValues = z.infer<typeof form1023Part5IdentificationOfApplicantSchema>;
 
 export default function FormationStep5Page() {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(legalNameSchema),
+    resolver: zodResolver(form1023Part5IdentificationOfApplicantSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      contactTelephoneNumber: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { firstName, lastName } = values;
+    const { contactTelephoneNumber } = values;
 
     const url = "/api/formation/step-5";
     let response: Response = new Response();
@@ -56,8 +56,7 @@ export default function FormationStep5Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          contactTelephoneNumber,
         }),
       });
 
@@ -67,9 +66,7 @@ export default function FormationStep5Page() {
         );
       }
 
-      // TODO
-      // Update this to a formation complete page
-      router.push("/dashboard");
+      router.push("/formation/step-6");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -83,7 +80,7 @@ export default function FormationStep5Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Step 5
+          Contact Telephone Number
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -97,35 +94,15 @@ export default function FormationStep5Page() {
           >
             <FormField
               control={form.control}
-              name="firstName"
+              name="contactTelephoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First name</FormLabel>
+                  <FormLabel>Contact Telephone Number</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type="text"
                       className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      className={
-                        "text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      }
                       disabled={isLoading}
                     />
                   </FormControl>
@@ -151,7 +128,9 @@ export default function FormationStep5Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                Finish
+                Next
+                <MoveRight aria-hidden="true" />
+                <span className="sr-only">{"Next Step"}</span>
               </Button>
             </div>
           </form>

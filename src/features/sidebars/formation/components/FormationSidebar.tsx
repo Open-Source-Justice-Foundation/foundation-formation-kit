@@ -15,29 +15,39 @@ import { usePathname } from "next/navigation";
 
 const items = [
   {
-    title: "Legal Name",
+    title: "Organization Identification",
     url: "/formation/step-1",
     step: "1",
   },
   {
-    title: "Step 2",
+    title: "Employer Identification Number",
     url: "/formation/step-2",
     step: "2",
   },
   {
-    title: "Step 3",
+    title: "Month Tax Year Ends",
     url: "/formation/step-3",
     step: "3",
   },
   {
-    title: "Step 4",
+    title: "Person to Contact",
     url: "/formation/step-4",
     step: "4",
   },
   {
-    title: "Step 5",
+    title: "Contact Telephone Number",
     url: "/formation/step-5",
     step: "5",
+  },
+  {
+    title: "Fax Number",
+    url: "/formation/step-6",
+    step: "6",
+  },
+  {
+    title: "User Fee Submitted",
+    url: "/formation/step-7",
+    step: "7",
   },
 ];
 

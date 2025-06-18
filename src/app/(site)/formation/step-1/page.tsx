@@ -12,6 +12,14 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "~/components/ui/command";
+import {
   Form,
   FormControl,
   FormField,
@@ -20,30 +28,54 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { legalNameSchema } from "~/lib/formation/validation/schemas";
-import { MoveRight } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
+import {
+  SUPPORTED_COUNTRIES,
+  SUPPORTED_STATE_ABBREVIATIONS,
+} from "~/lib/formation/constants/constants";
+import { form1023Part1IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
+import { cn } from "~/lib/utils";
+import { Check, ChevronsUpDown, MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof legalNameSchema>;
+type FormValues = z.infer<typeof form1023Part1IdentificationOfApplicantSchema>;
 
 export default function FormationStep1Page() {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(legalNameSchema),
+    resolver: zodResolver(form1023Part1IdentificationOfApplicantSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      fullNameOfOrganization: "",
+      careOfName: "",
+      mailingAddress: "",
+      city: "",
+      country: "",
+      state: "",
+      zipCodePlusFour: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { firstName, lastName } = values;
+    const {
+      fullNameOfOrganization,
+      careOfName,
+      mailingAddress,
+      city,
+      country,
+      state,
+      zipCodePlusFour,
+    } = values;
 
     const url = "/api/formation/step-1";
     let response: Response = new Response();
@@ -55,8 +87,13 @@ export default function FormationStep1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          fullNameOfOrganization,
+          careOfName,
+          mailingAddress,
+          city,
+          country,
+          state,
+          zipCodePlusFour,
         }),
       });
 
@@ -80,7 +117,7 @@ export default function FormationStep1Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Legal Name
+          Organization Identification
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -94,10 +131,10 @@ export default function FormationStep1Page() {
           >
             <FormField
               control={form.control}
-              name="firstName"
+              name="fullNameOfOrganization"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First name</FormLabel>
+                  <FormLabel>Full Name of Organization</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -112,17 +149,209 @@ export default function FormationStep1Page() {
             />
             <FormField
               control={form.control}
-              name="lastName"
+              name="careOfName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last name</FormLabel>
+                  <FormLabel>Care of Name (optional)</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type="text"
-                      className={
-                        "text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      }
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="mailingAddress"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mailing Address</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Country</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            !field.value && "text-muted-foreground",
+                          )}
+                          disabled={isLoading}
+                        >
+                          {field.value
+                            ? SUPPORTED_COUNTRIES.find(
+                              (supportedCountry) =>
+                                supportedCountry.value === field.value,
+                            )?.label
+                            : "Select country..."}
+                          <ChevronsUpDown className="opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[200px] p-0">
+                      <Command>
+                        <CommandInput
+                          placeholder="Search country..."
+                          className="h-9"
+                        />
+                        <CommandList>
+                          <CommandEmpty>No country found.</CommandEmpty>
+                          <CommandGroup>
+                            {SUPPORTED_COUNTRIES.map((supportedCountry) => (
+                              <CommandItem
+                                key={supportedCountry.value}
+                                value={supportedCountry.label}
+                                onSelect={() => {
+                                  form.setValue(
+                                    "country",
+                                    supportedCountry.value,
+                                  );
+                                }}
+                                disabled={isLoading}
+                              >
+                                {supportedCountry.label}
+                                <Check
+                                  className={cn(
+                                    "ml-auto",
+                                    supportedCountry.value === field.value
+                                      ? "opacity-100"
+                                      : "opacity-0",
+                                  )}
+                                />
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="state"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>State</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            !field.value && "text-muted-foreground",
+                          )}
+                          disabled={isLoading}
+                        >
+                          {field.value
+                            ? SUPPORTED_STATE_ABBREVIATIONS.find(
+                              (supportedState) =>
+                                supportedState.value === field.value,
+                            )?.label
+                            : "Select state..."}
+                          <ChevronsUpDown className="opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[200px] p-0">
+                      <Command>
+                        <CommandInput
+                          placeholder="Search state..."
+                          className="h-9"
+                        />
+                        <CommandList>
+                          <CommandEmpty>No state found.</CommandEmpty>
+                          <CommandGroup>
+                            {SUPPORTED_STATE_ABBREVIATIONS.map(
+                              (supportedState) => (
+                                <CommandItem
+                                  key={supportedState.value}
+                                  value={supportedState.label}
+                                  onSelect={() => {
+                                    form.setValue(
+                                      "state",
+                                      supportedState.value,
+                                    );
+                                  }}
+                                  disabled={isLoading}
+                                >
+                                  {supportedState.label}
+                                  <Check
+                                    className={cn(
+                                      "ml-auto",
+                                      supportedState.value === field.value
+                                        ? "opacity-100"
+                                        : "opacity-0",
+                                    )}
+                                  />
+                                </CommandItem>
+                              ),
+                            )}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="zipCodePlusFour"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Zip Code +4</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
                       disabled={isLoading}
                     />
                   </FormControl>

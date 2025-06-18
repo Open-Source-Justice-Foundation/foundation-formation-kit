@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { form1023Part2IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
+import { form1023Part7IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,24 +28,25 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023Part2IdentificationOfApplicantSchema>;
+type FormValues = z.infer<typeof form1023Part7IdentificationOfApplicantSchema>;
 
-export default function FormationStep2Page() {
+export default function FormationStep6Page() {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part2IdentificationOfApplicantSchema),
+    resolver: zodResolver(form1023Part7IdentificationOfApplicantSchema),
     defaultValues: {
-      employerIdentificationNumber: "",
+      userFeeSubmitted: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { employerIdentificationNumber } = values;
+    const { userFeeSubmitted } = values;
 
-    const url = "/api/formation/step-2";
+    const url = "/api/formation/step-7";
     let response: Response = new Response();
 
     try {
@@ -55,17 +56,19 @@ export default function FormationStep2Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          employerIdentificationNumber,
+          userFeeSubmitted,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation step 2 response status: ${response?.status}`,
+          `Formation step 7 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/step-3");
+      // TODO
+      // Update link to go to /formation/step-8
+      router.push("/dashboard");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -79,7 +82,7 @@ export default function FormationStep2Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Employer Identification Number
+          User Fee Submitted
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -93,10 +96,10 @@ export default function FormationStep2Page() {
           >
             <FormField
               control={form.control}
-              name="employerIdentificationNumber"
+              name="userFeeSubmitted"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Employer Identification Number</FormLabel>
+                  <FormLabel>User Fee Submitted</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -116,7 +119,7 @@ export default function FormationStep2Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/step-1" className="text-base">
+                <Link href="/formation/step-6" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

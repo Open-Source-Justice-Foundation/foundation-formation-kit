@@ -12,6 +12,14 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "~/components/ui/command";
+import {
   Form,
   FormControl,
   FormField,
@@ -19,32 +27,37 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { legalNameSchema } from "~/lib/formation/validation/schemas";
-import { MoveLeft, MoveRight } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
+import { MONTHS_TAX_YEAR_ENDS } from "~/lib/formation/constants/constants";
+import { form1023Part3IdentificationOfApplicantSchema } from "~/lib/formation/validation/schemas";
+import { cn } from "~/lib/utils";
+import { Check, ChevronsUpDown, MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof legalNameSchema>;
+type FormValues = z.infer<typeof form1023Part3IdentificationOfApplicantSchema>;
 
 export default function FormationStep3Page() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(legalNameSchema),
+    resolver: zodResolver(form1023Part3IdentificationOfApplicantSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      monthTaxYearEnds: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { firstName, lastName } = values;
+    const { monthTaxYearEnds } = values;
 
     const url = "/api/formation/step-3";
     let response: Response = new Response();
@@ -56,8 +69,7 @@ export default function FormationStep3Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          monthTaxYearEnds,
         }),
       });
 
@@ -81,7 +93,7 @@ export default function FormationStep3Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Step 3
+          Month Tax Year Ends
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -95,38 +107,69 @@ export default function FormationStep3Page() {
           >
             <FormField
               control={form.control}
-              name="firstName"
+              name="monthTaxYearEnds"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      className={
-                        "text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      }
-                      disabled={isLoading}
-                    />
-                  </FormControl>
+                <FormItem className="flex flex-col">
+                  <FormLabel>Month Tax Year Ends</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            !field.value && "text-muted-foreground",
+                          )}
+                          disabled={isLoading}
+                        >
+                          {field.value
+                            ? MONTHS_TAX_YEAR_ENDS.find(
+                              (monthTaxYearEnds) =>
+                                monthTaxYearEnds.value === field.value,
+                            )?.label
+                            : "Select month..."}
+                          <ChevronsUpDown className="opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[200px] p-0">
+                      <Command>
+                        <CommandInput
+                          placeholder="Search month..."
+                          className="h-9"
+                        />
+                        <CommandList>
+                          <CommandEmpty>No month found.</CommandEmpty>
+                          <CommandGroup>
+                            {MONTHS_TAX_YEAR_ENDS.map((monthTaxYearEnds) => (
+                              <CommandItem
+                                key={monthTaxYearEnds.value}
+                                value={monthTaxYearEnds.label}
+                                onSelect={() => {
+                                  form.setValue(
+                                    "monthTaxYearEnds",
+                                    monthTaxYearEnds.value,
+                                  );
+                                }}
+                                disabled={isLoading}
+                              >
+                                {monthTaxYearEnds.label}
+                                <Check
+                                  className={cn(
+                                    "ml-auto",
+                                    monthTaxYearEnds.value === field.value
+                                      ? "opacity-100"
+                                      : "opacity-0",
+                                  )}
+                                />
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                   <FormMessage />
                 </FormItem>
               )}
