@@ -16,38 +16,65 @@ import { usePathname } from "next/navigation";
 const items = [
   {
     title: "Organization Identification",
-    url: "/formation/step-1",
+    url: "/formation/part-1/step-1",
     step: "1",
   },
   {
     title: "Employer Identification Number",
-    url: "/formation/step-2",
+    url: "/formation/part-1/step-2",
     step: "2",
   },
   {
     title: "Month Tax Year Ends",
-    url: "/formation/step-3",
+    url: "/formation/part-1/step-3",
     step: "3",
   },
   {
     title: "Person to Contact",
-    url: "/formation/step-4",
+    url: "/formation/part-1/step-4",
     step: "4",
   },
   {
     title: "Contact Telephone Number",
-    url: "/formation/step-5",
+    url: "/formation/part-1/step-5",
     step: "5",
   },
   {
     title: "Fax Number",
-    url: "/formation/step-6",
+    url: "/formation/part-1/step-6",
     step: "6",
   },
   {
     title: "User Fee Submitted",
-    url: "/formation/step-7",
+    url: "/formation/part-1/step-7",
     step: "7",
+  },
+  // TODO
+  // This needs to be updated
+  {
+    title: "Organization Type",
+    url: "/formation/part-2/step-1",
+    step: "8",
+  },
+  {
+    title: "Date You Formed",
+    url: "/formation/part-2/step-2",
+    step: "9",
+  },
+  {
+    title: "State of Formation",
+    url: "/formation/part-2/step-3",
+    step: "10",
+  },
+  {
+    title: "Adopted Bylaws",
+    url: "/formation/part-2/step-4",
+    step: "11",
+  },
+  {
+    title: "Successor to Another Organization",
+    url: "/formation/part-2/step-5",
+    step: "12",
   },
 ];
 

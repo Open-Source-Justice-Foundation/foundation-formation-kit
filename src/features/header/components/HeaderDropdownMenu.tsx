@@ -90,7 +90,7 @@ export function HeaderDropdownMenu() {
             </>
           )}
         <DropdownMenuGroup>
-          <Link href="/formation/step-1">
+          <Link href="/formation/part-1/step-1">
             <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
               <div className="flex grow items-center justify-between">
                 New foundation

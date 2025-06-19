@@ -122,7 +122,7 @@ export function HeaderSheet() {
               )}
               <SheetClose asChild>
                 <Link
-                  href="/formation/step-1"
+                  href="/formation/part-1/step-1"
                   className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
                 >
                   <div className="flex items-center gap-2 text-base">

@@ -16,7 +16,7 @@ export function GetStartedButton() {
       type="button"
       className="text-base focus-visible:ring-ringPrimary"
     >
-      <Link href={session?.user ? "/formation/step-1" : "/login"}>
+      <Link href={session?.user ? "/formation/part-1/step-1" : "/login"}>
         Get started
       </Link>
     </Button>

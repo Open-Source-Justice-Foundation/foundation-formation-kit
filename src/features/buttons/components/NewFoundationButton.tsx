@@ -16,7 +16,9 @@ export function NewFoundationButton() {
       type="button"
       className="text-base focus-visible:ring-ringPrimary"
     >
-      {session?.user && <Link href="/formation/step-1">New foundation</Link>}
+      {session?.user && (
+        <Link href="/formation/part-1/step-1">New foundation</Link>
+      )}
     </Button>
   );
 }
