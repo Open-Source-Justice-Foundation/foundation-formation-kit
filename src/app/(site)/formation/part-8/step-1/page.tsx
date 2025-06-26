@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -20,8 +19,8 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { SELECT_EXCEPTED_FROM_FILING } from "~/lib/formation/constants/part-9/constants";
-import { form1023Part9AnnualFilingRequirementsStep1Schema } from "~/lib/formation/validation/part-9/schemas";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { form1023Part8EffectiveDateStep1Schema } from "~/lib/formation/validation/part-8/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,27 +32,22 @@ import { z } from "zod";
 // Update schemas
 // Update text
 
-type FormValues = z.infer<
-  typeof form1023Part9AnnualFilingRequirementsStep1Schema
->;
+type FormValues = z.infer<typeof form1023Part8EffectiveDateStep1Schema>;
 
-export default function FormationPart4Step16Page() {
+export default function FormationPart8Step1Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part9AnnualFilingRequirementsStep1Schema),
-    defaultValues: {
-      selectExceptedFromFiling: [""],
-    },
+    resolver: zodResolver(form1023Part8EffectiveDateStep1Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { selectExceptedFromFiling } = values;
+    const { input } = values;
 
-    const url = "/api/formation/part-9/step-1";
+    const url = "/api/formation/part-8/step-1";
     let response: Response = new Response();
 
     try {
@@ -63,17 +57,17 @@ export default function FormationPart4Step16Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectExceptedFromFiling,
+          input,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 9 step 1 response status: ${response?.status}`,
+          `Formation part 8 step 1 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-10/step-1");
+      router.push("/formation/part-9/step-1");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -87,7 +81,7 @@ export default function FormationPart4Step16Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Annual Filing Requirements
+          Effective Date
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -101,47 +95,42 @@ export default function FormationPart4Step16Page() {
           >
             <FormField
               control={form.control}
-              name="selectExceptedFromFiling"
-              render={() => (
+              name="input"
+              render={({ field }) => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Select Fundraising Activities
-                    </FormLabel>
-                  </div>
-                  {SELECT_EXCEPTED_FROM_FILING.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="selectExceptedFromFiling"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-center gap-2"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.includes(item.id)}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id,
-                                      ),
-                                    );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
+                  <FormLabel>Effective Date</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -153,7 +142,7 @@ export default function FormationPart4Step16Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-8/step-1" className="text-base">
+                <Link href="/formation/part-5/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

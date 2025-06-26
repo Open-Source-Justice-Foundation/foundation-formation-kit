@@ -283,7 +283,7 @@ const collapsibleTriggers = [
     urlBase: "/formation/part-8",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Effective Date",
         url: "/formation/part-8/step-1",
         step: "1",
       },
