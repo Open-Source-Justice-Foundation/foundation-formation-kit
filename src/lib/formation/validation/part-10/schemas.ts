@@ -1,0 +1,39 @@
+import { date, object, string } from "zod";
+
+import {
+  DATE_REQUIRED_ERR_MSG,
+  NAME_OF_SIGNER_INVALID_TYPE_ERR_MSG,
+  NAME_OF_SIGNER_MAX_LENGTH,
+  NAME_OF_SIGNER_MAX_LENGTH_ERR_MSG,
+  NAME_OF_SIGNER_NON_EMPTY_ERR_MSG,
+  NAME_OF_SIGNER_REQUIRED_ERR_MSG,
+  TITLE_OR_AUTHORITY_OF_SIGNER_INVALID_TYPE_ERR_MSG,
+  TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH,
+  TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH_ERR_MSG,
+  TITLE_OR_AUTHORITY_OF_SIGNER_NON_EMPTY_ERR_MSG,
+  TITLE_OR_AUTHORITY_OF_SIGNER_REQUIRED_ERR_MSG,
+} from "../../constants/part-10/constants";
+
+export const form1023Part10SignatureStep1Schema = object({
+  nameOfSigner: string({
+    required_error: NAME_OF_SIGNER_REQUIRED_ERR_MSG,
+    invalid_type_error: NAME_OF_SIGNER_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: NAME_OF_SIGNER_NON_EMPTY_ERR_MSG })
+    .max(NAME_OF_SIGNER_MAX_LENGTH, {
+      message: NAME_OF_SIGNER_MAX_LENGTH_ERR_MSG,
+    })
+    .trim(),
+  titleOrAuthorityOfSigner: string({
+    required_error: TITLE_OR_AUTHORITY_OF_SIGNER_REQUIRED_ERR_MSG,
+    invalid_type_error: TITLE_OR_AUTHORITY_OF_SIGNER_INVALID_TYPE_ERR_MSG,
+  })
+    .nonempty({ message: TITLE_OR_AUTHORITY_OF_SIGNER_NON_EMPTY_ERR_MSG })
+    .max(TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH, {
+      message: TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH_ERR_MSG,
+    })
+    .trim(),
+  date: date({
+    required_error: DATE_REQUIRED_ERR_MSG,
+  }),
+});

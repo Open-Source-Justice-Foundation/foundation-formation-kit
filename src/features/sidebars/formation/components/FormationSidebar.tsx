@@ -294,7 +294,7 @@ const collapsibleTriggers = [
     urlBase: "/formation/part-9",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Annual Filing Requirements",
         url: "/formation/part-9/step-1",
         step: "1",
       },
@@ -305,7 +305,7 @@ const collapsibleTriggers = [
     urlBase: "/formation/part-10",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Signature",
         url: "/formation/part-10/step-1",
         step: "1",
       },
@@ -316,8 +316,8 @@ const collapsibleTriggers = [
     urlBase: "/formation/upload-checklist",
     sidebarGroupContent: [
       {
-        title: "404",
-        url: "/formation/upload-checklist/step-1",
+        title: "Upload Checklist",
+        url: "/formation/upload-checklist",
         step: "1",
       },
     ],
