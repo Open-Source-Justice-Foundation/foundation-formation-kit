@@ -215,9 +215,44 @@ const collapsibleTriggers = [
     urlBase: "/formation/part-5",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Compensation",
         url: "/formation/part-5/step-1",
         step: "1",
+      },
+      {
+        title: "Conflict of Interest Policy",
+        url: "/formation/part-5/step-2",
+        step: "2",
+      },
+      {
+        title: "Non-Fixed Payment Compensation",
+        url: "/formation/part-5/step-3",
+        step: "3",
+      },
+      {
+        title: "Purchasing or Selling Goods, Services, or Assets",
+        url: "/formation/part-5/step-4",
+        step: "4",
+      },
+      {
+        title: "Leases, Contracts, Loans, or Other Agreements",
+        url: "/formation/part-5/step-5",
+        step: "5",
+      },
+      {
+        title: "Contract with Another Organization",
+        url: "/formation/part-5/step-6",
+        step: "6",
+      },
+      {
+        title: "Activities or Facilities Management",
+        url: "/formation/part-5/step-7",
+        step: "7",
+      },
+      {
+        title: "Profit and Loss Sharing with Partners",
+        url: "/formation/part-5/step-8",
+        step: "8",
       },
     ],
   },
