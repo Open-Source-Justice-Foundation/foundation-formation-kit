@@ -20,7 +20,8 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema } from "~/lib/formation/validation/part-5/schemas";
+import { Textarea } from "~/components/ui/textarea";
+import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/part-5/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,25 +34,25 @@ import { z } from "zod";
 // Update text
 
 type FormValues = z.infer<
-  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema
+  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
 >;
 
-export default function FormationPart5Step1Page() {
+export default function FormationPart5Step3Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(
-      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema,
+      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema,
     ),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { input } = values;
+    const { radioInput, textAreaInput } = values;
 
-    const url = "/api/formation/part-5/step-1";
+    const url = "/api/formation/part-5/step-3";
     let response: Response = new Response();
 
     try {
@@ -61,17 +62,18 @@ export default function FormationPart5Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          input,
+          radioInput,
+          textAreaInput,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 5 step 1 response status: ${response?.status}`,
+          `Formation part 5 step 3 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-5/step-2");
+      router.push("/formation/part-5/step-4");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -85,7 +87,7 @@ export default function FormationPart5Step1Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Compensation
+          Non-Fixed Payment Compensation
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -99,10 +101,10 @@ export default function FormationPart5Step1Page() {
           >
             <FormField
               control={form.control}
-              name="input"
+              name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Compensation</FormLabel>
+                  <FormLabel>Non-Fixed Payment Compensation</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -139,6 +141,23 @@ export default function FormationPart5Step1Page() {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="textAreaInput"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Non-Fixed Payment Compensation</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Non-fixed payment compensation..."
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="flex justify-between">
               <Button
                 asChild
@@ -146,7 +165,7 @@ export default function FormationPart5Step1Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-4/step-17" className="text-base">
+                <Link href="/formation/part-5/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev
