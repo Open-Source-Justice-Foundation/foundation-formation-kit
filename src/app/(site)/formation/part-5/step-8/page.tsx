@@ -149,7 +149,7 @@ export default function FormationPart5Step8Page() {
                   <FormLabel>Profit and Loss Sharing with Partners</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Purchasing or selling goods, services, or assets..."
+                      placeholder="Profit and loss sharing with partners..."
                       className="resize-none"
                       {...field}
                     />
