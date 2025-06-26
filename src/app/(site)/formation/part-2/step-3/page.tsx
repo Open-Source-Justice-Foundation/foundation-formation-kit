@@ -128,10 +128,10 @@ export default function FormationPart2Step3Page() {
                         >
                           {field.value
                             ? SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.find(
-                              (supportedStateOfFormation) =>
-                                supportedStateOfFormation.value ===
-                                field.value,
-                            )?.label
+                                (supportedStateOfFormation) =>
+                                  supportedStateOfFormation.value ===
+                                  field.value,
+                              )?.label
                             : "Select state..."}
                           <ChevronsUpDown className="opacity-50" />
                         </Button>

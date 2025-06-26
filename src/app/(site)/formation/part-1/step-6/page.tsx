@@ -82,7 +82,7 @@ export default function FormationPart1Step6Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Fax Number
+          Fax Number (optional)
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -99,7 +99,7 @@ export default function FormationPart1Step6Page() {
               name="faxNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Fax Number</FormLabel>
+                  <FormLabel>Fax Number (optional)</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

@@ -68,9 +68,7 @@ export default function FormationPart1Step7Page() {
         );
       }
 
-      // TODO
-      // Update link to go to /formation/step-8
-      router.push("/dashboard");
+      router.push("/formation/part-1/step-8");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error

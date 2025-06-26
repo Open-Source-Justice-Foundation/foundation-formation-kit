@@ -19,8 +19,9 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { form1023Part1IdentificationOfApplicantStep4Schema } from "~/lib/formation/validation/part-1/schemas";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
+import { form1023Part4YourActivitiesStep3Schema } from "~/lib/formation/validation/part-4/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,27 +29,29 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<
-  typeof form1023Part1IdentificationOfApplicantStep4Schema
->;
+// TODO
+// Update schemas
+// Update text
 
-export default function FormationPart1Step4Page() {
+type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
+
+export default function FormationPart4Step7Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part1IdentificationOfApplicantStep4Schema),
-    defaultValues: {
-      personToContact: "",
-    },
+    resolver: zodResolver(form1023Part4YourActivitiesStep3Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { personToContact } = values;
+    const {
+      programsLimitProvisionOfGoodsServicesOrFunds,
+      programsLimitProvisionOfGoodsServicesOrFundsExplanation,
+    } = values;
 
-    const url = "/api/formation/part-1/step-4";
+    const url = "/api/formation/part-4/step-7";
     let response: Response = new Response();
 
     try {
@@ -58,17 +61,18 @@ export default function FormationPart1Step4Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          personToContact,
+          programsLimitProvisionOfGoodsServicesOrFunds,
+          programsLimitProvisionOfGoodsServicesOrFundsExplanation,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 1 step 4 response status: ${response?.status}`,
+          `Formation part 4 step 7 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-1/step-5");
+      router.push("/formation/part-4/step-8");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -82,7 +86,7 @@ export default function FormationPart1Step4Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Person to Contact
+          Intellectual Property
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -96,16 +100,57 @@ export default function FormationPart1Step4Page() {
           >
             <FormField
               control={form.control}
-              name="personToContact"
+              name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Person to Contact</FormLabel>
+                  <FormLabel>Intellectual Property</FormLabel>
                   <FormControl>
-                    <Input
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Intellectual Property</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Intellectual property..."
+                      className="resize-none"
                       {...field}
-                      type="text"
-                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
-                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />
@@ -119,7 +164,7 @@ export default function FormationPart1Step4Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-1/step-3" className="text-base">
+                <Link href="/formation/part-4/step-6" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

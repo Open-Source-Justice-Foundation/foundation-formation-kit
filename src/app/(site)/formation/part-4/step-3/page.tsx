@@ -20,7 +20,8 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part2OrganizationalStructureStep1Schema } from "~/lib/formation/validation/part-2/schemas";
+import { Textarea } from "~/components/ui/textarea";
+import { form1023Part4YourActivitiesStep3Schema } from "~/lib/formation/validation/part-4/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,24 +29,25 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<
-  typeof form1023Part2OrganizationalStructureStep1Schema
->;
+type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
-export default function FormationPart2Step1Page() {
+export default function FormationPart4Step3Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part2OrganizationalStructureStep1Schema),
+    resolver: zodResolver(form1023Part4YourActivitiesStep3Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { organizationType } = values;
+    const {
+      programsLimitProvisionOfGoodsServicesOrFunds,
+      programsLimitProvisionOfGoodsServicesOrFundsExplanation,
+    } = values;
 
-    const url = "/api/formation/part-2/step-1";
+    const url = "/api/formation/part-4/step-3";
     let response: Response = new Response();
 
     try {
@@ -55,17 +57,18 @@ export default function FormationPart2Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          organizationType,
+          programsLimitProvisionOfGoodsServicesOrFunds,
+          programsLimitProvisionOfGoodsServicesOrFundsExplanation,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 2 step 1 response status: ${response?.status}`,
+          `Formation part 4 step 3 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-2/step-2");
+      router.push("/formation/part-4/step-4");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -79,7 +82,7 @@ export default function FormationPart2Step1Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Organization Type
+          Programs Limiting Provision of Goods, Services, or Funds
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -93,10 +96,12 @@ export default function FormationPart2Step1Page() {
           >
             <FormField
               control={form.control}
-              name="organizationType"
+              name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Organization Type</FormLabel>
+                  <FormLabel>
+                    Programs Limiting Provision of Goods, Services, or Funds
+                  </FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -106,52 +111,48 @@ export default function FormationPart2Step1Page() {
                       <FormItem className="flex items-center gap-3">
                         <FormControl>
                           <RadioGroupItem
-                            value="Corporation"
+                            value="Yes"
                             className="focus-visible:ring-ringPrimary"
                             disabled={isLoading}
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          Corporation
+                          Yes
                         </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center gap-3">
                         <FormControl>
                           <RadioGroupItem
-                            value="Limited Liability Company (LLC)"
+                            value="No"
                             className="focus-visible:ring-ringPrimary"
                             disabled={isLoading}
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          Limited Liability Company (LLC)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Unincorporated Association"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Unincorporated Association
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Trust"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Trust
+                          No
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Programs Limiting Provision of Goods, Services, or Funds
+                    Explanation
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Programs limiting provision of goods, services, or funds explanation..."
+                      className="resize-none"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -164,7 +165,7 @@ export default function FormationPart2Step1Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-1/step-9" className="text-base">
+                <Link href="/formation/part-4/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

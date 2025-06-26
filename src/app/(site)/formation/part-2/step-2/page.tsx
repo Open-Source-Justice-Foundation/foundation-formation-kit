@@ -87,7 +87,7 @@ export default function FormationPart2Step2Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Date You Formed
+          Date you Formed
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -104,7 +104,7 @@ export default function FormationPart2Step2Page() {
               name="dateYouFormed"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Date You Formed</FormLabel>
+                  <FormLabel>Date you Formed</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>

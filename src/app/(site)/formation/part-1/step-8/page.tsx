@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { form1023Part1IdentificationOfApplicantStep4Schema } from "~/lib/formation/validation/part-1/schemas";
+import { form1023Part1IdentificationOfApplicantStep8Schema } from "~/lib/formation/validation/part-1/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,26 +29,26 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 type FormValues = z.infer<
-  typeof form1023Part1IdentificationOfApplicantStep4Schema
+  typeof form1023Part1IdentificationOfApplicantStep8Schema
 >;
 
-export default function FormationPart1Step4Page() {
+export default function FormationPart1Step8Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part1IdentificationOfApplicantStep4Schema),
+    resolver: zodResolver(form1023Part1IdentificationOfApplicantStep8Schema),
     defaultValues: {
-      personToContact: "",
+      organizationsWebsite: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { personToContact } = values;
+    const { organizationsWebsite } = values;
 
-    const url = "/api/formation/part-1/step-4";
+    const url = "/api/formation/part-1/step-8";
     let response: Response = new Response();
 
     try {
@@ -58,17 +58,17 @@ export default function FormationPart1Step4Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          personToContact,
+          organizationsWebsite,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 1 step 4 response status: ${response?.status}`,
+          `Formation part 1 step 8 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-1/step-5");
+      router.push("/formation/part-1/step-9");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -82,7 +82,7 @@ export default function FormationPart1Step4Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Person to Contact
+          Organization&apos;s Website (if available)
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -96,10 +96,12 @@ export default function FormationPart1Step4Page() {
           >
             <FormField
               control={form.control}
-              name="personToContact"
+              name="organizationsWebsite"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Person to Contact</FormLabel>
+                  <FormLabel>
+                    Organization&apos;s Website (if available)
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -119,7 +121,7 @@ export default function FormationPart1Step4Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-1/step-3" className="text-base">
+                <Link href="/formation/part-1/step-7" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

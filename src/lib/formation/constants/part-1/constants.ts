@@ -183,7 +183,49 @@ export const USER_FEE_SUBMITTED_NON_EMPTY_ERR_MSG =
 export const USER_FEE_SUBMITTED_MAX_LENGTH_ERR_MSG = `User fee submitted can be at most ${USER_FEE_SUBMITTED_MAX_LENGTH} characters`;
 
 // TODO
+// URL validation & make it optional
 // Organization's website (if available)
-// URL validation
+export const ORGANIZATIONS_WEBSITE_MAX_LENGTH = 255;
+export const ORGANIZATIONS_WEBSITE_REQUIRED_ERR_MSG =
+  "Organization's website is required";
+export const ORGANIZATIONS_WEBSITE_INVALID_TYPE_ERR_MSG =
+  "Organization's website must be a string";
+export const ORGANIZATIONS_WEBSITE_NON_EMPTY_ERR_MSG =
+  "Organization's website is required";
+export const ORGANIZATIONS_WEBSITE_MAX_LENGTH_ERR_MSG = `Organization's website can be at most ${ORGANIZATIONS_WEBSITE_MAX_LENGTH} characters`;
 
 // Names, titles, and mailing addresses of officers, directors, and/or trustees
+// Mailing address - use same as before for now
+// City - use same as before for now
+// State (or Province) - use same as before for now
+
+// First name
+export const FIRST_NAME_MAX_LENGTH = 255;
+export const FIRST_NAME_REQUIRED_ERR_MSG = "First name is required";
+export const FIRST_NAME_INVALID_TYPE_ERR_MSG = "First name must be a string";
+export const FIRST_NAME_NON_EMPTY_ERR_MSG = "First name is required";
+export const FIRST_NAME_MAX_LENGTH_ERR_MSG = `First name can be at most ${FIRST_NAME_MAX_LENGTH} characters`;
+
+// Last name
+export const LAST_NAME_MAX_LENGTH = 255;
+export const LAST_NAME_REQUIRED_ERR_MSG = "Last name is required";
+export const LAST_NAME_INVALID_TYPE_ERR_MSG = "Last name must be a string";
+export const LAST_NAME_NON_EMPTY_ERR_MSG = "Last name is required";
+export const LAST_NAME_MAX_LENGTH_ERR_MSG = `Last name can be at most ${LAST_NAME_MAX_LENGTH} characters`;
+
+// Title
+export const TITLE_MAX_LENGTH = 255;
+export const TITLE_REQUIRED_ERR_MSG = "Title is required";
+export const TITLE_INVALID_TYPE_ERR_MSG = "Title must be a string";
+export const TITLE_NON_EMPTY_ERR_MSG = "Title is required";
+export const TITLE_MAX_LENGTH_ERR_MSG = `Title can be at most ${TITLE_MAX_LENGTH} characters`;
+
+// Zip Code (or Foreign Postal Code)
+// TODO
+// Don't support foreign postal code for now
+// Look into a zip code autocomplete and verifier based on address
+export const ZIP_CODE_MAX_LENGTH = 5;
+export const ZIP_CODE_REQUIRED_ERR_MSG = "Zip code is required";
+export const ZIP_CODE_INVALID_TYPE_ERR_MSG = "Zip code must be a string";
+export const ZIP_CODE_NON_EMPTY_ERR_MSG = "Zip code is required";
+export const ZIP_CODE_MAX_LENGTH_ERR_MSG = `Zip code can be at most ${ZIP_CODE_MAX_LENGTH} characters`;
