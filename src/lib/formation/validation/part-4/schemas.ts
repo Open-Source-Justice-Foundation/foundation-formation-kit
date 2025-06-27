@@ -81,6 +81,12 @@ export const form1023Part4YourActivitiesStep3Schema = object({
     .trim(),
 });
 
+export const form1023Part4YourActivitiesYesNoRadioSchema = object({
+  input: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});
+
 export const form1023Part4YourActivitiesStep16Schema = object({
   selectFundraisingActivities: array(string()).refine(
     (value) => value.some((item) => item),

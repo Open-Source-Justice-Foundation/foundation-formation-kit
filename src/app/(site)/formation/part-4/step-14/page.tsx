@@ -14,13 +14,14 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part4YourActivitiesStep3Schema } from "~/lib/formation/validation/part-4/schemas";
+import { form1023Part4YourActivitiesYesNoRadioSchema } from "~/lib/formation/validation/part-4/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -32,7 +33,7 @@ import { z } from "zod";
 // Update schemas
 // Update text
 
-type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
+type FormValues = z.infer<typeof form1023Part4YourActivitiesYesNoRadioSchema>;
 
 export default function FormationPart4Step14Page() {
   const router = useRouter();
@@ -40,15 +41,12 @@ export default function FormationPart4Step14Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part4YourActivitiesStep3Schema),
+    resolver: zodResolver(form1023Part4YourActivitiesYesNoRadioSchema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const {
-      programsLimitProvisionOfGoodsServicesOrFunds,
-      programsLimitProvisionOfGoodsServicesOrFundsExplanation,
-    } = values;
+    const { input } = values;
 
     const url = "/api/formation/part-4/step-14";
     let response: Response = new Response();
@@ -60,8 +58,7 @@ export default function FormationPart4Step14Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          programsLimitProvisionOfGoodsServicesOrFunds,
-          programsLimitProvisionOfGoodsServicesOrFundsExplanation,
+          input,
         }),
       });
 
@@ -99,10 +96,14 @@ export default function FormationPart4Step14Page() {
           >
             <FormField
               control={form.control}
-              name="programsLimitProvisionOfGoodsServicesOrFunds"
+              name="input"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Low-Income Housing</FormLabel>
+                  <FormDescription>
+                    Do you or will you provide low-income housing? If
+                    &quot;Yes,&quot; complete Schedule F.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
