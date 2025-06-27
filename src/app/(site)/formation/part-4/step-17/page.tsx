@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -106,6 +107,13 @@ export default function FormationPart4Step17Page() {
                   <FormLabel>
                     Fundraising Activities for Other Organizations
                   </FormLabel>
+
+                  <FormDescription>
+                    Do you or will you engage in fundraising activities for
+                    other organizations? If &quot;Yes,&quot; describe these
+                    arrangements, including the names or descriptions of the
+                    organizations for which you raise funds.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

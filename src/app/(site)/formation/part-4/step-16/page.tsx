@@ -15,6 +15,7 @@ import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -106,6 +107,10 @@ export default function FormationPart4Step16Page() {
                     <FormLabel className="text-base">
                       Select Fundraising Activities
                     </FormLabel>
+                    <FormDescription>
+                      Check any of the following fundraising activities that you
+                      will undertake (check all that apply):
+                    </FormDescription>
                   </div>
                   {SELECT_FUNDRAISING_ACTIVITIES.map((item) => (
                     <FormField
