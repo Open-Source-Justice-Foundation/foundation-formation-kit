@@ -22,6 +22,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -128,10 +129,10 @@ export default function FormationPart2Step3Page() {
                         >
                           {field.value
                             ? SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.find(
-                                (supportedStateOfFormation) =>
-                                  supportedStateOfFormation.value ===
-                                  field.value,
-                              )?.label
+                              (supportedStateOfFormation) =>
+                                supportedStateOfFormation.value ===
+                                field.value,
+                            )?.label
                             : "Select state..."}
                           <ChevronsUpDown className="opacity-50" />
                         </Button>
@@ -177,6 +178,9 @@ export default function FormationPart2Step3Page() {
                       </Command>
                     </PopoverContent>
                   </Popover>
+                  <FormDescription>
+                    Select your state of incorporation or other formation.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

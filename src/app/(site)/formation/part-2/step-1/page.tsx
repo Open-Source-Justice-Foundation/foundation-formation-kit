@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -83,6 +84,9 @@ export default function FormationPart2Step1Page() {
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
+          <br />
+          You must be a corporation, limited liability company (LLC),
+          unincorporated association, or trust to be tax exempt.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -97,59 +101,95 @@ export default function FormationPart2Step1Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Organization Type</FormLabel>
+                  <FormDescription>
+                    Select your type of organization.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                       className="flex flex-col"
                     >
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Corporation"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Corporation
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="Corporation"
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            Corporation
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          At the end of this form, you must upload a copy of
+                          your articles of incorporation (and any amendments)
+                          that shows proof of filing with the appropriate state
+                          agency.
+                        </FormDescription>
                       </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Limited Liability Company (LLC)"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Limited Liability Company (LLC)
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="Limited Liability Company (LLC)"
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            Limited Liability Company (LLC)
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          At the end of this form, you must upload a copy of
+                          your articles of organization (and any amendments)
+                          that shows proof of filing with the appropriate state
+                          agency. Also, if you adopted an operating agreement,
+                          upload a copy, along with any amendments.
+                        </FormDescription>
                       </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Unincorporated Association"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Unincorporated Association
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="Unincorporated Association"
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            Unincorporated Association
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          At the end of this form, you must upload a copy of
+                          your articles of association, constitution, or other
+                          similar organizing document that is dated and includes
+                          at least two signatures. Include signed and dated
+                          copies of any amendments.
+                        </FormDescription>
                       </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Trust"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Trust
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="Trust"
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            Trust
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          At the end of this form, you must upload a signed and
+                          dated copy of your trust agreement. Include signed and
+                          dated copies of any amendments.
+                        </FormDescription>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>

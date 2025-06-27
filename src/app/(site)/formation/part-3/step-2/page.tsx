@@ -14,11 +14,13 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { form1023Part3RequiredProvisionsInYourOrganizingDocumentStep2Schema } from "~/lib/formation/validation/part-3/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
@@ -105,6 +107,23 @@ export default function FormationPart3Step2Page() {
                   <FormLabel>
                     Organizing Document Dissolution Exempt Purposes Provision
                   </FormLabel>
+                  <FormDescription>
+                    Section 501(c)(3) requires that your organizing document
+                    provide that upon dissolution, your remaining assets be used
+                    exclusively for section 501(c)(3) exempt purposes, such as
+                    charitable, religious, educational, and/or scientific
+                    purposes. Depending on your entity type and the state in
+                    which you are formed, this requirement may be satisfied by
+                    operation of state law. The following is an example of an
+                    acceptable dissolution clause: Upon the dissolution of this
+                    organization, assets shall be distributed for one or more
+                    exempt purposes within the meaning of section 501(c)(3) of
+                    the Internal Revenue Code, or corresponding section of any
+                    future federal tax code, or shall be distributed to the
+                    federal government, or to a state or local government, for a
+                    public purpose. Does your organizing document meet this
+                    requirement?
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -137,6 +156,32 @@ export default function FormationPart3Step2Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="whereOrganizingDocumentMeetsDissolutionExemptPurposesProvision"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Where your organizing document meets this requirement
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    State specifically where your organizing document meets this
+                    requirement, such as a reference to a particular article or
+                    section in your organizing document (Page/Article/Paragraph)
+                    or indicate that you rely on state law.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

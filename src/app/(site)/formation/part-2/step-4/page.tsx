@@ -14,12 +14,14 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { form1023Part2OrganizationalStructureStep4Schema } from "~/lib/formation/validation/part-2/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -43,7 +45,7 @@ export default function FormationPart2Step4Page() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { adoptedBylaws } = values;
+    const { adoptedBylaws, adoptedBylawsNoResponseExplanation } = values;
 
     const url = "/api/formation/part-2/step-4";
     let response: Response = new Response();
@@ -56,6 +58,7 @@ export default function FormationPart2Step4Page() {
         },
         body: JSON.stringify({
           adoptedBylaws,
+          adoptedBylawsNoResponseExplanation,
         }),
       });
 
@@ -97,6 +100,12 @@ export default function FormationPart2Step4Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Adopted Bylaws</FormLabel>
+                  <FormDescription>
+                    Have you adopted bylaws? If &quot;Yes,&quot; at the end of
+                    this form, upload a current copy showing the date of
+                    adoption. If &quot;No,&quot; explain how you select your
+                    officers, directors, or trustees.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -128,6 +137,25 @@ export default function FormationPart2Step4Page() {
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="adoptedBylawsNoResponseExplanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Selection of officers, directors, or trustees
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Explain how you select your officers, directors, or trustees..."
+                      className="resize-none"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

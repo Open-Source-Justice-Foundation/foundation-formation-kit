@@ -46,6 +46,17 @@ export const form1023Part2OrganizationalStructureStep4Schema = object({
   adoptedBylaws: z.enum(["Yes", "No"], {
     required_error: ADOPTED_BYLAWS_REQUIRED_ERR_MSG,
   }),
+  adoptedBylawsNoResponseExplanation: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
 });
 
 export const form1023Part2OrganizationalStructureStep5Schema = object({

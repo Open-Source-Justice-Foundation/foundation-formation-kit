@@ -22,6 +22,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -145,6 +146,10 @@ export default function FormationPart1Step1Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Be sure to input the value exactly as it appears in your
+                    organizing document.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -154,7 +159,7 @@ export default function FormationPart1Step1Page() {
               name="careOfName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Care of Name (optional)</FormLabel>
+                  <FormLabel>Care of Name (if applicable)</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -172,7 +177,9 @@ export default function FormationPart1Step1Page() {
               name="mailingAddress"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mailing Address</FormLabel>
+                  <FormLabel>
+                    Mailing Address (Number, street, and room/suite)
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -348,7 +355,7 @@ export default function FormationPart1Step1Page() {
               name="zipCodePlusFour"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Zip Code +4</FormLabel>
+                  <FormLabel>Zip Code+4</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -97,6 +98,15 @@ export default function FormationPart2Step5Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Successor to Another Organization</FormLabel>
+                  <FormDescription>
+                    Are you a successor to another organization? Answer
+                    &quot;Yes&quot; if you have taken or will take over the
+                    activities of another organization, you took over 25% or
+                    more of the fair market value of the net assets of another
+                    organization, or you were established upon the conversion of
+                    an organization from for-profit to nonprofit status. If
+                    &quot;Yes,&quot; complete Schedule G.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

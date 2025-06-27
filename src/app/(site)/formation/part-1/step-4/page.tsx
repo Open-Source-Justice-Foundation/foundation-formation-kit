@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -108,6 +109,11 @@ export default function FormationPart1Step4Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Provide a person to contact if more information is needed,
+                    e.g., officier, director, trustee, or authorized
+                    representative.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

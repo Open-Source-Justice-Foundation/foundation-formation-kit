@@ -114,6 +114,9 @@ export default function FormationPart1Step9Page() {
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
+          <br />
+          List the names, titles, and mailing addresses of your officiers,
+          directors, and/or trustees.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
