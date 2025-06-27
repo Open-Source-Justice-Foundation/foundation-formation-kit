@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,15 @@ export default function FormationPart4Step8Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>General Public Educational Information</FormLabel>
+                  <FormDescription>
+                    Do you or will you provide educational information to the
+                    general public on budgeting, personal finance, financial
+                    literacy, saving and spending practices, the sound use of
+                    consumer credit, and/or assist individuals and families with
+                    financial problems such as credit card debt and foreclosure
+                    by providing them with counseling? If &quot;Yes,&quot;
+                    explain.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

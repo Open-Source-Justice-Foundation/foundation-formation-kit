@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,15 @@ export default function FormationPart4Step7Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Intellectual Property</FormLabel>
+                  <FormDescription>
+                    Do you or will you publish, own, or have rights in music,
+                    literature, tapes, artworks, choreography, scientific
+                    discoveries, or other intellectual property? If
+                    &quot;Yes,&quot; describe who owns or will own any
+                    copyrights, patents, or trademarks, whether fees are or will
+                    be charged, how the fees are determined, and how any items
+                    are or will be produced, distributed, and marketed.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

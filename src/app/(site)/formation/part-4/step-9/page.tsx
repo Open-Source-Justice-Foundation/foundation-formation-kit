@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,24 @@ export default function FormationPart4Step9Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Distributions to Other Organizations</FormLabel>
+                  <FormDescription>
+                    Do you or will you make grants, loans, or other
+                    distributions to organizations? If &quot;Yes,&quot; describe
+                    the type and purpose of the grants, loans, or distributions,
+                    how you select your recipients including submission
+                    requirements (such as grant proposals or application forms),
+                    and the criteria you use or will use to select recipients.
+                    Also describe how you ensure the grants, loans, and other
+                    distributions are or will be used for their intended
+                    purposes (including whether you require periodic or final
+                    reports on the use of funds and any procedures you have if
+                    you identify that funds are not being used for their
+                    intended purposes). Finally, describe the records you keep
+                    with respect to grants, loans, or other distributions you
+                    make and identify any recipient organizations and any
+                    relationships between you and the recipients. If
+                    &quot;No,&quot; continue to Line 10.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

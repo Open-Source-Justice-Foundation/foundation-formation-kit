@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,13 @@ export default function FormationPart4Step10Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Foreign Country Operation</FormLabel>
+                  <FormDescription>
+                    Do you or will you operate in a foreign country or
+                    countries? If &quot;Yes,&quot; name each foreign country and
+                    region within each country in which you do or wil operate
+                    and describe your operations in each one. If &quot;No,&quot;
+                    continue to Line 11.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

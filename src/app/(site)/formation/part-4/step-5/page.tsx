@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,10 @@ export default function FormationPart4Step5Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Political Support</FormLabel>
+                  <FormDescription>
+                    Do you or will you support or oppose candidates in political
+                    campaigns in any way? If &quot;Yes,&quot; explain.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

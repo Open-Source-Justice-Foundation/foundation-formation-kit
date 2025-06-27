@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,11 @@ export default function FormationPart4Step6Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Legislation Influence</FormLabel>
+                  <FormDescription>
+                    Do you or will you attempt to influence legislation? If
+                    &quot;Yes,&quot; explain how you attempt to influence
+                    legislation.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

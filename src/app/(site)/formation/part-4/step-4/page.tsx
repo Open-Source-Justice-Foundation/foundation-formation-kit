@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,15 @@ export default function FormationPart4Step4Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Related Individuals</FormLabel>
+                  <FormDescription>
+                    Do any individuals who receive goods, services, or funds
+                    through your programs have a family or business relationship
+                    with any officer, director, trustee, or with any of your
+                    highest compensated employees or highest compensated
+                    independent contractors? If &quot;Yes,&quot; explain how
+                    these related individuals are eligible for goods, services,
+                    or funds.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,6 +105,13 @@ export default function FormationPart4Step11Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Sponsoring Organization</FormLabel>
+                  <FormDescription>
+                    Are you a sponsoring organization that maintains one or more
+                    donor advised funds? If yes, please provide a complete
+                    description of your program, including the specific advice
+                    that such donors may provide. Describe in detail the control
+                    you maintain (or will maintain) over the use of the funds.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

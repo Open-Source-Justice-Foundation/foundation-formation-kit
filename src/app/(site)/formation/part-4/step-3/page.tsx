@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -102,6 +103,16 @@ export default function FormationPart4Step3Page() {
                   <FormLabel>
                     Programs Limiting Provision of Goods, Services, or Funds
                   </FormLabel>
+                  <FormDescription>
+                    Do any of your programs limit the provision of goods,
+                    services, or funds to a specific individual or group of
+                    specific individuals? For example, answer &quot;Yes&quot; if
+                    goods, services, or funds are provided only for a particular
+                    individual, your members, individuals who work for a
+                    particular employer, or graduates of a particular school. If
+                    &quot;Yes,&quot; explain the limitation and how recipients
+                    are selected for each program.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

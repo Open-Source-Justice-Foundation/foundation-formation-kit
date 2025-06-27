@@ -111,6 +111,10 @@ export default function FormationPart4Step2Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Enter the 3-character NTEE code that best describes your
+                    activities.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -121,9 +125,6 @@ export default function FormationPart4Step2Page() {
               render={() => (
                 <FormItem>
                   <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Select NTEE code by IRS
-                    </FormLabel>
                     <FormDescription>
                       Or check here if you want the IRS to select the NTEE code
                       that best describes your activities.
@@ -154,9 +155,6 @@ export default function FormationPart4Step2Page() {
                                 }}
                               />
                             </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                              {item.label}
-                            </FormLabel>
                           </FormItem>
                         );
                       }}
