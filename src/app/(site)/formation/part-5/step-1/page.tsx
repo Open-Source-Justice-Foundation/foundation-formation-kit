@@ -14,13 +14,15 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema } from "~/lib/formation/validation/part-5/schemas";
+import { Textarea } from "~/components/ui/textarea";
+import { form1023Part5CompensationAndOtherFinancialArrangementsStep1Schema } from "~/lib/formation/validation/part-5/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,7 +35,7 @@ import { z } from "zod";
 // Update text
 
 type FormValues = z.infer<
-  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema
+  typeof form1023Part5CompensationAndOtherFinancialArrangementsStep1Schema
 >;
 
 export default function FormationPart5Step1Page() {
@@ -43,13 +45,13 @@ export default function FormationPart5Step1Page() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(
-      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema,
+      form1023Part5CompensationAndOtherFinancialArrangementsStep1Schema,
     ),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { input } = values;
+    const { input1, input2, input3, input4, input5, input6, input7 } = values;
 
     const url = "/api/formation/part-5/step-1";
     let response: Response = new Response();
@@ -61,7 +63,13 @@ export default function FormationPart5Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          input,
+          input1,
+          input2,
+          input3,
+          input4,
+          input5,
+          input6,
+          input7,
         }),
       });
 
@@ -99,10 +107,15 @@ export default function FormationPart5Step1Page() {
           >
             <FormField
               control={form.control}
-              name="input"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Compensation</FormLabel>
+                  <FormDescription>
+                    Do you or will you compensate officers, directors, or
+                    trustees, or do or will you have highest compensated
+                    employees, or highest compensated independent contractors?
+                    If &quot;No,&quot; continue to Line 2.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -134,6 +147,343 @@ export default function FormationPart5Step1Page() {
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will the individuals that approve compensation
+                    arrangements follow a conflict of interest policy?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input3"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you approve compensation arrangements in advance
+                    of paying compensation?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input4"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you document in writing the date and terms of
+                    approved compensation arrangements?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input5"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you record in writing the decision made by each
+                    individual who decided or voted on compensation
+                    arrangements?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input6"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you approve compensation arrangements based on
+                    information about compensation paid by similarly situated
+                    taxable or tax-exempt organizations for similar services,
+                    current compensation surveys compiled by independent firms,
+                    or actual written offers from similarly situated
+                    organizations?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input7"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you record in writing both the information on
+                    which you relied to base your decision and its source?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input8"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do or will you have any other practices you use to set
+                    reasonable compensation? If &quot;Yes,&quot; describe these
+                    practices.
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input8Explanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe these practices..."
+                      className="resize-none"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
