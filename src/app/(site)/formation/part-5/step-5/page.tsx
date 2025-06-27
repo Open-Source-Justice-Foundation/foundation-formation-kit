@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,9 +105,23 @@ export default function FormationPart5Step5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Leases, Contracts, Loans, or Other Agreements
-                  </FormLabel>
+                  <FormDescription>
+                    Do you or will you have any leases, contracts, loans, or
+                    other agreements with: (i) your officers, directors, or
+                    trustees; (ii) any family of any of your officers,
+                    directors, or trustees; (iii) any organizations in which any
+                    of your officers, directors, or trustees are also officers,
+                    directors, or trustees, or in which any individual officer,
+                    director, or trustee owns more than a 35% interest; (iv)
+                    your highest compensated employees; or (v) your highest
+                    compensated independent contractors? If &quot;Yes,&quot;
+                    describe any written or oral arrangements that you made or
+                    intend to make, with whom you have or will have such
+                    arrangements, how the terms are or will be negotiated at
+                    arm&apos;s length, and how you determine you pay no more
+                    than fair market value or you are paid at least fair market
+                    value.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

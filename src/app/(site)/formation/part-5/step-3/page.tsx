@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,7 +105,18 @@ export default function FormationPart5Step3Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Non-Fixed Payment Compensation</FormLabel>
+                  <FormDescription>
+                    Do you or will you compensate any of your officers,
+                    directors, trustees, highest compensated employees, and
+                    highest compensated independent contractors through
+                    non-fixed payments, such as discretionary bonuses or
+                    revenue-based payments? If &quot;Yes,&quot; describe all
+                    non-fixed compensation arrangements, including how the
+                    amounts are determined, who is eligible for such
+                    arrangements, whether you place a limitation on total
+                    compensation, and how you determine or will determine that
+                    you pay no more than reasonable compensation for services.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

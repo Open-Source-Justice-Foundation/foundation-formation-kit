@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,9 +105,22 @@ export default function FormationPart5Step4Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Purchasing or Selling Goods, Services, or Assets
-                  </FormLabel>
+                  <FormDescription>
+                    Do you or will you purchase or sell any goods, services, or
+                    assets from or to: (i) any of your officers, directors, or
+                    trustees; (ii) any family of any of your officers,
+                    directors, or trustees; (il) any organizations in which any
+                    of your officers, directors, or trustees are also officers,
+                    directors, or trustees, or in which any individual officer,
+                    director, or trustee owns more than a 35% interest; (iv)
+                    your highest compensated employees; or (v) your highest
+                    compensated independent contractors? If &quot;Yes,&quot;
+                    describe any such transactions that you made or intend to
+                    make, with whom you make or will make such transactions, how
+                    the terms are or will be negotiated at arm&apos;s length,
+                    and how you determine you pay no more than fair market value
+                    or you are paid at least fair market value.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

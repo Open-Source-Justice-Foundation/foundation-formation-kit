@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -73,7 +74,7 @@ export default function FormationPart5Step8Page() {
         );
       }
 
-      router.push("/dashboard");
+      router.push("/formation/part-6/step-1");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -104,7 +105,20 @@ export default function FormationPart5Step8Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Profit and Loss Sharing with Partners</FormLabel>
+                  <FormDescription>
+                    Do you participate in any joint ventures, including
+                    partnerships or limited liability companies treated as
+                    partnerships, in which you share profits and losses with
+                    partners? If &quot;Yes,&quot; state your ownership
+                    percentage in each joint venture, list your investment in
+                    each joint venture, describe the tax status of other
+                    participants in each joint venture (including whether they
+                    are section 501(c)(3) organizations), describe the
+                    activities of each joint venture, describe how you exercise
+                    control over the activities of each joint venture, and
+                    describe how each joint venture furthers your exempt
+                    purposes.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

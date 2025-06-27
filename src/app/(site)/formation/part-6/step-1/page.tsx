@@ -21,8 +21,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { Textarea } from "~/components/ui/textarea";
-import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/part-5/schemas";
+import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema } from "~/lib/formation/validation/part-5/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -35,25 +34,25 @@ import { z } from "zod";
 // Update text
 
 type FormValues = z.infer<
-  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
+  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema
 >;
 
-export default function FormationPart5Step2Page() {
+export default function FormationPart6Step1Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(
-      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema,
+      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema,
     ),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput, textAreaInput } = values;
+    const { input } = values;
 
-    const url = "/api/formation/part-5/step-2";
+    const url = "/api/formation/part-6/step-1";
     let response: Response = new Response();
 
     try {
@@ -63,18 +62,17 @@ export default function FormationPart5Step2Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
-          textAreaInput,
+          input,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 5 step 2 response status: ${response?.status}`,
+          `Formation part 6 step 1 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-5/step-3");
+      router.push("/formation/part-7/step-1");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -88,7 +86,7 @@ export default function FormationPart5Step2Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Conflict of Interest Policy
+          Financial Data
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -102,20 +100,12 @@ export default function FormationPart5Step2Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
-                    Have you adopted a conflict of interest policy consistent
-                    with the sample conflict of interest policy in Appendix A to
-                    the instructions? If you are a hospital, answer
-                    &quot;Yes&quot; if your conflict of interest policy includes
-                    provisions consistent with the additional healthcare related
-                    provisions in the sample document. If &quot;No,&quot;
-                    describe the procedures you will folow to ensure that
-                    persons who have a conflict of interest will not have
-                    influence over setting their own compensation or regarding
-                    business deals with themselves.
+                    Select the option that best describes you to determine the
+                    years of revenues and expenses you need to provide.
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -153,23 +143,6 @@ export default function FormationPart5Step2Page() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="textAreaInput"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Conflict of Interest Policy</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Conflict of interest policy..."
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <div className="flex justify-between">
               <Button
                 asChild
@@ -177,7 +150,7 @@ export default function FormationPart5Step2Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-5/step-1" className="text-base">
+                <Link href="/formation/part-5/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev

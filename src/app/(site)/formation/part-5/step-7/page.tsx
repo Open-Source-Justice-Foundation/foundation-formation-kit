@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,7 +105,19 @@ export default function FormationPart5Step7Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Activities or Facilities Management</FormLabel>
+                  <FormDescription>
+                    Does or will someone other than your own employees or
+                    volunteers manage your activities or facilities? If
+                    &quot;Yes,&quot; describe the activities or facilities that
+                    will be managed by others, the names of the persons or
+                    organizations that manage or will manage your activities or
+                    facilities, and any business or family relationship between
+                    the organization and your officers, directors, or trustees.
+                    Explain how these managers were or will be selected, how the
+                    terms of any contracts or other agreements were or will be
+                    negotiated, and how you determine you will pay no more than
+                    fair market value for services.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

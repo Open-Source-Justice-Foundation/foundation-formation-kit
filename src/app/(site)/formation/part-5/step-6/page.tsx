@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -104,7 +105,17 @@ export default function FormationPart5Step6Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Contract with Another Organization</FormLabel>
+                  <FormDescription>
+                    Do you or will you contract with another organization to
+                    develop, build, market, or finance your facilities? If
+                    &quot;Yes,&quot; describe each facility, the role of the
+                    other organization, and any business or family relationship
+                    between the organization and your officers, directors, or
+                    trustees. Explain how that entity is selected, how the terms
+                    of any contract(s) are negotiated at arm&apos;s length, and
+                    how you determine you will pay no more than fair market
+                    value for services.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

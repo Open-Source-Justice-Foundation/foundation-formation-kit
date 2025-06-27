@@ -16,15 +16,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   } catch (err) {
     if (err instanceof ZodError) {
       throw new Error(
-        "Failed to process formation part 5 step 1: invalid data",
+        "Failed to process formation part 5 step 8: invalid data",
       );
     }
     console.error(err);
-    throw new Error("Failed to process formation part 5 step 1");
+    throw new Error("Failed to process formation part 5 step 8");
   }
 
   return NextResponse.json(
-    { message: "Formation part 5 step 1 submitted" },
+    { message: "Formation part 5 step 8 submitted" },
     { status: 200 },
   );
 }
