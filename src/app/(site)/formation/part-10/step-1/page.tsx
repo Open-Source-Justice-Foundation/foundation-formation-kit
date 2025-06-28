@@ -96,6 +96,10 @@ export default function FormationPart10Step1Page() {
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
+          <br />I declare under the penalties of perjury that I am authorized to
+          sign this application on behalf of the above organization and that I
+          have examined this application, and to the best of my knowledge it is
+          true, correct, and complete.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
