@@ -22,10 +22,7 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
-import {
-  form1023Part7FoundationClassificationStep1Schema,
-  form1023Part7FoundationClassificationStep2Schema,
-} from "~/lib/formation/validation/part-7/schemas";
+import { form1023Part7FoundationClassificationStep2Schema } from "~/lib/formation/validation/part-7/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
