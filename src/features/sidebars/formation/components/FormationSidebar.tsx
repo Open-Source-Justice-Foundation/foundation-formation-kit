@@ -332,9 +332,79 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-a",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Summary of Beliefs",
         url: "/formation/schedule-a/step-1",
         step: "1",
+      },
+      {
+        title: "Literature",
+        url: "/formation/schedule-a/step-2",
+        step: "2",
+      },
+      {
+        title: "Code of Doctrine and Discipline",
+        url: "/formation/schedule-a/step-3",
+        step: "3",
+      },
+      {
+        title: "Religious Hierarchy or Ecclesiastical Government",
+        url: "/formation/schedule-a/step-4",
+        step: "4",
+      },
+      {
+        title: "Group of Churches Participation",
+        url: "/formation/schedule-a/step-5",
+        step: "5",
+      },
+      {
+        title: "Form of Worship",
+        url: "/formation/schedule-a/step-6",
+        step: "6",
+      },
+      {
+        title: "Nature of Services",
+        url: "/formation/schedule-a/step-7",
+        step: "7",
+      },
+      {
+        title: "Place of Worship",
+        url: "/formation/schedule-a/step-8",
+        step: "8",
+      },
+      {
+        title: "Established Congregation",
+        url: "/formation/schedule-a/step-9",
+        step: "9",
+      },
+      {
+        title: "Religious Rites",
+        url: "/formation/schedule-a/step-10",
+        step: "10",
+      },
+      {
+        title: "Religious Education",
+        url: "/formation/schedule-a/step-11",
+        step: "11",
+      },
+      {
+        title: "Religious Leaders",
+        url: "/formation/schedule-a/step-12",
+        step: "12",
+      },
+      {
+        title: "Schools for Religious Leaders",
+        url: "/formation/schedule-a/step-13",
+        step: "13",
+      },
+      {
+        title: "Requirements for Religious Leaders",
+        url: "/formation/schedule-a/step-14",
+        step: "14",
+      },
+      {
+        title: "Other Information",
+        url: "/formation/schedule-a/step-15",
+        step: "15",
       },
     ],
   },
