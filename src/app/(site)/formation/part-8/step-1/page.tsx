@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -85,6 +86,14 @@ export default function FormationPart8Step1Page() {
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
+          <br />
+          In general, a determination letter recognizing exemption of an
+          organization described in section 501(c)(3) is effective as of the
+          date of formation of an organization if: (1) its purposes and
+          activities prior to the date of the determination letter have been
+          consistent with the requirements for exemption; and (2) it has filed
+          an application for recognition of exemption within 27 months from the
+          end of the month in which it was organized.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -98,7 +107,11 @@ export default function FormationPart8Step1Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Effective Date</FormLabel>
+                  <FormDescription>
+                    Are you submitting this application within 27 months of the
+                    end of the month in which you were legally formed? If
+                    &quot;No,&quot; complete Schedule E.
+                  </FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
