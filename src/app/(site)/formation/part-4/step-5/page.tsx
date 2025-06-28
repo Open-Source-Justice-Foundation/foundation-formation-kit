@@ -104,8 +104,7 @@ export default function FormationPart4Step5Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Political Support</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you support or oppose candidates in political
                     campaigns in any way? If &quot;Yes,&quot; explain.
                   </FormDescription>

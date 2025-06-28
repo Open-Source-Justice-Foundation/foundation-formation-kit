@@ -103,15 +103,10 @@ export default function FormationPart4Step16Page() {
               name="selectFundraisingActivities"
               render={() => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Select Fundraising Activities
-                    </FormLabel>
-                    <FormDescription>
-                      Check any of the following fundraising activities that you
-                      will undertake (check all that apply):
-                    </FormDescription>
-                  </div>
+                  <FormDescription className="text-sm font-normal sm:text-base">
+                    Check any of the following fundraising activities that you
+                    will undertake (check all that apply):
+                  </FormDescription>
                   {SELECT_FUNDRAISING_ACTIVITIES.map((item) => (
                     <FormField
                       key={item.id}

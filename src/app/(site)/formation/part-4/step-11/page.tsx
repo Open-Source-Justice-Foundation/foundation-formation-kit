@@ -104,8 +104,7 @@ export default function FormationPart4Step11Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Sponsoring Organization</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Are you a sponsoring organization that maintains one or more
                     donor advised funds? If yes, please provide a complete
                     description of your program, including the specific advice

@@ -97,8 +97,7 @@ export default function FormationPart2Step5Page() {
               name="successorToAnotherOrganization"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Successor to Another Organization</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Are you a successor to another organization? Answer
                     &quot;Yes&quot; if you have taken or will take over the
                     activities of another organization, you took over 25% or

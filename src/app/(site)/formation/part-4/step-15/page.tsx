@@ -99,9 +99,8 @@ export default function FormationPart4Step15Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Educational Financial Support</FormLabel>
-                  <FormDescription>
-                    Do you or wil you provide scholarships, fellowships,
+                  <FormDescription className="text-sm font-normal sm:text-base">
+                    Do you or will you provide scholarships, fellowships,
                     educational loans, or other educational grants to
                     individuals, including grants for travel, study, or other
                     similar purposes? If &quot;Yes,&quot; complete Schedule H -

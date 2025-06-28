@@ -99,8 +99,7 @@ export default function FormationPart2Step4Page() {
               name="adoptedBylaws"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Adopted Bylaws</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Have you adopted bylaws? If &quot;Yes,&quot; at the end of
                     this form, upload a current copy showing the date of
                     adoption. If &quot;No,&quot; explain how you select your

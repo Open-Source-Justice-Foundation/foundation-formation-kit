@@ -99,8 +99,7 @@ export default function FormationPart4Step12Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>School Operation</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you operate a school? If &quot;Yes,&quot;
                     complete Schedule B.
                   </FormDescription>

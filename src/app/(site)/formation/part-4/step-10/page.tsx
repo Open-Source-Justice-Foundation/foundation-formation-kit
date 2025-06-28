@@ -104,11 +104,10 @@ export default function FormationPart4Step10Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Foreign Country Operation</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you operate in a foreign country or
                     countries? If &quot;Yes,&quot; name each foreign country and
-                    region within each country in which you do or wil operate
+                    region within each country in which you do or will operate
                     and describe your operations in each one. If &quot;No,&quot;
                     continue to Line 11.
                   </FormDescription>

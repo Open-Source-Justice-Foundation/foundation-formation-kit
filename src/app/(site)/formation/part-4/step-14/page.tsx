@@ -99,8 +99,7 @@ export default function FormationPart4Step14Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Low-Income Housing</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you provide low-income housing? If
                     &quot;Yes,&quot; complete Schedule F.
                   </FormDescription>

@@ -99,8 +99,7 @@ export default function FormationPart4Step13Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Hospital or Medical Care</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Is your principal purpose or function to provide hospital or
                     medical care? If &quot;Yes,&quot; complete Schedule C.
                   </FormDescription>

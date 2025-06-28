@@ -100,8 +100,7 @@ export default function FormationPart2Step1Page() {
               name="organizationType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Organization Type</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Select your type of organization.
                   </FormDescription>
                   <FormControl>

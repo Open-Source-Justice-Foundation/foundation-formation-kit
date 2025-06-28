@@ -104,8 +104,7 @@ export default function FormationPart4Step6Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Legislation Influence</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you attempt to influence legislation? If
                     &quot;Yes,&quot; explain how you attempt to influence
                     legislation.

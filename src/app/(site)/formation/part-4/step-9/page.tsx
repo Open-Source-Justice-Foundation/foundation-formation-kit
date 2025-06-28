@@ -104,8 +104,7 @@ export default function FormationPart4Step9Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Distributions to Other Organizations</FormLabel>
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you make grants, loans, or other
                     distributions to organizations? If &quot;Yes,&quot; describe
                     the type and purpose of the grants, loans, or distributions,

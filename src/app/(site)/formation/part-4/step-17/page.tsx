@@ -104,11 +104,7 @@ export default function FormationPart4Step17Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Fundraising Activities for Other Organizations
-                  </FormLabel>
-
-                  <FormDescription>
+                  <FormDescription className="text-sm font-normal sm:text-base">
                     Do you or will you engage in fundraising activities for
                     other organizations? If &quot;Yes,&quot; describe these
                     arrangements, including the names or descriptions of the
