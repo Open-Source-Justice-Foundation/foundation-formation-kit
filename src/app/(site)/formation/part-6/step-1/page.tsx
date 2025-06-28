@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema } from "~/lib/formation/validation/part-5/schemas";
+import { form1023Part6FinancialDataYesNoRadioSchema } from "~/lib/formation/validation/part-6/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,9 +33,7 @@ import { z } from "zod";
 // Update schemas
 // Update text
 
-type FormValues = z.infer<
-  typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema
->;
+type FormValues = z.infer<typeof form1023Part6FinancialDataYesNoRadioSchema>;
 
 export default function FormationPart6Step1Page() {
   const router = useRouter();
@@ -43,9 +41,7 @@ export default function FormationPart6Step1Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(
-      form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioSchema,
-    ),
+    resolver: zodResolver(form1023Part6FinancialDataYesNoRadioSchema),
   });
 
   async function onSubmit(values: FormValues) {
@@ -113,29 +109,67 @@ export default function FormationPart6Step1Page() {
                       defaultValue={field.value}
                       className="flex flex-col"
                     >
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="Yes"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          Yes
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="You completed less than one tax year."
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            You completed less than one tax year.{" "}
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          Provide a total of three years of financial
+                          information (including the current year and two future
+                          years of reasonable and good faith projections of your
+                          future finances) in the following Statement of
+                          Revenues and Expenses.
+                        </FormDescription>
                       </FormItem>
-                      <FormItem className="flex items-center gap-3">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="No"
-                            className="focus-visible:ring-ringPrimary"
-                            disabled={isLoading}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal sm:text-base">
-                          No
-                        </FormLabel>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="You completed at least one tax year but fewer than five."
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            You completed at least one tax year but fewer than
+                            five.
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          Provide a total of four years financial information
+                          including the current year and three years of actual
+                          financial information or reasonable and good faith
+                          projections of your future finances) in the following
+                          Statement of Revenues and Expenses.
+                        </FormDescription>
+                      </FormItem>
+                      <FormItem>
+                        <div className="flex items-center gap-3">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="You completed five or more tax years."
+                              className="focus-visible:ring-ringPrimary"
+                              disabled={isLoading}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal sm:text-base">
+                            You completed five or more tax years.
+                          </FormLabel>
+                        </div>
+                        <FormDescription>
+                          Provide financial information for your five most
+                          recent tax years (including the current year) in the
+                          following Statement of Revenues and Expenses.
+                        </FormDescription>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>

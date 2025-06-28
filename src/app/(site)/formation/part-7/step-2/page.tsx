@@ -14,13 +14,18 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023Part8EffectiveDateStep1Schema } from "~/lib/formation/validation/part-8/schemas";
+import { Textarea } from "~/components/ui/textarea";
+import {
+  form1023Part7FoundationClassificationStep1Schema,
+  form1023Part7FoundationClassificationStep2Schema,
+} from "~/lib/formation/validation/part-7/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,26 +33,24 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-// TODO
-// Update schemas
-// Update text
+type FormValues = z.infer<
+  typeof form1023Part7FoundationClassificationStep2Schema
+>;
 
-type FormValues = z.infer<typeof form1023Part8EffectiveDateStep1Schema>;
-
-export default function FormationPart8Step1Page() {
+export default function FormationPart4Step3Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part8EffectiveDateStep1Schema),
+    resolver: zodResolver(form1023Part7FoundationClassificationStep2Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { input } = values;
+    const { input1, input2 } = values;
 
-    const url = "/api/formation/part-8/step-1";
+    const url = "/api/formation/part-7/step-2";
     let response: Response = new Response();
 
     try {
@@ -57,17 +60,18 @@ export default function FormationPart8Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          input,
+          input1,
+          input2,
         }),
       });
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation part 8 step 1 response status: ${response?.status}`,
+          `Formation part 7 step 2 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/part-9/step-1");
+      router.push("/formation/part-8/step-1");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -81,7 +85,7 @@ export default function FormationPart8Step1Page() {
     <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Effective Date
+          Existence
         </CardTitle>
         <CardDescription>
           🚧 Under construction, applications may be deleted and not work 🚧
@@ -95,10 +99,10 @@ export default function FormationPart8Step1Page() {
           >
             <FormField
               control={form.control}
-              name="input"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Effective Date</FormLabel>
+                  <FormDescription></FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -135,6 +139,22 @@ export default function FormationPart8Step1Page() {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      placeholder=""
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="flex justify-between">
               <Button
                 asChild
@@ -142,7 +162,7 @@ export default function FormationPart8Step1Page() {
                 className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
                 disabled={isLoading}
               >
-                <Link href="/formation/part-7/step-2" className="text-base">
+                <Link href="/formation/part-7/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
                   <span className="sr-only">{"Previous Step"}</span>
                   Prev
