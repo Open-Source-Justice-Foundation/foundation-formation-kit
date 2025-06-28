@@ -413,9 +413,79 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-b",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Regularity of Educational Activities",
         url: "/formation/schedule-b/step-1",
         step: "1",
+      },
+      {
+        title: "Primary Function",
+        url: "/formation/schedule-b/step-2",
+        step: "2",
+      },
+      {
+        title: "Public School Classification",
+        url: "/formation/schedule-b/step-3",
+        step: "3",
+      },
+      {
+        title: "Public School Desegregation",
+        url: "/formation/schedule-b/step-4",
+        step: "4",
+      },
+      {
+        title: "Judicial Procedings",
+        url: "/formation/schedule-b/step-5",
+        step: "5",
+      },
+      {
+        title: "Financial Aid Revocation and/or Suspension",
+        url: "/formation/schedule-b/step-6",
+        step: "6",
+      },
+      {
+        title: "Policies",
+        url: "/formation/schedule-b/step-7",
+        step: "7",
+      },
+      {
+        title: "Policies in Content",
+        url: "/formation/schedule-b/step-8",
+        step: "8",
+      },
+      {
+        title: "Policy Awareness",
+        url: "/formation/schedule-b/step-9",
+        step: "9",
+      },
+      {
+        title: "Selection Process",
+        url: "/formation/schedule-b/step-10",
+        step: "10",
+      },
+      {
+        title: "Demographics",
+        url: "/formation/schedule-b/step-11",
+        step: "11",
+      },
+      {
+        title: "Financial Aid by Demographics",
+        url: "/formation/schedule-b/step-12",
+        step: "12",
+      },
+      {
+        title: "Incorporators, Founders, Board Members, and Donors",
+        url: "/formation/schedule-b/step-13",
+        step: "13",
+      },
+      {
+        title: "Incorporators, Founders, Board Members, and Donors Objectives",
+        url: "/formation/schedule-b/step-14",
+        step: "14",
+      },
+      {
+        title: "Records",
+        url: "/formation/schedule-b/step-15",
+        step: "15",
       },
     ],
   },
