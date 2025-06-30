@@ -621,9 +621,14 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-e",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Reinstatement of Exemption",
         url: "/formation/schedule-e/step-1",
         step: "1",
+      },
+      {
+        title: "Effective Date of Submission Date",
+        url: "/formation/schedule-e/step-2",
+        step: "2",
       },
     ],
   },
