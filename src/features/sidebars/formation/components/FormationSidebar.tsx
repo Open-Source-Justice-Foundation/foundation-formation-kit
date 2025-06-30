@@ -724,9 +724,44 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-h",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Types of Educational Financial Support",
         url: "/formation/schedule-h/step-1",
         step: "1",
+      },
+      {
+        title: "Case Histories",
+        url: "/formation/schedule-h/step-2",
+        step: "2",
+      },
+      {
+        title: "Criteria for Program",
+        url: "/formation/schedule-h/step-3",
+        step: "3",
+      },
+      {
+        title: "Criteria for Selection",
+        url: "/formation/schedule-h/step-4",
+        step: "4",
+      },
+      {
+        title: "Requirements for Recipients",
+        url: "/formation/schedule-h/step-5",
+        step: "5",
+      },
+      {
+        title: "Procedures for Scholarship Supervision",
+        url: "/formation/schedule-h/step-6",
+        step: "6",
+      },
+      {
+        title: "Selection Committee",
+        url: "/formation/schedule-h/step-7",
+        step: "7",
+      },
+      {
+        title: "Eligibility for Awards",
+        url: "/formation/schedule-h/step-8",
+        step: "8",
       },
     ],
   },
