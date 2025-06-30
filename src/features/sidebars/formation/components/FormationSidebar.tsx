@@ -637,9 +637,44 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-f",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Facilities",
         url: "/formation/schedule-f/step-1",
         step: "1",
+      },
+      {
+        title: "Resident Qualifications",
+        url: "/formation/schedule-f/step-2",
+        step: "2",
+      },
+      {
+        title: "Safe Harbor Requirements",
+        url: "/formation/schedule-f/step-3",
+        step: "3",
+      },
+      {
+        title: "Affordability for Low-income Residents",
+        url: "/formation/schedule-f/step-4",
+        step: "4",
+      },
+      {
+        title: "Affordability Restrictions",
+        url: "/formation/schedule-f/step-5",
+        step: "5",
+      },
+      {
+        title: "Periodic Fees or Maintenance Charges",
+        url: "/formation/schedule-f/step-6",
+        step: "6",
+      },
+      {
+        title: "Social Services",
+        url: "/formation/schedule-f/step-7",
+        step: "7",
+      },
+      {
+        title: "Government Housing Programs",
+        url: "/formation/schedule-f/step-8",
+        step: "8",
       },
     ],
   },
