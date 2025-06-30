@@ -683,9 +683,39 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-g",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Name, Last Address, and EIN of Predecessor Organization",
         url: "/formation/schedule-g/step-1",
         step: "1",
+      },
+      {
+        title: "Members of Predecessor Organization",
+        url: "/formation/schedule-g/step-2",
+        step: "2",
+      },
+      {
+        title: "Successor to For-profit Organization",
+        url: "/formation/schedule-g/step-3",
+        step: "3",
+      },
+      {
+        title: "Working Relationships",
+        url: "/formation/schedule-g/step-4",
+        step: "4",
+      },
+      {
+        title: "Assets",
+        url: "/formation/schedule-g/step-5",
+        step: "5",
+      },
+      {
+        title: "Debts or Liabilities",
+        url: "/formation/schedule-g/step-6",
+        step: "6",
+      },
+      {
+        title: "Property or Equipment",
+        url: "/formation/schedule-g/step-7",
+        step: "7",
       },
     ],
   },
