@@ -494,9 +494,54 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-c",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Medical Research Organization Status",
         url: "/formation/schedule-c/step-1",
         step: "1",
+      },
+      {
+        title: "Cooperative Hospital Service Organization Exemption",
+        url: "/formation/schedule-c/step-2",
+        step: "2",
+      },
+      {
+        title: "Doctor Staff Privilege Eligibility",
+        url: "/formation/schedule-c/step-3",
+        step: "3",
+      },
+      {
+        title: "Medical Services",
+        url: "/formation/schedule-c/step-4",
+        step: "4",
+      },
+      {
+        title: "Full-time Emergency Room",
+        url: "/formation/schedule-c/step-5",
+        step: "5",
+      },
+      {
+        title: "Free or Below Cost Services",
+        url: "/formation/schedule-c/step-6",
+        step: "6",
+      },
+      {
+        title: "Medical Training or Research Programs",
+        url: "/formation/schedule-c/step-7",
+        step: "7",
+      },
+      {
+        title: "Community Education Programs",
+        url: "/formation/schedule-c/step-8",
+        step: "8",
+      },
+      {
+        title: "Board of Directors",
+        url: "/formation/schedule-c/step-9",
+        step: "9",
+      },
+      {
+        title: "Facility Requirements",
+        url: "/formation/schedule-c/step-10",
+        step: "10",
       },
     ],
   },
