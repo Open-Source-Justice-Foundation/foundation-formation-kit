@@ -550,9 +550,69 @@ const collapsibleTriggers = [
     urlBase: "/formation/schedule-d",
     sidebarGroupContent: [
       {
-        title: "404",
+        title: "Names, Addresses, and EINs of Supported Organizations",
         url: "/formation/schedule-d/step-1",
         step: "1",
+      },
+      {
+        title: "Supported Organizations Public Charity Statuses",
+        url: "/formation/schedule-d/step-2",
+        step: "2",
+      },
+      {
+        title: "Relationship with Supported Organizations",
+        url: "/formation/schedule-d/step-3",
+        step: "3",
+      },
+      {
+        title: "Governing Board and Officers",
+        url: "/formation/schedule-d/step-4",
+        step: "4",
+      },
+      {
+        title: "Disqualified Persons",
+        url: "/formation/schedule-d/step-5",
+        step: "5",
+      },
+      {
+        title: "Disqualified Persons Influence",
+        url: "/formation/schedule-d/step-6",
+        step: "6",
+      },
+      {
+        title: "Supported Organizations in Organizing Document",
+        url: "/formation/schedule-d/step-7",
+        step: "7",
+      },
+      {
+        title: "Contributions",
+        url: "/formation/schedule-d/step-8",
+        step: "8",
+      },
+      {
+        title: "Officers, Directors, or Trustees of Supported Organizations",
+        url: "/formation/schedule-d/step-9",
+        step: "9",
+      },
+      {
+        title: "Supported Organizations Taxes",
+        url: "/formation/schedule-d/step-10",
+        step: "10",
+      },
+      {
+        title: "Direction of Supported Organizations",
+        url: "/formation/schedule-d/step-11",
+        step: "11",
+      },
+      {
+        title: "Exempt Purposes of Supported Organizations",
+        url: "/formation/schedule-d/step-12",
+        step: "12",
+      },
+      {
+        title: "Distribution of Assets",
+        url: "/formation/schedule-d/step-13",
+        step: "13",
       },
     ],
   },
