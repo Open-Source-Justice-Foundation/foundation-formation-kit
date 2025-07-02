@@ -800,7 +800,7 @@ export function FormationSidebar() {
                             <SidebarMenuButton
                               asChild
                               isActive={item.url === pathname}
-                              className="data-[active=true]:bg-sidebar-primary/80 dark:data-[active=true]:bg-sidebar-primary/40"
+                              className="data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary/80 dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/80"
                             >
                               <Link
                                 className="my-1"

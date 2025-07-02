@@ -111,7 +111,7 @@ export default function FormationPart2Step2Page() {
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
+                            "w-[240px] pl-3 text-left font-normal focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                         >
