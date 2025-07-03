@@ -16,6 +16,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar,
 } from "~/components/ui/sidebar";
 import { COLLAPSIBLE_TRIGGERS } from "~/features/sidebars/formation/constants/constants";
@@ -32,8 +33,9 @@ export function FormationSidebar() {
       {!isMobile && (
         <Sidebar className="static h-full">
           <SidebarHeader>Form 1023</SidebarHeader>
+          <SidebarSeparator />
           <SidebarContent>
-            {COLLAPSIBLE_TRIGGERS.map((collapsibleTrigger) => (
+            {COLLAPSIBLE_TRIGGERS.map((collapsibleTrigger, index) => (
               <Collapsible
                 key={collapsibleTrigger.title}
                 defaultOpen={pathname.startsWith(collapsibleTrigger.urlBase)}
@@ -83,6 +85,9 @@ export function FormationSidebar() {
                     </SidebarGroupContent>
                   </CollapsibleContent>
                 </SidebarGroup>
+                <SidebarSeparator
+                  className={`${COLLAPSIBLE_TRIGGERS.length - 1 === index && "hidden"}`}
+                />
               </Collapsible>
             ))}
           </SidebarContent>
