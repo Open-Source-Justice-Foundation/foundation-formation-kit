@@ -1,7 +1,7 @@
 import { SidebarProvider } from "~/components/ui/sidebar";
 import { FormationSidebar } from "~/features/sidebars/formation";
 
-export default function FoundationLayout({
+export default function FormationLayout({
   children,
 }: {
   children: React.ReactNode;

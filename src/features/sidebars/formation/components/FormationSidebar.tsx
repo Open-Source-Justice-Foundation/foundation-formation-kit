@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "~/components/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
@@ -784,12 +785,12 @@ export function FormationSidebar() {
               >
                 <SidebarGroup>
                   <SidebarGroupLabel
-                    className="justify-between text-left sm:text-sm"
+                    className="justify-between text-left"
                     asChild
                   >
                     <CollapsibleTrigger>
                       {collapsibleTrigger.title}
-                      <ChevronDown className="ml-4 transition-transform group-data-[state=open]/collapsible:rotate-180 sm:text-sm" />
+                      <ChevronDown className="ml-3 transition-transform group-data-[state=open]/collapsible:rotate-180" />
                     </CollapsibleTrigger>
                   </SidebarGroupLabel>
                   <CollapsibleContent>
@@ -800,7 +801,7 @@ export function FormationSidebar() {
                             <SidebarMenuButton
                               asChild
                               isActive={item.url === pathname}
-                              className="data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary/80 dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/80"
+                              className="h-full data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary/80 dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/40"
                             >
                               <Link
                                 className="my-1"
@@ -808,16 +809,16 @@ export function FormationSidebar() {
                                   pathname: item.url,
                                 }}
                               >
-                                <div
-                                  className={`w-[1.25rem] rounded-full ${item.url === pathname ? "text-primary-foreground" : "bg-sidebar-accent"} text-center`}
+                                <Badge
+                                  className={`mr-1 focus-visible:outline-none ${item.url === pathname ? "bg-transparent text-primary-foreground hover:bg-transparent focus:ring-transparent focus:ring-offset-transparent" : "bg-sidebar-accent hover:bg-transparent"}`}
                                 >
                                   {item.step}
-                                </div>
-                                <span
-                                  className={`${item.url === pathname ? "text-primary-foreground" : "text-foreground"}`}
+                                </Badge>
+                                <div
+                                  className={`text-xs outline-none ${item.url === pathname ? "text-primary-foreground" : "text-foreground"}`}
                                 >
                                   {item.title}
-                                </span>
+                                </div>
                               </Link>
                             </SidebarMenuButton>
                           </SidebarMenuItem>
