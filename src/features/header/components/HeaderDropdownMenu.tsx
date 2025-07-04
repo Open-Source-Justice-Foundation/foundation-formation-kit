@@ -1,9 +1,6 @@
-"use client";
-
-import { useState } from "react";
-
 import OSJFLogoDark from "/images/svgs/logos/osjf-logo-dark.svg";
 import OSJFLogo from "/images/svgs/logos/osjf-logo.svg";
+import { auth } from "~/auth";
 import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -14,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { HeaderDropdownMenuSignOutMenuItem } from "~/features/header";
 import {
   AVATAR_ICON_LARGE_SIZE,
   HEADER_DROPDOWN_MENU_ICON_BASE_SIZE,
@@ -29,40 +27,14 @@ import {
   Gauge,
   Github,
   HandHelping,
-  LogOut,
   Pen,
   User,
   UserPen,
 } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { toast } from "sonner";
 
-export function HeaderDropdownMenu() {
-  const { data: session } = useSession();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  async function handleSignOutOnClick() {
-    setIsLoading(true);
-
-    try {
-      const signOutResponse = await signOut({
-        redirect: true,
-        redirectTo: "/",
-      });
-
-      if (signOutResponse !== undefined) {
-        throw new Error("Failed to redirect to homepage");
-      }
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Logout error");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+export async function HeaderDropdownMenu() {
+  const session = await auth();
 
   return (
     <DropdownMenu>
@@ -91,7 +63,7 @@ export function HeaderDropdownMenu() {
           )}
         <DropdownMenuGroup>
           <Link href="/formation/part-1/step-1">
-            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
+            <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 New foundation
                 <Pen aria-hidden="true" />
@@ -100,7 +72,7 @@ export function HeaderDropdownMenu() {
             </DropdownMenuItem>
           </Link>
           <Link href="/dashboard">
-            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
+            <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Dashboard
                 <Gauge aria-hidden="true" />
@@ -109,7 +81,7 @@ export function HeaderDropdownMenu() {
             </DropdownMenuItem>
           </Link>
           <Link href="/profile">
-            <DropdownMenuItem className="cursor-pointer" disabled={isLoading}>
+            <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Profile
                 <UserPen aria-hidden="true" />
@@ -171,17 +143,7 @@ export function HeaderDropdownMenu() {
           </a>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={handleSignOutOnClick}
-          disabled={isLoading}
-        >
-          <div className="flex grow items-center justify-between">
-            Logout
-            <LogOut aria-hidden="true" />
-            <span className="sr-only">{"Logout"}</span>
-          </div>
-        </DropdownMenuItem>
+        <HeaderDropdownMenuSignOutMenuItem />
       </DropdownMenuContent>
     </DropdownMenu>
   );

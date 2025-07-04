@@ -1,31 +1,22 @@
-"use client";
-
+import { auth } from "~/auth";
 import { Button } from "~/components/ui/button";
+import { GetStartedButton } from "~/features/buttons";
 import {
-  DashboardButton,
-  GetStartedButton,
-  NewFoundationButton,
-} from "~/features/buttons";
+  HeaderActionButton,
+  HeaderDropdownMenu,
+  HeaderHomeButton,
+  HeaderSheet,
+} from "~/features/header";
 import { ThemeToggle } from "~/features/theme-toggle";
 import {
   FFK_DOCS_URL,
   SUPPORT_EMAIL_URI,
 } from "~/lib/auth/constants/constants";
 import { ExternalLink, LogIn } from "lucide-react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-import { HeaderDropdownMenu } from "./HeaderDropdownMenu";
-import { HeaderHomeButton } from "./HeaderHomeButton";
-import { HeaderSheet } from "./HeaderSheet";
-
-export function Header() {
-  // TODO
-  // Make sure email is verified
-  // Make sure session is being handled properly
-  const { data: session } = useSession();
-  const pathname = usePathname();
+export async function Header() {
+  const session = await auth();
 
   return (
     <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b bg-background px-6 py-4 lg:px-8">
@@ -36,16 +27,8 @@ export function Header() {
         <HeaderHomeButton />
       </div>
       <div className="hidden items-center gap-6 min-[1020px]:flex">
-        {/* TODO */}
-        {/* Try using server session or using a loading skeleton or just hiding the element */}
         {session === null && <GetStartedButton />}
-        {session &&
-          typeof pathname === "string" &&
-          (pathname?.startsWith("/formation") ? (
-            <DashboardButton />
-          ) : (
-            <NewFoundationButton />
-          ))}
+        {session && <HeaderActionButton />}
         <Button
           type="button"
           variant="link"
@@ -92,5 +75,6 @@ export function Header() {
         {session && <HeaderDropdownMenu />}
       </div>
     </header>
+    /* )} */
   );
 }

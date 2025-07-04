@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-
+import { auth } from "~/auth";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import {
@@ -13,43 +10,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
+import {
+  HeaderSheetExternalLinks,
+  HeaderSheetHomeButton,
+  HeaderSheetSignOutButton,
+} from "~/features/header";
 import { HEADER_SHEET_ICON_BASE_SIZE } from "~/features/header/constants/constants";
 import { ThemeToggle } from "~/features/theme-toggle";
-import { Gauge, LogIn, LogOut, Menu, Pen, UserPen } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { Gauge, LogIn, Menu, Pen, UserPen } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner";
 
-import { HeaderSheetExternalLinks } from "./HeaderSheetExternalLinks";
-import { HeaderSheetHomeButton } from "./HeaderSheetHomeButton";
-
-export function HeaderSheet() {
-  // TODO
-  // Make sure email is verified
-  const { data: session } = useSession();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  async function handleSignOutOnClick() {
-    setIsLoading(true);
-
-    try {
-      const signOutResponse = await signOut({
-        redirect: true,
-        redirectTo: "/",
-      });
-
-      if (signOutResponse !== undefined) {
-        throw new Error("Failed to redirect to homepage");
-      }
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Logout error");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+export async function HeaderSheet() {
+  const session = await auth();
 
   return (
     <Sheet>
@@ -71,8 +43,6 @@ export function HeaderSheet() {
           <SheetDescription className="sr-only">Sheet Menu</SheetDescription>
         </SheetHeader>
         <>
-          {/* TODO */}
-          {/* Try using server session or using a loading skeleton or just hiding the element */}
           {session === null && (
             <div className="flex flex-col gap-1.5 py-4">
               <SheetClose asChild>
@@ -123,7 +93,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/formation/part-1/step-1"
-                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
+                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center gap-2 text-base">
                     <Pen
@@ -138,7 +108,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/dashboard"
-                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
+                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center gap-2 text-base">
                     <Gauge
@@ -153,7 +123,7 @@ export function HeaderSheet() {
               <SheetClose asChild>
                 <Link
                   href="/profile"
-                  className={`rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground ${isLoading ? "pointer-events-none opacity-50" : ""}`}
+                  className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
                 >
                   <div className="flex items-center gap-2 text-base">
                     <UserPen
@@ -169,22 +139,7 @@ export function HeaderSheet() {
               <HeaderSheetExternalLinks />
               <Separator />
               <SheetClose asChild>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="h-9 px-3 py-1.5 focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  onClick={handleSignOutOnClick}
-                  disabled={isLoading}
-                >
-                  <div className="flex grow items-center gap-2 text-base">
-                    <LogOut
-                      size={HEADER_SHEET_ICON_BASE_SIZE}
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">{"Logout"}</span>
-                    Logout
-                  </div>
-                </Button>
+                <HeaderSheetSignOutButton />
               </SheetClose>
             </div>
           )}
