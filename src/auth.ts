@@ -11,7 +11,7 @@ import type {
   UserWithEmailVerifiedAndPasswordHash,
   UserWithPasswordHash,
 } from "~/lib/auth/types";
-import { isRouteProtected } from "~/lib/auth/utils";
+import { isFormationRouteProtected, isRouteProtected } from "~/lib/auth/utils";
 import {
   oAuthEmailSchema,
   oAuthUsernameSchema,
@@ -143,18 +143,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
             "/update-email-address",
             "/under-construction",
             "/dashboard",
-            "/formation/part-1/step-1",
-            "/formation/part-1/step-2",
-            "/formation/part-1/step-3",
-            "/formation/part-1/step-4",
-            "/formation/part-1/step-5",
-            "/formation/part-1/step-6",
-            "/formation/part-1/step-7",
-            "/formation/part-2/step-1",
-            "/formation/part-2/step-2",
-            "/formation/part-2/step-3",
-            "/formation/part-2/step-4",
-            "/formation/part-2/step-5",
+            "/formation/upload-checklist",
             "/profile",
             "/profile-error",
             "/add-email-address-and-password-login",
@@ -165,6 +154,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
 
           // Redirect to login if route is a protected route and user is not authenticated
           if (routeProtected) {
+            return NextResponse.redirect(new URL("/login", request.url));
+          }
+
+          const formationRouteProtected = isFormationRouteProtected(request);
+
+          if (formationRouteProtected) {
             return NextResponse.redirect(new URL("/login", request.url));
           }
         }

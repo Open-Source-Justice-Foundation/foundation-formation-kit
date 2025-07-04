@@ -17,3 +17,17 @@ export function isRouteProtected(
 
   return routeProtected;
 }
+
+export function isFormationRouteProtected(request: NextRequest): boolean {
+  const { nextUrl } = request;
+  const nextUrlPathname = nextUrl.pathname;
+
+  if (
+    nextUrlPathname.startsWith("/formation/part-") ||
+    nextUrlPathname.startsWith("/formation/schedule-")
+  ) {
+    return true;
+  }
+
+  return false;
+}
