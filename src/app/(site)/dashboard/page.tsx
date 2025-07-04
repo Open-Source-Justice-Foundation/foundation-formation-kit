@@ -110,60 +110,80 @@ export default function DashboardPage() {
   async function handleArchiveFoundationOnClick() {
     setIsLoading(true);
 
-    try {
-      console.log("Archiving foundation...");
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Archive error");
-    } finally {
+    if (session?.user?.email) {
+      try {
+        console.log("Archiving foundation...");
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        toast.error("Archive error");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
+      toast.error("Archive error");
     }
   }
 
   async function downloadTaxForm() {
     setIsLoading(true);
 
-    try {
-      console.log("Downloading 1023...");
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Download error");
-    } finally {
+    if (session?.user?.email) {
+      try {
+        console.log("Downloading 1023...");
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        toast.error("Download error");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
+      toast.error("Download error");
     }
   }
 
   async function downloadArticlesOfIncorporation() {
     setIsLoading(true);
 
-    try {
-      console.log("Downloading Articles of Incorporation...");
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Download error");
-    } finally {
+    if (session?.user?.email) {
+      try {
+        console.log("Downloading Articles of Incorporation...");
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        toast.error("Download error");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
+      toast.error("Download error");
     }
   }
 
   async function deleteFoundation() {
     setIsLoading(true);
 
-    try {
-      console.log("Deleting foundation...");
-    } catch (err) {
-      // TODO
-      // Don't log the err value, do something else with it to avoid deployment error
-      console.error(err);
-      toast.error("Deletion error");
-    } finally {
+    if (session?.user?.email) {
+      try {
+        console.log("Deleting foundation...");
+      } catch (err) {
+        // TODO
+        // Don't log the err value, do something else with it to avoid deployment error
+        console.error(err);
+        toast.error("Deletion error");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
+      toast.error("Deletion error");
     }
   }
 
