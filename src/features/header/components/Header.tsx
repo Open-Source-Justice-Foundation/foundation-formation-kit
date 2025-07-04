@@ -28,7 +28,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between border-b px-6 py-4 lg:px-8">
+    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b bg-background px-6 py-4 lg:px-8">
       <div className="flex w-full items-center gap-4">
         <div className="hidden max-[1019px]:flex">
           <HeaderSheet />

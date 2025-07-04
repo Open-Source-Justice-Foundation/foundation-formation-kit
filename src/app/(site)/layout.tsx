@@ -8,7 +8,9 @@ export default function SiteLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex grow flex-col justify-center">{children}</main>
+      <main className="mt-[65px] flex grow flex-col justify-center min-[1020px]:mt-[73px]">
+        {children}
+      </main>
     </div>
   );
 }
