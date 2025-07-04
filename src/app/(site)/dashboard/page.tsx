@@ -170,7 +170,7 @@ export default function DashboardPage() {
   return (
     <>
       {session === undefined && (
-        <FullPageLoadingSpinner loadingText={"Loading..."} />
+        <FullPageLoadingSpinner loadingText={"Loading dashboard..."} />
       )}
       {session === null && (
         <FullPageLoadingSpinner loadingText={"Redirecting to homepage..."} />
