@@ -141,7 +141,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
           protectedRoutes = [
             "/logout",
             "/update-email-address",
-            "/non-profit-name",
             "/under-construction",
             "/dashboard",
             "/formation/part-1/step-1",
