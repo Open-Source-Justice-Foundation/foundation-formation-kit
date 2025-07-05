@@ -15,7 +15,7 @@ export default async function UnderConstructionPage() {
   return (
     <>
       {session === null && (
-        <FullPageLoadingSpinner loadingText={"Redirecting to homepage..."} />
+        <FullPageLoadingSpinner loadingText={"Redirecting to login..."} />
       )}
       {session && (
         <div className="flex items-center px-5 sm:max-w-[68%] sm:px-0 md:max-w-[56%]">

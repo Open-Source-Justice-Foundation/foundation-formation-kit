@@ -225,7 +225,7 @@ export default function ProfilePage() {
   return (
     <div className="flex w-full flex-col min-[421px]:w-[85%] sm:w-[80%] md:w-3/4">
       {session === undefined && (
-        <FullPageLoadingSpinner loadingText={"Loading..."} />
+        <FullPageLoadingSpinner loadingText={"Loading profile..."} />
       )}
       {session === null && (
         <FullPageLoadingSpinner loadingText={"Redirecting to homepage..."} />
