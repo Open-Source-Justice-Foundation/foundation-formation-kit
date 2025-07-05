@@ -21,9 +21,9 @@ export default async function FormationLayout({
         <FullPageLoadingSpinner loadingText={"Redirecting to login..."} />
       )}
       {session && (
-        <SidebarProvider className="min-h-full grow px-5">
+        <SidebarProvider>
           <FormationSidebar />
-          <SidebarTrigger className="mt-2 p-3 md:ml-2" />
+          <SidebarTrigger className="ml-2 mt-2 p-3" />
           <div className="flex grow items-center justify-center py-5 md:items-start md:justify-start md:px-6 md:pt-0 min-[800px]:px-10 min-[850px]:px-16">
             {children}
           </div>

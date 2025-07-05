@@ -27,7 +27,7 @@ export function FormationSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar className="h-full md:top-[65px] md:pb-[65px] min-[1020px]:top-[73px] min-[1020px]:pb-[73px]">
+    <Sidebar className="md:top-[65px] md:pb-[65px] min-[1020px]:top-[73px] min-[1020px]:pb-[73px]">
       <SidebarHeader>Form 1023</SidebarHeader>
       <SidebarSeparator />
       <SidebarContent>
