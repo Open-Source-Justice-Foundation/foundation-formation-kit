@@ -42,6 +42,7 @@ export function FormationSidebar() {
                 <CollapsibleTrigger>
                   {collapsibleTrigger.title}
                   <ChevronDown className="ml-3 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                  <span className="sr-only">Toggle</span>
                 </CollapsibleTrigger>
               </SidebarGroupLabel>
               <CollapsibleContent>
