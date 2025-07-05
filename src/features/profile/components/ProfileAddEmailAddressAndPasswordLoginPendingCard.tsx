@@ -96,14 +96,14 @@ export function ProfileAddEmailAddressAndPasswordLoginPendingCard({
           <div className="flex w-full flex-col gap-5 sm:gap-6">
             <div className="flex flex-col justify-center overflow-x-auto pb-1">
               <Label
-                htmlFor="add-email-login-pending-card-new-email"
+                htmlFor="profile-add-email-login-pending-card-new-email"
                 className="mb-2"
               >
                 Email address
               </Label>
               <div className="flex items-center gap-2">
                 <span
-                  id="add-email-login-pending-card-new-email"
+                  id="profile-add-email-login-pending-card-new-email"
                   className="text-sm text-secondary-foreground sm:text-base"
                 >
                   {newEmailAddressForLoginForm}

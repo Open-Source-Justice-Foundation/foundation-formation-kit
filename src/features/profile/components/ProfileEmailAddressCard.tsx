@@ -41,12 +41,12 @@ export function ProfileEmailAddressCard({
       </CardHeader>
       <CardContent className="flex px-4 pb-4 sm:px-6 sm:pb-6">
         <div className="flex flex-col justify-center overflow-x-auto pb-1">
-          <Label htmlFor="email-address-card-email" className="mb-2">
+          <Label htmlFor="profile-email-address-card-email" className="mb-2">
             Email address
           </Label>
           <div className="flex items-center gap-2">
             <span
-              id="email-address-card-email"
+              id="profile-email-address-card-email"
               className="text-sm text-secondary-foreground sm:text-base"
             >
               {email}
