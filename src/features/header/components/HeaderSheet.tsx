@@ -138,9 +138,7 @@ export async function HeaderSheet() {
               <Separator />
               <HeaderSheetExternalLinks />
               <Separator />
-              <SheetClose asChild>
-                <HeaderSheetSignOutButton />
-              </SheetClose>
+              <HeaderSheetSignOutButton />
             </div>
           )}
         </>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
+import { SheetClose } from "~/components/ui/sheet";
 import { HEADER_SHEET_ICON_BASE_SIZE } from "~/features/header/constants/constants";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -34,18 +35,20 @@ export function HeaderSheetSignOutButton() {
   }
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      className="h-9 px-3 py-1.5 focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
-      onClick={handleSignOutOnClick}
-      disabled={isLoading}
-    >
-      <div className="flex grow items-center gap-2 text-base">
-        <LogOut size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
-        <span className="sr-only">{"Logout"}</span>
-        Logout
-      </div>
-    </Button>
+    <SheetClose asChild>
+      <Button
+        type="button"
+        variant="ghost"
+        className="h-9 px-3 py-1.5 focus-visible:outline-ring/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+        onClick={handleSignOutOnClick}
+        disabled={isLoading}
+      >
+        <div className="flex grow items-center gap-2 text-base">
+          <LogOut size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
+          <span className="sr-only">{"Logout"}</span>
+          Logout
+        </div>
+      </Button>
+    </SheetClose>
   );
 }
