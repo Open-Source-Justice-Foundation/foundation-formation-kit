@@ -717,7 +717,7 @@ export const COLLAPSIBLE_TRIGGERS = [
   },
   {
     id: 19,
-    title: "Schedule H.",
+    title: "Schedule H. Organizations Providing Educational Support",
     urlBase: "/formation/schedule-h",
     sidebarGroupContent: [
       {
