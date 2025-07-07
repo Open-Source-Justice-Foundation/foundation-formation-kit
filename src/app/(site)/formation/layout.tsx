@@ -35,7 +35,7 @@ export default async function FormationLayout({
           }
         >
           <FormationSidebar />
-          <div className="flex grow items-center justify-center py-5 md:items-start md:justify-start md:px-6 md:pt-0 min-[800px]:px-10 min-[850px]:px-16">
+          <div className="flex w-full items-start justify-center pb-6 pl-9 pt-7 md:justify-start md:pt-3 min-[850px]:pl-16">
             {children}
           </div>
         </SidebarProvider>

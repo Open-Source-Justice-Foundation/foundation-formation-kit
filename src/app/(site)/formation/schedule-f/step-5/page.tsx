@@ -77,7 +77,7 @@ export default function FormationScheduleFStep5Page() {
   }
 
   return (
-    <Card className="flex w-[360px] flex-col border sm:w-[425px] md:border-0">
+    <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Affordability Restrictions
