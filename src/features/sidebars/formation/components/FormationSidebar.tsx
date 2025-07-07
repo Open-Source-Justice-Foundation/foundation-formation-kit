@@ -61,7 +61,7 @@ export function FormationSidebar() {
                           <SidebarMenuButton
                             asChild
                             isActive={item.url === pathname}
-                            className="h-full data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary/80 dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/40"
+                            className="h-full data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/80"
                           >
                             <Link
                               className="my-1"
@@ -70,12 +70,12 @@ export function FormationSidebar() {
                               }}
                             >
                               <Badge
-                                className={`mr-1 focus-visible:outline-none ${item.url === pathname ? "bg-transparent text-primary-foreground hover:bg-transparent focus:ring-transparent focus:ring-offset-transparent" : "bg-sidebar-accent hover:bg-sidebar-accent"}`}
+                                className={`mr-1 transition-none ${item.url === pathname ? "bg-transparent text-primary-foreground hover:bg-transparent focus:ring-ringPrimary focus:ring-offset-ringPrimary focus-visible:outline-ringPrimary dark:focus:ring-ringPrimary/80 dark:focus:ring-offset-ringPrimary/80 dark:focus-visible:outline-ringPrimary/80" : "bg-sidebar-accent text-sidebar-foreground hover:bg-sidebar-accent"}`}
                               >
                                 {item.step}
                               </Badge>
                               <div
-                                className={`text-xs outline-none ${item.url === pathname ? "text-primary-foreground" : "text-foreground"}`}
+                                className={`text-xs outline-none ${item.url === pathname ? "text-primary-foreground" : "text-sidebar-foreground"}`}
                               >
                                 {item.title}
                               </div>
