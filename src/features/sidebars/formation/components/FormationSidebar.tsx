@@ -38,7 +38,7 @@ export function FormationSidebar() {
         <SidebarContent>
           {COLLAPSIBLE_TRIGGERS.map((collapsibleTrigger, index) => (
             <Collapsible
-              key={collapsibleTrigger.title}
+              key={collapsibleTrigger.id}
               defaultOpen={pathname.startsWith(collapsibleTrigger.urlBase)}
               className="group/collapsible"
             >
