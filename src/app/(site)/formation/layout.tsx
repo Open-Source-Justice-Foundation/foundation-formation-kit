@@ -4,6 +4,11 @@ import { FormationSidebar } from "~/features/sidebars/formation";
 import { FullPageLoadingSpinner } from "~/features/spinners";
 import { redirect } from "next/navigation";
 
+interface CustomCSSProperties extends React.CSSProperties {
+  "--sidebar-width"?: string;
+  "--sidebar-width-mobile"?: string;
+}
+
 export default async function FormationLayout({
   children,
 }: {
@@ -21,7 +26,14 @@ export default async function FormationLayout({
         <FullPageLoadingSpinner loadingText={"Redirecting to login..."} />
       )}
       {session && (
-        <SidebarProvider>
+        <SidebarProvider
+          style={
+            {
+              "--sidebar-width": "16rem",
+              "--sidebar-width-mobile": "18rem",
+            } as CustomCSSProperties
+          }
+        >
           <FormationSidebar />
           <div className="flex grow items-center justify-center py-5 md:items-start md:justify-start md:px-6 md:pt-0 min-[800px]:px-10 min-[850px]:px-16">
             {children}
