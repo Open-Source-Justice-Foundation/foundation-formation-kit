@@ -57,11 +57,11 @@ export function FormationSidebar() {
                   <SidebarGroupContent>
                     <SidebarMenu>
                       {collapsibleTrigger.sidebarGroupContent.map((item) => (
-                        <SidebarMenuItem key={item.step}>
+                        <SidebarMenuItem className="mx-3" key={item.step}>
                           <SidebarMenuButton
                             asChild
                             isActive={item.url === pathname}
-                            className="h-full data-[active=true]:bg-sidebar-primary/80 data-[active=true]:focus-visible:ring-ringPrimary dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/80"
+                            className="h-full data-[active=true]:bg-sidebar-primary/80 data-[active=true]:font-normal data-[active=true]:focus-visible:ring-ringPrimary dark:data-[active=true]:bg-sidebar-primary/40 dark:data-[active=true]:focus-visible:ring-ringPrimary/80"
                           >
                             <Link
                               className="my-1"
