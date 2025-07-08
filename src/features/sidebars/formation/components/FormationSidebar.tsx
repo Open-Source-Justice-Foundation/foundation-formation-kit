@@ -28,7 +28,7 @@ import { usePathname } from "next/navigation";
 export function FormationSidebar() {
   const pathname = usePathname();
 
-  const { state, isMobile } = useSidebar();
+  const { open, state, isMobile, setOpenMobile } = useSidebar();
 
   return (
     <>
@@ -68,6 +68,7 @@ export function FormationSidebar() {
                               href={{
                                 pathname: item.url,
                               }}
+                              onClick={() => isMobile && setOpenMobile(!open)}
                             >
                               <Badge
                                 className={`mr-1 transition-none ${item.url === pathname ? "bg-transparent text-primary-foreground hover:bg-transparent focus:ring-ringPrimary focus:ring-offset-ringPrimary focus-visible:outline-ringPrimary dark:focus:ring-ringPrimary/80 dark:focus:ring-offset-ringPrimary/80 dark:focus-visible:outline-ringPrimary/80" : "bg-sidebar-accent text-sidebar-foreground hover:bg-sidebar-accent"}`}
