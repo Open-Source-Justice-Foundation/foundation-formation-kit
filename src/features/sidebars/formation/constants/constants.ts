@@ -1,6 +1,6 @@
 export const COLLAPSIBLE_TRIGGERS = [
   {
-    id: 1,
+    id: "1",
     title: "Part I Identification of Applicant",
     urlBase: "/formation/part-1",
     sidebarGroupContent: [
@@ -52,7 +52,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 2,
+    id: "2",
     title: "Part II Organizational Structure",
     urlBase: "/formation/part-2",
     sidebarGroupContent: [
@@ -84,7 +84,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 3,
+    id: "3",
     title: "Part III Required Provisions in Your Organizing Document",
     urlBase: "/formation/part-3",
     sidebarGroupContent: [
@@ -101,7 +101,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 4,
+    id: "4",
     title: "Part IV Your Activities",
     urlBase: "/formation/part-4",
     sidebarGroupContent: [
@@ -193,7 +193,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 5,
+    id: "5",
     title: "Part V Compensation and Other Financial Arrangements",
     urlBase: "/formation/part-5",
     sidebarGroupContent: [
@@ -240,7 +240,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 6,
+    id: "6",
     title: "Part VI Financial Data",
     urlBase: "/formation/part-6",
     sidebarGroupContent: [
@@ -252,7 +252,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 7,
+    id: "7",
     title: "Part VII Foundation Classification",
     urlBase: "/formation/part-7",
     sidebarGroupContent: [
@@ -269,7 +269,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 8,
+    id: "8",
     title: "Part VIII Effective Date",
     urlBase: "/formation/part-8",
     sidebarGroupContent: [
@@ -281,7 +281,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 9,
+    id: "9",
     title: "Part IX Annual Filing Requirements",
     urlBase: "/formation/part-9",
     sidebarGroupContent: [
@@ -293,7 +293,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 10,
+    id: "10",
     title: "Part X Signature",
     urlBase: "/formation/part-10",
     sidebarGroupContent: [
@@ -305,7 +305,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 11,
+    id: "11",
     title: "Upload Checklist",
     urlBase: "/formation/upload-checklist",
     sidebarGroupContent: [
@@ -317,7 +317,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 12,
+    id: "12",
     title: "Schedule A. Churches",
     urlBase: "/formation/schedule-a",
     sidebarGroupContent: [
@@ -399,7 +399,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 13,
+    id: "13",
     title: "Schedule B. Schools, Colleges, and Universities",
     urlBase: "/formation/schedule-b",
     sidebarGroupContent: [
@@ -481,7 +481,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 14,
+    id: "14",
     title: "Schedule C. Hospitals and Medical Research Organizations",
     urlBase: "/formation/schedule-c",
     sidebarGroupContent: [
@@ -538,7 +538,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 15,
+    id: "15",
     title: "Schedule D. Section 509(a)(3) Supporting Organizations",
     urlBase: "/formation/schedule-d",
     sidebarGroupContent: [
@@ -610,7 +610,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 16,
+    id: "16",
     title: "Schedule E. Effective Date",
     urlBase: "/formation/schedule-e",
     sidebarGroupContent: [
@@ -627,7 +627,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 17,
+    id: "17",
     title: "Schedule F. Low-Income Housing",
     urlBase: "/formation/schedule-f",
     sidebarGroupContent: [
@@ -674,7 +674,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 18,
+    id: "18",
     title: "Schedule G. Successors to Other Organizations",
     urlBase: "/formation/schedule-g",
     sidebarGroupContent: [
@@ -716,7 +716,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     ],
   },
   {
-    id: 19,
+    id: "19",
     title: "Schedule H. Organizations Providing Educational Support",
     urlBase: "/formation/schedule-h",
     sidebarGroupContent: [
