@@ -1,6 +1,7 @@
 import { array, object, string, z } from "zod";
 
 import {
+  FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG,
   NTEE_CODE_INVALID_TYPE_ERR_MSG,
   NTEE_CODE_MAX_LENGTH,
   NTEE_CODE_MAX_LENGTH_ERR_MSG,
@@ -17,7 +18,6 @@ import {
   PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_EXPLANATION_NON_EMPTY_ERR_MSG,
   PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_EXPLANATION_REQUIRED_ERR_MSG,
   PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_REQUIRED_ERR_MSG,
-  SELECT_FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG,
   SELECT_NTEE_CODE_BY_IRS_REQUIRED_ERR_MSG,
 } from "../../constants/part-4/constants";
 
@@ -36,6 +36,8 @@ export const form1023Part4YourActivitiesStep1Schema = object({
     .trim(),
 });
 
+// TODO
+// Check if selectNteeCodeByIrs should be an arrary
 export const form1023Part4YourActivitiesStep2Schema = object({
   nteeCode: string({
     required_error: NTEE_CODE_REQUIRED_ERR_MSG,
@@ -88,10 +90,10 @@ export const form1023Part4YourActivitiesYesNoRadioSchema = object({
 });
 
 export const form1023Part4YourActivitiesStep16Schema = object({
-  selectFundraisingActivities: array(string()).refine(
+  fundraisingActivities: array(string()).refine(
     (value) => value.some((item) => item),
     {
-      message: SELECT_FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG,
+      message: FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG,
     },
   ),
 });

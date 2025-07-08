@@ -15,12 +15,13 @@ import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { SELECT_EXCEPTED_FROM_FILING } from "~/lib/formation/constants/part-9/constants";
+import { EXCEPTED_FROM_FILING } from "~/lib/formation/constants/part-9/constants";
 import { form1023Part9AnnualFilingRequirementsStep1Schema } from "~/lib/formation/validation/part-9/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -31,13 +32,13 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
+// Update Other (describe) to include textarea
 
 type FormValues = z.infer<
   typeof form1023Part9AnnualFilingRequirementsStep1Schema
 >;
 
-export default function FormationPart4Step16Page() {
+export default function FormationPart9Step1Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,13 +46,13 @@ export default function FormationPart4Step16Page() {
   const form = useForm<FormValues>({
     resolver: zodResolver(form1023Part9AnnualFilingRequirementsStep1Schema),
     defaultValues: {
-      selectExceptedFromFiling: [""],
+      exceptedFromFiling: [""],
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { selectExceptedFromFiling } = values;
+    const { exceptedFromFiling } = values;
 
     const url = "/api/formation/part-9/step-1";
     let response: Response = new Response();
@@ -63,7 +64,7 @@ export default function FormationPart4Step16Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectExceptedFromFiling,
+          exceptedFromFiling,
         }),
       });
 
@@ -89,8 +90,9 @@ export default function FormationPart4Step16Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Annual Filing Requirements
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
+        <CardDescription className="text-sm font-bold sm:text-base">
+          If you fail to file a required information return or notice for three
+          consecutive years, your exempt status will be automatically revoked.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -101,19 +103,18 @@ export default function FormationPart4Step16Page() {
           >
             <FormField
               control={form.control}
-              name="selectExceptedFromFiling"
+              name="exceptedFromFiling"
               render={() => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Select Fundraising Activities
-                    </FormLabel>
-                  </div>
-                  {SELECT_EXCEPTED_FROM_FILING.map((item) => (
+                  <FormDescription className="text-sm font-normal sm:text-base">
+                    If &quot;Yes,&quot; are you claiming you are excepted from
+                    filing because you are:
+                  </FormDescription>
+                  {EXCEPTED_FROM_FILING.map((item) => (
                     <FormField
                       key={item.id}
                       control={form.control}
-                      name="selectExceptedFromFiling"
+                      name="exceptedFromFiling"
                       render={({ field }) => {
                         return (
                           <FormItem
@@ -122,15 +123,16 @@ export default function FormationPart4Step16Page() {
                           >
                             <FormControl>
                               <Checkbox
+                                name={item.id}
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
                                     ? field.onChange([...field.value, item.id])
                                     : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id,
-                                        ),
-                                      );
+                                      field.value?.filter(
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
                                 }}
                               />
                             </FormControl>

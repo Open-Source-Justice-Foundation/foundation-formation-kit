@@ -1,8 +1,6 @@
 // Form 1023 Upload Checklist
 
-// TODO
-// Make sure id is unique
-export const SELECT_UPLOAD_CHECKLIST_ITEM = [
+export const UPLOAD_CHECKLIST_ITEMS = [
   {
     id: "organizing-document-and-any-amendments",
     label: "Organizing document (and any amendments)",
@@ -30,4 +28,4 @@ export const SELECT_UPLOAD_CHECKLIST_ITEM = [
   },
 ];
 
-export const SELECT_UPLOAD_CHECKLIST_ITEM_REQUIRED_ERR_MSG = "Required";
+export const UPLOAD_CHECKLIST_ITEMS_REQUIRED_ERR_MSG = "Required";

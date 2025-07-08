@@ -17,11 +17,11 @@ export const NTEE_CODE_MAX_LENGTH_ERR_MSG = `Input can be at most ${NTEE_CODE_MA
 
 // TODO
 // Make this optional
-// Make sure id is unique
 export const SELECT_NTEE_CODE_BY_IRS = [
   {
     id: "select-ntee-code-by-irs",
-    label: "Select NTEE code by IRS",
+    label:
+      "Or check here if you want the IRS to select the NTEE code that best describes your activities.",
   },
 ];
 export const SELECT_NTEE_CODE_BY_IRS_REQUIRED_ERR_MSG = "Required";
@@ -40,9 +40,7 @@ export const PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_EXPLANATION_NON
 export const PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_EXPLANATION_MAX_LENGTH_ERR_MSG = `Input can be at most ${PROGRAMS_LIMIT_PROVISION_OF_GOODS_SERVICES_OR_FUNDS_EXPLANATION_MAX_LENGTH} characters`;
 
 // Fundraising activities
-// TODO
-// Make sure id is unique
-export const SELECT_FUNDRAISING_ACTIVITIES = [
+export const FUNDRAISING_ACTIVITIES = [
   {
     id: "website-mail-email-personal-and-or-phone-solicitations",
     label: "Website, mail, email, personal, and/or phone solicitations",
@@ -73,8 +71,8 @@ export const SELECT_FUNDRAISING_ACTIVITIES = [
   },
   {
     id: "we-will-not-engage-in-fundraising-activities",
-    label: "We will not engage in fundraising activities",
+    label: "We will not engage in fundraising activities.",
   },
 ];
 
-export const SELECT_FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG = "Required";
+export const FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG = "Required";

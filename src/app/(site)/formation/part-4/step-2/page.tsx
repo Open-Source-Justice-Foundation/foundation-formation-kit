@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
@@ -30,6 +24,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+
+// TODO
+// Update schemas
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep2Schema>;
 
@@ -87,9 +84,6 @@ export default function FormationPart4Step2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           NTEE Code
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -119,51 +113,43 @@ export default function FormationPart4Step2Page() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="selectNteeCodeByIrs"
-              render={() => (
-                <FormItem>
-                  <div className="mb-4">
-                    <FormDescription>
-                      Or check here if you want the IRS to select the NTEE code
-                      that best describes your activities.
-                    </FormDescription>
-                  </div>
-                  {SELECT_NTEE_CODE_BY_IRS.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="selectNteeCodeByIrs"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-center gap-2"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.includes(item.id)}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id,
-                                      ),
-                                    );
-                                }}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormItem>
+              {SELECT_NTEE_CODE_BY_IRS.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="selectNteeCodeByIrs"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-center gap-2"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            name={item.id}
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                  field.value?.filter(
+                                    (value) => value !== item.id,
+                                  ),
+                                );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
             <div className="flex justify-between">
               <Button
                 asChild

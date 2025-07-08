@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
@@ -21,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { SELECT_FUNDRAISING_ACTIVITIES } from "~/lib/formation/constants/part-4/constants";
+import { FUNDRAISING_ACTIVITIES } from "~/lib/formation/constants/part-4/constants";
 import { form1023Part4YourActivitiesStep16Schema } from "~/lib/formation/validation/part-4/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -32,7 +26,7 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
+// Add Other (describe) textarea
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep16Schema>;
 
@@ -44,13 +38,13 @@ export default function FormationPart4Step16Page() {
   const form = useForm<FormValues>({
     resolver: zodResolver(form1023Part4YourActivitiesStep16Schema),
     defaultValues: {
-      selectFundraisingActivities: [""],
+      fundraisingActivities: [""],
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { selectFundraisingActivities } = values;
+    const { fundraisingActivities } = values;
 
     const url = "/api/formation/part-4/step-16";
     let response: Response = new Response();
@@ -62,7 +56,7 @@ export default function FormationPart4Step16Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectFundraisingActivities,
+          fundraisingActivities,
         }),
       });
 
@@ -88,9 +82,6 @@ export default function FormationPart4Step16Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Fundraising Activities
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -100,18 +91,18 @@ export default function FormationPart4Step16Page() {
           >
             <FormField
               control={form.control}
-              name="selectFundraisingActivities"
+              name="fundraisingActivities"
               render={() => (
                 <FormItem>
                   <FormDescription className="text-sm font-normal sm:text-base">
                     Check any of the following fundraising activities that you
                     will undertake (check all that apply):
                   </FormDescription>
-                  {SELECT_FUNDRAISING_ACTIVITIES.map((item) => (
+                  {FUNDRAISING_ACTIVITIES.map((item) => (
                     <FormField
                       key={item.id}
                       control={form.control}
-                      name="selectFundraisingActivities"
+                      name="fundraisingActivities"
                       render={({ field }) => {
                         return (
                           <FormItem
@@ -120,6 +111,7 @@ export default function FormationPart4Step16Page() {
                           >
                             <FormControl>
                               <Checkbox
+                                name={item.id}
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked

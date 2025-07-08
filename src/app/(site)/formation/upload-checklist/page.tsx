@@ -15,12 +15,13 @@ import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { SELECT_UPLOAD_CHECKLIST_ITEM } from "~/lib/formation/constants/upload-checklist/constants";
+import { UPLOAD_CHECKLIST_ITEMS } from "~/lib/formation/constants/upload-checklist/constants";
 import { form1023UploadChecklistSchema } from "~/lib/formation/validation/upload-checklist/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -31,7 +32,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023UploadChecklistSchema>;
 
@@ -43,13 +43,13 @@ export default function FormationUploadChecklistPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(form1023UploadChecklistSchema),
     defaultValues: {
-      selectUploadChecklistItem: [""],
+      uploadChecklistItems: [""],
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { selectUploadChecklistItem } = values;
+    const { uploadChecklistItems } = values;
 
     const url = "/api/formation/upload-checklist";
     let response: Response = new Response();
@@ -61,7 +61,7 @@ export default function FormationUploadChecklistPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectUploadChecklistItem,
+          uploadChecklistItems,
         }),
       });
 
@@ -87,8 +87,9 @@ export default function FormationUploadChecklistPage() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Upload Checklist
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
+        <CardDescription className="text-sm sm:text-base">
+          This is an upload checklist used to make sure you&apos;ve uploaded all
+          of your required documents.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -99,19 +100,18 @@ export default function FormationUploadChecklistPage() {
           >
             <FormField
               control={form.control}
-              name="selectUploadChecklistItem"
+              name="uploadChecklistItems"
               render={() => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Upload Checklist
-                    </FormLabel>
-                  </div>
-                  {SELECT_UPLOAD_CHECKLIST_ITEM.map((item) => (
+                  <FormDescription className="text-sm font-normal sm:text-base">
+                    Check the relevant boxes below to make sure you&apos;ve
+                    uploaded all of your required documents.
+                  </FormDescription>
+                  {UPLOAD_CHECKLIST_ITEMS.map((item) => (
                     <FormField
                       key={item.id}
                       control={form.control}
-                      name="selectUploadChecklistItem"
+                      name="uploadChecklistItems"
                       render={({ field }) => {
                         return (
                           <FormItem
@@ -120,6 +120,7 @@ export default function FormationUploadChecklistPage() {
                           >
                             <FormControl>
                               <Checkbox
+                                name={item.id}
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
