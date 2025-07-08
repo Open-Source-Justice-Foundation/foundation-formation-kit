@@ -33,7 +33,7 @@ import { format } from "date-fns";
 import { CalendarIcon, MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -42,6 +42,7 @@ type FormValues = z.infer<typeof form1023Part10SignatureStep1Schema>;
 export default function FormationPart10Step1Page() {
   const router = useRouter();
 
+  const [openDatePicker, setOpenDatePicker] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -88,18 +89,29 @@ export default function FormationPart10Step1Page() {
     }
   }
 
+  function handleCalendarOnSelect(
+    event: Date | undefined,
+    field: ControllerRenderProps<{
+      date: Date;
+      nameOfSigner: string;
+      titleOrAuthorityOfSigner: string;
+    }>,
+  ) {
+    field.onChange(event);
+    setOpenDatePicker(false);
+  }
+
   return (
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Signature
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />I declare under the penalties of perjury that I am authorized to
-          sign this application on behalf of the above organization and that I
-          have examined this application, and to the best of my knowledge it is
-          true, correct, and complete.
+        <CardDescription className="text-sm sm:text-base">
+          I declare under the penalties of perjury that I am authorized to sign
+          this application on behalf of the above organization and that I have
+          examined this application, and to the best of my knowledge it is true,
+          correct, and complete.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -150,13 +162,16 @@ export default function FormationPart10Step1Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Date</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openDatePicker}
+                    onOpenChange={setOpenDatePicker}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"outline"}
+                          variant="outline"
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
+                            "w-[240px] pl-3 text-left font-normal focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                         >
@@ -166,17 +181,22 @@ export default function FormationPart10Step1Page() {
                             <span>Pick a date</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          <span className="sr-only">Select date</span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
+                        defaultMonth={field.value ? field.value : new Date()}
                         selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
+                        onSelect={(event) =>
+                          handleCalendarOnSelect(event, field)
                         }
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1970-01-01")
+                        }
+                        className="rounded-md border shadow-sm"
                         captionLayout="dropdown"
                       />
                     </PopoverContent>

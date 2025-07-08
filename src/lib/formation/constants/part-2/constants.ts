@@ -5,7 +5,7 @@ export const ORGANIZATION_TYPE_REQUIRED_ERR_MSG =
   "Organization type is required";
 
 // Date you formed
-export const DATE_YOU_FORMED_REQUIRED_ERR_MSG = "Date you formed is required";
+export const DATE_YOU_FORMED_REQUIRED_ERR_MSG = "Required";
 
 // State of formation
 export const STATE_OF_FORMATION_REQUIRED_ERR_MSG =

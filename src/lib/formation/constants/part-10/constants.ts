@@ -19,4 +19,4 @@ export const TITLE_OR_AUTHORITY_OF_SIGNER_NON_EMPTY_ERR_MSG =
 export const TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH_ERR_MSG = `Title or authority can be at most ${TITLE_OR_AUTHORITY_OF_SIGNER_MAX_LENGTH} characters`;
 
 // Date
-export const DATE_REQUIRED_ERR_MSG = "Date is required";
+export const DATE_REQUIRED_ERR_MSG = "Required";
