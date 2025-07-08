@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Command,
   CommandEmpty,
@@ -122,9 +116,6 @@ export default function FormationPart1Step1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Organization Identification
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -147,8 +138,8 @@ export default function FormationPart1Step1Page() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Be sure to input the value exactly as it appears in your
-                    organizing document.
+                    Input the value exactly as it appears in your organizing
+                    document.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -223,7 +214,7 @@ export default function FormationPart1Step1Page() {
                           variant="outline"
                           role="combobox"
                           className={cn(
-                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                           disabled={isLoading}
@@ -292,7 +283,7 @@ export default function FormationPart1Step1Page() {
                           variant="outline"
                           role="combobox"
                           className={cn(
-                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                           disabled={isLoading}
