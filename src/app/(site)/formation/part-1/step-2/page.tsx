@@ -7,7 +7,6 @@ import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
@@ -84,9 +83,6 @@ export default function FormationPart1Step2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Employer Identification Number
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
