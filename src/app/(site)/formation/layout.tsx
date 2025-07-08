@@ -33,6 +33,7 @@ export default async function FormationLayout({
               "--sidebar-width-mobile": "18rem",
             } as CustomCSSProperties
           }
+          className="min-h-full grow"
         >
           <FormationSidebar />
           <div className="flex w-full items-start justify-center pb-6 pl-9 pt-7 md:justify-start md:pt-3 min-[850px]:pl-16">
