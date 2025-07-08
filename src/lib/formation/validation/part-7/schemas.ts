@@ -2,6 +2,7 @@ import { array, object, string, z } from "zod";
 
 import {
   EDUCATIONAL_SUPPORT_REQUIRED_ERR_MSG,
+  FOUNDATION_CLASSIFICATION_REQUIRED_ERR_MSG,
   PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_CONFIRMATION_CHECKBOX_REQUIRED_ERR_MSG,
   PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_REFERENCE_INVALID_TYPE_ERR_MSG,
   PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_REFERENCE_MAX_LENGTH,
@@ -14,14 +15,15 @@ import {
   PRIVATE_OPERATING_FOUNDATION_STATUS_EXPLANATION_MAX_LENGTH_ERR_MSG,
   PRIVATE_OPERATING_FOUNDATION_STATUS_EXPLANATION_NON_EMPTY_ERR_MSG,
   PRIVATE_OPERATING_FOUNDATION_STATUS_EXPLANATION_REQUIRED_ERR_MSG,
-  SELECT_FOUNDATION_CLASSIFICATION_REQUIRED_ERR_MSG,
 } from "../../constants/part-7/constants";
 
+// TODO
+// Check if privateFoundationSpecialProvisionsConfirmationCheckbox should be an arrary
 export const form1023Part7FoundationClassificationStep1Schema = object({
-  selectFoundationClassification: array(string()).refine(
+  foundationClassifications: array(string()).refine(
     (value) => value.some((item) => item),
     {
-      message: SELECT_FOUNDATION_CLASSIFICATION_REQUIRED_ERR_MSG,
+      message: FOUNDATION_CLASSIFICATION_REQUIRED_ERR_MSG,
     },
   ),
   privateFoundationSpecialProvisionsConfirmationCheckbox: array(

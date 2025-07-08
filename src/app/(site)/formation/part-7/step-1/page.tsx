@@ -24,8 +24,8 @@ import {
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import {
+  FOUNDATION_CLASSIFICATIONS,
   PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_CONFIRMATION_CHECKBOX,
-  SELECT_FOUNDATION_CLASSIFICATION,
 } from "~/lib/formation/constants/part-7/constants";
 import { form1023Part7FoundationClassificationStep1Schema } from "~/lib/formation/validation/part-7/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
@@ -51,7 +51,7 @@ export default function FormationPart7Step1Page() {
   const form = useForm<FormValues>({
     resolver: zodResolver(form1023Part7FoundationClassificationStep1Schema),
     defaultValues: {
-      selectFoundationClassification: [""],
+      foundationClassifications: [""],
       privateFoundationSpecialProvisionsConfirmationCheckbox: [""],
     },
   });
@@ -59,7 +59,7 @@ export default function FormationPart7Step1Page() {
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
     const {
-      selectFoundationClassification,
+      foundationClassifications,
       privateFoundationSpecialProvisionsConfirmationCheckbox,
       educationalSupport,
       privateOperatingFoundationConfirmation,
@@ -76,7 +76,7 @@ export default function FormationPart7Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectFoundationClassification,
+          foundationClassifications,
           privateFoundationSpecialProvisionsConfirmationCheckbox,
           educationalSupport,
           privateOperatingFoundationConfirmation,
@@ -106,9 +106,7 @@ export default function FormationPart7Step1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Selection and Explanation
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />
+        <CardDescription className="text-sm sm:text-base">
           Part VII is designed to classify you as an organization that is either
           a private foundation or a public charity. Public charity
           classification is a more favorable tax status than private foundation
@@ -124,20 +122,18 @@ export default function FormationPart7Step1Page() {
           >
             <FormField
               control={form.control}
-              name="selectFoundationClassification"
+              name="foundationClassifications"
               render={() => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel>
-                      Select the foundation classification you are requesting
-                      from the list below.
-                    </FormLabel>
-                  </div>
-                  {SELECT_FOUNDATION_CLASSIFICATION.map((item) => (
+                  <FormDescription className="text-sm font-normal sm:text-base">
+                    Select the foundation classification you are requesting from
+                    the list below.
+                  </FormDescription>
+                  {FOUNDATION_CLASSIFICATIONS.map((item) => (
                     <FormField
                       key={item.id}
                       control={form.control}
-                      name="selectFoundationClassification"
+                      name="foundationClassifications"
                       render={({ field }) => {
                         return (
                           <FormItem
@@ -146,6 +142,7 @@ export default function FormationPart7Step1Page() {
                           >
                             <FormControl>
                               <Checkbox
+                                name={item.id}
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -175,11 +172,6 @@ export default function FormationPart7Step1Page() {
               name="privateFoundationSpecialProvisionsConfirmationCheckbox"
               render={() => (
                 <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Private Foundation Special Provisions Confirmation
-                    </FormLabel>
-                  </div>
                   {PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_CONFIRMATION_CHECKBOX.map(
                     (item) => (
                       <FormField
@@ -190,28 +182,35 @@ export default function FormationPart7Step1Page() {
                           return (
                             <FormItem
                               key={item.id}
-                              className="flex flex-row items-center gap-2"
+                              className="flex flex-col items-center gap-2"
                             >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([
-                                        ...field.value,
-                                        item.id,
-                                      ])
-                                      : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id,
-                                        ),
-                                      );
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="text-sm font-normal">
-                                {item.label}
+                              <FormLabel className="text-sm sm:text-base">
+                                Private Foundation Special Provisions
+                                Confirmation
                               </FormLabel>
+                              <div className="flex items-center gap-2 space-y-2">
+                                <FormControl>
+                                  <Checkbox
+                                    name={item.id}
+                                    checked={field.value?.includes(item.id)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([
+                                          ...field.value,
+                                          item.id,
+                                        ])
+                                        : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.id,
+                                          ),
+                                        );
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-sm font-normal">
+                                  {item.label}
+                                </FormLabel>
+                              </div>
                             </FormItem>
                           );
                         }}
