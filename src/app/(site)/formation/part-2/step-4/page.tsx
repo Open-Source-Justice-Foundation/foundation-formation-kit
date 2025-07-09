@@ -91,10 +91,15 @@ export default function FormationPart2Step4Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormDescription className="font-normal">
-                    Have you adopted bylaws? If &quot;Yes,&quot; at the end of
-                    this form, upload a current copy showing the date of
-                    adoption. If &quot;No,&quot; explain how you select your
-                    officers, directors, or trustees.
+                    Have you adopted bylaws?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; at the end of this form, upload a
+                      current copy showing the date of adoption.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; explain how you select your officers,
+                      directors, or trustees.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup

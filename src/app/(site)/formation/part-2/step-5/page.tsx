@@ -89,13 +89,18 @@ export default function FormationPart2Step5Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormDescription className="font-normal">
-                    Are you a successor to another organization? Answer
-                    &quot;Yes&quot; if you have taken or will take over the
-                    activities of another organization, you took over 25% or
-                    more of the fair market value of the net assets of another
-                    organization, or you were established upon the conversion of
-                    an organization from for-profit to non-profit status. If
-                    &quot;Yes,&quot; complete Schedule G.
+                    Are you a successor to another organization?
+                    <span className="mt-1.5 block">
+                      Answer &quot;Yes&quot; if you have taken or will take over
+                      the activities of another organization, you took over 25%
+                      or more of the fair market value of the net assets of
+                      another organization, or you were established upon the
+                      conversion of an organization from for-profit to
+                      non-profit status.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; complete Schedule G.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
