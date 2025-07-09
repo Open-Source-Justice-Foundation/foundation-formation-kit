@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -89,9 +82,6 @@ export default function FormationPart4Step9Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Distributions to Other Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,23 +94,28 @@ export default function FormationPart4Step9Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you make grants, loans, or other
-                    distributions to organizations? If &quot;Yes,&quot; describe
-                    the type and purpose of the grants, loans, or distributions,
-                    how you select your recipients including submission
-                    requirements (such as grant proposals or application forms),
-                    and the criteria you use or will use to select recipients.
-                    Also describe how you ensure the grants, loans, and other
-                    distributions are or will be used for their intended
-                    purposes (including whether you require periodic or final
-                    reports on the use of funds and any procedures you have if
-                    you identify that funds are not being used for their
-                    intended purposes). Finally, describe the records you keep
-                    with respect to grants, loans, or other distributions you
-                    make and identify any recipient organizations and any
-                    relationships between you and the recipients. If
-                    &quot;No,&quot; continue to Line 10.
+                    distributions to organizations?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe the type and purpose of the
+                      grants, loans, or distributions, how you select your
+                      recipients including submission requirements (such as
+                      grant proposals or application forms), and the criteria
+                      you use or will use to select recipients. Also describe
+                      how you ensure the grants, loans, and other distributions
+                      are or will be used for their intended purposes (including
+                      whether you require periodic or final reports on the use
+                      of funds and any procedures you have if you identify that
+                      funds are not being used for their intended purposes).
+                      Finally, describe the records you keep with respect to
+                      grants, loans, or other distributions you make and
+                      identify any recipient organizations and any relationships
+                      between you and the recipients.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; continue to Line 10.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -166,8 +161,8 @@ export default function FormationPart4Step9Page() {
                   <FormLabel>Distributions to Other Organizations</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Distributions to other organizations..."
-                      className="resize-none"
+                      placeholder="Describe your distributions to other organizations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -184,7 +179,7 @@ export default function FormationPart4Step9Page() {
               >
                 <Link href="/formation/part-4/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -195,7 +190,7 @@ export default function FormationPart4Step9Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

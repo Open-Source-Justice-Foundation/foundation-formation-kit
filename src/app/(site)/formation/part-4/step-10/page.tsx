@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -87,11 +80,8 @@ export default function FormationPart4Step10Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Foreign Country Operation
+          Foreign Country Operations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,12 +94,17 @@ export default function FormationPart4Step10Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you operate in a foreign country or
-                    countries? If &quot;Yes,&quot; name each foreign country and
-                    region within each country in which you do or will operate
-                    and describe your operations in each one. If &quot;No,&quot;
-                    continue to Line 11.
+                    countries?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; name each foreign country and region
+                      within each country in which you do or will operate and
+                      describe your operations in each one.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; continue to Line 11.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -152,11 +147,11 @@ export default function FormationPart4Step10Page() {
               name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Foreign Country Operation</FormLabel>
+                  <FormLabel>Foreign Country Operations</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Foreign country operation..."
-                      className="resize-none"
+                      placeholder="Describe your foreign country operations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -173,7 +168,7 @@ export default function FormationPart4Step10Page() {
               >
                 <Link href="/formation/part-4/step-9" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -184,7 +179,7 @@ export default function FormationPart4Step10Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

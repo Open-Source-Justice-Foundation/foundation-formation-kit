@@ -94,7 +94,7 @@ export default function FormationPart4Step16Page() {
               name="fundraisingActivities"
               render={() => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Check any of the following fundraising activities that you
                     will undertake (check all that apply):
                   </FormDescription>
@@ -112,6 +112,7 @@ export default function FormationPart4Step16Page() {
                             <FormControl>
                               <Checkbox
                                 name={item.id}
+                                className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -145,7 +146,7 @@ export default function FormationPart4Step16Page() {
               >
                 <Link href="/formation/part-4/step-15" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -156,7 +157,7 @@ export default function FormationPart4Step16Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

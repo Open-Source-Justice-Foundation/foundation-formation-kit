@@ -157,7 +157,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "11",
-        title: "Sponsoring Organization",
+        title: "Donor Advised Funds",
         url: "/formation/part-4/step-11",
       },
       {

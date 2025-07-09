@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -87,11 +80,8 @@ export default function FormationPart4Step11Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Sponsoring Organization
+          Donor Advised Funds
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,12 +94,15 @@ export default function FormationPart4Step11Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Are you a sponsoring organization that maintains one or more
-                    donor advised funds? If yes, please provide a complete
-                    description of your program, including the specific advice
-                    that such donors may provide. Describe in detail the control
-                    you maintain (or will maintain) over the use of the funds.
+                    donor advised funds?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes&quot;, please provide a complete description
+                      of your program, including the specific advice that such
+                      donors may provide. Describe in detail the control you
+                      maintain (or will maintain) over the use of the funds.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -152,11 +145,11 @@ export default function FormationPart4Step11Page() {
               name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Sponsoring Organization</FormLabel>
+                  <FormLabel>Donor Advised Funds Program</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Sponsoring organization..."
-                      className="resize-none"
+                      placeholder="Describe your donor advised funds program..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -173,7 +166,7 @@ export default function FormationPart4Step11Page() {
               >
                 <Link href="/formation/part-4/step-10" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -184,7 +177,7 @@ export default function FormationPart4Step11Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

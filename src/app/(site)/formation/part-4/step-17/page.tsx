@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -89,9 +82,6 @@ export default function FormationPart4Step17Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Fundraising Activities for Other Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,11 +94,14 @@ export default function FormationPart4Step17Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you engage in fundraising activities for
-                    other organizations? If &quot;Yes,&quot; describe these
-                    arrangements, including the names or descriptions of the
-                    organizations for which you raise funds.
+                    other organizations?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe these arrangements, including
+                      the names or descriptions of the organizations for which
+                      you raise funds.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -151,13 +144,11 @@ export default function FormationPart4Step17Page() {
               name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Fundraising Activities for Other Organizations
-                  </FormLabel>
+                  <FormLabel>Fundraising Activities Arrangements</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Fundraising activities for other organizations..."
-                      className="resize-none"
+                      placeholder="Describe your fundraising activities arrangements..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -174,7 +165,7 @@ export default function FormationPart4Step17Page() {
               >
                 <Link href="/formation/part-4/step-16" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -185,7 +176,7 @@ export default function FormationPart4Step17Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
