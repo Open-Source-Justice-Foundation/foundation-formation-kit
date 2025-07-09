@@ -50,6 +50,7 @@ type FormValues = z.infer<
 export default function FormationPart1Step9Page() {
   const router = useRouter();
 
+  const [openStateCombobox, setOpenStateCombobox] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -113,8 +114,6 @@ export default function FormationPart1Step9Page() {
           Officer, Director, and/or Trustee Identification
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />
           List the names, titles, and mailing addresses of your officiers,
           directors, and/or trustees.
         </CardDescription>
@@ -221,7 +220,10 @@ export default function FormationPart1Step9Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>State</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openStateCombobox}
+                    onOpenChange={setOpenStateCombobox}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -240,6 +242,7 @@ export default function FormationPart1Step9Page() {
                             )?.label
                             : "Select state..."}
                           <ChevronsUpDown className="opacity-50" />
+                          <span className="sr-only">Open state combobox</span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -262,6 +265,7 @@ export default function FormationPart1Step9Page() {
                                       "state",
                                       supportedState.value,
                                     );
+                                    setOpenStateCombobox(false);
                                   }}
                                   disabled={isLoading}
                                 >
@@ -274,6 +278,9 @@ export default function FormationPart1Step9Page() {
                                         : "opacity-0",
                                     )}
                                   />
+                                  <span className="sr-only">
+                                    State selected
+                                  </span>
                                 </CommandItem>
                               ),
                             )}
@@ -313,7 +320,7 @@ export default function FormationPart1Step9Page() {
               >
                 <Link href="/formation/part-1/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -324,7 +331,7 @@ export default function FormationPart1Step9Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -85,9 +79,6 @@ export default function FormationPart1Step4Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Person to Contact
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -110,9 +101,8 @@ export default function FormationPart1Step4Page() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Provide a person to contact if more information is needed,
-                    e.g., officier, director, trustee, or authorized
-                    representative.
+                    Provide a person to contact if more information is needed
+                    (officier, director, trustee, or authorized representative).
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -127,7 +117,7 @@ export default function FormationPart1Step4Page() {
               >
                 <Link href="/formation/part-1/step-3" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -138,7 +128,7 @@ export default function FormationPart1Step4Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

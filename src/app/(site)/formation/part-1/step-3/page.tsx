@@ -43,6 +43,8 @@ type FormValues = z.infer<
 export default function FormationPart1Step3Page() {
   const router = useRouter();
 
+  const [openMonthTaxYearEndsCombobox, setOpenMonthTaxYearEndsCombobox] =
+    useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -105,14 +107,17 @@ export default function FormationPart1Step3Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Month Tax Year Ends</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openMonthTaxYearEndsCombobox}
+                    onOpenChange={setOpenMonthTaxYearEndsCombobox}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
                           variant="outline"
                           role="combobox"
                           className={cn(
-                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                           disabled={isLoading}
@@ -124,6 +129,9 @@ export default function FormationPart1Step3Page() {
                             )?.label
                             : "Select month..."}
                           <ChevronsUpDown className="opacity-50" />
+                          <span className="sr-only">
+                            Open month tax year ends combobox
+                          </span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -145,6 +153,7 @@ export default function FormationPart1Step3Page() {
                                     "monthTaxYearEnds",
                                     monthTaxYearEnds.value,
                                   );
+                                  setOpenMonthTaxYearEndsCombobox(false);
                                 }}
                                 disabled={isLoading}
                               >
@@ -157,6 +166,9 @@ export default function FormationPart1Step3Page() {
                                       : "opacity-0",
                                   )}
                                 />
+                                <span className="sr-only">
+                                  Month tax year ends selected
+                                </span>
                               </CommandItem>
                             ))}
                           </CommandGroup>
@@ -177,7 +189,7 @@ export default function FormationPart1Step3Page() {
               >
                 <Link href="/formation/part-1/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -188,7 +200,7 @@ export default function FormationPart1Step3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
