@@ -124,7 +124,9 @@ export default function FormationPart2Step2Page() {
                             <span>Pick a date</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          <span className="sr-only">Select date</span>
+                          <span className="sr-only">
+                            Select date you formed
+                          </span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -158,7 +160,7 @@ export default function FormationPart2Step2Page() {
               >
                 <Link href="/formation/part-2/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -169,7 +171,7 @@ export default function FormationPart2Step2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

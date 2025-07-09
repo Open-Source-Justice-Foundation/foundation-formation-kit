@@ -83,8 +83,6 @@ export default function FormationPart2Step1Page() {
           Organization Type
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />
           You must be a corporation, limited liability company (LLC),
           unincorporated association, or trust to be tax exempt.
         </CardDescription>
@@ -100,7 +98,7 @@ export default function FormationPart2Step1Page() {
               name="organizationType"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Select your type of organization.
                   </FormDescription>
                   <FormControl>
@@ -205,7 +203,7 @@ export default function FormationPart2Step1Page() {
               >
                 <Link href="/formation/part-1/step-9" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -216,7 +214,7 @@ export default function FormationPart2Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

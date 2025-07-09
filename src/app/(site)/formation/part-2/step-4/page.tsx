@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -84,9 +78,6 @@ export default function FormationPart2Step4Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Adopted Bylaws
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -99,7 +90,7 @@ export default function FormationPart2Step4Page() {
               name="adoptedBylaws"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Have you adopted bylaws? If &quot;Yes,&quot; at the end of
                     this form, upload a current copy showing the date of
                     adoption. If &quot;No,&quot; explain how you select your
@@ -146,13 +137,11 @@ export default function FormationPart2Step4Page() {
               name="adoptedBylawsNoResponseExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Selection of officers, directors, or trustees
-                  </FormLabel>
+                  <FormLabel>Selection Process</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you select your officers, directors, or trustees..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -169,7 +158,7 @@ export default function FormationPart2Step4Page() {
               >
                 <Link href="/formation/part-2/step-3" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -180,7 +169,7 @@ export default function FormationPart2Step4Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

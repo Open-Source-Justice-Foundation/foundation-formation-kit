@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Command,
   CommandEmpty,
@@ -50,6 +44,7 @@ type FormValues = z.infer<
 export default function FormationPart2Step3Page() {
   const router = useRouter();
 
+  const [openStateCombobox, setOpenStateCombobox] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -99,9 +94,6 @@ export default function FormationPart2Step3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           State of Formation
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -115,14 +107,17 @@ export default function FormationPart2Step3Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>State of Formation</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openStateCombobox}
+                    onOpenChange={setOpenStateCombobox}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
                           variant="outline"
                           role="combobox"
                           className={cn(
-                            "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
+                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
                           disabled={isLoading}
@@ -135,6 +130,7 @@ export default function FormationPart2Step3Page() {
                             )?.label
                             : "Select state..."}
                           <ChevronsUpDown className="opacity-50" />
+                          <span className="sr-only">Open state combobox</span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -157,6 +153,7 @@ export default function FormationPart2Step3Page() {
                                       "stateOfFormation",
                                       supportedStateOfFormation.value,
                                     );
+                                    setOpenStateCombobox(false);
                                   }}
                                   disabled={isLoading}
                                 >
@@ -170,6 +167,9 @@ export default function FormationPart2Step3Page() {
                                         : "opacity-0",
                                     )}
                                   />
+                                  <span className="sr-only">
+                                    State selected
+                                  </span>
                                 </CommandItem>
                               ),
                             )}
@@ -194,7 +194,7 @@ export default function FormationPart2Step3Page() {
               >
                 <Link href="/formation/part-2/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -205,7 +205,7 @@ export default function FormationPart2Step3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

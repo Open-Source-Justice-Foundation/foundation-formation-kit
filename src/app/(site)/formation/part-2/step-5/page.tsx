@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationPart2Step5Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Successor to Another Organization
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,13 +88,13 @@ export default function FormationPart2Step5Page() {
               name="successorToAnotherOrganization"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Are you a successor to another organization? Answer
                     &quot;Yes&quot; if you have taken or will take over the
                     activities of another organization, you took over 25% or
                     more of the fair market value of the net assets of another
                     organization, or you were established upon the conversion of
-                    an organization from for-profit to nonprofit status. If
+                    an organization from for-profit to non-profit status. If
                     &quot;Yes,&quot; complete Schedule G.
                   </FormDescription>
                   <FormControl>
@@ -151,7 +142,7 @@ export default function FormationPart2Step5Page() {
               >
                 <Link href="/formation/part-2/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -162,7 +153,7 @@ export default function FormationPart2Step5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
