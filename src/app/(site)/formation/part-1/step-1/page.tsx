@@ -47,6 +47,9 @@ type FormValues = z.infer<
 export default function FormationPart1Step1Page() {
   const router = useRouter();
 
+  const [openStateCombobox, setOpenStateCombobox] = useState<boolean>(false);
+  const [openCountryCombobox, setOpenCountryCombobox] =
+    useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
@@ -207,7 +210,10 @@ export default function FormationPart1Step1Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Country</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openCountryCombobox}
+                    onOpenChange={setOpenCountryCombobox}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -226,6 +232,7 @@ export default function FormationPart1Step1Page() {
                             )?.label
                             : "Select country..."}
                           <ChevronsUpDown className="opacity-50" />
+                          <span className="sr-only">Open country combobox</span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -247,6 +254,7 @@ export default function FormationPart1Step1Page() {
                                     "country",
                                     supportedCountry.value,
                                   );
+                                  setOpenCountryCombobox(false);
                                 }}
                                 disabled={isLoading}
                               >
@@ -259,6 +267,9 @@ export default function FormationPart1Step1Page() {
                                       : "opacity-0",
                                   )}
                                 />
+                                <span className="sr-only">
+                                  Country selected
+                                </span>
                               </CommandItem>
                             ))}
                           </CommandGroup>
@@ -276,7 +287,10 @@ export default function FormationPart1Step1Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>State</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={openStateCombobox}
+                    onOpenChange={setOpenStateCombobox}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -295,6 +309,7 @@ export default function FormationPart1Step1Page() {
                             )?.label
                             : "Select state..."}
                           <ChevronsUpDown className="opacity-50" />
+                          <span className="sr-only">Open state combobox</span>
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -317,6 +332,7 @@ export default function FormationPart1Step1Page() {
                                       "state",
                                       supportedState.value,
                                     );
+                                    setOpenStateCombobox(false);
                                   }}
                                   disabled={isLoading}
                                 >
@@ -329,6 +345,9 @@ export default function FormationPart1Step1Page() {
                                         : "opacity-0",
                                     )}
                                   />
+                                  <span className="sr-only">
+                                    State selected
+                                  </span>
                                 </CommandItem>
                               ),
                             )}
@@ -366,7 +385,7 @@ export default function FormationPart1Step1Page() {
             >
               Next
               <MoveRight aria-hidden="true" />
-              <span className="sr-only">{"Next Step"}</span>
+              <span className="sr-only">Next Step</span>
             </Button>
           </form>
         </Form>
