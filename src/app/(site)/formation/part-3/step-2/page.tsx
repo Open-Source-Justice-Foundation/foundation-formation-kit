@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -89,9 +83,6 @@ export default function FormationPart3Step2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Organizing Document Dissolution Exempt Purposes Provision
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,22 +95,27 @@ export default function FormationPart3Step2Page() {
               name="organizingDocumentDissolutionExemptPurposesProvision"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Section 501(c)(3) requires that your organizing document
                     provide that upon dissolution, your remaining assets be used
                     exclusively for section 501(c)(3) exempt purposes, such as
                     charitable, religious, educational, and/or scientific
                     purposes. Depending on your entity type and the state in
                     which you are formed, this requirement may be satisfied by
-                    operation of state law. The following is an example of an
-                    acceptable dissolution clause: Upon the dissolution of this
-                    organization, assets shall be distributed for one or more
-                    exempt purposes within the meaning of section 501(c)(3) of
-                    the Internal Revenue Code, or corresponding section of any
-                    future federal tax code, or shall be distributed to the
-                    federal government, or to a state or local government, for a
-                    public purpose. Does your organizing document meet this
-                    requirement?
+                    operation of state law.
+                    <span className="mt-1.5 block italic">
+                      The following is an example of an acceptable dissolution
+                      clause: Upon the dissolution of this organization, assets
+                      shall be distributed for one or more exempt purposes
+                      within the meaning of section 501(c)(3) of the Internal
+                      Revenue Code, or corresponding section of any future
+                      federal tax code, or shall be distributed to the federal
+                      government, or to a state or local government, for a
+                      public purpose.
+                    </span>
+                    <span className="mt-1.5 block">
+                      Does your organizing document meet this requirement?
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -163,7 +159,7 @@ export default function FormationPart3Step2Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Where your organizing document meets this requirement
+                    Dissolution Exempt Purposes Provision Location
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -192,7 +188,7 @@ export default function FormationPart3Step2Page() {
               >
                 <Link href="/formation/part-3/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -203,7 +199,7 @@ export default function FormationPart3Step2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

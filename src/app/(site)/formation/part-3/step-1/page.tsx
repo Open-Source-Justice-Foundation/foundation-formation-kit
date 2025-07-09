@@ -87,18 +87,20 @@ export default function FormationPart3Step1Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Organizing Document Exempt Purposes Provision
+          Exempt Purposes Provision
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />
           Part III helps ensure that, when you submit this application, your
           organizing document contains the required provisions to meet the
-          organizational test under section 501(c)(3). If you cannot check
-          &quot;Yes&quot; in both Lines 1 and 2, your organizing document does
-          not meet the organizational test. DO NOT file this application until
-          you have amended your organizing document. Remember to upload your
-          original and amended organizing documents at the end of this form.
+          organizational test under section 501(c)(3).{" "}
+          <p className="mt-1.5">
+            If you cannot check &quot;Yes&quot; in both Lines 1 and 2, your
+            organizing document does not meet the organizational test.{" "}
+            <span className="font-bold">DO NOT</span> file this application
+            until you have amended your organizing document. Remember to upload
+            your original and amended organizing documents at the end of this
+            form.
+          </p>
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -112,17 +114,22 @@ export default function FormationPart3Step1Page() {
               name="organizingDocumentExemptPurposesProvision"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Section 501(c)(3) requires that your organizing document
                     limit your purposes to one or more exempt purposes within
                     section 501(c)(3), such as charitable, religious,
-                    educational, and/or scientific purposes. The following is an
-                    example of an acceptable purpose clause: The organization is
-                    organized exclusively for charitable, religious,
-                    educational, and scientific purposes under section 501(c)(3)
-                    of the Internal Revenue Code, or corresponding section of
-                    any future federal tax code. Does your organizing document
-                    meet this requirement?
+                    educational, and/or scientific purposes.
+                    <span className="mt-1.5 block italic">
+                      The following is an example of an acceptable purpose
+                      clause: The organization is organized exclusively for
+                      charitable, religious, educational, and scientific
+                      purposes under section 501(c)(3) of the Internal Revenue
+                      Code, or corresponding section of any future federal tax
+                      code.
+                    </span>
+                    <span className="mt-1.5 block">
+                      Does your organizing document meet this requirement?
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -165,9 +172,7 @@ export default function FormationPart3Step1Page() {
               name="whereOrganizingDocumentMeetsExemptPurposesProvision"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Where your organizing document meets this requirement
-                  </FormLabel>
+                  <FormLabel>Exempt Purposes Provision Location</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -195,7 +200,7 @@ export default function FormationPart3Step1Page() {
               >
                 <Link href="/formation/part-2/step-5" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -206,7 +211,7 @@ export default function FormationPart3Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

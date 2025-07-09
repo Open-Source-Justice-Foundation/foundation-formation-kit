@@ -90,12 +90,12 @@ export const COLLAPSIBLE_TRIGGERS = [
     sidebarGroupContent: [
       {
         step: "1",
-        title: "Organizing Document Exempt Purposes Provision",
+        title: "Exempt Purposes Provision",
         url: "/formation/part-3/step-1",
       },
       {
         step: "2",
-        title: "Organizing Document Dissolution Exempt Purposes Provision",
+        title: "Dissolution Exempt Purposes Provision",
         url: "/formation/part-3/step-2",
       },
     ],
