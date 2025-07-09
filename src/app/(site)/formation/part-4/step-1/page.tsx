@@ -81,7 +81,36 @@ export default function FormationPart4Step1Page() {
           Past, Present, and Planned Activities
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
+          Describe completely and in detail your past, present, and planned
+          activities. Do not refer to or repeat the purposes in your organizing
+          document.
+          <p className="mt-6">
+            For each past, present, or planned activity, include information
+            that answers the following questions:
+          </p>
+          <ol className="my-6 ml-6 [&>li]:mt-2">
+            <li className="list-['a.'] before:mr-1.5">
+              {" "}
+              What is the activity?
+            </li>
+            <li className="list-['b.'] before:mr-1.5">
+              Who conducts the activity?
+            </li>
+            <li className="list-['c.'] before:mr-1.5">
+              Where is the activity conducted?
+            </li>
+            <li className="list-['d.'] before:mr-1.5">
+              What percentage of your total time is allocated to the activity?
+            </li>
+            <li className="list-['e.'] before:mr-1.5">
+              How is the activity funded (for example, donations, fees, etc.)
+              and what percentage of your overall expenses is allocated to this
+              activity?
+            </li>
+            <li className="list-['f.'] before:mr-1.5">
+              How does the activity further your exempt purposes?
+            </li>
+          </ol>
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -98,16 +127,12 @@ export default function FormationPart4Step1Page() {
                   <FormLabel>Past, Present, and Planned Activities</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Enter your past, present, and planned activities..."
+                      placeholder="Describe your past, present, and planned activities..."
                       className="resize-none"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Describe completely and in detail your past, present, and
-                    planned activities. Do not refer to or repeat the purposes
-                    in your organizing document.
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -121,7 +146,7 @@ export default function FormationPart4Step1Page() {
               >
                 <Link href="/formation/part-3/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -132,7 +157,7 @@ export default function FormationPart4Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
