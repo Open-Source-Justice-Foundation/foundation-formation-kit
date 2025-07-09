@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -89,9 +82,6 @@ export default function FormationPart4Step7Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Intellectual Property
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,14 +94,16 @@ export default function FormationPart4Step7Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you publish, own, or have rights in music,
                     literature, tapes, artworks, choreography, scientific
-                    discoveries, or other intellectual property? If
-                    &quot;Yes,&quot; describe who owns or will own any
-                    copyrights, patents, or trademarks, whether fees are or will
-                    be charged, how the fees are determined, and how any items
-                    are or will be produced, distributed, and marketed.
+                    discoveries, or other intellectual property?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe who owns or will own any
+                      copyrights, patents, or trademarks, whether fees are or
+                      will be charged, how the fees are determined, and how any
+                      items are or will be produced, distributed, and marketed.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -157,8 +149,8 @@ export default function FormationPart4Step7Page() {
                   <FormLabel>Intellectual Property</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Intellectual property..."
-                      className="resize-none"
+                      placeholder="Describe your intellectual property..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -175,7 +167,7 @@ export default function FormationPart4Step7Page() {
               >
                 <Link href="/formation/part-4/step-6" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -186,7 +178,7 @@ export default function FormationPart4Step7Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

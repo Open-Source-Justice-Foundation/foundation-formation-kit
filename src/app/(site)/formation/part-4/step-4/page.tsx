@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -88,9 +81,6 @@ export default function FormationPart4Step4Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Related Individuals
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -103,14 +93,16 @@ export default function FormationPart4Step4Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do any individuals who receive goods, services, or funds
                     through your programs have a family or business relationship
                     with any officer, director, trustee, or with any of your
                     highest compensated employees or highest compensated
-                    independent contractors? If &quot;Yes,&quot; explain how
-                    these related individuals are eligible for goods, services,
-                    or funds.
+                    independent contractors?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain how these related individuals
+                      are eligible for goods, services, or funds.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -153,11 +145,13 @@ export default function FormationPart4Step4Page() {
               name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Related Individuals</FormLabel>
+                  <FormLabel>
+                    Eligibility for Goods, Services, or Funds
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Related individuals..."
-                      className="resize-none"
+                      placeholder="Explain how these related individuals are eligible for goods, services, or funds..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -174,7 +168,7 @@ export default function FormationPart4Step4Page() {
               >
                 <Link href="/formation/part-4/step-3" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -185,7 +179,7 @@ export default function FormationPart4Step4Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

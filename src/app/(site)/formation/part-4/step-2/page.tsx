@@ -106,7 +106,7 @@ export default function FormationPart4Step2Page() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Enter the 3-character NTEE code that best describes your
+                    Enter the 3-character NTEE Code that best describes your
                     activities.
                   </FormDescription>
                   <FormMessage />
@@ -128,6 +128,7 @@ export default function FormationPart4Step2Page() {
                         <FormControl>
                           <Checkbox
                             name={item.id}
+                            className="focus-visible:ring-ringPrimary"
                             checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => {
                               return checked
@@ -159,7 +160,7 @@ export default function FormationPart4Step2Page() {
               >
                 <Link href="/formation/part-4/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -170,7 +171,7 @@ export default function FormationPart4Step2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

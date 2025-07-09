@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -87,11 +80,8 @@ export default function FormationPart4Step8Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          General Public Educational Information
+          General Public Finance Education
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,14 +94,16 @@ export default function FormationPart4Step8Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you provide educational information to the
                     general public on budgeting, personal finance, financial
                     literacy, saving and spending practices, the sound use of
                     consumer credit, and/or assist individuals and families with
                     financial problems such as credit card debt and foreclosure
-                    by providing them with counseling? If &quot;Yes,&quot;
-                    explain.
+                    by providing them with counseling?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -154,11 +146,11 @@ export default function FormationPart4Step8Page() {
               name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>General Public Educational Information</FormLabel>
+                  <FormLabel>General Public Finance Education</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="General public educational information..."
-                      className="resize-none"
+                      placeholder="Explain how you provide general public finance education..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -175,7 +167,7 @@ export default function FormationPart4Step8Page() {
               >
                 <Link href="/formation/part-4/step-7" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -186,7 +178,7 @@ export default function FormationPart4Step8Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

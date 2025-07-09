@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
 
@@ -89,9 +82,6 @@ export default function FormationPart4Step5Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Political Support
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -104,9 +94,12 @@ export default function FormationPart4Step5Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do you or will you support or oppose candidates in political
-                    campaigns in any way? If &quot;Yes,&quot; explain.
+                    campaigns in any way?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -152,8 +145,8 @@ export default function FormationPart4Step5Page() {
                   <FormLabel>Political Support</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Political support..."
-                      className="resize-none"
+                      placeholder="Explain your political support..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -170,7 +163,7 @@ export default function FormationPart4Step5Page() {
               >
                 <Link href="/formation/part-4/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -181,7 +174,7 @@ export default function FormationPart4Step5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

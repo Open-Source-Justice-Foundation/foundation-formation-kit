@@ -21,7 +21,7 @@ export const SELECT_NTEE_CODE_BY_IRS = [
   {
     id: "select-ntee-code-by-irs",
     label:
-      "Or check here if you want the IRS to select the NTEE code that best describes your activities.",
+      "Or check here if you want the IRS to select the NTEE Code that best describes your activities.",
   },
 ];
 export const SELECT_NTEE_CODE_BY_IRS_REQUIRED_ERR_MSG = "Required";

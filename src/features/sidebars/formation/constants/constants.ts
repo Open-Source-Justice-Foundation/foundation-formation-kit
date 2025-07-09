@@ -142,7 +142,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "8",
-        title: "General Public Educational Information",
+        title: "General Public Finance Education",
         url: "/formation/part-4/step-8",
       },
       {

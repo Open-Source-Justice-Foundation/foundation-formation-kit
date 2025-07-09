@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -85,9 +79,6 @@ export default function FormationPart4Step3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Programs Limiting Provision of Goods, Services, or Funds
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -100,15 +91,20 @@ export default function FormationPart4Step3Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription className="font-normal">
                     Do any of your programs limit the provision of goods,
                     services, or funds to a specific individual or group of
-                    specific individuals? For example, answer &quot;Yes&quot; if
-                    goods, services, or funds are provided only for a particular
-                    individual, your members, individuals who work for a
-                    particular employer, or graduates of a particular school. If
-                    &quot;Yes,&quot; explain the limitation and how recipients
-                    are selected for each program.
+                    specific individuals?
+                    <span className="mt-1.5 block">
+                      For example, answer &quot;Yes&quot; if goods, services, or
+                      funds are provided only for a particular individual, your
+                      members, individuals who work for a particular employer,
+                      or graduates of a particular school.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain the limitation and how
+                      recipients are selected for each program.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -152,13 +148,12 @@ export default function FormationPart4Step3Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Programs Limiting Provision of Goods, Services, or Funds
-                    Explanation
+                    Limitation and how Recipients are Selected for Each Program
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Programs limiting provision of goods, services, or funds explanation..."
-                      className="resize-none"
+                      placeholder="Explain the limitation and how recipients are selected for each program..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -175,7 +170,7 @@ export default function FormationPart4Step3Page() {
               >
                 <Link href="/formation/part-4/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -186,7 +181,7 @@ export default function FormationPart4Step3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
