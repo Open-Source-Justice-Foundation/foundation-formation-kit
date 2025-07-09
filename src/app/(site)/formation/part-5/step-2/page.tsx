@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Conflict of Interest Policy
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -108,14 +98,19 @@ export default function FormationPart5Step2Page() {
                   <FormDescription>
                     Have you adopted a conflict of interest policy consistent
                     with the sample conflict of interest policy in Appendix A to
-                    the instructions? If you are a hospital, answer
-                    &quot;Yes&quot; if your conflict of interest policy includes
-                    provisions consistent with the additional healthcare related
-                    provisions in the sample document. If &quot;No,&quot;
-                    describe the procedures you will folow to ensure that
-                    persons who have a conflict of interest will not have
-                    influence over setting their own compensation or regarding
-                    business deals with themselves.
+                    the instructions?
+                    <span className="mt-1.5 block">
+                      If you are a hospital, answer &quot;Yes&quot; if your
+                      conflict of interest policy includes provisions consistent
+                      with the additional healthcare related provisions in the
+                      sample document.
+                    </span>
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; describe the procedures you will folow
+                      to ensure that persons who have a conflict of interest
+                      will not have influence over setting their own
+                      compensation or regarding business deals with themselves.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -158,11 +153,11 @@ export default function FormationPart5Step2Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Conflict of Interest Policy</FormLabel>
+                  <FormLabel>Conflict of Interest Procedures</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Conflict of interest policy..."
-                      className="resize-none"
+                      placeholder="Describe your conflict of interest procedures..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -179,7 +174,7 @@ export default function FormationPart5Step2Page() {
               >
                 <Link href="/formation/part-5/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -190,7 +185,7 @@ export default function FormationPart5Step2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

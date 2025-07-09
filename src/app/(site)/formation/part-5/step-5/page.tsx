@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step5Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Leases, Contracts, Loans, or Other Agreements
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -105,23 +95,39 @@ export default function FormationPart5Step5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription>
+                  <FormDescription className="mb-6">
                     Do you or will you have any leases, contracts, loans, or
-                    other agreements with: (i) your officers, directors, or
-                    trustees; (ii) any family of any of your officers,
-                    directors, or trustees; (iii) any organizations in which any
-                    of your officers, directors, or trustees are also officers,
-                    directors, or trustees, or in which any individual officer,
-                    director, or trustee owns more than a 35% interest; (iv)
-                    your highest compensated employees; or (v) your highest
-                    compensated independent contractors? If &quot;Yes,&quot;
-                    describe any written or oral arrangements that you made or
-                    intend to make, with whom you have or will have such
-                    arrangements, how the terms are or will be negotiated at
-                    arm&apos;s length, and how you determine you pay no more
-                    than fair market value or you are paid at least fair market
-                    value.
+                    other agreements with:
                   </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground [&>li]:mt-2">
+                    <li className="list-['(i)'] before:mr-1.5">
+                      Your officers, directors, or trustees?
+                    </li>
+                    <li className="list-['(ii)'] before:mr-1.5">
+                      Any family of any of your officers, directors, or
+                      trustees?
+                    </li>
+                    <li className="list-['(iii)'] before:mr-1.5">
+                      Any organizations in which any of your officers,
+                      directors, or trustees are also officers, directors, or
+                      trustees, or in which any individual officer, director, or
+                      trustee owns more than a 35% interest?
+                    </li>
+                    <li className="list-['(iv)'] before:mr-1.5">
+                      Your highest compensated employees?
+                    </li>
+                    <li className="mb-6 list-['(v)'] before:mr-1.5">
+                      Your highest compensated independent contractors?
+                    </li>
+                  </ol>
+                  <p className="text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; describe any written or oral
+                    arrangements that you made or intend to make, with whom you
+                    have or will have such arrangements, how the terms are or
+                    will be negotiated at arm&apos;s length, and how you
+                    determine you pay no more than fair market value or you are
+                    paid at least fair market value.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -163,13 +169,11 @@ export default function FormationPart5Step5Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Leases, Contracts, Loans, or Other Agreements
-                  </FormLabel>
+                  <FormLabel>Written or Oral Arrangements</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Leases, contracts, loans, or other agreements..."
-                      className="resize-none"
+                      placeholder="Describe your written or oral arrangements..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -186,7 +190,7 @@ export default function FormationPart5Step5Page() {
               >
                 <Link href="/formation/part-5/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -197,7 +201,7 @@ export default function FormationPart5Step5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

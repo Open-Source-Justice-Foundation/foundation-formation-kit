@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step6Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Contract with Another Organization
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -107,14 +97,16 @@ export default function FormationPart5Step6Page() {
                 <FormItem>
                   <FormDescription>
                     Do you or will you contract with another organization to
-                    develop, build, market, or finance your facilities? If
-                    &quot;Yes,&quot; describe each facility, the role of the
-                    other organization, and any business or family relationship
-                    between the organization and your officers, directors, or
-                    trustees. Explain how that entity is selected, how the terms
-                    of any contract(s) are negotiated at arm&apos;s length, and
-                    how you determine you will pay no more than fair market
-                    value for services.
+                    develop, build, market, or finance your facilities?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe each facility, the role of
+                      the other organization, and any business or family
+                      relationship between the organization and your officers,
+                      directors, or trustees. Explain how that entity is
+                      selected, how the terms of any contract(s) are negotiated
+                      at arm&apos;s length, and how you determine you will pay
+                      no more than fair market value for services.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -160,8 +152,8 @@ export default function FormationPart5Step6Page() {
                   <FormLabel>Contract with Another Organization</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Contract with another organization..."
-                      className="resize-none"
+                      placeholder="Describe your contract with another organization..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -178,7 +170,7 @@ export default function FormationPart5Step6Page() {
               >
                 <Link href="/formation/part-5/step-5" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -189,7 +181,7 @@ export default function FormationPart5Step6Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

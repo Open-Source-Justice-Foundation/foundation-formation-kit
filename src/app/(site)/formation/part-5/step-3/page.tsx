@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Non-Fixed Payment Compensation
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -110,12 +100,15 @@ export default function FormationPart5Step3Page() {
                     directors, trustees, highest compensated employees, and
                     highest compensated independent contractors through
                     non-fixed payments, such as discretionary bonuses or
-                    revenue-based payments? If &quot;Yes,&quot; describe all
-                    non-fixed compensation arrangements, including how the
-                    amounts are determined, who is eligible for such
-                    arrangements, whether you place a limitation on total
-                    compensation, and how you determine or will determine that
-                    you pay no more than reasonable compensation for services.
+                    revenue-based payments?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe all non-fixed compensation
+                      arrangements, including how the amounts are determined,
+                      who is eligible for such arrangements, whether you place a
+                      limitation on total compensation, and how you determine or
+                      will determine that you pay no more than reasonable
+                      compensation for services.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -158,11 +151,11 @@ export default function FormationPart5Step3Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Non-Fixed Payment Compensation</FormLabel>
+                  <FormLabel>Non-Fixed Compensation Arrangements</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Non-fixed payment compensation..."
-                      className="resize-none"
+                      placeholder="Describe all non-fixed compensation arrangements..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -179,7 +172,7 @@ export default function FormationPart5Step3Page() {
               >
                 <Link href="/formation/part-5/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -190,7 +183,7 @@ export default function FormationPart5Step3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

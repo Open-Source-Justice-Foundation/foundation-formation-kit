@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step7Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Activities or Facilities Management
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -107,16 +97,19 @@ export default function FormationPart5Step7Page() {
                 <FormItem>
                   <FormDescription>
                     Does or will someone other than your own employees or
-                    volunteers manage your activities or facilities? If
-                    &quot;Yes,&quot; describe the activities or facilities that
-                    will be managed by others, the names of the persons or
-                    organizations that manage or will manage your activities or
-                    facilities, and any business or family relationship between
-                    the organization and your officers, directors, or trustees.
-                    Explain how these managers were or will be selected, how the
-                    terms of any contracts or other agreements were or will be
-                    negotiated, and how you determine you will pay no more than
-                    fair market value for services.
+                    volunteers manage your activities or facilities?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe the activities or facilities
+                      that will be managed by others, the names of the persons
+                      or organizations that manage or will manage your
+                      activities or facilities, and any business or family
+                      relationship between the organization and your officers,
+                      directors, or trustees. Explain how these managers were or
+                      will be selected, how the terms of any contracts or other
+                      agreements were or will be negotiated, and how you
+                      determine you will pay no more than fair market value for
+                      services.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -162,8 +155,8 @@ export default function FormationPart5Step7Page() {
                   <FormLabel>Activities or Facilities Management</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Activities or facilities management..."
-                      className="resize-none"
+                      placeholder="Describe your sctivities or facilities management..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -180,7 +173,7 @@ export default function FormationPart5Step7Page() {
               >
                 <Link href="/formation/part-5/step-6" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -191,7 +184,7 @@ export default function FormationPart5Step7Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

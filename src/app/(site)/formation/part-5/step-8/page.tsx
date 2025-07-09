@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,7 +26,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part5CompensationAndOtherFinancialArrangementsYesNoRadioWithTextAreaSchema
@@ -90,9 +83,6 @@ export default function FormationPart5Step8Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Profit and Loss Sharing with Partners
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -109,15 +99,17 @@ export default function FormationPart5Step8Page() {
                     Do you participate in any joint ventures, including
                     partnerships or limited liability companies treated as
                     partnerships, in which you share profits and losses with
-                    partners? If &quot;Yes,&quot; state your ownership
-                    percentage in each joint venture, list your investment in
-                    each joint venture, describe the tax status of other
-                    participants in each joint venture (including whether they
-                    are section 501(c)(3) organizations), describe the
-                    activities of each joint venture, describe how you exercise
-                    control over the activities of each joint venture, and
-                    describe how each joint venture furthers your exempt
-                    purposes.
+                    partners?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; state your ownership percentage in
+                      each joint venture, list your investment in each joint
+                      venture, describe the tax status of other participants in
+                      each joint venture (including whether they are section
+                      501(c)(3) organizations), describe the activities of each
+                      joint venture, describe how you exercise control over the
+                      activities of each joint venture, and describe how each
+                      joint venture furthers your exempt purposes.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -163,8 +155,8 @@ export default function FormationPart5Step8Page() {
                   <FormLabel>Profit and Loss Sharing with Partners</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Profit and loss sharing with partners..."
-                      className="resize-none"
+                      placeholder="Describe your profit and loss sharing with partners..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -181,7 +173,7 @@ export default function FormationPart5Step8Page() {
               >
                 <Link href="/formation/part-5/step-7" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -192,7 +184,7 @@ export default function FormationPart5Step8Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
