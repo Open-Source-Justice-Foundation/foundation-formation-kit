@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleBStep2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Primary Function
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,9 +86,12 @@ export default function FormationScheduleBStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Is the primary function of your school the presentation of
-                    formal instruction? If &quot;No,&quot; continue to Line 3.
+                    formal instruction?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; continue to Line 3.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup

@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -78,11 +72,8 @@ export default function FormationScheduleBStep9Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Policy Awareness
+          Student Policy Awareness
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,17 +86,29 @@ export default function FormationScheduleBStep9Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Have you made your racially nondiscriminatory policy known
-                    to all segments of the general community you serve by: a)
-                    publishing a notice of your policy in a newspaper of general
-                    circulation that serves all racial segments of the
-                    community; b) publicizing your policy over broadcast media
-                    in a way that is reasonably expected to be effective; or c)
-                    displaying a notice of your policy at all times on your
-                    primary, publicly accessible internet home page in a manner
-                    reasonably expected to be noticed by visitors to the
-                    homepage? If &quot;Yes,&quot; continue to Line 10.
+                    to all segments of the general community you serve by:
+                    <ol className="my-6 ml-6 [&>li]:mt-2">
+                      <li className="list-['a)'] before:mr-1.5">
+                        Publishing a notice of your policy in a newspaper of
+                        general circulation that serves all racial segments of
+                        the community?
+                      </li>
+                      <li className="list-['b)'] before:mr-1.5">
+                        Publicizing your policy over broadcast media in a way
+                        that is reasonably expected to be effective?
+                      </li>
+                      <li className="list-['c)'] before:mr-1.5">
+                        Displaying a notice of your policy at all times on your
+                        primary, publicly accessible internet home page in a
+                        manner reasonably expected to be noticed by visitors to
+                        the homepage?
+                      </li>
+                    </ol>
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; continue to Line 10.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup

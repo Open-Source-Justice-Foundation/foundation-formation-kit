@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleBStep10Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Selection Process
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,13 +88,15 @@ export default function FormationScheduleBStep10Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do or will you (or any department or division of your
                     organization) discriminate in any way on the basis of race
                     with respect to admissions, use of facilities or exercise of
                     student privileges, faculty or administrative staff, or
-                    scholarship or loan programs? If &quot;Yes,&quot; for any of
-                    the above, explain fully.
+                    scholarship or loan programs?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; for any of the above, explain fully.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -146,11 +139,11 @@ export default function FormationScheduleBStep10Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Selection Process</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain your selection process..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>

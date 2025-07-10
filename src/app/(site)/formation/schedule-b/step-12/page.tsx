@@ -79,7 +79,10 @@ export default function FormationScheduleBStep12Page() {
           Financial Aid by Demographics
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
+          In the table below, enter the number and amount of loans and
+          scholarships awarded to enrolled students by racial categories.
+          Provide actual numbers rather than percentages for each racial
+          category.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -95,8 +98,8 @@ export default function FormationScheduleBStep12Page() {
                 <FormItem>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Switch to table..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>

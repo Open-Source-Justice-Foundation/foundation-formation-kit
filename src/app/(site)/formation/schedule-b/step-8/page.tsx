@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -78,11 +72,8 @@ export default function FormationScheduleBStep8Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Policies in Content
+          Student Policy in Content
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,12 +86,14 @@ export default function FormationScheduleBStep8Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do your brochures, application forms, advertisements, and
                     catalogues dealing with student admissions, programs, and
                     scholarships contain a statement of your racially
-                    nondiscriminatory policy? If &quot;Yes,&quot; continue to
-                    Line 9.
+                    nondiscriminatory policy?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; continue to Line 9.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup

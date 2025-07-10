@@ -430,22 +430,22 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "6",
-        title: "Financial Aid Revocation and/or Suspension",
+        title: "Financial Aid Revocation or Suspension",
         url: "/formation/schedule-b/step-6",
       },
       {
         step: "7",
-        title: "Policies",
+        title: "Student Policy",
         url: "/formation/schedule-b/step-7",
       },
       {
         step: "8",
-        title: "Policies in Content",
+        title: "Student Policy in Content",
         url: "/formation/schedule-b/step-8",
       },
       {
         step: "9",
-        title: "Policy Awareness",
+        title: "Student Policy Awareness",
         url: "/formation/schedule-b/step-9",
       },
       {

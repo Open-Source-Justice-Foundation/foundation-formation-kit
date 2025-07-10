@@ -4,19 +4,14 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
@@ -79,9 +74,6 @@ export default function FormationScheduleBStep13Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Incorporators, Founders, Board Members, and Donors
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -94,10 +86,13 @@ export default function FormationScheduleBStep13Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>
+                    Incorporators, Founders, Board Members, and Donors
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="List..."
-                      className="resize-none"
+                      placeholder="List your incorporators, founders, board members, and donors..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>

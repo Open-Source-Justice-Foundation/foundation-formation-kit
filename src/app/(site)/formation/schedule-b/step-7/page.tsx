@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -20,8 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { Textarea } from "~/components/ui/textarea";
 import { form1023ScheduleBYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/schedule-b/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
@@ -80,11 +74,8 @@ export default function FormationScheduleBStep7Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Policies
+          Student Policy
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,7 +88,7 @@ export default function FormationScheduleBStep7Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Have you adopted a racially nondiscriminatory policy as to
                     students in your organizing document, bylaws, or by
                     resolution of your governing body?
@@ -143,12 +134,13 @@ export default function FormationScheduleBStep7Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Policy Location</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                    <Input
                       {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

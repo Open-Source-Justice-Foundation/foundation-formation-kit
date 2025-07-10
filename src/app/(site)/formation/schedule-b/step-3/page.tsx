@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleBStep3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Public School Classification
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,13 +88,15 @@ export default function FormationScheduleBStep3Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Are you a public school because you are operated by a state
                     or subdivision of a state or operated wholly or
-                    predominantly from government funds or property? If
-                    &quot;Yes,&quot; explain how you are operated by a state or
-                    subdivision of a state. Do not complete the remainder of
-                    Schedule B.
+                    predominantly from government funds or property?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain how you are operated by a
+                      state or subdivision of a state. Do not complete the
+                      remainder of Schedule B.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -147,13 +140,12 @@ export default function FormationScheduleBStep3Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Explanation of how you are operated by a state or
-                    subdivision of a state
+                    How you are Operated by a State or Subdivision of a State
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you are operated by a state or subdivision of a state..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
