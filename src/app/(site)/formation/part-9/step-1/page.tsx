@@ -32,6 +32,7 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
+// Add radio button section
 // Update Other (describe) to include textarea
 
 type FormValues = z.infer<
@@ -90,7 +91,7 @@ export default function FormationPart9Step1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Annual Filing Requirements
         </CardTitle>
-        <CardDescription className="text-sm font-bold sm:text-base">
+        <CardDescription className="font-bold">
           If you fail to file a required information return or notice for three
           consecutive years, your exempt status will be automatically revoked.
         </CardDescription>
@@ -106,7 +107,7 @@ export default function FormationPart9Step1Page() {
               name="exceptedFromFiling"
               render={() => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     If &quot;Yes,&quot; are you claiming you are excepted from
                     filing because you are:
                   </FormDescription>
@@ -124,6 +125,7 @@ export default function FormationPart9Step1Page() {
                             <FormControl>
                               <Checkbox
                                 name={item.id}
+                                className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -157,7 +159,7 @@ export default function FormationPart9Step1Page() {
               >
                 <Link href="/formation/part-8/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -168,7 +170,7 @@ export default function FormationPart9Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

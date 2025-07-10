@@ -87,7 +87,7 @@ export default function FormationUploadChecklistPage() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Upload Checklist
         </CardTitle>
-        <CardDescription className="text-sm sm:text-base">
+        <CardDescription>
           This is an upload checklist used to make sure you&apos;ve uploaded all
           of your required documents.
         </CardDescription>
@@ -103,7 +103,7 @@ export default function FormationUploadChecklistPage() {
               name="uploadChecklistItems"
               render={() => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Check the relevant boxes below to make sure you&apos;ve
                     uploaded all of your required documents.
                   </FormDescription>
@@ -121,6 +121,7 @@ export default function FormationUploadChecklistPage() {
                             <FormControl>
                               <Checkbox
                                 name={item.id}
+                                className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -154,7 +155,7 @@ export default function FormationUploadChecklistPage() {
               >
                 <Link href="/formation/part-10/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -165,7 +166,7 @@ export default function FormationUploadChecklistPage() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

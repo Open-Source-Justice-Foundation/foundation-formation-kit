@@ -107,7 +107,7 @@ export default function FormationPart10Step1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Signature
         </CardTitle>
-        <CardDescription className="text-sm sm:text-base">
+        <CardDescription>
           I declare under the penalties of perjury that I am authorized to sign
           this application on behalf of the above organization and that I have
           examined this application, and to the best of my knowledge it is true,
@@ -215,7 +215,7 @@ export default function FormationPart10Step1Page() {
               >
                 <Link href="/formation/part-9/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -226,7 +226,7 @@ export default function FormationPart10Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
