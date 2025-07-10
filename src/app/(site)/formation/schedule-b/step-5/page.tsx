@@ -164,7 +164,7 @@ export default function FormationScheduleBStep5Page() {
               >
                 <Link href="/formation/schedule-b/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -175,7 +175,7 @@ export default function FormationScheduleBStep5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

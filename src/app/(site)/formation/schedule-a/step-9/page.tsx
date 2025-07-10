@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleAStep9Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Established Congregation
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,9 +86,12 @@ export default function FormationScheduleAStep9Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you have an established congregation or other regular
-                    membership group? If &quot;No,&quot; continue to Line 10.
+                    membership group?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; continue to Line 10.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -144,7 +138,7 @@ export default function FormationScheduleAStep9Page() {
               >
                 <Link href="/formation/schedule-a/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -155,7 +149,7 @@ export default function FormationScheduleAStep9Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

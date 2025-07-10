@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Literature
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,9 +92,11 @@ export default function FormationScheduleAStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
-                    Do you have a literature of your own? If &quot;Yes,&quot;
-                    describe your literature.
+                  <FormDescription>
+                    Do you have a literature of your own?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe your literature.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -146,11 +139,11 @@ export default function FormationScheduleAStep2Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Literature description</FormLabel>
+                  <FormLabel>Literature</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe your literature..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -167,7 +160,7 @@ export default function FormationScheduleAStep2Page() {
               >
                 <Link href="/formation/schedule-a/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -178,7 +171,7 @@ export default function FormationScheduleAStep2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

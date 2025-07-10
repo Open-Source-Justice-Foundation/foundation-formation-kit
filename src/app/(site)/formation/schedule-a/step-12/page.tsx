@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep12Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Religious Leaders
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,12 +92,14 @@ export default function FormationScheduleAStep12Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
-                    Do you have ministers or religious leaders? If
-                    &quot;Yes,&quot; describe these roles and explain whether
-                    the ministers or religious leaders are ordained,
-                    commissioned, or licensed after a prescribed course of
-                    study.
+                  <FormDescription>
+                    Do you have ministers or religious leaders?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe these roles and explain
+                      whether the ministers or religious leaders are ordained,
+                      commissioned, or licensed after a prescribed course of
+                      study.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -149,11 +142,11 @@ export default function FormationScheduleAStep12Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Religious leaders description</FormLabel>
+                  <FormLabel>Ministers or Religious Leaders</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe your religious leaders..."
-                      className="resize-none"
+                      placeholder="Describe your ministers or religious leaders..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -173,7 +166,7 @@ export default function FormationScheduleAStep12Page() {
                   className="text-base"
                 >
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -184,7 +177,7 @@ export default function FormationScheduleAStep12Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

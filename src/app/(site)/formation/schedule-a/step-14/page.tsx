@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep14Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Requirements for Religious Leaders
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,10 +92,13 @@ export default function FormationScheduleAStep14Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you ordain, commission, or license ministers or religious
-                    leaders? If &quot;Yes,&quot; describe the requirements for
-                    ordination, commission, or licensure.
+                    leaders?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe the requirements for
+                      ordination, commission, or licensure.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -147,13 +141,11 @@ export default function FormationScheduleAStep14Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Requirements for religious leaders description
-                  </FormLabel>
+                  <FormLabel>Requirements for Religious Leaders</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe your requirements for religious leaders..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -173,7 +165,7 @@ export default function FormationScheduleAStep14Page() {
                   className="text-base"
                 >
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -184,7 +176,7 @@ export default function FormationScheduleAStep14Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

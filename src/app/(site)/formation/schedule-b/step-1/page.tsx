@@ -146,7 +146,7 @@ export default function FormationScheduleBStep1Page() {
               >
                 <Link href="/formation/upload-checklist" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -157,7 +157,7 @@ export default function FormationScheduleBStep1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

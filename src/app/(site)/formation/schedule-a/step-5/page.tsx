@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep5Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Group of Churches Participation
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,9 +92,12 @@ export default function FormationScheduleAStep5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Are you part of a group of churches with similar beliefs and
-                    structures? If &quot;Yes,&quot; explain.
+                    structures?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -146,13 +140,11 @@ export default function FormationScheduleAStep5Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Group of churches participation description
-                  </FormLabel>
+                  <FormLabel>Group of Churches Participation</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe your group of churches participation..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -169,7 +161,7 @@ export default function FormationScheduleAStep5Page() {
               >
                 <Link href="/formation/schedule-a/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -180,7 +172,7 @@ export default function FormationScheduleAStep5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Code of Doctrine and Discipline
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,10 +92,12 @@ export default function FormationScheduleAStep3Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
-                    Do you have a formal code of doctrine and discipline? If
-                    &quot;Yes,&quot; describe your code of doctrine and
-                    discipline.
+                  <FormDescription>
+                    Do you have a formal code of doctrine and discipline?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe your code of doctrine and
+                      discipline.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -147,13 +140,11 @@ export default function FormationScheduleAStep3Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Code of doctrine and discipline description
-                  </FormLabel>
+                  <FormLabel>Code of Doctrine and Discipline</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe your code of doctrine and discipline..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -170,7 +161,7 @@ export default function FormationScheduleAStep3Page() {
               >
                 <Link href="/formation/schedule-a/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -181,7 +172,7 @@ export default function FormationScheduleAStep3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

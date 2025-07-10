@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -86,9 +80,6 @@ export default function FormationScheduleAStep15Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Other Information
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -101,10 +92,12 @@ export default function FormationScheduleAStep15Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you have other information you believe should be
-                    considered regarding your status as a church? If
-                    &quot;Yes,&quot; explain.
+                    considered regarding your status as a church?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -147,11 +140,11 @@ export default function FormationScheduleAStep15Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Other information description</FormLabel>
+                  <FormLabel>Other Information</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe your other information..."
-                      className="resize-none"
+                      placeholder="Explain the other information..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -171,7 +164,7 @@ export default function FormationScheduleAStep15Page() {
                   className="text-base"
                 >
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -182,7 +175,7 @@ export default function FormationScheduleAStep15Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
