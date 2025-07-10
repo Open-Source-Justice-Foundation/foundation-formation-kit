@@ -94,7 +94,7 @@ export default function FormationPart4Step16Page() {
               name="fundraisingActivities"
               render={() => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Check any of the following fundraising activities that you
                     will undertake (check all that apply):
                   </FormDescription>

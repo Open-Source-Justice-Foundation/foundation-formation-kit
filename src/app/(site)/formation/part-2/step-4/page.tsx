@@ -90,7 +90,7 @@ export default function FormationPart2Step4Page() {
               name="adoptedBylaws"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Have you adopted bylaws?
                     <span className="mt-1.5 block">
                       If &quot;Yes,&quot; at the end of this form, upload a

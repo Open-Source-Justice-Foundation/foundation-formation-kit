@@ -31,7 +31,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<typeof form1023Part8EffectiveDateStep1Schema>;
 
@@ -85,15 +84,19 @@ export default function FormationPart8Step1Page() {
           Effective Date
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-          <br />
           In general, a determination letter recognizing exemption of an
           organization described in section 501(c)(3) is effective as of the
-          date of formation of an organization if: (1) its purposes and
-          activities prior to the date of the determination letter have been
-          consistent with the requirements for exemption; and (2) it has filed
-          an application for recognition of exemption within 27 months from the
-          end of the month in which it was organized.
+          date of formation of an organization if:
+          <ol className="my-6 ml-6 [&>li]:mt-2">
+            <li className="list-['(1)'] before:mr-1.5">
+              Its purposes and activities prior to the date of the determination
+              letter have been consistent with the requirements for exemption.
+            </li>
+            <li className="list-['(2)'] before:mr-1.5">
+              It has filed an application for recognition of exemption within 27
+              months from the end of the month in which it was organized.
+            </li>
+          </ol>
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -109,8 +112,10 @@ export default function FormationPart8Step1Page() {
                 <FormItem>
                   <FormDescription>
                     Are you submitting this application within 27 months of the
-                    end of the month in which you were legally formed? If
-                    &quot;No,&quot; complete Schedule E.
+                    end of the month in which you were legally formed?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; complete Schedule E.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -157,7 +162,7 @@ export default function FormationPart8Step1Page() {
               >
                 <Link href="/formation/part-7/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -168,7 +173,7 @@ export default function FormationPart8Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

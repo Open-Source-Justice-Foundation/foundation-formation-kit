@@ -91,7 +91,7 @@ export default function FormationPart4Step3Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do any of your programs limit the provision of goods,
                     services, or funds to a specific individual or group of
                     specific individuals?

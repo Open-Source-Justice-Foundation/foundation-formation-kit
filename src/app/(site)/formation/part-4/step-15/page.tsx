@@ -89,7 +89,7 @@ export default function FormationPart4Step15Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you provide scholarships, fellowships,
                     educational loans, or other educational grants to
                     individuals, including grants for travel, study, or other

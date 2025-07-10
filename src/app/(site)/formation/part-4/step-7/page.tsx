@@ -94,7 +94,7 @@ export default function FormationPart4Step7Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you publish, own, or have rights in music,
                     literature, tapes, artworks, choreography, scientific
                     discoveries, or other intellectual property?

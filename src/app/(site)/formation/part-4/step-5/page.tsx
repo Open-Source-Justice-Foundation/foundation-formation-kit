@@ -94,7 +94,7 @@ export default function FormationPart4Step5Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you support or oppose candidates in political
                     campaigns in any way?
                     <span className="mt-1.5 block">

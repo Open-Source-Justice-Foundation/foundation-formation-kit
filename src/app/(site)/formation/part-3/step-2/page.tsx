@@ -95,7 +95,7 @@ export default function FormationPart3Step2Page() {
               name="organizingDocumentDissolutionExemptPurposesProvision"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Section 501(c)(3) requires that your organizing document
                     provide that upon dissolution, your remaining assets be used
                     exclusively for section 501(c)(3) exempt purposes, such as

@@ -88,7 +88,7 @@ export default function FormationPart2Step5Page() {
               name="successorToAnotherOrganization"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Are you a successor to another organization?
                     <span className="mt-1.5 block">
                       Answer &quot;Yes&quot; if you have taken or will take over

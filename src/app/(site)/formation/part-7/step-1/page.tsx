@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import {
@@ -37,7 +38,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Update text
 
 type FormValues = z.infer<
   typeof form1023Part7FoundationClassificationStep1Schema
@@ -106,7 +106,7 @@ export default function FormationPart7Step1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Selection and Explanation
         </CardTitle>
-        <CardDescription className="text-sm sm:text-base">
+        <CardDescription>
           Part VII is designed to classify you as an organization that is either
           a private foundation or a public charity. Public charity
           classification is a more favorable tax status than private foundation
@@ -125,7 +125,7 @@ export default function FormationPart7Step1Page() {
               name="foundationClassifications"
               render={() => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Select the foundation classification you are requesting from
                     the list below.
                   </FormDescription>
@@ -143,6 +143,7 @@ export default function FormationPart7Step1Page() {
                             <FormControl>
                               <Checkbox
                                 name={item.id}
+                                className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -172,6 +173,9 @@ export default function FormationPart7Step1Page() {
               name="privateFoundationSpecialProvisionsConfirmationCheckbox"
               render={() => (
                 <FormItem>
+                  <FormLabel>
+                    Private Foundation Special Provisions Confirmation
+                  </FormLabel>
                   {PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_CONFIRMATION_CHECKBOX.map(
                     (item) => (
                       <FormField
@@ -184,14 +188,11 @@ export default function FormationPart7Step1Page() {
                               key={item.id}
                               className="flex flex-col items-center gap-2"
                             >
-                              <FormLabel className="text-sm sm:text-base">
-                                Private Foundation Special Provisions
-                                Confirmation
-                              </FormLabel>
                               <div className="flex items-center gap-2 space-y-2">
                                 <FormControl>
                                   <Checkbox
                                     name={item.id}
+                                    className="focus-visible:ring-ringPrimary"
                                     checked={field.value?.includes(item.id)}
                                     onCheckedChange={(checked) => {
                                       return checked
@@ -230,10 +231,11 @@ export default function FormationPart7Step1Page() {
                     Private Foundation Special Provisions Reference
                   </FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Enter private foundation special provision reference..."
-                      className="resize-none"
+                    <Input
                       {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>
@@ -256,8 +258,10 @@ export default function FormationPart7Step1Page() {
                     Do you or will you provide scholarships, fellowships,
                     educational loans, or other educational grants to
                     individuals, including grants for travel, study, or other
-                    similar purposes? If &quot;Yes,&quot; complete Schedule H -
-                    Section II.
+                    similar purposes?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; complete Schedule H - Section II.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -304,12 +308,14 @@ export default function FormationPart7Step1Page() {
                     Private Operating Foundation Confirmation
                   </FormLabel>
                   <FormDescription>
-                    Are you a private operating foundation? To be a private
-                    operating foundation you must engage directly in the active
-                    conduct of charitable, religious, educational, and similar
-                    activities, as opposed to indirectly carrying out these
-                    activities by providing grants to individuals or other
-                    organizations.
+                    Are you a private operating foundation?
+                    <span className="mt-1.5 block">
+                      To be a private operating foundation you must engage
+                      directly in the active conduct of charitable, religious,
+                      educational, and similar activities, as opposed to
+                      indirectly carrying out these activities by providing
+                      grants to individuals or other organizations.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -352,13 +358,11 @@ export default function FormationPart7Step1Page() {
               name="privateOperatingFoundationStatusExplanation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Private Operating Foundation Status Explanation
-                  </FormLabel>
+                  <FormLabel>Private Operating Foundation Status</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Enter private operating foundation status explanation..."
-                      className="resize-none"
+                      placeholder="Describe your private operating foundation status..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -383,7 +387,7 @@ export default function FormationPart7Step1Page() {
               >
                 <Link href="/formation/part-6/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -394,7 +398,7 @@ export default function FormationPart7Step1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

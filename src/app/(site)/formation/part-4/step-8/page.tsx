@@ -94,7 +94,7 @@ export default function FormationPart4Step8Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you provide educational information to the
                     general public on budgeting, personal finance, financial
                     literacy, saving and spending practices, the sound use of

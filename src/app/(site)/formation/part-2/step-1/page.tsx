@@ -98,7 +98,7 @@ export default function FormationPart2Step1Page() {
               name="organizationType"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Select your type of organization.
                   </FormDescription>
                   <FormControl>

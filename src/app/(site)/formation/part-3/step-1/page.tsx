@@ -114,7 +114,7 @@ export default function FormationPart3Step1Page() {
               name="organizingDocumentExemptPurposesProvision"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Section 501(c)(3) requires that your organizing document
                     limit your purposes to one or more exempt purposes within
                     section 501(c)(3), such as charitable, religious,

@@ -89,7 +89,7 @@ export default function FormationPart4Step13Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Is your principal purpose or function to provide hospital or
                     medical care?
                     <span className="mt-1.5 block">

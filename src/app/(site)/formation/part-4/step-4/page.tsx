@@ -93,7 +93,7 @@ export default function FormationPart4Step4Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do any individuals who receive goods, services, or funds
                     through your programs have a family or business relationship
                     with any officer, director, trustee, or with any of your

@@ -94,7 +94,7 @@ export default function FormationPart4Step6Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you attempt to influence legislation?
                     <span className="mt-1.5 block">
                       If &quot;Yes,&quot; explain how you attempt to influence

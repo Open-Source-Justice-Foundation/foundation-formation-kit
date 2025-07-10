@@ -94,7 +94,7 @@ export default function FormationPart4Step17Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you engage in fundraising activities for
                     other organizations?
                     <span className="mt-1.5 block">

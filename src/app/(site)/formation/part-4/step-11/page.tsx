@@ -94,7 +94,7 @@ export default function FormationPart4Step11Page() {
               name="programsLimitProvisionOfGoodsServicesOrFunds"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Are you a sponsoring organization that maintains one or more
                     donor advised funds?
                     <span className="mt-1.5 block">

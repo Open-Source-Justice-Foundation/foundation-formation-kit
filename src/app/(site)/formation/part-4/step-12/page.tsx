@@ -89,7 +89,7 @@ export default function FormationPart4Step12Page() {
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="font-normal">
+                  <FormDescription>
                     Do you or will you operate a school?
                     <span className="mt-1.5 block">
                       If &quot;Yes,&quot; complete Schedule B.
