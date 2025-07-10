@@ -246,7 +246,7 @@ export const COLLAPSIBLE_TRIGGERS = [
     sidebarGroupContent: [
       {
         step: "1",
-        title: "Financial Data",
+        title: "Number of Tax Years",
         url: "/formation/part-6/step-1",
       },
     ],
