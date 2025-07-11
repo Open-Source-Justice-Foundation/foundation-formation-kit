@@ -71,17 +71,11 @@ export default function SignInPage() {
         throw new Error(`Login response status: ${loginResponse?.status}`);
       }
 
-      const emailSignInResponse = await signIn("resend", {
+      await signIn("resend", {
         email,
         redirect: true,
         redirectTo: "/dashboard",
       });
-
-      if (emailSignInResponse !== undefined && !emailSignInResponse?.ok) {
-        throw new Error(
-          `Email sign in response status: ${emailSignInResponse?.status}`,
-        );
-      }
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -111,16 +105,10 @@ export default function SignInPage() {
         );
       }
 
-      const oAuthSignInResponse = await signIn(provider, {
+      await signIn(provider, {
         redirect: true,
         redirectTo: "/dashboard",
       });
-
-      if (oAuthSignInResponse !== undefined && !oAuthSignInResponse?.ok) {
-        throw new Error(
-          `OAuth sign in response status: ${oAuthSignInResponse?.status}`,
-        );
-      }
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error

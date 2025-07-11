@@ -158,13 +158,7 @@ export default function ProfilePage() {
           );
         }
 
-        const oAuthSignInResponse = await signIn(provider);
-
-        if (oAuthSignInResponse !== undefined && !oAuthSignInResponse?.ok) {
-          throw new Error(
-            `OAuth sign in response status: ${oAuthSignInResponse?.status}`,
-          );
-        }
+        await signIn(provider);
       } catch (err) {
         // TODO
         // Don't log the err value, do something else with it to avoid deployment error
