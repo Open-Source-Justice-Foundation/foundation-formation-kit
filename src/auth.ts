@@ -22,7 +22,7 @@ import {
   updateUsernameAndConnectedOnInAccountsByProviderAndProviderAccountId,
   updateUsernameInAccountsByProviderAndProviderAccountId,
 } from "~/services/database/queries/auth/oauth-accounts";
-import NextAuth, { type NextAuthConfig } from "next-auth";
+import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Resend from "next-auth/providers/resend";
 import { headers } from "next/headers";
@@ -32,6 +32,8 @@ import { ZodError } from "zod";
 // *DO NOT* create a `Pool` here, outside the request handler.
 // Neon's Postgres cannot keep a pool alive between requests.
 
+// TODO
+// @ts-expect-error: NextAuth config type error when using lazy initialization
 export const { auth, handlers, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -310,5 +312,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         }
       },
     },
-  } satisfies NextAuthConfig;
+  };
 });
