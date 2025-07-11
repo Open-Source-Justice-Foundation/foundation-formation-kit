@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -78,11 +72,8 @@ export default function FormationScheduleEStep2Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Effective Date of Submission Date
+          Effective Date as Submission Date
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,7 +86,7 @@ export default function FormationScheduleEStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Generally, if you did not file Form 1023 within 27 months of
                     formation, the effective date of your exempt status will be
                     the date you filed Form 1023 (submission date). Requests for
@@ -119,7 +110,9 @@ export default function FormationScheduleEStep2Page() {
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          Yes
+                          Check this box if you accept the submission date as
+                          the effective date of your exempt status. Do not
+                          complete the rest of Schedule E.
                         </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center gap-3">
@@ -131,7 +124,8 @@ export default function FormationScheduleEStep2Page() {
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          No
+                          Check this box if you are requesting an earlier
+                          effective date than the submission date.
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
@@ -149,7 +143,7 @@ export default function FormationScheduleEStep2Page() {
               >
                 <Link href="/formation/schedule-e/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -160,7 +154,7 @@ export default function FormationScheduleEStep2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

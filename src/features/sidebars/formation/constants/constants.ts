@@ -621,7 +621,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "2",
-        title: "Effective Date of Submission Date",
+        title: "Effective Date as Submission Date",
         url: "/formation/schedule-e/step-2",
       },
     ],
