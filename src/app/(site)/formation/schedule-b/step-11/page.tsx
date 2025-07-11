@@ -83,18 +83,16 @@ export default function FormationScheduleBStep11Page() {
           current academic year and projected for the next academic year. If you
           are not operational, submit an estimate based on the best information
           available (such as the racial composition of the community you serve).
-          <span className="mt-6 block">
-            For each racial category, enter the number of:
-          </span>
+          <p className="mt-6">For each racial category, enter the number of:</p>
           <ol className="my-6 ml-6 [&>li]:mt-2">
             <li className="list-['(a)'] before:mr-1.5">Students</li>
             <li className="list-['(b)'] before:mr-1.5">Faculty</li>
             <li className="list-['(c)'] before:mr-1.5">Administrative Staff</li>
           </ol>
-          <span className="mt-1.5 block">
+          <p>
             Provide actual numbers rather than percentages for each racial
             category.
-          </span>
+          </p>
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">

@@ -107,9 +107,9 @@ export default function FormationScheduleBStep9Page() {
                       the homepage?
                     </li>
                   </ol>
-                  <span className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     If &quot;Yes,&quot; continue to Line 10.
-                  </span>
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}

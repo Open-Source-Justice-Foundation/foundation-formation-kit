@@ -87,7 +87,7 @@ export default function FormationPart8Step1Page() {
           In general, a determination letter recognizing exemption of an
           organization described in section 501(c)(3) is effective as of the
           date of formation of an organization if:
-          <ol className="my-6 ml-6 [&>li]:mt-2">
+          <ol className="ml-6 mt-6 [&>li]:mt-2">
             <li className="list-['(1)'] before:mr-1.5">
               Its purposes and activities prior to the date of the determination
               letter have been consistent with the requirements for exemption.

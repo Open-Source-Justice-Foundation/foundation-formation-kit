@@ -95,28 +95,28 @@ export default function FormationPart5Step5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="mb-6">
+                  <FormDescription>
                     Do you or will you have any leases, contracts, loans, or
                     other agreements with:
                   </FormDescription>
-                  <ol className="ml-6 text-sm text-muted-foreground [&>li]:mt-2">
-                    <li className="list-['(i)'] before:mr-1.5">
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(i)'] before:mr-1.5">
                       Your officers, directors, or trustees?
                     </li>
-                    <li className="list-['(ii)'] before:mr-1.5">
+                    <li className="mt-2 list-['(ii)'] before:mr-1.5">
                       Any family of any of your officers, directors, or
                       trustees?
                     </li>
-                    <li className="list-['(iii)'] before:mr-1.5">
+                    <li className="mt-2 list-['(iii)'] before:mr-1.5">
                       Any organizations in which any of your officers,
                       directors, or trustees are also officers, directors, or
                       trustees, or in which any individual officer, director, or
                       trustee owns more than a 35% interest?
                     </li>
-                    <li className="list-['(iv)'] before:mr-1.5">
+                    <li className="mt-2 list-['(iv)'] before:mr-1.5">
                       Your highest compensated employees?
                     </li>
-                    <li className="mb-6 list-['(v)'] before:mr-1.5">
+                    <li className="mb-6 mt-2 list-['(v)'] before:mr-1.5">
                       Your highest compensated independent contractors?
                     </li>
                   </ol>

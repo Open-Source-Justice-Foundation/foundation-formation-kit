@@ -88,11 +88,8 @@ export default function FormationPart4Step1Page() {
             For each past, present, or planned activity, include information
             that answers the following questions:
           </p>
-          <ol className="my-6 ml-6 [&>li]:mt-2">
-            <li className="list-['a.'] before:mr-1.5">
-              {" "}
-              What is the activity?
-            </li>
+          <ol className="ml-6 mt-6 [&>li]:mt-2">
+            <li className="list-['a.'] before:mr-1.5">What is the activity?</li>
             <li className="list-['b.'] before:mr-1.5">
               Who conducts the activity?
             </li>

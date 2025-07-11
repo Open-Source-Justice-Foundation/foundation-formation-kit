@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleDStep6Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Disqualified Persons Influence
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,18 +88,29 @@ export default function FormationScheduleDStep6Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do any persons who are disqualified persons (except
                     individuals who are disqualified persons only because they
                     are foundation managers) have any influence regarding your
-                    operations, including your assets or activities? If
-                    &quot;Yes,&quot; (1) provide the names of these disqualified
-                    persons, (2) explain how influence is exerted over your
-                    operations (including assets and activities), and (3)
-                    explain how control is vested over your operations
-                    (including assets and activities) by individuals other than
-                    disqualified persons.
+                    operations, including your assets or activities?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot;
+                  </p>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(1)'] before:mr-1.5">
+                      Provide the names of these disqualified persons
+                    </li>
+                    <li className="mt-2 list-['(2)'] before:mr-1.5">
+                      Explain how influence is exerted over your operations
+                      (including assets and activities)
+                    </li>
+                    <li className="mb-6 mt-2 list-['(3)'] before:mr-1.5">
+                      Explain how control is vested over your operations
+                      (including assets and activities) by individuals other
+                      than disqualified persons
+                    </li>
+                  </ol>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -154,7 +156,7 @@ export default function FormationScheduleDStep6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explanation..."
-                      className="resize-none"
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -171,7 +173,7 @@ export default function FormationScheduleDStep6Page() {
               >
                 <Link href="/formation/schedule-d/step-5" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -182,7 +184,7 @@ export default function FormationScheduleDStep6Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

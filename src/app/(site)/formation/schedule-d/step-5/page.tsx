@@ -94,8 +94,10 @@ export default function FormationScheduleDStep5Page() {
                     are foundation managers) with respect to you or persons who
                     have a family or business relationship with any disqualified
                     persons appoint any of your foundation managers?
-                    <span className="mt-1.5 block">If &quot;Yes,&quot;</span>
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot;
+                  </p>
                   <ol className="ml-6 text-sm text-muted-foreground">
                     <li className="mt-6 list-['(1)'] before:mr-1.5">
                       Describe the process by which disqualified persons appoint
