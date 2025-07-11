@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleCStep6Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Free or Below Cost Services
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,12 +88,14 @@ export default function FormationScheduleCStep6Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
-                    Do you provide free or below cost services? If
-                    &quot;Yes,&quot; describe your policy for determining when
-                    and to whom you provide these services and how these
-                    services promote the organization&apos;s benefit to the
-                    community.
+                  <FormDescription>
+                    Do you provide free or below cost services?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; describe your policy for determining
+                      when and to whom you provide these services and how these
+                      services promote the organization&apos;s benefit to the
+                      community.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -145,11 +138,11 @@ export default function FormationScheduleCStep6Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Free or Below Cost Services</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Describe your policy for these services..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -166,7 +159,7 @@ export default function FormationScheduleCStep6Page() {
               >
                 <Link href="/formation/schedule-c/step-5" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -177,7 +170,7 @@ export default function FormationScheduleCStep6Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

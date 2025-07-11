@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleCStep9Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Board of Directors
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,13 +86,15 @@ export default function FormationScheduleCStep9Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Is your board of directors composed of a majority of
                     individuals who are representative of the community you
                     serve, or do you operate under a parent organization whose
                     board of directors is composed of a majority of individuals
-                    who are representative of the community you serve? If
-                    &quot;Yes,&quot; continue to Line 10.
+                    who are representative of the community you serve?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; continue to Line 10.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -148,7 +141,7 @@ export default function FormationScheduleCStep9Page() {
               >
                 <Link href="/formation/schedule-c/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -159,7 +152,7 @@ export default function FormationScheduleCStep9Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

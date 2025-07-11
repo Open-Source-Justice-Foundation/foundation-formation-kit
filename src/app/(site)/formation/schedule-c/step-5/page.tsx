@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -78,11 +72,8 @@ export default function FormationScheduleCStep5Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Full-time Emergency Room
+          Full-Time Emergency Room
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,9 +86,11 @@ export default function FormationScheduleCStep5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
-                    Do you or will you maintain a full-time emergency room? If
-                    &quot;Yes,&quot; continue to Line 6.
+                  <FormDescription>
+                    Do you or will you maintain a full-time emergency room?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; continue to Line 6.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -144,7 +137,7 @@ export default function FormationScheduleCStep5Page() {
               >
                 <Link href="/formation/schedule-c/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -155,7 +148,7 @@ export default function FormationScheduleCStep5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

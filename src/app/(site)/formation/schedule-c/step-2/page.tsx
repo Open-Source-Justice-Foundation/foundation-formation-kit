@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleCStep2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Cooperative Hospital Service Organization Exemption
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,10 +88,12 @@ export default function FormationScheduleCStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Are you applying for exemption as a cooperative hospital
-                    service organization described in section 501(e)? If
-                    &quot;Yes,&quot; explain.
+                    service organization described in section 501(e)?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; explain.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -143,11 +136,13 @@ export default function FormationScheduleCStep2Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>
+                    Cooperative Hospital Service Organization Exemption
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain your cooperative hospital service organization exemption..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -164,7 +159,7 @@ export default function FormationScheduleCStep2Page() {
               >
                 <Link href="/formation/schedule-c/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -175,7 +170,7 @@ export default function FormationScheduleCStep2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
