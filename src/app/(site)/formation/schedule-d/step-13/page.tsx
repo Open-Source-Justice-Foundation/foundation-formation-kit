@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleDStep13Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Distribution of Assets
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,12 +88,15 @@ export default function FormationScheduleDStep13Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you distribute at least 85% of your annual net income or
-                    3.5% of the aggregate fair market value of your
+                    3.5% of the aggregate fair market value of all of your
                     non-exempt-use assets (whichever is greater) to your
-                    supported organization(s)? If &quot;No,&quot; explain.
+                    supported organization(s)?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;No,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -144,10 +138,10 @@ export default function FormationScheduleDStep13Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Distribution of Assets</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="Explain your distributions of assets to your supported organizations..."
                       className="resize-none"
                       {...field}
                     />

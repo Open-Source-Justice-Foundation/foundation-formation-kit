@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleDStep8Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Contributions
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,15 +88,18 @@ export default function FormationScheduleDStep8Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you or will you receive contributions from any person who
                     alone, or combined with family members or an entity at least
                     35% controlled by that person, controls any of your
                     supported organizations, or will you receive contributions
                     from any family member of, or an entity at least 35%
                     controlled by, any person who controls any of your supported
-                    organizations? If &quot;Yes,&quot; explain.
+                    organizations?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -147,11 +141,11 @@ export default function FormationScheduleDStep8Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Contributions</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain your contributions..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -168,7 +162,7 @@ export default function FormationScheduleDStep8Page() {
               >
                 <Link href="/formation/schedule-d/step-7" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -179,7 +173,7 @@ export default function FormationScheduleDStep8Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

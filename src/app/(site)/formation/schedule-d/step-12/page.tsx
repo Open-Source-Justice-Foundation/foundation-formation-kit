@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleDStep12Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Exempt Purposes of Supported Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,15 +88,18 @@ export default function FormationScheduleDStep12Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do substantially all of your activities directly further the
                     exempt purposes of one or more supported organizations to
                     which you are responsive by performing the functions of, or
                     carrying out the purposes of, such supported organization(s)
                     and but for your involvement would normally be engaged in by
-                    such supported organization(s). If &quot;Yes,&quot; explain
-                    and do not complete the rest of Schedule D.
+                    such supported organization(s).
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; explain and do not complete the rest of
+                    Schedule D.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -147,11 +141,13 @@ export default function FormationScheduleDStep12Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>
+                    Exempt Purposes of Supported Organizations
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain how you further the exempt purposes of your supported organizations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -171,7 +167,7 @@ export default function FormationScheduleDStep12Page() {
                   className="text-base"
                 >
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -182,7 +178,7 @@ export default function FormationScheduleDStep12Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

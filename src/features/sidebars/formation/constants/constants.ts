@@ -589,12 +589,12 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "10",
-        title: "Supported Organizations Taxes",
+        title: "Supported Organizations Documents",
         url: "/formation/schedule-d/step-10",
       },
       {
         step: "11",
-        title: "Direction of Supported Organizations",
+        title: "Direction Over Supported Organizations",
         url: "/formation/schedule-d/step-11",
       },
       {

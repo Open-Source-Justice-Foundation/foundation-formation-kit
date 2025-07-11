@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,11 +74,8 @@ export default function FormationScheduleDStep10Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Supported Organizations Taxes
+          Supported Organizations Documents
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,17 +88,29 @@ export default function FormationScheduleDStep10Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     In each taxable year, do you or will you provide each of
-                    your supported organizations with (a) a written notice
-                    addressed to a principal officer of the supported
-                    organization describing the type and amount of all of the
-                    support you provided to the supported organization during
-                    the immediately preceding taxable year, (b) a copy of your
-                    most recently filed Form 990-series return or notice, and
-                    (c) a copy of your governing documents? If &quot;No,&quot;
-                    explain.
+                    your supported organizations with:
                   </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(a)'] before:mr-1.5">
+                      A written notice addressed to a principal officer of the
+                      supported organization describing the type and amount of
+                      all of the support you provided to the supported
+                      organization during the immediately preceding taxable
+                      year?
+                    </li>
+                    <li className="mt-2 list-['(b)'] before:mr-1.5">
+                      A copy of your most recently filed Form 990-series return
+                      or notice?
+                    </li>
+                    <li className="mb-6 mt-2 list-['(c)'] before:mr-1.5">
+                      A copy of your governing document?
+                    </li>
+                  </ol>
+                  <p className="text-sm text-muted-foreground">
+                    If &quot;No,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -149,11 +152,11 @@ export default function FormationScheduleDStep10Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Supported Organizations Documents</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain documents provided to your supported Organizations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -170,7 +173,7 @@ export default function FormationScheduleDStep10Page() {
               >
                 <Link href="/formation/schedule-d/step-9" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -181,7 +184,7 @@ export default function FormationScheduleDStep10Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleDStep9Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Officers, Directors, or Trustees of Supported Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,13 +88,16 @@ export default function FormationScheduleDStep9Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do the officers, directors, or trustees of your supported
                     organization have a significant voice in your investment
                     policies, the timing and making of grants, the selection of
                     grant recipients, and in otherwise directing the use of your
-                    income or assets? If &quot;Yes,&quot; explain.
+                    income or assets?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -145,11 +139,14 @@ export default function FormationScheduleDStep9Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>
+                    Investment Involvement of Officers, Directors, or Trustees
+                    of Supported Organizations
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain the investment involvement of your officers, directors, or trustees of supported organizations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -166,7 +163,7 @@ export default function FormationScheduleDStep9Page() {
               >
                 <Link href="/formation/schedule-d/step-8" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -177,7 +174,7 @@ export default function FormationScheduleDStep9Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

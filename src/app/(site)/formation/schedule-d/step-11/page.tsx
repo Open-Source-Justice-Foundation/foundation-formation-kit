@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,11 +74,8 @@ export default function FormationScheduleDStep11Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Direction of Supported Organizations
+          Direction Over Supported Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,14 +88,16 @@ export default function FormationScheduleDStep11Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you exercise a substantial degree of direction over the
                     policies, programs, and activities of your supported
                     organization(s) and appoint or elect (directly or
                     indirectly) a majority of the officers, directors, or
-                    trustees of your supported organization(s)? If
-                    &quot;Yes,&quot; explain.
+                    trustees of your supported organization(s)?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -146,11 +139,11 @@ export default function FormationScheduleDStep11Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Direction Over Supporting Organizations</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Explain the degree of direction you have over your supporting organizations..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -170,7 +163,7 @@ export default function FormationScheduleDStep11Page() {
                   className="text-base"
                 >
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -181,7 +174,7 @@ export default function FormationScheduleDStep11Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
