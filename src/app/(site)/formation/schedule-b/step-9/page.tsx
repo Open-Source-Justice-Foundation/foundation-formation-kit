@@ -89,27 +89,27 @@ export default function FormationScheduleBStep9Page() {
                   <FormDescription>
                     Have you made your racially nondiscriminatory policy known
                     to all segments of the general community you serve by:
-                    <ol className="my-6 ml-6 [&>li]:mt-2">
-                      <li className="list-['a)'] before:mr-1.5">
-                        Publishing a notice of your policy in a newspaper of
-                        general circulation that serves all racial segments of
-                        the community?
-                      </li>
-                      <li className="list-['b)'] before:mr-1.5">
-                        Publicizing your policy over broadcast media in a way
-                        that is reasonably expected to be effective?
-                      </li>
-                      <li className="list-['c)'] before:mr-1.5">
-                        Displaying a notice of your policy at all times on your
-                        primary, publicly accessible internet home page in a
-                        manner reasonably expected to be noticed by visitors to
-                        the homepage?
-                      </li>
-                    </ol>
-                    <span className="mt-1.5 block">
-                      If &quot;Yes,&quot; continue to Line 10.
-                    </span>
                   </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['a)'] before:mr-1.5">
+                      Publishing a notice of your policy in a newspaper of
+                      general circulation that serves all racial segments of the
+                      community?
+                    </li>
+                    <li className="mt-2 list-['b)'] before:mr-1.5">
+                      Publicizing your policy over broadcast media in a way that
+                      is reasonably expected to be effective?
+                    </li>
+                    <li className="mb-6 mt-2 list-['c)'] before:mr-1.5">
+                      Displaying a notice of your policy at all times on your
+                      primary, publicly accessible internet home page in a
+                      manner reasonably expected to be noticed by visitors to
+                      the homepage?
+                    </li>
+                  </ol>
+                  <span className="text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; continue to Line 10.
+                  </span>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
