@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleDStep7Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Supported Organizations in Organizing Document
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,17 +86,25 @@ export default function FormationScheduleDStep7Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Does your organizing document specify your supported
-                    organization(s) by name? If &quot;Yes&quot; and you selected
-                    Type I above, continue to Line 8. If &quot;Yes,&quot; and
-                    you selected Type Il, do not complete the rest of Schedule
-                    D. If &quot;No&quot; and you selected Type Il above, amend
+                    organization(s) by name?
+                  </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes&quot; and you selected Type I above, continue
+                    to Line 8.
+                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; and you selected Type II, do not
+                    complete the rest of Schedule D.
+                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;No&quot; and you selected Type III above, amend
                     your organizing document to specify your supported
                     organization(s) by name or you will not meet the
                     organizational test and need to reconsider your requested
                     public charity classification; then continue to Line 8.
-                  </FormDescription>
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -151,7 +150,7 @@ export default function FormationScheduleDStep7Page() {
               >
                 <Link href="/formation/schedule-d/step-6" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -162,7 +161,7 @@ export default function FormationScheduleDStep7Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
