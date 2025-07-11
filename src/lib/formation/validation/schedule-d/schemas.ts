@@ -36,3 +36,16 @@ export const form1023ScheduleDTextAreaSchema = object({
     })
     .trim(),
 });
+
+export const form1023ScheduleDStep3Schema = object({
+  radioInput: z.enum(
+    [
+      "type-I-supporting-organization",
+      "type-II-supporting-organization",
+      "type-III-supporting-organization",
+    ],
+    {
+      required_error: "Required",
+    },
+  ),
+});

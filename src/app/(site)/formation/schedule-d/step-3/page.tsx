@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -21,7 +15,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { form1023ScheduleDYesNoRadioSchema } from "~/lib/formation/validation/schedule-d/schemas";
+import { form1023ScheduleDStep3Schema } from "~/lib/formation/validation/schedule-d/schemas";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleDYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleDStep3Schema>;
 
 export default function FormationScheduleDStep3Page() {
   const router = useRouter();
@@ -37,7 +31,7 @@ export default function FormationScheduleDStep3Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleDYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleDStep3Schema),
   });
 
   async function onSubmit(values: FormValues) {
@@ -80,9 +74,6 @@ export default function FormationScheduleDStep3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Relationship with Supported Organizations
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,7 +86,7 @@ export default function FormationScheduleDStep3Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Which of the following describes your relationship with your
                     supported organization(s)?
                   </FormDescription>
@@ -108,25 +99,51 @@ export default function FormationScheduleDStep3Page() {
                       <FormItem className="flex items-center gap-3">
                         <FormControl>
                           <RadioGroupItem
-                            value="Yes"
+                            value="type-I-supporting-organization"
                             className="focus-visible:ring-ringPrimary"
                             disabled={isLoading}
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          Yes
+                          A majority of your governing board or officers are
+                          elected or appointed by your supported
+                          organization(s). (Type I supporting organization)
                         </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center gap-3">
                         <FormControl>
                           <RadioGroupItem
-                            value="No"
+                            value="type-II-supporting-organization"
                             className="focus-visible:ring-ringPrimary"
                             disabled={isLoading}
                           />
                         </FormControl>
                         <FormLabel className="text-sm font-normal sm:text-base">
-                          No
+                          Your control or management is vested in the same
+                          persons who control or manage your supported
+                          organization(s). (Type II supporting organization)
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="type-III-supporting-organization"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          One or more of your officers, directors, or trustees
+                          are elected or appointed by the officers, directors,
+                          trustees, or membership of your supported
+                          organization(s), or one or more of your officers,
+                          directors, trustees, or other important office
+                          holders, are also members of the governing body of
+                          your supported organization(s), or your officers,
+                          directors, or trustees maintain a close and continuous
+                          working relationship with the officers, directors, or
+                          trustees of your supported organization(s). (Type IlI
+                          supporting organization)
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
@@ -144,7 +161,7 @@ export default function FormationScheduleDStep3Page() {
               >
                 <Link href="/formation/schedule-d/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -155,7 +172,7 @@ export default function FormationScheduleDStep3Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

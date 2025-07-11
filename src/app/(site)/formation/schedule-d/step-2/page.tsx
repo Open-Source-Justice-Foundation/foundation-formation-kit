@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleDStep2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Supported Organizations Public Charity Statuses
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,10 +86,12 @@ export default function FormationScheduleDStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Are all your supported organizations public charities under
-                    section 509(a)(1) or (2)? If &quot;Yes,&quot; continue to
-                    Line 3.
+                    section 509(a)(1) or (2)?
+                    <span className="mt-1.5 block">
+                      If &quot;Yes,&quot; continue to Line 3.
+                    </span>
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
@@ -145,7 +138,7 @@ export default function FormationScheduleDStep2Page() {
               >
                 <Link href="/formation/schedule-d/step-1" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -156,7 +149,7 @@ export default function FormationScheduleDStep2Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
