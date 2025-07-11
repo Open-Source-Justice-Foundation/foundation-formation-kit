@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,11 +74,8 @@ export default function FormationScheduleDStep5Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Disqualified Persons
+          Disqualified Persons, Foundation Managers, and Control
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,20 +88,29 @@ export default function FormationScheduleDStep5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do any persons who are disqualified persons (except
                     individuals who are disqualified persons only because they
                     are foundation managers) with respect to you or persons who
                     have a family or business relationship with any disqualified
-                    persons appoint any of your foundation managers? If
-                    &quot;Yes,&quot; (1) describe the process by which
-                    disqualified persons appoint any of your foundation
-                    managers, (2) provide the names of these disqualified
-                    persons and the foundation managers they appoint, and (3)
-                    explain how control is vested over your operations
-                    (including assets and activities) by persons other than
-                    disqualified persons.
+                    persons appoint any of your foundation managers?
+                    <span className="mt-1.5 block">If &quot;Yes,&quot;</span>
                   </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(1)'] before:mr-1.5">
+                      Describe the process by which disqualified persons appoint
+                      any of your foundation managers
+                    </li>
+                    <li className="mt-2 list-['(2)'] before:mr-1.5">
+                      Provide the names of these disqualified persons and the
+                      foundation managers they appoint
+                    </li>
+                    <li className="mb-6 mt-2 list-['(3)'] before:mr-1.5">
+                      Explain how control is vested over your operations
+                      (including assets and activities) by persons other than
+                      disqualified persons
+                    </li>
+                  </ol>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -152,11 +152,13 @@ export default function FormationScheduleDStep5Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>
+                    Disqualified Persons, Foundation Managers, and Control
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Describe the relationship between disqualified persons, foundation managers, and control..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -173,7 +175,7 @@ export default function FormationScheduleDStep5Page() {
               >
                 <Link href="/formation/schedule-d/step-4" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -184,7 +186,7 @@ export default function FormationScheduleDStep5Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

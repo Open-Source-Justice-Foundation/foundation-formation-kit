@@ -564,7 +564,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "5",
-        title: "Disqualified Persons",
+        title: "Disqualified Persons, Foundation Managers, and Control",
         url: "/formation/schedule-d/step-5",
       },
       {
