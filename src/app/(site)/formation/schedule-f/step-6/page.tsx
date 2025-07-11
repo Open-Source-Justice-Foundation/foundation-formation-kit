@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -82,9 +76,6 @@ export default function FormationScheduleFStep6Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Periodic Fees or Maintenance Charges
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -97,12 +88,14 @@ export default function FormationScheduleFStep6Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     In addition to rent or mortgage payments, do residents pay
-                    periodic fees or maintenance charges? If &quot;Yes,&quot;
-                    describe what these charges cover and how they are
-                    determined.
+                    periodic fees or maintenance charges?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; describe what these charges cover and
+                    how they are determined.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -144,11 +137,11 @@ export default function FormationScheduleFStep6Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Periodic Fees or Maintenance Charges</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
-                      className="resize-none"
+                      placeholder="Describe what these charges cover and how they are determined..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -165,7 +158,7 @@ export default function FormationScheduleFStep6Page() {
               >
                 <Link href="/formation/schedule-f/step-5" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -176,7 +169,7 @@ export default function FormationScheduleFStep6Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

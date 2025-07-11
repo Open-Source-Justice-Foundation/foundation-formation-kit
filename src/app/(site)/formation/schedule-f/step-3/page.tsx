@@ -4,13 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -31,7 +25,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof form1023ScheduleFYesNoRadioSchema>;
 
-export default function FormationScheduleFStep1Page() {
+export default function FormationScheduleFStep3Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -80,9 +74,6 @@ export default function FormationScheduleFStep1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Safe Harbor Requirements
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,20 +86,27 @@ export default function FormationScheduleFStep1Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you meet the safe harbor requirements outlined in Revenue
                     Procedure 96-32, 1996-1 C.B. 717, which provides guidelines
                     for providing low-income housing that will be treated as
-                    charitable, including for each project that (a) at least 75
-                    percent of the units are occupied by residents that qualify
-                    as low-income and (b) either at least 20 percent of the
-                    units are occupied by residents that also meet the very
-                    low-income limit for the area or 40 percent of the units are
-                    occupied by residents that also do not exceed 120 percent of
-                    the area&apos;s very low-income limit, and less than 25
-                    percent of the units are provided at market rates to persons
-                    who have incomes in excess of the low-income limit?
+                    charitable, including for each project that:
                   </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(a)'] before:mr-1.5">
+                      At least 75 percent of the units are occupied by residents
+                      that qualify as low-income?
+                    </li>
+                    <li className="mt-2 list-['(b)'] before:mr-1.5">
+                      Either at least 20 percent of the units are occupied by
+                      residents that also meet the very low-income limit for the
+                      area or 40 percent of the units are occupied by residents
+                      that also do not exceed 120 percent of the area&apos;s
+                      very low-income limit, and less than 25 percent of the
+                      units are provided at market rates to persons who have
+                      incomes in excess of the low-income limit?
+                    </li>
+                  </ol>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -154,7 +152,7 @@ export default function FormationScheduleFStep1Page() {
               >
                 <Link href="/formation/schedule-f/step-2" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -165,7 +163,7 @@ export default function FormationScheduleFStep1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>

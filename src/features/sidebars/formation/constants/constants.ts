@@ -648,7 +648,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "4",
-        title: "Affordability for Low-income Residents",
+        title: "Affordability for Low-Income Residents",
         url: "/formation/schedule-f/step-4",
       },
       {

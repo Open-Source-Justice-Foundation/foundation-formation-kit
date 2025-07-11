@@ -4,19 +4,14 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
@@ -79,9 +74,6 @@ export default function FormationScheduleFStep1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Facilities
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -94,10 +86,11 @@ export default function FormationScheduleFStep1Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Facilities</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description..."
-                      className="resize-none"
+                      placeholder="Describe your facilities..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -120,7 +113,7 @@ export default function FormationScheduleFStep1Page() {
               >
                 <Link href="/formation/upload-checklist" className="text-base">
                   <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
+                  <span className="sr-only">Previous Step</span>
                   Prev
                 </Link>
               </Button>
@@ -131,7 +124,7 @@ export default function FormationScheduleFStep1Page() {
               >
                 Next
                 <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
+                <span className="sr-only">Next Step</span>
               </Button>
             </div>
           </form>
