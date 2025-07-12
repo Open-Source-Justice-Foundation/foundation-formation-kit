@@ -144,7 +144,7 @@ export default function FormationPart4Step6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you attempt to influence legislation..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

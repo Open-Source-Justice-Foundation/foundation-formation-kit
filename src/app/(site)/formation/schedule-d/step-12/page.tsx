@@ -145,7 +145,7 @@ export default function FormationScheduleDStep12Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you further the exempt purposes of your supported organizations..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

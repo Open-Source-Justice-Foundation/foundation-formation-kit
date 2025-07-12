@@ -145,7 +145,7 @@ export default function FormationScheduleAStep1Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your written creed, statement of faith, or summary of beliefs..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

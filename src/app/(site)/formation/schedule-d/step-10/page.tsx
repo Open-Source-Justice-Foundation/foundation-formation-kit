@@ -154,7 +154,7 @@ export default function FormationScheduleDStep10Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain documents provided to your supported Organizations..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

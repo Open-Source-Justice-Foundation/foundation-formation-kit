@@ -123,7 +123,7 @@ export default function FormationPart4Step1Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your past, present, and planned activities..."
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

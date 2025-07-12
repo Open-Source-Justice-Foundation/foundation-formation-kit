@@ -95,7 +95,7 @@ export default function FormationScheduleHStep1Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Description..."
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -140,7 +140,7 @@ export default function FormationScheduleDStep13Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your distributions of assets to your supported organizations..."
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

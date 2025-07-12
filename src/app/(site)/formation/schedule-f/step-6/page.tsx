@@ -139,7 +139,7 @@ export default function FormationScheduleFStep6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe what these charges cover and how they are determined..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

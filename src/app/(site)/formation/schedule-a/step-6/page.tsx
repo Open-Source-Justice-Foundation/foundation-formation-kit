@@ -141,7 +141,7 @@ export default function FormationScheduleAStep6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your form of worship..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

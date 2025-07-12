@@ -138,7 +138,7 @@ export default function FormationScheduleBStep6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your financial aid revocation or suspension..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -141,7 +141,7 @@ export default function FormationScheduleAStep7Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your nature of services..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

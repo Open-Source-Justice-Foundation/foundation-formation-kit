@@ -158,7 +158,7 @@ export default function FormationScheduleDStep5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe the relationship between disqualified persons, foundation managers, and control..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

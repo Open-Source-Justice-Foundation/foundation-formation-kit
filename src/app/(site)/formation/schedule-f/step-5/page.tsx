@@ -138,7 +138,7 @@ export default function FormationScheduleFStep5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your affordability restrictions..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

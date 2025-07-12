@@ -133,7 +133,7 @@ export default function FormationPart7Step2Page() {
                   <FormControl>
                     <Textarea
                       placeholder=""
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

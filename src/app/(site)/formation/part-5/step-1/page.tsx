@@ -482,7 +482,7 @@ export default function FormationPart5Step1Page() {
                     <FormControl>
                       <Textarea
                         placeholder="Describe these reasonable compensation practices..."
-                        className="resize-none text-sm"
+                        className="resize-none text-sm focus-visible:ring-ringPrimary"
                         {...field}
                       />
                     </FormControl>

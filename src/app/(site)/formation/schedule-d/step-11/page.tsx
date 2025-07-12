@@ -141,7 +141,7 @@ export default function FormationScheduleDStep11Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain the degree of direction you have over your supporting organizations..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

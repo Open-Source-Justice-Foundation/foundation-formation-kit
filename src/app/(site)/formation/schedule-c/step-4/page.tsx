@@ -139,7 +139,7 @@ export default function FormationScheduleCStep4Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain why you are not providing medical services..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

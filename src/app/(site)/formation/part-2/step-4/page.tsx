@@ -144,7 +144,7 @@ export default function FormationPart2Step4Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you select your officers, directors, or trustees..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

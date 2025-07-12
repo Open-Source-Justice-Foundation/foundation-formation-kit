@@ -151,7 +151,7 @@ export default function FormationPart4Step3Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain the limitation and how recipients are selected for each program..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

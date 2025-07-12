@@ -90,7 +90,7 @@ export default function FormationScheduleDStep1Page() {
                   <FormControl>
                     <Textarea
                       placeholder="List the names, addresses, and EINs of the organizations you support..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

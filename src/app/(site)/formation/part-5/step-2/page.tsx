@@ -155,7 +155,7 @@ export default function FormationPart5Step2Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your conflict of interest procedures..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

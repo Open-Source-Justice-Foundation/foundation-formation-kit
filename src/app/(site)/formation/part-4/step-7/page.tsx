@@ -148,7 +148,7 @@ export default function FormationPart4Step7Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your intellectual property..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

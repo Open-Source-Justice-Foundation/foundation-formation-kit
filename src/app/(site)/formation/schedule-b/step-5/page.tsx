@@ -138,7 +138,7 @@ export default function FormationScheduleBStep5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your judicial procedings..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

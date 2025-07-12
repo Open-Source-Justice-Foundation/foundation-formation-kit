@@ -148,7 +148,7 @@ export default function FormationPart4Step8Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you provide general public finance education..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

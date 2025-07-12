@@ -90,7 +90,7 @@ export default function FormationScheduleAStep4Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your religious hierarchy or ecclesiastical government..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

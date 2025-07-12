@@ -90,7 +90,7 @@ export default function FormationScheduleBStep13Page() {
                   <FormControl>
                     <Textarea
                       placeholder="List your incorporators, founders, board members, and donors..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -171,7 +171,7 @@ export default function FormationPart5Step5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your written or oral arrangements..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

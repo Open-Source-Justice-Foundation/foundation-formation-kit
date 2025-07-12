@@ -142,7 +142,7 @@ export default function FormationScheduleAStep3Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your code of doctrine and discipline..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

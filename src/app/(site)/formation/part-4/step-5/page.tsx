@@ -144,7 +144,7 @@ export default function FormationPart4Step5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your political support..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

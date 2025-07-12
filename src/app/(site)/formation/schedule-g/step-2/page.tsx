@@ -95,7 +95,7 @@ export default function FormationScheduleGStep2Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Description..."
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

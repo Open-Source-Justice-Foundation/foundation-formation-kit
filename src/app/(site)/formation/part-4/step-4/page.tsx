@@ -149,7 +149,7 @@ export default function FormationPart4Step4Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how these related individuals are eligible for goods, services, or funds..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

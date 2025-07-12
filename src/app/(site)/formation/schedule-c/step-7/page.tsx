@@ -142,7 +142,7 @@ export default function FormationScheduleCStep7Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your medical training or research programs..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

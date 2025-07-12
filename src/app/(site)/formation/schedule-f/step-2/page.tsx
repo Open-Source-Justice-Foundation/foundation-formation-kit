@@ -89,7 +89,7 @@ export default function FormationScheduleFStep2Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your resident qualifications..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

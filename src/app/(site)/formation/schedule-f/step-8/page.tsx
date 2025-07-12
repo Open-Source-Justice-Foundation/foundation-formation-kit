@@ -137,7 +137,7 @@ export default function FormationScheduleFStep8Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe the government housing programs you participate in..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -140,7 +140,7 @@ export default function FormationScheduleCStep2Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your cooperative hospital service organization exemption..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

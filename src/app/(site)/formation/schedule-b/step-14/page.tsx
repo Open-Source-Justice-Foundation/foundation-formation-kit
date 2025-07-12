@@ -143,7 +143,7 @@ export default function FormationScheduleBStep14Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your incorporators, founders, board members, and donors objectives..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

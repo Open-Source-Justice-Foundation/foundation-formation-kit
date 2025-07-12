@@ -97,7 +97,7 @@ export default function FormationScheduleBStep12Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Switch to table..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

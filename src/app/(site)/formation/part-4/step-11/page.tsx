@@ -147,7 +147,7 @@ export default function FormationPart4Step11Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your donor advised funds program..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -160,7 +160,7 @@ export default function FormationPart4Step9Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your distributions to other organizations..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

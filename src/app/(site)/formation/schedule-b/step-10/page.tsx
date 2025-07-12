@@ -141,7 +141,7 @@ export default function FormationScheduleBStep10Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your selection process..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

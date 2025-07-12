@@ -143,7 +143,7 @@ export default function FormationScheduleAStep8Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your place of worship..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

@@ -154,7 +154,7 @@ export default function FormationScheduleDStep6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explanation..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

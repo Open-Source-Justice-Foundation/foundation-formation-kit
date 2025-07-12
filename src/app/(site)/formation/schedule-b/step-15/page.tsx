@@ -138,7 +138,7 @@ export default function FormationScheduleBStep15Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain your decision not to maintain records according to Revenue Procedure 75-50..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

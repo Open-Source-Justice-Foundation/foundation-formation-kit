@@ -142,7 +142,7 @@ export default function FormationScheduleAStep5Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your group of churches participation..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

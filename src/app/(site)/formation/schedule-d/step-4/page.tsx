@@ -88,7 +88,7 @@ export default function FormationScheduleDStep4Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe how your governing board and officers are selected..."
-                      className="resize-none"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

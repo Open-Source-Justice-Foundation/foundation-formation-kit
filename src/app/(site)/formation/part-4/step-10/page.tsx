@@ -149,7 +149,7 @@ export default function FormationPart4Step10Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your foreign country operations..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

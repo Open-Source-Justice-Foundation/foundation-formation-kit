@@ -139,7 +139,7 @@ export default function FormationScheduleCStep3Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Explain how the medical staff is selected..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

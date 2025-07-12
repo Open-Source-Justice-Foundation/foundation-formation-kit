@@ -151,7 +151,7 @@ export default function FormationPart5Step6Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your contract with another organization..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

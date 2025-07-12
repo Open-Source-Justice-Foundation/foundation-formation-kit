@@ -143,7 +143,7 @@ export default function FormationScheduleAStep14Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your requirements for religious leaders..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

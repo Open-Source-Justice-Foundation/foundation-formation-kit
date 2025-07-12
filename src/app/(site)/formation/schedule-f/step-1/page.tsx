@@ -88,7 +88,7 @@ export default function FormationScheduleFStep1Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your facilities..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>

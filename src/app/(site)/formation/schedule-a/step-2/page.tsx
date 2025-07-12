@@ -141,7 +141,7 @@ export default function FormationScheduleAStep2Page() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your literature..."
-                      className="resize-none text-sm"
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
                   </FormControl>
