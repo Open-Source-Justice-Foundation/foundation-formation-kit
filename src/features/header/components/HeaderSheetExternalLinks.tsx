@@ -20,7 +20,7 @@ export function HeaderSheetExternalLinks() {
       >
         <div className="flex items-center gap-2 text-base">
           <BookText size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
-          <span className="sr-only">{"Docs"}</span>
+          <span className="sr-only">Docs</span>
           <span className="font-medium">Docs</span>
         </div>
       </a>
@@ -32,7 +32,7 @@ export function HeaderSheetExternalLinks() {
       >
         <div className="flex items-center gap-2 text-base">
           <HandHelping size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
-          <span className="sr-only">{"Support"}</span>
+          <span className="sr-only">Support</span>
           <span className="font-medium">Support</span>
         </div>
       </a>
@@ -55,7 +55,7 @@ export function HeaderSheetExternalLinks() {
             className="hidden dark:block"
             aria-hidden="true"
           />
-          <span className="sr-only">{"Open Source Justice Foundation"}</span>
+          <span className="sr-only">Open Source Justice Foundation</span>
           <span className="font-medium">OSJF</span>
         </div>
       </a>
@@ -67,7 +67,7 @@ export function HeaderSheetExternalLinks() {
       >
         <div className="flex items-center gap-2 text-base">
           <Github size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
-          <span className="sr-only">{"GitHub"}</span>
+          <span className="sr-only">GitHub</span>
           <span className="font-medium">GitHub</span>
         </div>
       </a>

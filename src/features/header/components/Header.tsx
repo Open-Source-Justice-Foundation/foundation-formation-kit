@@ -38,7 +38,7 @@ export async function Header() {
             <div className="flex items-center gap-2">
               Docs
               <ExternalLink aria-hidden="true" />
-              <span className="sr-only">{"External link"}</span>
+              <span className="sr-only">External link</span>
             </div>
           </a>
         </Button>
@@ -51,7 +51,7 @@ export async function Header() {
             <div className="flex items-center gap-2">
               Support
               <ExternalLink aria-hidden="true" />
-              <span className="sr-only">{"External link"}</span>
+              <span className="sr-only">External link</span>
             </div>
           </a>
         </Button>
@@ -67,7 +67,7 @@ export async function Header() {
               <div className="flex items-center gap-2">
                 Login
                 <LogIn aria-hidden="true" />
-                <span className="sr-only">{"Login"}</span>
+                <span className="sr-only">Login</span>
               </div>
             </Link>
           </Button>

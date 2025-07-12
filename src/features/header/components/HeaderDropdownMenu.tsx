@@ -48,7 +48,7 @@ export async function HeaderDropdownMenu() {
           ) : (
             <AvatarFallback className="bg-accent">
               <User size={AVATAR_ICON_LARGE_SIZE} aria-hidden="true" />
-              <span className="sr-only">{"Avatar"}</span>
+              <span className="sr-only">Avatar</span>
             </AvatarFallback>
           )}
         </Avatar>
@@ -67,7 +67,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 New foundation
                 <Pen aria-hidden="true" />
-                <span className="sr-only">{"New foundation"}</span>
+                <span className="sr-only">New foundation</span>
               </div>
             </DropdownMenuItem>
           </Link>
@@ -76,7 +76,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 Dashboard
                 <Gauge aria-hidden="true" />
-                <span className="sr-only">{"Dashboard"}</span>
+                <span className="sr-only">Dashboard</span>
               </div>
             </DropdownMenuItem>
           </Link>
@@ -85,7 +85,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 Profile
                 <UserPen aria-hidden="true" />
-                <span className="sr-only">{"Profile"}</span>
+                <span className="sr-only">Profile</span>
               </div>
             </DropdownMenuItem>
           </Link>
@@ -97,7 +97,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 Docs
                 <BookText aria-hidden="true" />
-                <span className="sr-only">{"Docs"}</span>
+                <span className="sr-only">Docs</span>
               </div>
             </DropdownMenuItem>
           </a>
@@ -106,7 +106,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 Support
                 <HandHelping aria-hidden="true" />
-                <span className="sr-only">{"Support"}</span>
+                <span className="sr-only">Support</span>
               </div>
             </DropdownMenuItem>
           </a>
@@ -126,9 +126,7 @@ export async function HeaderDropdownMenu() {
                   className="hidden dark:block"
                   aria-hidden="true"
                 />
-                <span className="sr-only">
-                  {"Open Source Justice Foundation"}
-                </span>
+                <span className="sr-only">Open Source Justice Foundation</span>
               </div>
             </DropdownMenuItem>
           </a>
@@ -137,7 +135,7 @@ export async function HeaderDropdownMenu() {
               <div className="flex grow items-center justify-between">
                 GitHub
                 <Github aria-hidden="true" />
-                <span className="sr-only">{"GitHub"}</span>
+                <span className="sr-only">GitHub</span>
               </div>
             </DropdownMenuItem>
           </a>

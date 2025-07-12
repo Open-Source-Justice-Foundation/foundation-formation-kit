@@ -45,7 +45,7 @@ export function HeaderSheetSignOutButton() {
       >
         <div className="flex grow items-center gap-2 text-base">
           <LogOut size={HEADER_SHEET_ICON_BASE_SIZE} aria-hidden="true" />
-          <span className="sr-only">{"Logout"}</span>
+          <span className="sr-only">Logout</span>
           Logout
         </div>
       </Button>

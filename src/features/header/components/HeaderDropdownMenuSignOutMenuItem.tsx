@@ -41,7 +41,7 @@ export function HeaderDropdownMenuSignOutMenuItem() {
       <div className="flex grow items-center justify-between">
         Logout
         <LogOut aria-hidden="true" />
-        <span className="sr-only">{"Logout"}</span>
+        <span className="sr-only">Logout</span>
       </div>
     </DropdownMenuItem>
   );

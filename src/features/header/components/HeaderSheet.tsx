@@ -55,7 +55,7 @@ export async function HeaderSheet() {
                       size={HEADER_SHEET_ICON_BASE_SIZE}
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{"Get started"}</span>
+                    <span className="sr-only">Get started</span>
                     <span className="font-medium">Get started</span>
                   </div>
                 </Link>
@@ -73,7 +73,7 @@ export async function HeaderSheet() {
                       size={HEADER_SHEET_ICON_BASE_SIZE}
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{"Login"}</span>
+                    <span className="sr-only">Login</span>
                     <span className="font-medium">Login</span>
                   </div>
                 </Link>
@@ -100,7 +100,7 @@ export async function HeaderSheet() {
                       size={HEADER_SHEET_ICON_BASE_SIZE}
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{"New foundation"}</span>
+                    <span className="sr-only">New foundation</span>
                     <span className="font-medium">New foundation</span>
                   </div>
                 </Link>
@@ -115,7 +115,7 @@ export async function HeaderSheet() {
                       size={HEADER_SHEET_ICON_BASE_SIZE}
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{"Dashboard"}</span>
+                    <span className="sr-only">Dashboard</span>
                     <span className="font-medium">Dashboard</span>
                   </div>
                 </Link>
@@ -130,7 +130,7 @@ export async function HeaderSheet() {
                       size={HEADER_SHEET_ICON_BASE_SIZE}
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{"Profile"}</span>
+                    <span className="sr-only">Profile</span>
                     <span className="font-medium">Profile</span>
                   </div>
                 </Link>

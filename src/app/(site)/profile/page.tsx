@@ -287,7 +287,7 @@ export default function ProfilePage() {
                                   size={PROFILE_ICON_BASE_SIZE}
                                   aria-hidden="true"
                                 />
-                                <span className="sr-only">{"GitHub"}</span>
+                                <span className="sr-only">GitHub</span>
                                 <div className="flex flex-col">
                                   <span className="text-sm font-medium text-secondary-foreground sm:text-base">
                                     GitHub
@@ -408,7 +408,7 @@ export default function ProfilePage() {
                                 size={PROFILE_ICON_BASE_SIZE}
                                 aria-hidden="true"
                               />
-                              <span className="sr-only">{"GitHub"}</span>
+                              <span className="sr-only">GitHub</span>
                               <div className="flex flex-col">
                                 <span className="text-sm font-medium text-secondary-foreground sm:text-base">
                                   GitHub
@@ -529,7 +529,7 @@ export default function ProfilePage() {
                                 size={PROFILE_ICON_BASE_SIZE}
                                 aria-hidden="true"
                               />
-                              <span className="sr-only">{"GitHub"}</span>
+                              <span className="sr-only">GitHub</span>
                               <div className="flex flex-col">
                                 <span className="text-sm font-medium text-secondary-foreground sm:text-base">
                                   GitHub
