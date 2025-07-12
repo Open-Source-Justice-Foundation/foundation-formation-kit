@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Checkbox } from "~/components/ui/checkbox";
 import {
@@ -15,10 +14,9 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { FUNDRAISING_ACTIVITIES } from "~/lib/formation/constants/part-4/constants";
 import { form1023Part4YourActivitiesStep16Schema } from "~/lib/formation/validation/part-4/schemas";
-import { MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -137,29 +135,10 @@ export default function FormationPart4Step16Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/part-4/step-15" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">Previous Step</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">Next Step</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/part-4/step-15"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>

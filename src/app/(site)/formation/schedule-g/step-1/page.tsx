@@ -3,26 +3,19 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { form1023ScheduleGTextAreaSchema } from "~/lib/formation/validation/schedule-g/schemas";
-import { MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -79,9 +72,6 @@ export default function FormationScheduleGStep1Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Name, Last Address, and EIN of Predecessor Organization
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -94,10 +84,11 @@ export default function FormationScheduleGStep1Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Predecessor Organization</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description..."
-                      className="resize-none"
+                      placeholder="Describe your predecessor organization..."
+                      className="resize-none text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -109,29 +100,10 @@ export default function FormationScheduleGStep1Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/upload-checklist" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">{"Previous Step"}</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">{"Next Step"}</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/upload-checklist"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>

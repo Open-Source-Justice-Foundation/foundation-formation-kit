@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,10 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { EXCEPTED_FROM_FILING } from "~/lib/formation/constants/part-9/constants";
 import { form1023Part9AnnualFilingRequirementsStep1Schema } from "~/lib/formation/validation/part-9/schemas";
-import { MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -150,29 +148,10 @@ export default function FormationPart9Step1Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/part-8/step-1" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">Previous Step</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">Next Step</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/part-8/step-1"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>

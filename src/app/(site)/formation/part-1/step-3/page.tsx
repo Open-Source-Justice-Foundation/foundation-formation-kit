@@ -26,11 +26,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { MONTHS_TAX_YEAR_ENDS } from "~/lib/formation/constants/part-1/constants";
 import { form1023Part1IdentificationOfApplicantStep3Schema } from "~/lib/formation/validation/part-1/schemas";
 import { cn } from "~/lib/utils";
-import { Check, ChevronsUpDown, MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -180,29 +180,10 @@ export default function FormationPart1Step3Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/part-1/step-2" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">Previous Step</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">Next Step</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/part-1/step-2"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>

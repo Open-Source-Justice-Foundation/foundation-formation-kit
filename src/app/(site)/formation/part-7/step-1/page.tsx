@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -24,13 +23,12 @@ import {
 import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import {
   FOUNDATION_CLASSIFICATIONS,
   PRIVATE_FOUNDATION_SPECIAL_PROVISIONS_CONFIRMATION_CHECKBOX,
 } from "~/lib/formation/constants/part-7/constants";
 import { form1023Part7FoundationClassificationStep1Schema } from "~/lib/formation/validation/part-7/schemas";
-import { MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -378,29 +376,10 @@ export default function FormationPart7Step1Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/part-6/step-1" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">Previous Step</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">Next Step</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/part-6/step-1"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>

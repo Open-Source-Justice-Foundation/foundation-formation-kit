@@ -27,11 +27,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { form1023Part10SignatureStep1Schema } from "~/lib/formation/validation/part-10/schemas";
 import { cn } from "~/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
+import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ControllerRenderProps, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -206,29 +206,10 @@ export default function FormationPart10Step1Page() {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
-              <Button
-                asChild
-                type="button"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                <Link href="/formation/part-9/step-1" className="text-base">
-                  <MoveLeft aria-hidden="true" />
-                  <span className="sr-only">Previous Step</span>
-                  Prev
-                </Link>
-              </Button>
-              <Button
-                type="submit"
-                className="w-1/4 min-w-[92px] gap-3 focus-visible:ring-ringPrimary"
-                disabled={isLoading}
-              >
-                Next
-                <MoveRight aria-hidden="true" />
-                <span className="sr-only">Next Step</span>
-              </Button>
-            </div>
+            <FormationNavigationButtons
+              prevHref="/formation/part-9/step-1"
+              isLoading={isLoading}
+            />
           </form>
         </Form>
       </CardContent>
