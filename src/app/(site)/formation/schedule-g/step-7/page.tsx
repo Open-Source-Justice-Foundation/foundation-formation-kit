@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleGStep7Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Property or Equipment
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,14 +86,16 @@ export default function FormationScheduleGStep7Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Will you lease or rent any property or equipment to or from
                     the predecessor organization or any persons listed in Line 2
                     or a for-profit organization in which these persons own more
-                    than a 35% interest? If &quot;Yes,&quot; describe the
-                    arrangement(s) including how the lease or rental value was
-                    determined.
+                    than a 35% interest?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; describe the arrangement(s) including
+                    how the lease or rental value was determined.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -144,10 +137,10 @@ export default function FormationScheduleGStep7Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Property or Equipment</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="Describe the arrangement(s) including how the lease or rental value was determined..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

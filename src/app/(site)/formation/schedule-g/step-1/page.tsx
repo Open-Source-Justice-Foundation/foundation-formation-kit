@@ -84,10 +84,12 @@ export default function FormationScheduleGStep1Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Predecessor Organization</FormLabel>
+                  <FormLabel>
+                    Name, Last Address, and EIN of Predecessor Organization
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe your predecessor organization..."
+                      placeholder="List the name, last address, and EIN of your predecessor organization and describe its activities..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

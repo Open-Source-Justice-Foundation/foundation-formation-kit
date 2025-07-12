@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleGStep5Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Assets
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,16 +86,18 @@ export default function FormationScheduleGStep5Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Were any assets transferred, whether by gift or sale, from
-                    the predecessor organization to you? If &quot;Yes,&quot;
-                    provide a list of assets, indicate the value of each asset,
-                    explain how the value was determined, and attach an
-                    appraisal, if available. For each asset listed, also explain
-                    if the transfer was by gift, sale, or combination thereof
-                    and describe any restrictions that were placed on the use or
-                    sale of the assets.
+                    the predecessor organization to you?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; provide a list of assets, indicate the
+                    value of each asset, explain how the value was determined,
+                    and attach an appraisal, if available. For each asset
+                    listed, also explain if the transfer was by gift, sale, or
+                    combination thereof and describe any restrictions that were
+                    placed on the use or sale of the assets.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -146,10 +139,10 @@ export default function FormationScheduleGStep5Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Assets</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="List and explain your assets from your predecessor organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

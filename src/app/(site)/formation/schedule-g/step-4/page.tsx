@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -78,11 +72,8 @@ export default function FormationScheduleGStep4Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Working Relationships
+          Working Relationship
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,12 +86,16 @@ export default function FormationScheduleGStep4Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do or will you maintain a working relationship with any of
                     the persons listed in question 2 or with any for-profit
                     organization in which these persons own more than a 35%
-                    interest? If &quot;Yes,&quot; describe the relationship.
+                    interest?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; describe the relationship.
+                  </p>
+
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -142,10 +137,10 @@ export default function FormationScheduleGStep4Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Working Relationship</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="Describe the working relationship...."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

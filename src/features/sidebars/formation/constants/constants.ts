@@ -690,12 +690,12 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "3",
-        title: "Successor to For-profit Organization",
+        title: "Successor to For-Profit Organization",
         url: "/formation/schedule-g/step-3",
       },
       {
         step: "4",
-        title: "Working Relationships",
+        title: "Working Relationship",
         url: "/formation/schedule-g/step-4",
       },
       {

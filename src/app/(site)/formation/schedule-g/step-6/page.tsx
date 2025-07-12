@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleGStep6Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Debts or Liabilities
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,14 +86,16 @@ export default function FormationScheduleGStep6Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Were any debts or liabilities transferred from the
-                    predecessor for-profit organization to you? If
-                    &quot;Yes,&quot; provide a list of the debts or liabilities
-                    that were transferred to you, indicating the amount of each,
-                    how the amount was determined, and the name of the person to
-                    whom the debt or liability is owed.
+                    predecessor for-profit organization to you?{" "}
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; provide a list of the debts or
+                    liabilities that were transferred to you, indicating the
+                    amount of each, how the amount was determined, and the name
+                    of the person to whom the debt or liability is owed.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -144,10 +137,10 @@ export default function FormationScheduleGStep6Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Debts or Liabilities</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="List and explain your debts or liabilities from your predecessor for-profit organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
