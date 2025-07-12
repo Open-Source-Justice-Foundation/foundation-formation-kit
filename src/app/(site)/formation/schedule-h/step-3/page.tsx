@@ -3,19 +3,14 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
@@ -77,9 +72,6 @@ export default function FormationScheduleHStep3Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Criteria for Program
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -92,9 +84,10 @@ export default function FormationScheduleHStep3Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Criteria for Program</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description..."
+                      placeholder="Describe the specific criteria you use to determine who is eligible for your program..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

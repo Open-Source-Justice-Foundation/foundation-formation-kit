@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleHStep2Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Case Histories
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,14 +86,17 @@ export default function FormationScheduleHStep2Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Do you maintain case histories showing recipients of your
                     scholarships, fellowships, educational loans, or other
                     educational grants, including names, addresses, purposes of
                     awards, amount of each grant, manner of selection, and
                     relationship (if any) to officers, trustees, or donors of
-                    funds to you? If &quot;No,&quot; explain.
+                    funds to you?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;No,&quot; explain.
+                  </p>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -144,10 +138,10 @@ export default function FormationScheduleHStep2Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Case Histories</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="Explain why you do not maintain case histories of recipients..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

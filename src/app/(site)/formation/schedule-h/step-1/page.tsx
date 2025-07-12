@@ -16,6 +16,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
@@ -78,7 +79,8 @@ export default function FormationScheduleHStep1Page() {
           Types of Educational Financial Support
         </CardTitle>
         <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
+          Public charities and private foundations complete lines 1 through 8 of
+          this section.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -92,9 +94,10 @@ export default function FormationScheduleHStep1Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Types of Educational Financial Support</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description..."
+                      placeholder="Describe the types of educational financial support you provide..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
@@ -102,7 +105,7 @@ export default function FormationScheduleHStep1Page() {
                   <FormDescription>
                     Describe the types of educational grants you provide to
                     individuals, such as scholarships, fellowships, loans, etc.,
-                    including the purpose, number and amount(s) of grants, how
+                    including the purpose, number, and amount(s) of grants, how
                     the program is publicized, and if you award educational
                     loans, the terms of the loans.
                   </FormDescription>
