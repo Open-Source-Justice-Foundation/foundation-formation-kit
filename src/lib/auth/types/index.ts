@@ -64,6 +64,6 @@ export type SupportedOAuthProvider = "github";
 // Sign in callback params
 export interface SignInCallbackParams {
   user: User | AdapterUser;
-  account: Account | null;
+  account?: Account | null | undefined;
   profile?: Profile;
 }
