@@ -3,19 +3,14 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
@@ -75,11 +70,8 @@ export default function FormationScheduleHStep6Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Procedures for Scholarship Supervision
+          Procedures for Educational Support Supervision
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -92,9 +84,12 @@ export default function FormationScheduleHStep6Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>
+                    Procedures for Educational Support Supervision
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Description..."
+                      placeholder="Describe your procedures for supervising the scholarships, fellowships, educational loans, or other educational grants..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />

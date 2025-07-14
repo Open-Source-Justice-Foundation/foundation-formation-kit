@@ -747,7 +747,7 @@ export const COLLAPSIBLE_TRIGGERS = [
       },
       {
         step: "6",
-        title: "Procedures for Scholarship Supervision",
+        title: "Procedures for Educatioanl Support Supervision",
         url: "/formation/schedule-h/step-6",
       },
       {

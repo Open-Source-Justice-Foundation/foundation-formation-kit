@@ -3,13 +3,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -80,9 +74,6 @@ export default function FormationScheduleHStep8Page() {
         <CardTitle className="text-base sm:text-xl md:text-2xl">
           Eligibility for Awards
         </CardTitle>
-        <CardDescription>
-          🚧 Under construction, applications may be deleted and not work 🚧
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <Form {...form}>
@@ -95,13 +86,16 @@ export default function FormationScheduleHStep8Page() {
               name="radioInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription className="text-sm font-normal sm:text-base">
+                  <FormDescription>
                     Are relatives of members of the selection committee, or of
                     your officers, directors, or substantial contributors
-                    eligible for awards made under your program? If
-                    &quot;Yes,&quot; what measures do you take to ensure
-                    unbiased selections?
+                    eligible for awards made under your program?
                   </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; what measures do you take to ensure
+                    unbiased selections?
+                  </p>
+
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -143,10 +137,10 @@ export default function FormationScheduleHStep8Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Explanation</FormLabel>
+                  <FormLabel>Measures to Ensure Unbiased Selections</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explanation..."
+                      placeholder="Explain what measures you take to ensure unbiased selections..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                     />
