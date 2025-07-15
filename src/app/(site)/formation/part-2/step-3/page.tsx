@@ -13,6 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -28,6 +29,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
+import { useIsMobile } from "~/hooks/use-mobile";
 import { SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS } from "~/lib/formation/constants/part-2/constants";
 import { form1023Part2OrganizationalStructureStep3Schema } from "~/lib/formation/validation/part-2/schemas";
 import { cn } from "~/lib/utils";
@@ -43,6 +45,7 @@ type FormValues = z.infer<
 
 export default function FormationPart2Step3Page() {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   const [openStateCombobox, setOpenStateCombobox] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -88,6 +91,53 @@ export default function FormationPart2Step3Page() {
     }
   }
 
+  function StateOfFormationComboboxList({
+    fieldValue,
+  }: {
+    fieldValue: string;
+  }) {
+    return (
+      <Command>
+        <CommandInput placeholder="Search state..." className="h-9" />
+        <CommandList>
+          <CommandEmpty>No state found.</CommandEmpty>
+          <CommandGroup>
+            {SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.map(
+              (supportedStateOfFormation) => (
+                <CommandItem
+                  key={supportedStateOfFormation.value}
+                  value={supportedStateOfFormation.value}
+                  onSelect={() => {
+                    form.setValue(
+                      "stateOfFormation",
+                      form.getValues("stateOfFormation") ===
+                        supportedStateOfFormation.value
+                        ? ""
+                        : supportedStateOfFormation.value,
+                    );
+                    setOpenStateCombobox(false);
+                  }}
+                  disabled={isLoading}
+                >
+                  {supportedStateOfFormation.label}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      supportedStateOfFormation.value === fieldValue
+                        ? "opacity-100"
+                        : "opacity-0",
+                    )}
+                  />
+                  <span className="sr-only">State selected</span>
+                </CommandItem>
+              ),
+            )}
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    );
+  }
+
   return (
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
@@ -107,81 +157,78 @@ export default function FormationPart2Step3Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>State of Formation</FormLabel>
-                  <Popover
-                    open={openStateCombobox}
-                    onOpenChange={setOpenStateCombobox}
-                  >
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          aria-expanded={openStateCombobox}
-                          className={cn(
-                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
-                            !field.value && "text-muted-foreground",
-                          )}
-                          disabled={isLoading}
-                        >
-                          {field.value
-                            ? SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.find(
-                              (supportedStateOfFormation) =>
-                                supportedStateOfFormation.value ===
-                                field.value,
-                            )?.label
-                            : "Select state..."}
-                          <ChevronsUpDown className="opacity-50" />
-                          <span className="sr-only">Open state combobox</span>
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search state..."
-                          className="h-9"
-                        />
-                        <CommandList>
-                          <CommandEmpty>No state found.</CommandEmpty>
-                          <CommandGroup>
-                            {SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.map(
-                              (supportedStateOfFormation) => (
-                                <CommandItem
-                                  key={supportedStateOfFormation.value}
-                                  value={supportedStateOfFormation.value}
-                                  onSelect={() => {
-                                    form.setValue(
-                                      "stateOfFormation",
-                                      form.getValues("stateOfFormation") ===
-                                        supportedStateOfFormation.value
-                                        ? ""
-                                        : supportedStateOfFormation.value,
-                                    );
-                                    setOpenStateCombobox(false);
-                                  }}
-                                  disabled={isLoading}
-                                >
-                                  {supportedStateOfFormation.label}
-                                  <Check
-                                    className={cn(
-                                      "ml-auto",
-                                      supportedStateOfFormation.value ===
-                                        field.value
-                                        ? "opacity-100"
-                                        : "opacity-0",
-                                    )}
-                                  />
-                                  <span className="sr-only">
-                                    State selected
-                                  </span>
-                                </CommandItem>
-                              ),
+                  {!isMobile && (
+                    <Popover
+                      open={openStateCombobox}
+                      onOpenChange={setOpenStateCombobox}
+                    >
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openStateCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
                             )}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.find(
+                                (supportedStateOfFormation) =>
+                                  supportedStateOfFormation.value ===
+                                  field.value,
+                              )?.label
+                              : "Select state..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">Open state combobox</span>
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[200px] p-0">
+                        <StateOfFormationComboboxList
+                          fieldValue={field.value}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                  {isMobile && (
+                    <Drawer
+                      open={openStateCombobox}
+                      onOpenChange={setOpenStateCombobox}
+                    >
+                      <DrawerTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openStateCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_STATE_OF_FORMATION_ABBREVIATIONS.find(
+                                (supportedStateOfFormation) =>
+                                  supportedStateOfFormation.value ===
+                                  field.value,
+                              )?.label
+                              : "Select state..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">Open state combobox</span>
+                          </Button>
+                        </FormControl>
+                      </DrawerTrigger>
+                      <DrawerContent className="mt-4 border-t">
+                        <StateOfFormationComboboxList
+                          fieldValue={field.value}
+                        />
+                      </DrawerContent>
+                    </Drawer>
+                  )}
                   <FormDescription>
                     Select your state of incorporation or other formation.
                   </FormDescription>

@@ -13,6 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -27,6 +28,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
+import { useIsMobile } from "~/hooks/use-mobile";
 import { MONTHS_TAX_YEAR_ENDS } from "~/lib/formation/constants/part-1/constants";
 import { form1023Part1IdentificationOfApplicantStep3Schema } from "~/lib/formation/validation/part-1/schemas";
 import { cn } from "~/lib/utils";
@@ -42,6 +44,7 @@ type FormValues = z.infer<
 
 export default function FormationPart1Step3Page() {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   const [openMonthTaxYearEndsCombobox, setOpenMonthTaxYearEndsCombobox] =
     useState<boolean>(false);
@@ -88,6 +91,51 @@ export default function FormationPart1Step3Page() {
     }
   }
 
+  function MonthTaxYearEndsComboboxList({
+    fieldValue,
+  }: {
+    fieldValue: string;
+  }) {
+    return (
+      <Command>
+        <CommandInput placeholder="Search month..." className="h-9" />
+        <CommandList>
+          <CommandEmpty>No month found.</CommandEmpty>
+          <CommandGroup>
+            {MONTHS_TAX_YEAR_ENDS.map((monthTaxYearEnds) => (
+              <CommandItem
+                key={monthTaxYearEnds.value}
+                value={monthTaxYearEnds.value}
+                onSelect={() => {
+                  form.setValue(
+                    "monthTaxYearEnds",
+                    form.getValues("monthTaxYearEnds") ===
+                      monthTaxYearEnds.value
+                      ? ""
+                      : monthTaxYearEnds.value,
+                  );
+                  setOpenMonthTaxYearEndsCombobox(false);
+                }}
+                disabled={isLoading}
+              >
+                {monthTaxYearEnds.label}
+                <Check
+                  className={cn(
+                    "ml-auto",
+                    monthTaxYearEnds.value === fieldValue
+                      ? "opacity-100"
+                      : "opacity-0",
+                  )}
+                />
+                <span className="sr-only">Month tax year ends selected</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    );
+  }
+
   return (
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
@@ -107,79 +155,80 @@ export default function FormationPart1Step3Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Month Tax Year Ends</FormLabel>
-                  <Popover
-                    open={openMonthTaxYearEndsCombobox}
-                    onOpenChange={setOpenMonthTaxYearEndsCombobox}
-                  >
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          aria-expanded={openMonthTaxYearEndsCombobox}
-                          className={cn(
-                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
-                            !field.value && "text-muted-foreground",
-                          )}
-                          disabled={isLoading}
-                        >
-                          {field.value
-                            ? MONTHS_TAX_YEAR_ENDS.find(
-                              (monthTaxYearEnds) =>
-                                monthTaxYearEnds.value === field.value,
-                            )?.label
-                            : "Select month..."}
-                          <ChevronsUpDown className="opacity-50" />
-                          <span className="sr-only">
-                            Open month tax year ends combobox
-                          </span>
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search month..."
-                          className="h-9"
+                  {!isMobile && (
+                    <Popover
+                      open={openMonthTaxYearEndsCombobox}
+                      onOpenChange={setOpenMonthTaxYearEndsCombobox}
+                    >
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openMonthTaxYearEndsCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? MONTHS_TAX_YEAR_ENDS.find(
+                                (monthTaxYearEnds) =>
+                                  monthTaxYearEnds.value === field.value,
+                              )?.label
+                              : "Select month..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">
+                              Open month tax year ends combobox
+                            </span>
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[200px] p-0">
+                        <MonthTaxYearEndsComboboxList
+                          fieldValue={field.value}
                         />
-                        <CommandList>
-                          <CommandEmpty>No month found.</CommandEmpty>
-                          <CommandGroup>
-                            {MONTHS_TAX_YEAR_ENDS.map((monthTaxYearEnds) => (
-                              <CommandItem
-                                key={monthTaxYearEnds.value}
-                                value={monthTaxYearEnds.value}
-                                onSelect={() => {
-                                  form.setValue(
-                                    "monthTaxYearEnds",
-                                    form.getValues("monthTaxYearEnds") ===
-                                      monthTaxYearEnds.value
-                                      ? ""
-                                      : monthTaxYearEnds.value,
-                                  );
-                                  setOpenMonthTaxYearEndsCombobox(false);
-                                }}
-                                disabled={isLoading}
-                              >
-                                {monthTaxYearEnds.label}
-                                <Check
-                                  className={cn(
-                                    "ml-auto",
-                                    monthTaxYearEnds.value === field.value
-                                      ? "opacity-100"
-                                      : "opacity-0",
-                                  )}
-                                />
-                                <span className="sr-only">
-                                  Month tax year ends selected
-                                </span>
-                              </CommandItem>
-                            ))}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                  {isMobile && (
+                    <Drawer
+                      open={openMonthTaxYearEndsCombobox}
+                      onOpenChange={setOpenMonthTaxYearEndsCombobox}
+                    >
+                      <DrawerTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openMonthTaxYearEndsCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? MONTHS_TAX_YEAR_ENDS.find(
+                                (monthTaxYearEnds) =>
+                                  monthTaxYearEnds.value === field.value,
+                              )?.label
+                              : "Select month..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">
+                              Open month tax year ends combobox
+                            </span>
+                          </Button>
+                        </FormControl>
+                      </DrawerTrigger>
+                      <DrawerContent className="mt-4 border-t">
+                        <MonthTaxYearEndsComboboxList
+                          fieldValue={field.value}
+                        />
+                      </DrawerContent>
+                    </Drawer>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}

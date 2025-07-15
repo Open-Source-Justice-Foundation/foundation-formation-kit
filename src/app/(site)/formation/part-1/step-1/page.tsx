@@ -13,6 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -28,6 +29,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import { useIsMobile } from "~/hooks/use-mobile";
 import {
   SUPPORTED_COUNTRIES,
   SUPPORTED_STATE_ABBREVIATIONS,
@@ -46,6 +48,7 @@ type FormValues = z.infer<
 
 export default function FormationPart1Step1Page() {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   const [openStateCombobox, setOpenStateCombobox] = useState<boolean>(false);
   const [openCountryCombobox, setOpenCountryCombobox] =
@@ -111,6 +114,86 @@ export default function FormationPart1Step1Page() {
       toast.error("Submission error");
       setIsLoading(false);
     }
+  }
+
+  function CountryComboboxList({ fieldValue }: { fieldValue: string }) {
+    return (
+      <Command>
+        <CommandInput placeholder="Search country..." className="h-9" />
+        <CommandList>
+          <CommandEmpty>No country found.</CommandEmpty>
+          <CommandGroup>
+            {SUPPORTED_COUNTRIES.map((supportedCountry) => (
+              <CommandItem
+                key={supportedCountry.value}
+                value={supportedCountry.value}
+                onSelect={() => {
+                  form.setValue(
+                    "country",
+                    form.getValues("country") === supportedCountry.value
+                      ? ""
+                      : supportedCountry.value,
+                  );
+                  setOpenCountryCombobox(false);
+                }}
+                disabled={isLoading}
+              >
+                {supportedCountry.label}
+                <Check
+                  className={cn(
+                    "ml-auto",
+                    supportedCountry.value === fieldValue
+                      ? "opacity-100"
+                      : "opacity-0",
+                  )}
+                />
+                <span className="sr-only">Country selected</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    );
+  }
+
+  function StateComboboxList({ fieldValue }: { fieldValue: string }) {
+    return (
+      <Command>
+        <CommandInput placeholder="Search state..." className="h-9" />
+        <CommandList>
+          <CommandEmpty>No state found.</CommandEmpty>
+          <CommandGroup>
+            {SUPPORTED_STATE_ABBREVIATIONS.map((supportedState) => (
+              <CommandItem
+                key={supportedState.value}
+                value={supportedState.value}
+                onSelect={() => {
+                  form.setValue(
+                    "state",
+                    form.getValues("state") === supportedState.value
+                      ? ""
+                      : supportedState.value,
+                  );
+                  setOpenStateCombobox(false);
+                }}
+                disabled={isLoading}
+              >
+                {supportedState.label}
+                <Check
+                  className={cn(
+                    "ml-auto",
+                    supportedState.value === fieldValue
+                      ? "opacity-100"
+                      : "opacity-0",
+                  )}
+                />
+                <span className="sr-only">State selected</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    );
   }
 
   return (
@@ -210,77 +293,76 @@ export default function FormationPart1Step1Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Country</FormLabel>
-                  <Popover
-                    open={openCountryCombobox}
-                    onOpenChange={setOpenCountryCombobox}
-                  >
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          aria-expanded={openCountryCombobox}
-                          className={cn(
-                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
-                            !field.value && "text-muted-foreground",
-                          )}
-                          disabled={isLoading}
-                        >
-                          {field.value
-                            ? SUPPORTED_COUNTRIES.find(
-                              (supportedCountry) =>
-                                supportedCountry.value === field.value,
-                            )?.label
-                            : "Select country..."}
-                          <ChevronsUpDown className="opacity-50" />
-                          <span className="sr-only">Open country combobox</span>
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search country..."
-                          className="h-9"
-                        />
-                        <CommandList>
-                          <CommandEmpty>No country found.</CommandEmpty>
-                          <CommandGroup>
-                            {SUPPORTED_COUNTRIES.map((supportedCountry) => (
-                              <CommandItem
-                                key={supportedCountry.value}
-                                value={supportedCountry.value}
-                                onSelect={() => {
-                                  form.setValue(
-                                    "country",
-                                    form.getValues("country") ===
-                                      supportedCountry.value
-                                      ? ""
-                                      : supportedCountry.value,
-                                  );
-                                  setOpenCountryCombobox(false);
-                                }}
-                                disabled={isLoading}
-                              >
-                                {supportedCountry.label}
-                                <Check
-                                  className={cn(
-                                    "ml-auto",
-                                    supportedCountry.value === field.value
-                                      ? "opacity-100"
-                                      : "opacity-0",
-                                  )}
-                                />
-                                <span className="sr-only">
-                                  Country selected
-                                </span>
-                              </CommandItem>
-                            ))}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
+                  {!isMobile && (
+                    <Popover
+                      open={openCountryCombobox}
+                      onOpenChange={setOpenCountryCombobox}
+                    >
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openCountryCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_COUNTRIES.find(
+                                (supportedCountry) =>
+                                  supportedCountry.value === field.value,
+                              )?.label
+                              : "Select country..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">
+                              Open country combobox
+                            </span>
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[200px] p-0">
+                        <CountryComboboxList fieldValue={field.value} />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                  {isMobile && (
+                    <Drawer
+                      open={openCountryCombobox}
+                      onOpenChange={setOpenCountryCombobox}
+                    >
+                      <DrawerTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openCountryCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_COUNTRIES.find(
+                                (supportedCountry) =>
+                                  supportedCountry.value === field.value,
+                              )?.label
+                              : "Select country..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">
+                              Open country combobox
+                            </span>
+                          </Button>
+                        </FormControl>
+                      </DrawerTrigger>
+                      <DrawerContent className="mt-4 border-t">
+                        <CountryComboboxList fieldValue={field.value} />
+                      </DrawerContent>
+                    </Drawer>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -291,79 +373,72 @@ export default function FormationPart1Step1Page() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>State</FormLabel>
-                  <Popover
-                    open={openStateCombobox}
-                    onOpenChange={setOpenStateCombobox}
-                  >
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          aria-expanded={openStateCombobox}
-                          className={cn(
-                            "w-[200px] justify-between focus-visible:ring-ringPrimary",
-                            !field.value && "text-muted-foreground",
-                          )}
-                          disabled={isLoading}
-                        >
-                          {field.value
-                            ? SUPPORTED_STATE_ABBREVIATIONS.find(
-                              (supportedState) =>
-                                supportedState.value === field.value,
-                            )?.label
-                            : "Select state..."}
-                          <ChevronsUpDown className="opacity-50" />
-                          <span className="sr-only">Open state combobox</span>
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search state..."
-                          className="h-9"
-                        />
-                        <CommandList>
-                          <CommandEmpty>No state found.</CommandEmpty>
-                          <CommandGroup>
-                            {SUPPORTED_STATE_ABBREVIATIONS.map(
-                              (supportedState) => (
-                                <CommandItem
-                                  key={supportedState.value}
-                                  value={supportedState.value}
-                                  onSelect={() => {
-                                    form.setValue(
-                                      "state",
-                                      form.getValues("state") ===
-                                        supportedState.value
-                                        ? ""
-                                        : supportedState.value,
-                                    );
-                                    setOpenStateCombobox(false);
-                                  }}
-                                  disabled={isLoading}
-                                >
-                                  {supportedState.label}
-                                  <Check
-                                    className={cn(
-                                      "ml-auto",
-                                      supportedState.value === field.value
-                                        ? "opacity-100"
-                                        : "opacity-0",
-                                    )}
-                                  />
-                                  <span className="sr-only">
-                                    State selected
-                                  </span>
-                                </CommandItem>
-                              ),
+                  {!isMobile && (
+                    <Popover
+                      open={openStateCombobox}
+                      onOpenChange={setOpenStateCombobox}
+                    >
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openStateCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
                             )}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_STATE_ABBREVIATIONS.find(
+                                (supportedState) =>
+                                  supportedState.value === field.value,
+                              )?.label
+                              : "Select state..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">Open state combobox</span>
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[200px] p-0">
+                        <StateComboboxList fieldValue={field.value} />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                  {isMobile && (
+                    <Drawer
+                      open={openStateCombobox}
+                      onOpenChange={setOpenStateCombobox}
+                    >
+                      <DrawerTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openStateCombobox}
+                            className={cn(
+                              "w-[200px] justify-between focus-visible:ring-ringPrimary",
+                              !field.value && "text-muted-foreground",
+                            )}
+                            disabled={isLoading}
+                          >
+                            {field.value
+                              ? SUPPORTED_STATE_ABBREVIATIONS.find(
+                                (supportedState) =>
+                                  supportedState.value === field.value,
+                              )?.label
+                              : "Select state..."}
+                            <ChevronsUpDown className="opacity-50" />
+                            <span className="sr-only">Open state combobox</span>
+                          </Button>
+                        </FormControl>
+                      </DrawerTrigger>
+                      <DrawerContent className="mt-4 border-t">
+                        <StateComboboxList fieldValue={field.value} />
+                      </DrawerContent>
+                    </Drawer>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
