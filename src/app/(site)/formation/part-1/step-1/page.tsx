@@ -13,7 +13,14 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/ui/command";
-import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "~/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -359,6 +366,14 @@ export default function FormationPart1Step1Page() {
                         </FormControl>
                       </DrawerTrigger>
                       <DrawerContent className="mt-4 border-t">
+                        <DrawerHeader className="p-0">
+                          <DrawerTitle className="sr-only">
+                            Supported Countries
+                          </DrawerTitle>
+                          <DrawerDescription className="sr-only">
+                            Select country
+                          </DrawerDescription>
+                        </DrawerHeader>
                         <CountryComboboxList fieldValue={field.value} />
                       </DrawerContent>
                     </Drawer>
@@ -435,6 +450,14 @@ export default function FormationPart1Step1Page() {
                         </FormControl>
                       </DrawerTrigger>
                       <DrawerContent className="mt-4 border-t">
+                        <DrawerHeader className="p-0">
+                          <DrawerTitle className="sr-only">
+                            Supported States
+                          </DrawerTitle>
+                          <DrawerDescription className="sr-only">
+                            Select state
+                          </DrawerDescription>
+                        </DrawerHeader>
                         <StateComboboxList fieldValue={field.value} />
                       </DrawerContent>
                     </Drawer>

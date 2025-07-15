@@ -13,7 +13,14 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/ui/command";
-import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "~/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -223,6 +230,14 @@ export default function FormationPart1Step3Page() {
                         </FormControl>
                       </DrawerTrigger>
                       <DrawerContent className="mt-4 border-t">
+                        <DrawerHeader className="p-0">
+                          <DrawerTitle className="sr-only">
+                            Month Tax Year Ends
+                          </DrawerTitle>
+                          <DrawerDescription className="sr-only">
+                            Select month
+                          </DrawerDescription>
+                        </DrawerHeader>
                         <MonthTaxYearEndsComboboxList
                           fieldValue={field.value}
                         />
