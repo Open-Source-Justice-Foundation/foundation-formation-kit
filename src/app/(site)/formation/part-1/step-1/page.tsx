@@ -219,6 +219,7 @@ export default function FormationPart1Step1Page() {
                         <Button
                           variant="outline"
                           role="combobox"
+                          aria-expanded={openCountryCombobox}
                           className={cn(
                             "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
@@ -248,11 +249,14 @@ export default function FormationPart1Step1Page() {
                             {SUPPORTED_COUNTRIES.map((supportedCountry) => (
                               <CommandItem
                                 key={supportedCountry.value}
-                                value={supportedCountry.label}
+                                value={supportedCountry.value}
                                 onSelect={() => {
                                   form.setValue(
                                     "country",
-                                    supportedCountry.value,
+                                    form.getValues("country") ===
+                                      supportedCountry.value
+                                      ? ""
+                                      : supportedCountry.value,
                                   );
                                   setOpenCountryCombobox(false);
                                 }}
@@ -296,6 +300,7 @@ export default function FormationPart1Step1Page() {
                         <Button
                           variant="outline"
                           role="combobox"
+                          aria-expanded={openStateCombobox}
                           className={cn(
                             "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
@@ -326,11 +331,14 @@ export default function FormationPart1Step1Page() {
                               (supportedState) => (
                                 <CommandItem
                                   key={supportedState.value}
-                                  value={supportedState.label}
+                                  value={supportedState.value}
                                   onSelect={() => {
                                     form.setValue(
                                       "state",
-                                      supportedState.value,
+                                      form.getValues("state") ===
+                                        supportedState.value
+                                        ? ""
+                                        : supportedState.value,
                                     );
                                     setOpenStateCombobox(false);
                                   }}

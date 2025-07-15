@@ -116,6 +116,7 @@ export default function FormationPart1Step3Page() {
                         <Button
                           variant="outline"
                           role="combobox"
+                          aria-expanded={openMonthTaxYearEndsCombobox}
                           className={cn(
                             "w-[200px] justify-between focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
@@ -147,11 +148,14 @@ export default function FormationPart1Step3Page() {
                             {MONTHS_TAX_YEAR_ENDS.map((monthTaxYearEnds) => (
                               <CommandItem
                                 key={monthTaxYearEnds.value}
-                                value={monthTaxYearEnds.label}
+                                value={monthTaxYearEnds.value}
                                 onSelect={() => {
                                   form.setValue(
                                     "monthTaxYearEnds",
-                                    monthTaxYearEnds.value,
+                                    form.getValues("monthTaxYearEnds") ===
+                                      monthTaxYearEnds.value
+                                      ? ""
+                                      : monthTaxYearEnds.value,
                                   );
                                   setOpenMonthTaxYearEndsCombobox(false);
                                 }}

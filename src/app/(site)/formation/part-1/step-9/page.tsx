@@ -229,6 +229,7 @@ export default function FormationPart1Step9Page() {
                         <Button
                           variant="outline"
                           role="combobox"
+                          aria-expanded={openStateCombobox}
                           className={cn(
                             "w-[200px] justify-between text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base",
                             !field.value && "text-muted-foreground",
@@ -259,11 +260,14 @@ export default function FormationPart1Step9Page() {
                               (supportedState) => (
                                 <CommandItem
                                   key={supportedState.value}
-                                  value={supportedState.label}
+                                  value={supportedState.value}
                                   onSelect={() => {
                                     form.setValue(
                                       "state",
-                                      supportedState.value,
+                                      form.getValues("state") ===
+                                        supportedState.value
+                                        ? ""
+                                        : supportedState.value,
                                     );
                                     setOpenStateCombobox(false);
                                   }}
