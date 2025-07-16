@@ -143,14 +143,15 @@ export default function FormationPart7Step1Page() {
                                 name={item.id}
                                 className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
+                                disabled={isLoading}
                                 onCheckedChange={(checked) => {
                                   return checked
                                     ? field.onChange([...field.value, item.id])
                                     : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id,
-                                        ),
-                                      );
+                                      field.value?.filter(
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
                                 }}
                               />
                             </FormControl>
@@ -192,17 +193,18 @@ export default function FormationPart7Step1Page() {
                                     name={item.id}
                                     className="focus-visible:ring-ringPrimary"
                                     checked={field.value?.includes(item.id)}
+                                    disabled={isLoading}
                                     onCheckedChange={(checked) => {
                                       return checked
                                         ? field.onChange([
-                                            ...field.value,
-                                            item.id,
-                                          ])
+                                          ...field.value,
+                                          item.id,
+                                        ])
                                         : field.onChange(
-                                            field.value?.filter(
-                                              (value) => value !== item.id,
-                                            ),
-                                          );
+                                          field.value?.filter(
+                                            (value) => value !== item.id,
+                                          ),
+                                        );
                                     }}
                                   />
                                 </FormControl>

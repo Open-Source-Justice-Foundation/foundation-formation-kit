@@ -117,6 +117,7 @@ export default function FormationPart2Step2Page() {
                             "w-[240px] pl-3 text-left font-normal focus-visible:ring-ringPrimary",
                             !field.value && "text-muted-foreground",
                           )}
+                          disabled={isLoading}
                         >
                           {field.value ? (
                             format(field.value, "PPP")

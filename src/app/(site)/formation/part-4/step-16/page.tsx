@@ -112,6 +112,7 @@ export default function FormationPart4Step16Page() {
                                 name={item.id}
                                 className="focus-visible:ring-ringPrimary"
                                 checked={field.value?.includes(item.id)}
+                                disabled={isLoading}
                                 onCheckedChange={(checked) => {
                                   return checked
                                     ? field.onChange([...field.value, item.id])
