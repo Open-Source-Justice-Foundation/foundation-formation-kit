@@ -100,7 +100,7 @@ export default function FormationPart1Step4Page() {
                   </FormControl>
                   <FormDescription>
                     Provide a person to contact if more information is needed
-                    (officier, director, trustee, or authorized representative).
+                    (officer, director, trustee, or authorized representative).
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

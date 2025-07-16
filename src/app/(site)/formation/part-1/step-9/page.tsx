@@ -164,7 +164,7 @@ export default function FormationPart1Step9Page() {
           Officer, Director, and/or Trustee Identification
         </CardTitle>
         <CardDescription>
-          List the names, titles, and mailing addresses of your officiers,
+          List the names, titles, and mailing addresses of your officers,
           directors, and/or trustees.
         </CardDescription>
       </CardHeader>
