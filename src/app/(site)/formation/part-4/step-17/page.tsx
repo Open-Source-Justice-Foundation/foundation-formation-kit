@@ -148,6 +148,7 @@ export default function FormationPart4Step17Page() {
                       placeholder="Describe your fundraising activities arrangements..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

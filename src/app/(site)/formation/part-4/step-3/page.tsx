@@ -153,6 +153,7 @@ export default function FormationPart4Step3Page() {
                       placeholder="Explain the limitation and how recipients are selected for each program..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

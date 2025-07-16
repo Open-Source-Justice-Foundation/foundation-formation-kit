@@ -157,6 +157,7 @@ export default function FormationPart5Step2Page() {
                       placeholder="Describe your conflict of interest procedures..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

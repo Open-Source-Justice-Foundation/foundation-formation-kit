@@ -139,6 +139,7 @@ export default function FormationScheduleFStep8Page() {
                       placeholder="Describe the government housing programs you participate in..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

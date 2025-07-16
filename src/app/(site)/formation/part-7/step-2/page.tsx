@@ -135,6 +135,7 @@ export default function FormationPart7Step2Page() {
                       placeholder=""
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

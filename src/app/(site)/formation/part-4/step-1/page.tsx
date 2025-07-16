@@ -125,6 +125,7 @@ export default function FormationPart4Step1Page() {
                       placeholder="Describe your past, present, and planned activities..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription></FormDescription>

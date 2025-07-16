@@ -147,10 +147,10 @@ export default function FormationPart7Step1Page() {
                                   return checked
                                     ? field.onChange([...field.value, item.id])
                                     : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id,
-                                      ),
-                                    );
+                                        field.value?.filter(
+                                          (value) => value !== item.id,
+                                        ),
+                                      );
                                 }}
                               />
                             </FormControl>
@@ -195,14 +195,14 @@ export default function FormationPart7Step1Page() {
                                     onCheckedChange={(checked) => {
                                       return checked
                                         ? field.onChange([
-                                          ...field.value,
-                                          item.id,
-                                        ])
+                                            ...field.value,
+                                            item.id,
+                                          ])
                                         : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== item.id,
-                                          ),
-                                        );
+                                            field.value?.filter(
+                                              (value) => value !== item.id,
+                                            ),
+                                          );
                                     }}
                                   />
                                 </FormControl>
@@ -362,6 +362,7 @@ export default function FormationPart7Step1Page() {
                       placeholder="Describe your private operating foundation status..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

@@ -146,6 +146,7 @@ export default function FormationScheduleDStep9Page() {
                       placeholder="Explain the investment involvement of your officers, directors, or trustees of supported organizations..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

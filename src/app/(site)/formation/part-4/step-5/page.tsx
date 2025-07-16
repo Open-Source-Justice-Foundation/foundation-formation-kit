@@ -146,6 +146,7 @@ export default function FormationPart4Step5Page() {
                       placeholder="Explain your political support..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

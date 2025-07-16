@@ -92,6 +92,7 @@ export default function FormationScheduleDStep1Page() {
                       placeholder="List the names, addresses, and EINs of the organizations you support..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

@@ -139,6 +139,7 @@ export default function FormationScheduleFStep7Page() {
                       placeholder="Describe your social services..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

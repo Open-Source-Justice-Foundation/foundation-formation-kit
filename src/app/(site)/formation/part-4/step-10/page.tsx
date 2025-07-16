@@ -151,6 +151,7 @@ export default function FormationPart4Step10Page() {
                       placeholder="Describe your foreign country operations..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

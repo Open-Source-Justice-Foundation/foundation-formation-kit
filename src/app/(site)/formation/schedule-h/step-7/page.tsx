@@ -90,6 +90,7 @@ export default function FormationScheduleHStep7Page() {
                       placeholder="Describe how you determine your selection committee..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

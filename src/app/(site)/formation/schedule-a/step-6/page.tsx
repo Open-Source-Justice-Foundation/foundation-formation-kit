@@ -143,6 +143,7 @@ export default function FormationScheduleAStep6Page() {
                       placeholder="Describe your form of worship..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

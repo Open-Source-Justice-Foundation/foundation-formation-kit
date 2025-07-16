@@ -143,6 +143,7 @@ export default function FormationScheduleAStep2Page() {
                       placeholder="Describe your literature..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

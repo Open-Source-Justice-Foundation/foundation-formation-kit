@@ -146,6 +146,7 @@ export default function FormationPart4Step6Page() {
                       placeholder="Explain how you attempt to influence legislation..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

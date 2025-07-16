@@ -144,6 +144,7 @@ export default function FormationScheduleHStep2Page() {
                       placeholder="Explain why you do not maintain case histories of recipients..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

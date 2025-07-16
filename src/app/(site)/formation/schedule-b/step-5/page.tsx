@@ -140,6 +140,7 @@ export default function FormationScheduleBStep5Page() {
                       placeholder="Explain your judicial procedings..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

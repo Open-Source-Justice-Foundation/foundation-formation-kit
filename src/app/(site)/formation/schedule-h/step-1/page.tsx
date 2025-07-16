@@ -100,6 +100,7 @@ export default function FormationScheduleHStep1Page() {
                       placeholder="Describe the types of educational financial support you provide..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

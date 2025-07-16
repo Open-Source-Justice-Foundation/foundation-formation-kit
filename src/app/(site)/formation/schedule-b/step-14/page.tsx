@@ -145,6 +145,7 @@ export default function FormationScheduleBStep14Page() {
                       placeholder="Explain your incorporators, founders, board members, and donors objectives..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

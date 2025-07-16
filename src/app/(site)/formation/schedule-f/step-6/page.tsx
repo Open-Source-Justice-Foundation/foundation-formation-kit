@@ -141,6 +141,7 @@ export default function FormationScheduleFStep6Page() {
                       placeholder="Describe what these charges cover and how they are determined..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

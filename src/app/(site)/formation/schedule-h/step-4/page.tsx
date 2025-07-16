@@ -90,6 +90,7 @@ export default function FormationScheduleHStep4Page() {
                       placeholder="Describe the specific criteria you use to select recipients..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

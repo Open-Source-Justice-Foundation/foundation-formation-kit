@@ -140,6 +140,7 @@ export default function FormationScheduleFStep5Page() {
                       placeholder="Describe your affordability restrictions..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

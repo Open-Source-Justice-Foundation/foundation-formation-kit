@@ -91,6 +91,7 @@ export default function FormationScheduleFStep2Page() {
                       placeholder="Describe your resident qualifications..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

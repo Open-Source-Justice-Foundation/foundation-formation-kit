@@ -92,6 +92,7 @@ export default function FormationScheduleHStep6Page() {
                       placeholder="Describe your procedures for supervising the scholarships, fellowships, educational loans, or other educational grants..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

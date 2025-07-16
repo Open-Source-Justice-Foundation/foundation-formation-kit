@@ -147,6 +147,7 @@ export default function FormationScheduleAStep1Page() {
                       placeholder="Describe your written creed, statement of faith, or summary of beliefs..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

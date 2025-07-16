@@ -151,6 +151,7 @@ export default function FormationPart4Step4Page() {
                       placeholder="Explain how these related individuals are eligible for goods, services, or funds..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

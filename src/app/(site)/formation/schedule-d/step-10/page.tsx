@@ -156,6 +156,7 @@ export default function FormationScheduleDStep10Page() {
                       placeholder="Explain documents provided to your supported Organizations..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

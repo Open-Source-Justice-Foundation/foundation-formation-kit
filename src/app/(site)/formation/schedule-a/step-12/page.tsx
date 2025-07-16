@@ -146,6 +146,7 @@ export default function FormationScheduleAStep12Page() {
                       placeholder="Describe your ministers or religious leaders..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

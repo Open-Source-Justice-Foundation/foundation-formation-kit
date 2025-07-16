@@ -160,6 +160,7 @@ export default function FormationScheduleDStep5Page() {
                       placeholder="Describe the relationship between disqualified persons, foundation managers, and control..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

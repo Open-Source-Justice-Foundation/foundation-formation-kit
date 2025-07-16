@@ -90,6 +90,7 @@ export default function FormationScheduleHStep3Page() {
                       placeholder="Describe the specific criteria you use to determine who is eligible for your program..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

@@ -162,6 +162,7 @@ export default function FormationPart4Step9Page() {
                       placeholder="Describe your distributions to other organizations..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

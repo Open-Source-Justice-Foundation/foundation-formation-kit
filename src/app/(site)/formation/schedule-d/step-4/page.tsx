@@ -90,6 +90,7 @@ export default function FormationScheduleDStep4Page() {
                       placeholder="Describe how your governing board and officers are selected..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

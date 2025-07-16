@@ -145,6 +145,7 @@ export default function FormationScheduleGStep3Page() {
                       placeholder="Explain your relationship with the predecessor organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

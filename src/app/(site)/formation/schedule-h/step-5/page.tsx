@@ -90,6 +90,7 @@ export default function FormationScheduleHStep5Page() {
                       placeholder="Describe any requirement or condition you impose on recipients to obtain, maintain, or qualify for renewal of a grant..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

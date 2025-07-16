@@ -156,6 +156,7 @@ export default function FormationPart5Step8Page() {
                       placeholder="Describe your profit and loss sharing with partners..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

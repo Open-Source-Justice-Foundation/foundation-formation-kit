@@ -92,6 +92,7 @@ export default function FormationScheduleGStep1Page() {
                       placeholder="List the name, last address, and EIN of your predecessor organization and describe its activities..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

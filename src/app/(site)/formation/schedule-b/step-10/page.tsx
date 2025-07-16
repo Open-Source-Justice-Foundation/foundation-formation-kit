@@ -143,6 +143,7 @@ export default function FormationScheduleBStep10Page() {
                       placeholder="Explain your selection process..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

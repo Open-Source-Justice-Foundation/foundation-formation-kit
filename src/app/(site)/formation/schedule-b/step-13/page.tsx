@@ -92,6 +92,7 @@ export default function FormationScheduleBStep13Page() {
                       placeholder="List your incorporators, founders, board members, and donors..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

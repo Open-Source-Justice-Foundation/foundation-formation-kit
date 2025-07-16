@@ -90,6 +90,7 @@ export default function FormationScheduleFStep1Page() {
                       placeholder="Describe your facilities..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

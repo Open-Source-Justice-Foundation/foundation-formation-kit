@@ -90,6 +90,7 @@ export default function FormationScheduleGStep2Page() {
                       placeholder="List and describe the members of your predecessor organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>

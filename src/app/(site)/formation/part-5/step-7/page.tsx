@@ -156,6 +156,7 @@ export default function FormationPart5Step7Page() {
                       placeholder="Describe your sctivities or facilities management..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

@@ -145,6 +145,7 @@ export default function FormationScheduleBStep3Page() {
                       placeholder="Explain how you are operated by a state or subdivision of a state..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

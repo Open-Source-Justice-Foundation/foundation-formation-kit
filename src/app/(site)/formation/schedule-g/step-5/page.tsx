@@ -145,6 +145,7 @@ export default function FormationScheduleGStep5Page() {
                       placeholder="List and explain your assets from your predecessor organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

@@ -142,6 +142,7 @@ export default function FormationScheduleCStep2Page() {
                       placeholder="Explain your cooperative hospital service organization exemption..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

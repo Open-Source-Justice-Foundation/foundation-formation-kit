@@ -144,6 +144,7 @@ export default function FormationScheduleAStep15Page() {
                       placeholder="Explain the other information..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

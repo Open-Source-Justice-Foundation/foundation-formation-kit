@@ -144,6 +144,7 @@ export default function FormationScheduleCStep7Page() {
                       placeholder="Describe your medical training or research programs..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

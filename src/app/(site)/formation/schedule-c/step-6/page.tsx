@@ -142,6 +142,7 @@ export default function FormationScheduleCStep6Page() {
                       placeholder="Describe your policy for these services..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

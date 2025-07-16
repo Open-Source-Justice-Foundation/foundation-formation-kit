@@ -143,6 +143,7 @@ export default function FormationScheduleGStep7Page() {
                       placeholder="Describe the arrangement(s) including how the lease or rental value was determined..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

@@ -143,6 +143,7 @@ export default function FormationScheduleGStep4Page() {
                       placeholder="Describe the working relationship...."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

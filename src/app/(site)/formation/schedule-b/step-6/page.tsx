@@ -140,6 +140,7 @@ export default function FormationScheduleBStep6Page() {
                       placeholder="Explain your financial aid revocation or suspension..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

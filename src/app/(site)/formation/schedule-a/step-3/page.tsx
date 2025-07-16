@@ -144,6 +144,7 @@ export default function FormationScheduleAStep3Page() {
                       placeholder="Describe your code of doctrine and discipline..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

@@ -150,6 +150,7 @@ export default function FormationPart4Step8Page() {
                       placeholder="Explain how you provide general public finance education..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

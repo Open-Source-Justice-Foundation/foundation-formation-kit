@@ -99,6 +99,7 @@ export default function FormationScheduleBStep12Page() {
                       placeholder="Switch to table..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

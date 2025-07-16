@@ -146,6 +146,7 @@ export default function FormationPart2Step4Page() {
                       placeholder="Explain how you select your officers, directors, or trustees..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

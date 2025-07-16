@@ -143,6 +143,7 @@ export default function FormationScheduleGStep6Page() {
                       placeholder="List and explain your debts or liabilities from your predecessor for-profit organization..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

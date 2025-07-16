@@ -143,6 +143,7 @@ export default function FormationScheduleHStep8Page() {
                       placeholder="Explain what measures you take to ensure unbiased selections..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

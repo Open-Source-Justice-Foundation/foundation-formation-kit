@@ -144,6 +144,7 @@ export default function FormationScheduleAStep5Page() {
                       placeholder="Describe your group of churches participation..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />

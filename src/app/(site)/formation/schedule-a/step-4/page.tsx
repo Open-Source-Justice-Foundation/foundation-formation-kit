@@ -92,6 +92,7 @@ export default function FormationScheduleAStep4Page() {
                       placeholder="Describe your religious hierarchy or ecclesiastical government..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>
