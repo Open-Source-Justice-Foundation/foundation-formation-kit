@@ -128,7 +128,6 @@ export default function FormationPart4Step1Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
-                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

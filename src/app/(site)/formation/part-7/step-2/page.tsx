@@ -88,7 +88,6 @@ export default function FormationPart7Step2Page() {
               name="input1"
               render={({ field }) => (
                 <FormItem>
-                  <FormDescription></FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
