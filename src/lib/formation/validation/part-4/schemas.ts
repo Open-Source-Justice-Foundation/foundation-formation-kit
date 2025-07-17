@@ -83,6 +83,37 @@ export const form1023Part4YourActivitiesStep3Schema = object({
     .trim(),
 });
 
+export const form1023Part4YourActivitiesStep6Schema = object({
+  influenceLegislation: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  influenceLegislationExplanation: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  legislativeActivityMeasuredByExpenditures: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  legislativeActivityMeasuredByExpendituresExplanation: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+});
+
 export const form1023Part4YourActivitiesYesNoRadioSchema = object({
   input: z.enum(["Yes", "No"], {
     required_error: "Required",

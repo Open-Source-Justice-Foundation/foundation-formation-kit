@@ -16,7 +16,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023Part4YourActivitiesStep3Schema } from "~/lib/formation/validation/part-4/schemas";
+import { form1023Part4YourActivitiesStep6Schema } from "~/lib/formation/validation/part-4/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,7 +25,7 @@ import { z } from "zod";
 // TODO
 // Update schemas
 
-type FormValues = z.infer<typeof form1023Part4YourActivitiesStep3Schema>;
+type FormValues = z.infer<typeof form1023Part4YourActivitiesStep6Schema>;
 
 export default function FormationPart4Step6Page() {
   const router = useRouter();
@@ -33,14 +33,16 @@ export default function FormationPart4Step6Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023Part4YourActivitiesStep3Schema),
+    resolver: zodResolver(form1023Part4YourActivitiesStep6Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
     const {
-      programsLimitProvisionOfGoodsServicesOrFunds,
-      programsLimitProvisionOfGoodsServicesOrFundsExplanation,
+      influenceLegislation,
+      influenceLegislationExplanation,
+      legislativeActivityMeasuredByExpenditures,
+      legislativeActivityMeasuredByExpendituresExplanation,
     } = values;
 
     const url = "/api/formation/part-4/step-6";
@@ -53,8 +55,10 @@ export default function FormationPart4Step6Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          programsLimitProvisionOfGoodsServicesOrFunds,
-          programsLimitProvisionOfGoodsServicesOrFundsExplanation,
+          influenceLegislation,
+          influenceLegislationExplanation,
+          legislativeActivityMeasuredByExpenditures,
+          legislativeActivityMeasuredByExpendituresExplanation,
         }),
       });
 
@@ -89,7 +93,7 @@ export default function FormationPart4Step6Page() {
           >
             <FormField
               control={form.control}
-              name="programsLimitProvisionOfGoodsServicesOrFunds"
+              name="influenceLegislation"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -137,13 +141,84 @@ export default function FormationPart4Step6Page() {
             />
             <FormField
               control={form.control}
-              name="programsLimitProvisionOfGoodsServicesOrFundsExplanation"
+              name="influenceLegislationExplanation"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Legislation Influence</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Explain how you attempt to influence legislation..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="legislativeActivityMeasuredByExpenditures"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Did you or will you make an election to have your
+                    legislative activities measured by expenditures by filing
+                    Form 5768?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; describe whether your attempts to
+                      influence legislation are a substantial part of your
+                      activities. Include the time and money spent on your
+                      attempts to influence legislation as compared to your
+                      total activities.
+                    </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="legislativeActivityMeasuredByExpendituresExplanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Attempts to Influence Legislation</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe whether your attempts to influence legislation are a substantial part of your activities..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}
