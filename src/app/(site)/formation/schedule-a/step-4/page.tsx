@@ -99,7 +99,6 @@ export default function FormationScheduleAStep4Page() {
                     Describe your religious hierarchy or ecclesiastical
                     government.
                   </FormDescription>
-                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

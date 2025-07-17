@@ -1,5 +1,5 @@
 import { auth } from "~/auth";
-import { form1023Part4YourActivitiesStep3Schema } from "~/lib/formation/validation/part-4/schemas";
+import { form1023Part4YourActivitiesStep9Schema } from "~/lib/formation/validation/part-4/schemas";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const data = await request.json();
 
-    const { } = form1023Part4YourActivitiesStep3Schema.parse(data);
+    const { } = form1023Part4YourActivitiesStep9Schema.parse(data);
   } catch (err) {
     if (err instanceof ZodError) {
       throw new Error(

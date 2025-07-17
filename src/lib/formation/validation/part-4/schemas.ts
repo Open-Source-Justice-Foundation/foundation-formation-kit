@@ -120,6 +120,127 @@ export const form1023Part4YourActivitiesYesNoRadioSchema = object({
   }),
 });
 
+export const form1023Part4YourActivitiesStep9Schema = object({
+  radioInput1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput1: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput2: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput2: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput3: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput3: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput4: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput4: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput5: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput5: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput6: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput6: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput7: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput7: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput8: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput8: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput9: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  radioInput10: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});
+
 export const form1023Part4YourActivitiesStep16Schema = object({
   fundraisingActivities: array(string()).refine(
     (value) => value.some((item) => item),
