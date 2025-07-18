@@ -241,6 +241,43 @@ export const form1023Part4YourActivitiesStep9Schema = object({
   }),
 });
 
+export const form1023Part4YourActivitiesStep10Schema = object({
+  radioInput1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput1: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput2: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput2: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput3: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  radioInput4: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});
+
 export const form1023Part4YourActivitiesStep16Schema = object({
   fundraisingActivities: array(string()).refine(
     (value) => value.some((item) => item),
