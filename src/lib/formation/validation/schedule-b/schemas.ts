@@ -1,4 +1,4 @@
-import { object, string, z } from "zod";
+import { array, object, string, z } from "zod";
 
 export const form1023ScheduleBYesNoRadioSchema = object({
   radioInput: z.enum(["Yes", "No"], {
@@ -35,4 +35,16 @@ export const form1023ScheduleBTextAreaSchema = object({
       message: "Input can be at most 1000 characters",
     })
     .trim(),
+});
+
+export const form1023ScheduleBStep8Schema = object({
+  radioInput: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  confirmStudentPolicyInContent: array(string()).refine(
+    (value) => value.some((item) => item),
+    {
+      message: "Required",
+    },
+  ),
 });
