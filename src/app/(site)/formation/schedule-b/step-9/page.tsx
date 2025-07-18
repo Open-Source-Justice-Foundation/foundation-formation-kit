@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -15,13 +16,14 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleBYesNoRadioSchema } from "~/lib/formation/validation/schedule-b/schemas";
+import { CONFIRM_STUDENT_POLICY_AWARENESS } from "~/lib/formation/constants/schedule-b/constants";
+import { form1023ScheduleBStep9Schema } from "~/lib/formation/validation/schedule-b/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleBYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleBStep9Schema>;
 
 export default function FormationScheduleBStep9Page() {
   const router = useRouter();
@@ -29,12 +31,15 @@ export default function FormationScheduleBStep9Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleBYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleBStep9Schema),
+    defaultValues: {
+      confirmStudentPolicyAwareness: [""],
+    },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { radioInput, confirmStudentPolicyAwareness } = values;
 
     const url = "/api/formation/schedule-b/step-9";
     let response: Response = new Response();
@@ -47,6 +52,7 @@ export default function FormationScheduleBStep9Page() {
         },
         body: JSON.stringify({
           radioInput,
+          confirmStudentPolicyAwareness,
         }),
       });
 
@@ -144,6 +150,45 @@ export default function FormationScheduleBStep9Page() {
                 </FormItem>
               )}
             />
+            <FormItem>
+              {CONFIRM_STUDENT_POLICY_AWARENESS.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="confirmStudentPolicyAwareness"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-center gap-2"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            name={item.id}
+                            className="focus-visible:ring-ringPrimary"
+                            checked={field.value?.includes(item.id)}
+                            disabled={isLoading}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                  field.value?.filter(
+                                    (value) => value !== item.id,
+                                  ),
+                                );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
             <FormationNavigationButtons
               prevHref="/formation/schedule-b/step-8"
               isLoading={isLoading}

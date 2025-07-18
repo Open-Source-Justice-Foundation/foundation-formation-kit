@@ -48,3 +48,15 @@ export const form1023ScheduleBStep8Schema = object({
     },
   ),
 });
+
+export const form1023ScheduleBStep9Schema = object({
+  radioInput: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  confirmStudentPolicyAwareness: array(string()).refine(
+    (value) => value.some((item) => item),
+    {
+      message: "Required",
+    },
+  ),
+});
