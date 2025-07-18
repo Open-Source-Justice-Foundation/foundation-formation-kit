@@ -285,4 +285,15 @@ export const form1023Part4YourActivitiesStep16Schema = object({
       message: FUNDRAISING_ACTIVITIES_REQUIRED_ERR_MSG,
     },
   ),
+  otherDescription: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
 });

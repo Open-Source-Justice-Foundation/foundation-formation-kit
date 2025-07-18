@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { FUNDRAISING_ACTIVITIES } from "~/lib/formation/constants/part-4/constants";
 import { form1023Part4YourActivitiesStep16Schema } from "~/lib/formation/validation/part-4/schemas";
@@ -24,7 +25,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Add Other (describe) textarea
 
 type FormValues = z.infer<typeof form1023Part4YourActivitiesStep16Schema>;
 
@@ -42,7 +42,7 @@ export default function FormationPart4Step16Page() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { fundraisingActivities } = values;
+    const { fundraisingActivities, otherDescription } = values;
 
     const url = "/api/formation/part-4/step-16";
     let response: Response = new Response();
@@ -55,6 +55,7 @@ export default function FormationPart4Step16Page() {
         },
         body: JSON.stringify({
           fundraisingActivities,
+          otherDescription,
         }),
       });
 
@@ -97,40 +98,64 @@ export default function FormationPart4Step16Page() {
                     will undertake (check all that apply):
                   </FormDescription>
                   {FUNDRAISING_ACTIVITIES.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="fundraisingActivities"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-center gap-2"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                name={item.id}
-                                className="focus-visible:ring-ringPrimary"
-                                checked={field.value?.includes(item.id)}
-                                disabled={isLoading}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id,
-                                      ),
-                                    );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
+                    <>
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="fundraisingActivities"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-center gap-2"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  name={item.id}
+                                  className="focus-visible:ring-ringPrimary"
+                                  checked={field.value?.includes(item.id)}
+                                  disabled={isLoading}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                        ...field.value,
+                                        item.id,
+                                      ])
+                                      : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item.id,
+                                        ),
+                                      );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-sm font-normal">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                      {item.id === "other-describe" && (
+                        <FormField
+                          control={form.control}
+                          name="otherDescription"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Textarea
+                                  placeholder="Describe your other fundraising activities..."
+                                  className="resize-none text-sm focus-visible:ring-ringPrimary"
+                                  {...field}
+                                  disabled={isLoading}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      )}
+                    </>
                   ))}
                   <FormMessage />
                 </FormItem>
