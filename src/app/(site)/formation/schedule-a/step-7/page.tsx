@@ -13,18 +13,17 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleAChurchesYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/schedule-a/schemas";
+import { form1023ScheduleAChurchesStep7Schema } from "~/lib/formation/validation/schedule-a/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<
-  typeof form1023ScheduleAChurchesYesNoRadioWithTextAreaSchema
->;
+type FormValues = z.infer<typeof form1023ScheduleAChurchesStep7Schema>;
 
 export default function FormationScheduleAStep7Page() {
   const router = useRouter();
@@ -32,14 +31,12 @@ export default function FormationScheduleAStep7Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(
-      form1023ScheduleAChurchesYesNoRadioWithTextAreaSchema,
-    ),
+    resolver: zodResolver(form1023ScheduleAChurchesStep7Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput, textAreaInput } = values;
+    const { radioInput, textAreaInput, averageAttendance } = values;
 
     const url = "/api/formation/schedule-a/step-7";
     let response: Response = new Response();
@@ -53,6 +50,7 @@ export default function FormationScheduleAStep7Page() {
         body: JSON.stringify({
           radioInput,
           textAreaInput,
+          averageAttendance,
         }),
       });
 
@@ -146,6 +144,28 @@ export default function FormationScheduleAStep7Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="averageAttendance"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Average Attendance</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="text"
+                      className="text-sm focus-visible:ring-ringPrimary sm:text-base md:text-base"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    What is the average attendance at your regularly scheduled
+                    religious services?
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
