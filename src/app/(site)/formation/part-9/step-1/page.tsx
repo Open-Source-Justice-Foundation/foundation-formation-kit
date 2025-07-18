@@ -20,6 +20,8 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
 import { EXCEPTED_FROM_FILING } from "~/lib/formation/constants/part-9/constants";
 import { form1023Part9AnnualFilingRequirementsStep1Schema } from "~/lib/formation/validation/part-9/schemas";
@@ -31,7 +33,6 @@ import { z } from "zod";
 // TODO
 // Update schemas
 // Add radio button section
-// Update Other (describe) to include textarea
 
 type FormValues = z.infer<
   typeof form1023Part9AnnualFilingRequirementsStep1Schema
@@ -51,7 +52,7 @@ export default function FormationPart9Step1Page() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { exceptedFromFiling } = values;
+    const { excusedFromFiling, exceptedFromFiling, otherDescription } = values;
 
     const url = "/api/formation/part-9/step-1";
     let response: Response = new Response();
@@ -63,7 +64,9 @@ export default function FormationPart9Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          excusedFromFiling,
           exceptedFromFiling,
+          otherDescription,
         }),
       });
 
@@ -102,6 +105,54 @@ export default function FormationPart9Step1Page() {
           >
             <FormField
               control={form.control}
+              name="excusedFromFiling"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Certain organizations are not required to file annual
+                    information returns or notices (Form 990, Form 990-EZ, or
+                    Form 990-N, e-Postcard). If you are granted tax-exemption,
+                    are you claiming to be excused from filing Form 990, Form
+                    990-EZ, or Form 990-N?
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="exceptedFromFiling"
               render={() => (
                 <FormItem>
@@ -110,40 +161,65 @@ export default function FormationPart9Step1Page() {
                     filing because you are:
                   </FormDescription>
                   {EXCEPTED_FROM_FILING.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="exceptedFromFiling"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-center gap-2"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                name={item.id}
-                                className="focus-visible:ring-ringPrimary"
-                                checked={field.value?.includes(item.id)}
-                                disabled={isLoading}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id,
-                                      ),
-                                    );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
+                    <>
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="exceptedFromFiling"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-center gap-2"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  name={item.id}
+                                  className="focus-visible:ring-ringPrimary"
+                                  checked={field.value?.includes(item.id)}
+                                  disabled={isLoading}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                        ...field.value,
+                                        item.id,
+                                      ])
+                                      : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item.id,
+                                        ),
+                                      );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-sm font-normal">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+
+                      {item.id === "other-describe" && (
+                        <FormField
+                          control={form.control}
+                          name="otherDescription"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Textarea
+                                  placeholder="Describe your other filing exception claims..."
+                                  className="resize-none text-sm focus-visible:ring-ringPrimary"
+                                  {...field}
+                                  disabled={isLoading}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      )}
+                    </>
                   ))}
                   <FormMessage />
                 </FormItem>
