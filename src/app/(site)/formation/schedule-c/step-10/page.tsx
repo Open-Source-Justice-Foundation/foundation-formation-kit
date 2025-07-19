@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleCYesNoRadioSchema } from "~/lib/formation/validation/schedule-c/schemas";
+import { form1023ScheduleCStep10Schema } from "~/lib/formation/validation/schedule-c/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleCYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleCStep10Schema>;
 
 export default function FormationScheduleCStep10Page() {
   const router = useRouter();
@@ -29,12 +30,22 @@ export default function FormationScheduleCStep10Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleCYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleCStep10Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const {
+      facilityRequirementsStatus,
+      communityHealthNeedsAssessmentStatus,
+      communityHealthNeedsAssessmentDescription,
+      financialAssistancePolicyStatus,
+      financialAssistancePolicyDescription,
+      financialAssistancePolicyChargesStatus,
+      financialAssistancePolicyChargesDescription,
+      financialAssistancePolicyEffortsStatus,
+      financialAssistancePolicyEffortsDescription,
+    } = values;
 
     const url = "/api/formation/schedule-c/step-10";
     let response: Response = new Response();
@@ -46,7 +57,15 @@ export default function FormationScheduleCStep10Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          facilityRequirementsStatus,
+          communityHealthNeedsAssessmentStatus,
+          communityHealthNeedsAssessmentDescription,
+          financialAssistancePolicyStatus,
+          financialAssistancePolicyDescription,
+          financialAssistancePolicyChargesStatus,
+          financialAssistancePolicyChargesDescription,
+          financialAssistancePolicyEffortsStatus,
+          financialAssistancePolicyEffortsDescription,
         }),
       });
 
@@ -81,7 +100,7 @@ export default function FormationScheduleCStep10Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="facilityRequirementsStatus"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -122,6 +141,290 @@ export default function FormationScheduleCStep10Page() {
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="communityHealthNeedsAssessmentStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do you conduct a community health needs assessment (CHNA) at
+                    least once every three years and adopt an implementation
+                    strategy to meet the community health needs identified in
+                    the assessment as required by section 501(r)(3)?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; explain.
+                    </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="communityHealthNeedsAssessmentDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Lack of Community Health Needs Assessment
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your lack of community health needs assessment..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do you have a written financial assistance policy (FAP) and
+                    a written policy relating to emergency medical care as
+                    required by section 501(r)(4)?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; explain.
+                    </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Lack of Financial Assistance Policy</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your lack of financial assistance policy..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyChargesStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>Do you both:</FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(1)'] before:mr-1.5">
+                      Limit amounts charged for emergency or other medically
+                      necessary care provided to individuals eligible for
+                      assistance under your FAP to not more than amounts
+                      generally billed to individuals who have insurance
+                      covering such care?
+                    </li>
+                    <li className="mb-6 mt-2 list-['(2)'] before:mr-1.5">
+                      Prohibit use of gross charges as required by section
+                      501(r)(5)?
+                    </li>
+                  </ol>
+                  <p className="text-sm text-muted-foreground">
+                    If &quot;No,&quot; explain.
+                  </p>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyChargesDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Lack of Financial Assistance Policy Charges
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your lack of financial assistance policy charges..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyEffortsStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do you make reasonable efforts to determine whether an
+                    individual is FAP-eligible before engaging in extraordinary
+                    collection actions as required by section 501(r)(6)?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; explain.
+                    </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="financialAssistancePolicyEffortsDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Lack of Financial Assistance Policy Efforts
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your lack of financial assistance policy efforts..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
