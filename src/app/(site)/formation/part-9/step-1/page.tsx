@@ -32,7 +32,6 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Add radio button section
 
 type FormValues = z.infer<
   typeof form1023Part9AnnualFilingRequirementsStep1Schema
