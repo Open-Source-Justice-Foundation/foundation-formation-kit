@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleCYesNoRadioSchema } from "~/lib/formation/validation/schedule-c/schemas";
+import { form1023ScheduleCStep1Schema } from "~/lib/formation/validation/schedule-c/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleCYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleCStep1Schema>;
 
 export default function FormationScheduleCStep1Page() {
   const router = useRouter();
@@ -29,12 +30,16 @@ export default function FormationScheduleCStep1Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleCYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleCStep1Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const {
+      medicalResearchOrganizationStatus,
+      hospitalRelationshipsDescription,
+      assetsDescription,
+    } = values;
 
     const url = "/api/formation/schedule-c/step-1";
     let response: Response = new Response();
@@ -46,7 +51,9 @@ export default function FormationScheduleCStep1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          medicalResearchOrganizationStatus,
+          hospitalRelationshipsDescription,
+          assetsDescription,
         }),
       });
 
@@ -81,7 +88,7 @@ export default function FormationScheduleCStep1Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="medicalResearchOrganizationStatus"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -126,6 +133,50 @@ export default function FormationScheduleCStep1Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="hospitalRelationshipsDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Hospital Relationships</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your hospital relationships..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Name the hospitals with which you have a relationship and
+                    describe the relationship.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="assetsDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Assets</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your assets..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    List your assets showing their fair market value and the
+                    portion of your assets directly devoted to medical research.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
