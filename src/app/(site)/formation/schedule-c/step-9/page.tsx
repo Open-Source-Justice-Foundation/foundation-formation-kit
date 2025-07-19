@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleCYesNoRadioSchema } from "~/lib/formation/validation/schedule-c/schemas";
+import { form1023ScheduleCStep9Schema } from "~/lib/formation/validation/schedule-c/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleCYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleCStep9Schema>;
 
 export default function FormationScheduleCStep9Page() {
   const router = useRouter();
@@ -29,12 +30,15 @@ export default function FormationScheduleCStep9Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleCYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleCStep9Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const {
+      boardOfDirectorsCommunityRepresentationStatus,
+      boardOfDirectorsDescription,
+    } = values;
 
     const url = "/api/formation/schedule-c/step-9";
     let response: Response = new Response();
@@ -46,7 +50,8 @@ export default function FormationScheduleCStep9Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          boardOfDirectorsCommunityRepresentationStatus,
+          boardOfDirectorsDescription,
         }),
       });
 
@@ -81,7 +86,7 @@ export default function FormationScheduleCStep9Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="boardOfDirectorsCommunityRepresentationStatus"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -126,6 +131,35 @@ export default function FormationScheduleCStep9Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="boardOfDirectorsDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Board of Directors</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your board of directors..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    List each board member&apos;s name and business, financial,
+                    or professional relationship with the hospital. Also,
+                    identify each board member who is representative of the
+                    community and describe how that individual is a community
+                    representative. If you operate under a parent organization
+                    whose board of directors is not composed of a majority of
+                    individuals who are representative of the community you
+                    serve, provide the requested information for your
+                    parent&apos;s board of directors as well.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
