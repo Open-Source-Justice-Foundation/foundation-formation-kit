@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleDYesNoRadioSchema } from "~/lib/formation/validation/schedule-d/schemas";
+import { form1023ScheduleDStep2Schema } from "~/lib/formation/validation/schedule-d/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleDYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleDStep2Schema>;
 
 export default function FormationScheduleDStep2Page() {
   const router = useRouter();
@@ -29,12 +30,16 @@ export default function FormationScheduleDStep2Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleDYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleDStep2Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const {
+      supportedOrganizationsPublicCharityStatuses,
+      supportedOrganizationsTaxExemptStatuses,
+      supportedOrganizationsPublicCharityExplanation,
+    } = values;
 
     const url = "/api/formation/schedule-d/step-2";
     let response: Response = new Response();
@@ -46,7 +51,9 @@ export default function FormationScheduleDStep2Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          supportedOrganizationsPublicCharityStatuses,
+          supportedOrganizationsTaxExemptStatuses,
+          supportedOrganizationsPublicCharityExplanation,
         }),
       });
 
@@ -81,7 +88,7 @@ export default function FormationScheduleDStep2Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="supportedOrganizationsPublicCharityStatuses"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -122,6 +129,78 @@ export default function FormationScheduleDStep2Page() {
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="supportedOrganizationsTaxExemptStatuses"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Are your supported organizations tax exempt under section
+                    501(c)(4), 501(c)(5), or 501(c)(6) and do your supported
+                    organizations meet the public support test under section
+                    509(a)(2)?
+                    <span className="mt-1.5 block">
+                      If &quot;No,&quot; explain how each organization you
+                      support is a public charity under section 509(a)(1) or
+                      509(a)(2).
+                    </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="supportedOrganizationsPublicCharityExplanation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Supported Organizations Public Charity Statuses
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Explain how each organization you support is a public charity..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
