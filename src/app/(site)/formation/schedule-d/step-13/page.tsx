@@ -16,13 +16,13 @@ import {
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleDYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/schedule-d/schemas";
+import { form1023ScheduleDStep13Schema } from "~/lib/formation/validation/schedule-d/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleDYesNoRadioWithTextAreaSchema>;
+type FormValues = z.infer<typeof form1023ScheduleDStep13Schema>;
 
 export default function FormationScheduleDStep13Page() {
   const router = useRouter();
@@ -30,12 +30,19 @@ export default function FormationScheduleDStep13Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleDYesNoRadioWithTextAreaSchema),
+    resolver: zodResolver(form1023ScheduleDStep13Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput, textAreaInput } = values;
+    const {
+      radioInput1,
+      textAreaInput1,
+      textAreaInput2,
+      textAreaInput3,
+      radioInput2,
+      textAreaInput4,
+    } = values;
 
     const url = "/api/formation/schedule-d/step-13";
     let response: Response = new Response();
@@ -47,8 +54,12 @@ export default function FormationScheduleDStep13Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
-          textAreaInput,
+          radioInput1,
+          textAreaInput1,
+          textAreaInput2,
+          textAreaInput3,
+          radioInput2,
+          textAreaInput4,
         }),
       });
 
@@ -83,7 +94,7 @@ export default function FormationScheduleDStep13Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="radioInput1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -133,13 +144,129 @@ export default function FormationScheduleDStep13Page() {
             />
             <FormField
               control={form.control}
-              name="textAreaInput"
+              name="textAreaInput1"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Distribution of Assets</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Explain your distributions of assets to your supported organizations..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="textAreaInput2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Annual Contribution to Each Supported Organization
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your annual contribution to each supported organization..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    How much do you contribute annually to each supported
+                    organization?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="textAreaInput3"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Total Annual Revenue of Each Supported Organization
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe the total annual revenue of each supported organization..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    What is the total annual revenue of each supported
+                    organization?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="radioInput2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Do you or the supported organization(s) earmark your funds
+                    for support of a particular program or activity?
+                  </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;Yes,&quot; explain.
+                  </p>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="textAreaInput4"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Support of a Particular Program or Activity
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Explain your support of a particular program or activity..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}

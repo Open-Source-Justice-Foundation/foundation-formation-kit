@@ -78,3 +78,56 @@ export const form1023ScheduleDStep7Schema = object({
     required_error: "Required",
   }),
 });
+
+export const form1023ScheduleDStep13Schema = object({
+  radioInput1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput1: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  textAreaInput2: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  textAreaInput3: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  radioInput2: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  textAreaInput4: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+});
