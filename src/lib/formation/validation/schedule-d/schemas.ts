@@ -69,3 +69,12 @@ export const form1023ScheduleDStep3Schema = object({
     },
   ),
 });
+
+export const form1023ScheduleDStep7Schema = object({
+  supportedOrganizationsSpecifiedByName: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  supportedOrganizationsSimilarPurpose: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});

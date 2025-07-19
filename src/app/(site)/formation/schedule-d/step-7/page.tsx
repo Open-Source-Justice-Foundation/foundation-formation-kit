@@ -15,13 +15,13 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleDYesNoRadioSchema } from "~/lib/formation/validation/schedule-d/schemas";
+import { form1023ScheduleDStep7Schema } from "~/lib/formation/validation/schedule-d/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleDYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleDStep7Schema>;
 
 export default function FormationScheduleDStep7Page() {
   const router = useRouter();
@@ -29,12 +29,15 @@ export default function FormationScheduleDStep7Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleDYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleDStep7Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const {
+      supportedOrganizationsSpecifiedByName,
+      supportedOrganizationsSimilarPurpose,
+    } = values;
 
     const url = "/api/formation/schedule-d/step-7";
     let response: Response = new Response();
@@ -46,7 +49,8 @@ export default function FormationScheduleDStep7Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          supportedOrganizationsSpecifiedByName,
+          supportedOrganizationsSimilarPurpose,
         }),
       });
 
@@ -81,7 +85,7 @@ export default function FormationScheduleDStep7Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="supportedOrganizationsSpecifiedByName"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -102,6 +106,58 @@ export default function FormationScheduleDStep7Page() {
                     organization(s) by name or you will not meet the
                     organizational test and need to reconsider your requested
                     public charity classification; then continue to Line 8.
+                  </p>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="supportedOrganizationsSimilarPurpose"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Does your organizing document name a similar purpose or
+                    charitable class of beneficiaries as to your supported
+                    organization(s)?
+                  </FormDescription>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    If &quot;No,&quot; amend your organizing document to specify
+                    your supported organization(s) by name, purpose, or class or
+                    you will not meet the organizational test and need to
+                    reconsider your requested public charity classification.
                   </p>
                   <FormControl>
                     <RadioGroup
