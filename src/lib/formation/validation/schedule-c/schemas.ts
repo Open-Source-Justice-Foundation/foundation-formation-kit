@@ -50,3 +50,12 @@ export const form1023ScheduleCStep1Schema = object({
     })
     .trim(),
 });
+
+export const form1023ScheduleCStep5Schema = object({
+  fullTimeEmergencyRoomStatus: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  specialtyHospitalStatus: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});

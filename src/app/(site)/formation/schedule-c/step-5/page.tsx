@@ -15,13 +15,13 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleCYesNoRadioSchema } from "~/lib/formation/validation/schedule-c/schemas";
+import { form1023ScheduleCStep5Schema } from "~/lib/formation/validation/schedule-c/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleCYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleCStep5Schema>;
 
 export default function FormationScheduleCStep5Page() {
   const router = useRouter();
@@ -29,12 +29,12 @@ export default function FormationScheduleCStep5Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleCYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleCStep5Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { fullTimeEmergencyRoomStatus, specialtyHospitalStatus } = values;
 
     const url = "/api/formation/schedule-c/step-5";
     let response: Response = new Response();
@@ -46,7 +46,8 @@ export default function FormationScheduleCStep5Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          fullTimeEmergencyRoomStatus,
+          specialtyHospitalStatus,
         }),
       });
 
@@ -81,7 +82,7 @@ export default function FormationScheduleCStep5Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="fullTimeEmergencyRoomStatus"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -89,6 +90,51 @@ export default function FormationScheduleCStep5Page() {
                     <span className="mt-1.5 block">
                       If &quot;Yes,&quot; continue to Line 6.
                     </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="specialtyHospitalStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Are you a specialty hospital or would emergency services be
+                    duplicative based on your region or locality?
                   </FormDescription>
                   <FormControl>
                     <RadioGroup
