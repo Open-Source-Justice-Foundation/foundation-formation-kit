@@ -16,13 +16,13 @@ import {
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleGYesNoRadioWithTextAreaSchema } from "~/lib/formation/validation/schedule-g/schemas";
+import { form1023ScheduleGStep3Schema } from "~/lib/formation/validation/schedule-g/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleGYesNoRadioWithTextAreaSchema>;
+type FormValues = z.infer<typeof form1023ScheduleGStep3Schema>;
 
 export default function FormationScheduleGStep3Page() {
   const router = useRouter();
@@ -30,12 +30,12 @@ export default function FormationScheduleGStep3Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleGYesNoRadioWithTextAreaSchema),
+    resolver: zodResolver(form1023ScheduleGStep3Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput, textAreaInput } = values;
+    const { input1, input2, input3 } = values;
 
     const url = "/api/formation/schedule-g/step-3";
     let response: Response = new Response();
@@ -47,8 +47,9 @@ export default function FormationScheduleGStep3Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
-          textAreaInput,
+          input1,
+          input2,
+          input3,
         }),
       });
 
@@ -83,7 +84,7 @@ export default function FormationScheduleGStep3Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -134,7 +135,7 @@ export default function FormationScheduleGStep3Page() {
             />
             <FormField
               control={form.control}
-              name="textAreaInput"
+              name="input2"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
@@ -148,6 +149,29 @@ export default function FormationScheduleGStep3Page() {
                       disabled={isLoading}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input3"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Relationship with Other Organization</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Explain your relationship with the other organization..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Explain your relationship with the other organization that
+                    resulted in your creation and why you took over the
+                    activities or assets of another organization.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
