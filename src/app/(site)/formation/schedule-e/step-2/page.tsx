@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleEYesNoRadioSchema } from "~/lib/formation/validation/schedule-e/schemas";
+import { form1023ScheduleEStep2Schema } from "~/lib/formation/validation/schedule-e/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleEYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleEStep2Schema>;
 
 export default function FormationScheduleEStep2Page() {
   const router = useRouter();
@@ -29,12 +30,12 @@ export default function FormationScheduleEStep2Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleEYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleEStep2Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { input1, input2 } = values;
 
     const url = "/api/formation/schedule-e/step-2";
     let response: Response = new Response();
@@ -46,7 +47,8 @@ export default function FormationScheduleEStep2Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          input1,
+          input2,
         }),
       });
 
@@ -81,7 +83,7 @@ export default function FormationScheduleEStep2Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -128,6 +130,49 @@ export default function FormationScheduleEStep2Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Failure to File Form 1023 Within 27 Months of Formation
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Explain why you did not file Form 1023 within 27 months of formation..."
+                      className="resize-none text-sm focus-visible:ring-ringPrimary"
+                      {...field}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Explain why you did not file Form 1023 within 27 months of
+                    formation, how you acted reasonably and in good faith, and
+                    how granting an earlier effective date will not prejudice
+                    the interests of the Government. You may want to include the
+                    events that led to the failure to timely file Form 1023 and
+                    to the discovery of the failure, any reliance on the advice
+                    of a qualified tax professional and a description of the
+                    engagement and responsibilities of the professional as well
+                    as the extent to which you relied on the professional, a
+                    comparison of:
+                  </FormDescription>
+                  <ol className="ml-6 text-sm text-muted-foreground">
+                    <li className="mt-6 list-['(1)'] before:mr-1.5">
+                      what your aggregate tax liability would be if you had
+                      filed this application within the 27-month period with
+                    </li>
+                    <li className="mt-2 list-['(2)'] before:mr-1.5">
+                      what your aggregate liability would be if you were exempt
+                      as of your formation date, or any other information you
+                      believe will support your request for relief.
+                    </li>
+                  </ol>
                   <FormMessage />
                 </FormItem>
               )}
