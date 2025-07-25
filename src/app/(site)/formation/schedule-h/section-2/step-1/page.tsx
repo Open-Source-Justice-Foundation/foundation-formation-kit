@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -21,7 +22,8 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleHYesNoRadioSchema } from "~/lib/formation/validation/schedule-h/schemas";
+import { GRANT_MAKING_PROCEDURES } from "~/lib/formation/constants/schedule-h/section-2/constants";
+import { form1023ScheduleHSection2Step1Schema } from "~/lib/formation/validation/schedule-h/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -29,9 +31,8 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Add checkbox input
 
-type FormValues = z.infer<typeof form1023ScheduleHYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleHSection2Step1Schema>;
 
 export default function FormationScheduleHSection2Step1Page() {
   const router = useRouter();
@@ -39,12 +40,15 @@ export default function FormationScheduleHSection2Step1Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleHYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleHSection2Step1Schema),
+    defaultValues: {
+      input2: [""],
+    },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { input1, input2 } = values;
 
     const url = "/api/formation/schedule-h/step-8";
     let response: Response = new Response();
@@ -56,7 +60,8 @@ export default function FormationScheduleHSection2Step1Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          input1,
+          input2,
         }),
       });
 
@@ -95,7 +100,7 @@ export default function FormationScheduleHSection2Step1Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -138,6 +143,55 @@ export default function FormationScheduleHSection2Step1Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={() => (
+                <FormItem>
+                  <FormDescription>
+                    Check the box(es) indicating under which section(s) you want
+                    your grant making procedures to be considered.
+                  </FormDescription>
+                  {GRANT_MAKING_PROCEDURES.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="input2"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item.id}
+                            className="flex flex-row items-center gap-2"
+                          >
+                            <FormControl>
+                              <Checkbox
+                                name={item.id}
+                                className="focus-visible:ring-ringPrimary"
+                                checked={field.value?.includes(item.id)}
+                                disabled={isLoading}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, item.id])
+                                    : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="text-sm font-normal">
+                              {item.label}
+                            </FormLabel>
+                          </FormItem>
+                        );
+                      }}
+                    />
+                  ))}
                   <FormMessage />
                 </FormItem>
               )}
