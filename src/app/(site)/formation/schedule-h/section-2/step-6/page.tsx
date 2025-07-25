@@ -15,7 +15,7 @@ import {
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleHYesNoRadioSchema } from "~/lib/formation/validation/schedule-h/schemas";
+import { form1023ScheduleHSection2Step6Schema } from "~/lib/formation/validation/schedule-h/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -23,9 +23,8 @@ import { z } from "zod";
 
 // TODO
 // Update schemas
-// Add other radio input
 
-type FormValues = z.infer<typeof form1023ScheduleHYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleHSection2Step6Schema>;
 
 export default function FormationScheduleHSection2Step6Page() {
   const router = useRouter();
@@ -33,12 +32,12 @@ export default function FormationScheduleHSection2Step6Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleHYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleHSection2Step6Schema),
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { input1, input2 } = values;
 
     const url = "/api/formation/schedule-h/step-8";
     let response: Response = new Response();
@@ -50,7 +49,8 @@ export default function FormationScheduleHSection2Step6Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          input1,
+          input2,
         }),
       });
 
@@ -85,7 +85,7 @@ export default function FormationScheduleHSection2Step6Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -95,6 +95,53 @@ export default function FormationScheduleHSection2Step6Page() {
                     <span className="mt-1.5 block">
                       If &quot;No,&quot; continue to Line 7.
                     </span>
+                  </FormDescription>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="Yes"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          Yes
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center gap-3">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="No"
+                            className="focus-visible:ring-ringPrimary"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal sm:text-base">
+                          No
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormDescription>
+                    Will you award grants to 10% or fewer of the eligible
+                    applicants who were actually considered by the selection
+                    committee in selecting recipients of grants in that year as
+                    provided by Revenue Procedures 76-47 and 80-39?
                   </FormDescription>
                   <FormControl>
                     <RadioGroup

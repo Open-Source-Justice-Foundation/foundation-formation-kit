@@ -36,3 +36,12 @@ export const form1023ScheduleHYesNoRadioWithTextAreaSchema = object({
     })
     .trim(),
 });
+
+export const form1023ScheduleHSection2Step6Schema = object({
+  input1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input2: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});
