@@ -1,9 +1,12 @@
 import { object, string, z } from "zod";
 
-export const form1023ScheduleHYesNoRadioWithTextAreaSchema = object({
+export const form1023ScheduleHYesNoRadioSchema = object({
   radioInput: z.enum(["Yes", "No"], {
     required_error: "Required",
   }),
+});
+
+export const form1023ScheduleHTextAreaSchema = object({
   textAreaInput: string({
     required_error: "Required",
     invalid_type_error: "Input must be a string",
@@ -17,7 +20,10 @@ export const form1023ScheduleHYesNoRadioWithTextAreaSchema = object({
     .trim(),
 });
 
-export const form1023ScheduleHTextAreaSchema = object({
+export const form1023ScheduleHYesNoRadioWithTextAreaSchema = object({
+  radioInput: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
   textAreaInput: string({
     required_error: "Required",
     invalid_type_error: "Input must be a string",

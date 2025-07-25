@@ -760,6 +760,42 @@ export const COLLAPSIBLE_TRIGGERS = [
         title: "Eligibility for Awards",
         url: "/formation/schedule-h/step-8",
       },
+      {
+        step: "9",
+        title: "Request for Advance Approval",
+        url: "/formation/schedule-h/section-2/step-1",
+      },
+      {
+        step: "10",
+        title: "Grantee Reports",
+        url: "/formation/schedule-h/section-2/step-2",
+      },
+      {
+        step: "11",
+        title: "Grant Records",
+        url: "/formation/schedule-h/section-2/step-3",
+      },
+      {
+        step: "12",
+        title: "Educational Support",
+        url: "/formation/schedule-h/section-2/step-4",
+      },
+      {
+        step: "13",
+        title: "Educational Support Compliance",
+        url: "/formation/schedule-h/section-2/step-5",
+      },
+      {
+        step: "14",
+        title: "Educational Support for Employees of a Particular Employer",
+        url: "/formation/schedule-h/section-2/step-6",
+      },
+      {
+        step: "15",
+        title:
+          "Educational Support for Children of Employees of a Particular Employer",
+        url: "/formation/schedule-h/section-2/step-7",
+      },
     ],
   },
 ];
