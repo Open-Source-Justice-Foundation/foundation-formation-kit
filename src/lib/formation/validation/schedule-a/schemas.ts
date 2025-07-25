@@ -62,3 +62,54 @@ export const form1023ScheduleAChurchesStep7Schema = object({
     })
     .trim(),
 });
+
+export const form1023ScheduleAChurchesStep9Schema = object({
+  input1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input2: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(100, {
+      message: "Input can be at most 100 characters",
+    })
+    .trim(),
+  input3: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input4: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  input5: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input6: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  input7: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input8: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+});
