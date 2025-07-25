@@ -54,3 +54,40 @@ export const form1023ScheduleHSection2Step6Schema = object({
     required_error: "Required",
   }),
 });
+
+export const form1023ScheduleHSection2Step7Schema = object({
+  input1: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input2: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input3: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input4: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+  input5: z.enum(["Yes", "No"], {
+    required_error: "Required",
+  }),
+  input6: string({
+    required_error: "Required",
+    invalid_type_error: "Input must be a string",
+  })
+    .nonempty({
+      message: "Required",
+    })
+    .max(1000, {
+      message: "Input can be at most 1000 characters",
+    })
+    .trim(),
+});
