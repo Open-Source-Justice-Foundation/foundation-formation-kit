@@ -107,7 +107,7 @@ export default function FormationPart6Step1Page() {
                             />
                           </FormControl>
                           <FormLabel className="text-sm font-normal sm:text-base">
-                            You completed less than one tax year.{" "}
+                            You completed less than one tax year.
                           </FormLabel>
                         </div>
                         <FormDescription>

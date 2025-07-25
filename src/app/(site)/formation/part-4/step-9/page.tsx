@@ -688,7 +688,7 @@ export default function FormationPart4Step9Page() {
                   <FormDescription>
                     Describe any other practices you will engage in to ensure
                     that foreign expenditures or grants are not diverted to
-                    support terrorism or other non-charitable activities.{" "}
+                    support terrorism or other non-charitable activities.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

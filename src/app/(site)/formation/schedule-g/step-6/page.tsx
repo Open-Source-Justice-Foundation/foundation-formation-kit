@@ -88,7 +88,7 @@ export default function FormationScheduleGStep6Page() {
                 <FormItem>
                   <FormDescription>
                     Were any debts or liabilities transferred from the
-                    predecessor for-profit organization to you?{" "}
+                    predecessor for-profit organization to you?
                   </FormDescription>
                   <p className="mt-1.5 text-sm text-muted-foreground">
                     If &quot;Yes,&quot; provide a list of the debts or

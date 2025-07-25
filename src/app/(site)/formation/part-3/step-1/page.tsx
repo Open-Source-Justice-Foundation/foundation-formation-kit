@@ -90,7 +90,7 @@ export default function FormationPart3Step1Page() {
         <CardDescription>
           Part III helps ensure that, when you submit this application, your
           organizing document contains the required provisions to meet the
-          organizational test under section 501(c)(3).{" "}
+          organizational test under section 501(c)(3).
           <p className="mt-1.5">
             If you cannot check &quot;Yes&quot; in both Lines 1 and 2, your
             organizing document does not meet the organizational test.{" "}
