@@ -23,7 +23,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof form1023ScheduleHTextAreaSchema>;
 
-export default function FormationScheduleHStep7Page() {
+export default function FormationScheduleHStep5Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export default function FormationScheduleHStep7Page() {
     setIsLoading(true);
     const { textAreaInput } = values;
 
-    const url = "/api/formation/schedule-h/step-7";
+    const url = "/api/formation/schedule-h/step-5";
     let response: Response = new Response();
 
     try {
@@ -52,11 +52,11 @@ export default function FormationScheduleHStep7Page() {
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation schedule H step 7 response status: ${response?.status}`,
+          `Formation schedule H step 5 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/schedule-h/step-8");
+      router.push("/formation/schedule-h/section-1/step-6");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -70,7 +70,7 @@ export default function FormationScheduleHStep7Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Selection Committee
+          Requirements for Recipients
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -84,25 +84,29 @@ export default function FormationScheduleHStep7Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Selection Committee</FormLabel>
+                  <FormLabel>Requirements for Recipients</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe how you determine your selection committee..."
+                      placeholder="Describe any requirement or condition you impose on recipients to obtain, maintain, or qualify for renewal of a grant..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>
-                    How do you determine who is on the selection committee for
-                    the awards made under your program?
+                    Describe any requirement or condition you impose on
+                    recipients to obtain, maintain, or qualify for renewal of a
+                    grant (for example, specific requirements or conditions
+                    could consist of attendance at a four-year college,
+                    maintaining a certain grade point average, teaching in
+                    public school after graduation from college, etc.).
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormationNavigationButtons
-              prevHref="/formation/schedule-h/step-6"
+              prevHref="/formation/schedule-h/section-1/step-4"
               isLoading={isLoading}
             />
           </form>

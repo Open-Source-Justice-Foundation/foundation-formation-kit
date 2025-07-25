@@ -24,7 +24,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof form1023ScheduleHYesNoRadioWithTextAreaSchema>;
 
-export default function FormationScheduleHStep2Page() {
+export default function FormationScheduleHStep8Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export default function FormationScheduleHStep2Page() {
     setIsLoading(true);
     const { radioInput, textAreaInput } = values;
 
-    const url = "/api/formation/schedule-h/step-2";
+    const url = "/api/formation/schedule-h/step-8";
     let response: Response = new Response();
 
     try {
@@ -54,11 +54,11 @@ export default function FormationScheduleHStep2Page() {
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation schedule H step 2 response status: ${response?.status}`,
+          `Formation schedule H step 8 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/schedule-h/step-3");
+      router.push("/dashboard");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -72,7 +72,7 @@ export default function FormationScheduleHStep2Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Case Histories
+          Eligibility for Awards
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -87,16 +87,15 @@ export default function FormationScheduleHStep2Page() {
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
-                    Do you maintain case histories showing recipients of your
-                    scholarships, fellowships, educational loans, or other
-                    educational grants, including names, addresses, purposes of
-                    awards, amount of each grant, manner of selection, and
-                    relationship (if any) to officers, trustees, or donors of
-                    funds to you?
+                    Are relatives of members of the selection committee, or of
+                    your officers, directors, or substantial contributors
+                    eligible for awards made under your program?
                   </FormDescription>
                   <p className="mt-1.5 text-sm text-muted-foreground">
-                    If &quot;No,&quot; explain.
+                    If &quot;Yes,&quot; what measures do you take to ensure
+                    unbiased selections?
                   </p>
+
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -138,10 +137,10 @@ export default function FormationScheduleHStep2Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Case Histories</FormLabel>
+                  <FormLabel>Measures to Ensure Unbiased Selections</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Explain why you do not maintain case histories of recipients..."
+                      placeholder="Explain what measures you take to ensure unbiased selections..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}
@@ -152,7 +151,7 @@ export default function FormationScheduleHStep2Page() {
               )}
             />
             <FormationNavigationButtons
-              prevHref="/formation/schedule-h/step-1"
+              prevHref="/formation/schedule-h/section-1/step-7"
               isLoading={isLoading}
             />
           </form>

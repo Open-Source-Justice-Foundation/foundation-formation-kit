@@ -23,7 +23,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof form1023ScheduleHTextAreaSchema>;
 
-export default function FormationScheduleHStep6Page() {
+export default function FormationScheduleHStep3Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export default function FormationScheduleHStep6Page() {
     setIsLoading(true);
     const { textAreaInput } = values;
 
-    const url = "/api/formation/schedule-h/step-6";
+    const url = "/api/formation/schedule-h/step-3";
     let response: Response = new Response();
 
     try {
@@ -52,11 +52,11 @@ export default function FormationScheduleHStep6Page() {
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation schedule H step 6 response status: ${response?.status}`,
+          `Formation schedule H step 3 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/schedule-h/step-7");
+      router.push("/formation/schedule-h/section-1/step-4");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -70,7 +70,7 @@ export default function FormationScheduleHStep6Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Procedures for Educational Support Supervision
+          Criteria for Program
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -84,33 +84,29 @@ export default function FormationScheduleHStep6Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Procedures for Educational Support Supervision
-                  </FormLabel>
+                  <FormLabel>Criteria for Program</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe your procedures for supervising the scholarships, fellowships, educational loans, or other educational grants..."
+                      placeholder="Describe the specific criteria you use to determine who is eligible for your program..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>
-                    Describe your procedures for supervising the scholarships,
-                    fellowships, educational loans, or other educational grants.
-                    Explain whether you obtain reports and grade transcripts
-                    from recipients, or you pay grants directly to a school
-                    under an arrangement whereby the school will apply the grant
-                    funds only for enrolled students who are in good standing.
-                    Also, describe your procedures for taking action if the
-                    terms of the award are violated.
+                    Describe the specific criteria you use to determine who is
+                    eligible for your program (for example, eligibility
+                    selection criteria could consist of graduating high school
+                    students from a particular high school who will attend
+                    college, writers of scholarly works about American history,
+                    etc.).
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormationNavigationButtons
-              prevHref="/formation/schedule-h/step-5"
+              prevHref="/formation/schedule-h/section-1/step-2"
               isLoading={isLoading}
             />
           </form>

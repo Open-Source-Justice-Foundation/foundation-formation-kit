@@ -723,42 +723,42 @@ export const COLLAPSIBLE_TRIGGERS = [
       {
         step: "1",
         title: "Types of Educational Financial Support",
-        url: "/formation/schedule-h/step-1",
+        url: "/formation/schedule-h/section-1/step-1",
       },
       {
         step: "2",
         title: "Case Histories",
-        url: "/formation/schedule-h/step-2",
+        url: "/formation/schedule-h/section-1/step-2",
       },
       {
         step: "3",
         title: "Criteria for Program",
-        url: "/formation/schedule-h/step-3",
+        url: "/formation/schedule-h/section-1/step-3",
       },
       {
         step: "4",
         title: "Criteria for Selection",
-        url: "/formation/schedule-h/step-4",
+        url: "/formation/schedule-h/section-1/step-4",
       },
       {
         step: "5",
         title: "Requirements for Recipients",
-        url: "/formation/schedule-h/step-5",
+        url: "/formation/schedule-h/section-1/step-5",
       },
       {
         step: "6",
         title: "Procedures for Educatioanl Support Supervision",
-        url: "/formation/schedule-h/step-6",
+        url: "/formation/schedule-h/section-1/step-6",
       },
       {
         step: "7",
         title: "Selection Committee",
-        url: "/formation/schedule-h/step-7",
+        url: "/formation/schedule-h/section-1/step-7",
       },
       {
         step: "8",
         title: "Eligibility for Awards",
-        url: "/formation/schedule-h/step-8",
+        url: "/formation/schedule-h/section-1/step-8",
       },
       {
         step: "9",

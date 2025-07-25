@@ -143,7 +143,7 @@ export default function FormationScheduleHSection2Step1Page() {
               )}
             />
             <FormationNavigationButtons
-              prevHref="/formation/schedule-h/step-8"
+              prevHref="/formation/schedule-h/section-1/step-8"
               isLoading={isLoading}
             />
           </form>

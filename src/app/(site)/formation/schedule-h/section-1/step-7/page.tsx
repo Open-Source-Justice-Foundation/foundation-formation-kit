@@ -23,7 +23,7 @@ import { z } from "zod";
 
 type FormValues = z.infer<typeof form1023ScheduleHTextAreaSchema>;
 
-export default function FormationScheduleHStep3Page() {
+export default function FormationScheduleHStep7Page() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export default function FormationScheduleHStep3Page() {
     setIsLoading(true);
     const { textAreaInput } = values;
 
-    const url = "/api/formation/schedule-h/step-3";
+    const url = "/api/formation/schedule-h/step-7";
     let response: Response = new Response();
 
     try {
@@ -52,11 +52,11 @@ export default function FormationScheduleHStep3Page() {
 
       if (response?.status !== 200) {
         throw new Error(
-          `Formation schedule H step 3 response status: ${response?.status}`,
+          `Formation schedule H step 7 response status: ${response?.status}`,
         );
       }
 
-      router.push("/formation/schedule-h/step-4");
+      router.push("/formation/schedule-h/section-1/step-8");
     } catch (err) {
       // TODO
       // Don't log the err value, do something else with it to avoid deployment error
@@ -70,7 +70,7 @@ export default function FormationScheduleHStep3Page() {
     <Card className="flex w-[360px] flex-col border max-[444px]:mx-6 max-[444px]:w-[88%] sm:w-[425px] md:border-0">
       <CardHeader className="px-4 pt-4 sm:px-6 sm:pt-6">
         <CardTitle className="text-base sm:text-xl md:text-2xl">
-          Criteria for Program
+          Selection Committee
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
@@ -84,29 +84,25 @@ export default function FormationScheduleHStep3Page() {
               name="textAreaInput"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Criteria for Program</FormLabel>
+                  <FormLabel>Selection Committee</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe the specific criteria you use to determine who is eligible for your program..."
+                      placeholder="Describe how you determine your selection committee..."
                       className="resize-none text-sm focus-visible:ring-ringPrimary"
                       {...field}
                       disabled={isLoading}
                     />
                   </FormControl>
                   <FormDescription>
-                    Describe the specific criteria you use to determine who is
-                    eligible for your program (for example, eligibility
-                    selection criteria could consist of graduating high school
-                    students from a particular high school who will attend
-                    college, writers of scholarly works about American history,
-                    etc.).
+                    How do you determine who is on the selection committee for
+                    the awards made under your program?
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormationNavigationButtons
-              prevHref="/formation/schedule-h/step-2"
+              prevHref="/formation/schedule-h/section-1/step-6"
               isLoading={isLoading}
             />
           </form>
