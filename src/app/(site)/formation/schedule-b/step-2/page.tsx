@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -14,14 +15,16 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Textarea } from "~/components/ui/textarea";
 import { FormationNavigationButtons } from "~/features/formation/components/FormationNavigationButtons";
-import { form1023ScheduleBYesNoRadioSchema } from "~/lib/formation/validation/schedule-b/schemas";
+import { BEST_SCHOOL_DESCRIPTION } from "~/lib/formation/constants/schedule-b/constants";
+import { form1023ScheduleBStep2Schema } from "~/lib/formation/validation/schedule-b/schemas";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-type FormValues = z.infer<typeof form1023ScheduleBYesNoRadioSchema>;
+type FormValues = z.infer<typeof form1023ScheduleBStep2Schema>;
 
 export default function FormationScheduleBStep2Page() {
   const router = useRouter();
@@ -29,12 +32,15 @@ export default function FormationScheduleBStep2Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(form1023ScheduleBYesNoRadioSchema),
+    resolver: zodResolver(form1023ScheduleBStep2Schema),
+    defaultValues: {
+      input2: [""],
+    },
   });
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    const { radioInput } = values;
+    const { input1, input2, input3 } = values;
 
     const url = "/api/formation/schedule-b/step-2";
     let response: Response = new Response();
@@ -46,7 +52,9 @@ export default function FormationScheduleBStep2Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          radioInput,
+          input1,
+          input2,
+          input3,
         }),
       });
 
@@ -81,7 +89,7 @@ export default function FormationScheduleBStep2Page() {
           >
             <FormField
               control={form.control}
-              name="radioInput"
+              name="input1"
               render={({ field }) => (
                 <FormItem>
                   <FormDescription>
@@ -123,6 +131,79 @@ export default function FormationScheduleBStep2Page() {
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="input2"
+              render={() => (
+                <FormItem>
+                  <FormDescription>
+                    Select the best description(s) of your school:
+                  </FormDescription>
+                  {BEST_SCHOOL_DESCRIPTION.map((item) => (
+                    <>
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="input2"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-center gap-2"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  name={item.id}
+                                  className="focus-visible:ring-ringPrimary"
+                                  checked={field.value?.includes(item.id)}
+                                  disabled={isLoading}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                        ...field.value,
+                                        item.id,
+                                      ])
+                                      : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item.id,
+                                        ),
+                                      );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-sm font-normal">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+
+                      {item.id === "other-school-describe" && (
+                        <FormField
+                          control={form.control}
+                          name="input3"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Textarea
+                                  placeholder="Describe your school..."
+                                  className="resize-none text-sm focus-visible:ring-ringPrimary"
+                                  {...field}
+                                  disabled={isLoading}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      )}
+                    </>
+                  ))}
                   <FormMessage />
                 </FormItem>
               )}

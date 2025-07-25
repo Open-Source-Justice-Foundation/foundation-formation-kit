@@ -1,5 +1,31 @@
 // Form 1023 Schedule B. Schools, Colleges, and Universities
 
+export const BEST_SCHOOL_DESCRIPTION = [
+  {
+    id: "elementary-school",
+    label: "Elementary school",
+  },
+  {
+    id: "secondary-school",
+    label: "Secondary school",
+  },
+  {
+    id: "charter-school",
+    label: "Charter school",
+  },
+  {
+    id: "college-or-university",
+    label: "College or university",
+  },
+  {
+    id: "technical-school",
+    label: "Technical school",
+  },
+  {
+    id: "other-school-describe",
+    label: "Other school (describe)",
+  },
+];
 // TODO
 // Make this optional
 export const CONFIRM_STUDENT_POLICY_IN_CONTENT = [
