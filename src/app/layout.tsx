@@ -49,6 +49,9 @@ export const metadata: Metadata = {
   other: {
     "mobile-web-app-capable": "yes",
   },
+  verification: {
+    google: "google",
+  },
 };
 
 export const viewport: Viewport = {
