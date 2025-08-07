@@ -2,6 +2,7 @@ import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
 import { AUTH_FROM_EMAIL_ADDRESS } from "~/lib/auth/constants/constants";
 import {
+  oAuthWelcomeEmail,
   signInRequest,
   verificationRequest,
 } from "~/lib/auth/providers/email/resend";
@@ -261,6 +262,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
     },
     events: {
       signIn: async (message) => {
+        const userEmail = message?.user?.email;
         const oAuthProfileLogin = message?.profile?.login;
         const accountType = message?.account?.type;
         const accountProvider = message?.account?.provider;
@@ -269,6 +271,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
         const isNewUser = message?.isNewUser;
 
         if (
+          typeof userEmail === "string" &&
           typeof oAuthProfileLogin === "string" &&
           accountType === "oauth" &&
           accountProvider === "github" &&
@@ -283,6 +286,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth(() => {
               accountProvider,
               accountProviderAccountId,
             );
+
+            await oAuthWelcomeEmail(userEmail);
           } else {
             const isConnectedOnNull =
               await checkConnectedOnIsNullInAccountsByProviderAndProviderAccountId(

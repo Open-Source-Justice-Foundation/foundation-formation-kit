@@ -1,4 +1,5 @@
 export { VerificationRequestEmailTemplate } from "./components/VerificationRequestEmailTemplate";
+export { OAuthWelcomeEmailTemplate } from "./components/OAuthWelcomeEmailTemplate";
 export { SignInRequestEmailTemplate } from "./components/SignInRequestEmailTemplate";
 export { ResetPasswordRequestEmailTemplate } from "./components/ResetPasswordRequestEmailTemplate";
 export { ResetEmailAddressRequestEmailTemplate } from "./components/ResetEmailAddressRequestEmailTemplate";
