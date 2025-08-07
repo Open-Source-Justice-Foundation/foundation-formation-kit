@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "mobile-web-app-capable": "yes",
   },
   verification: {
-    google: "google",
+    google: "7uvtxSU6SvhGCwFL3L4uglunJcEET3B8FI4_ddFpKZ0",
   },
 };
 
