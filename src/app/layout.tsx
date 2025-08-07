@@ -5,10 +5,11 @@ import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";
 
+import { FFK_URL, OSJF_URL } from "~/lib/auth/constants/constants";
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://foundationformationkit.org"),
+  metadataBase: new URL(FFK_URL),
   alternates: {
     canonical: "/",
     languages: {
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Open Source Justice Foundation",
-      url: "https://opensourcejustice.org",
+      url: OSJF_URL,
     },
   ],
   creator: "Open Source Justice Foundation",
