@@ -46,7 +46,6 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["next-auth", "react-hook-form", "zod"],
     typedRoutes: true,
   },
   poweredByHeader: false,
