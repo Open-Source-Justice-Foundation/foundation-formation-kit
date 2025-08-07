@@ -15,7 +15,6 @@ import {
 import { FullPageLoadingSpinner } from "~/features/spinners";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
