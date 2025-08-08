@@ -13,13 +13,11 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import {
-  FFK_EMAIL_FOOTER_LOGO,
-  INTER_FONT_URL,
-  SUPPORT_EMAIL_URI,
-} from "~/lib/auth/constants/constants";
+import { FFK_EMAIL_FOOTER_LOGO } from "~/lib/auth/providers/email/constants/constants";
 import { emailStyles } from "~/lib/auth/styles/emails";
 import type { CustomSendVerificationRequestEmailTemplateProps } from "~/lib/auth/types";
+import { SUPPORT_EMAIL_URI } from "~/lib/emails/constants/constants";
+import { INTER_FONT_URL } from "~/lib/fonts/constants/constants";
 
 export function VerificationRequestEmailTemplate(
   props: Readonly<CustomSendVerificationRequestEmailTemplateProps>,

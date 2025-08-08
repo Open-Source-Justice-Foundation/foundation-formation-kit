@@ -1,12 +1,12 @@
 import OSJFLogoDark from "/images/svgs/logos/osjf-logo-dark.svg";
 import OSJFLogoSecondary from "/images/svgs/logos/osjf-logo-secondary.svg";
 import { HEADER_SHEET_ICON_BASE_SIZE } from "~/features/header/constants/constants";
+import { SUPPORT_EMAIL_URI } from "~/lib/emails/constants/constants";
 import {
   FFK_DOCS_URL,
   FFK_GITHUB_URL,
   OSJF_URL,
-  SUPPORT_EMAIL_URI,
-} from "~/lib/auth/constants/constants";
+} from "~/lib/external-links/constants/constants";
 import { BookText, Github, HandHelping } from "lucide-react";
 
 export function HeaderSheetExternalLinks() {

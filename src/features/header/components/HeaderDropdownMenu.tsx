@@ -16,12 +16,12 @@ import {
   AVATAR_ICON_LARGE_SIZE,
   HEADER_DROPDOWN_MENU_ICON_BASE_SIZE,
 } from "~/features/header/constants/constants";
+import { SUPPORT_EMAIL_URI } from "~/lib/emails/constants/constants";
 import {
   FFK_DOCS_URL,
   FFK_GITHUB_URL,
   OSJF_URL,
-  SUPPORT_EMAIL_URI,
-} from "~/lib/auth/constants/constants";
+} from "~/lib/external-links/constants/constants";
 import {
   BookText,
   Gauge,

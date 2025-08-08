@@ -1,15 +1,13 @@
 import { render } from "@react-email/render";
 import { auth } from "~/auth";
-import {
-  AUTH_FROM_FIELD,
-  RESEND_API_ENDPOINT,
-} from "~/lib/auth/constants/constants";
+import { AUTH_FROM_FIELD } from "~/lib/auth/constants/constants";
 import { generateEmailAddressResetToken } from "~/lib/auth/emails/utils";
 import { verifyPassword } from "~/lib/auth/passwords/utils";
 import {
   ResetEmailAddressRequestEmailTemplate,
   ResetEmailAddressWarningEmailTemplate,
 } from "~/lib/auth/providers/email";
+import { RESEND_API_ENDPOINT } from "~/lib/auth/providers/email/resend/constants/constants";
 import type { UserWithEmailVerifiedAndPasswordHash } from "~/lib/auth/types";
 import {
   passwordRequestSchema,

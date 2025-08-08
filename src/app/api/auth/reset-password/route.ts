@@ -1,11 +1,9 @@
 import { render } from "@react-email/render";
 import { auth } from "~/auth";
-import {
-  AUTH_FROM_FIELD,
-  RESEND_API_ENDPOINT,
-} from "~/lib/auth/constants/constants";
+import { AUTH_FROM_FIELD } from "~/lib/auth/constants/constants";
 import { generatePasswordResetToken } from "~/lib/auth/passwords/utils";
 import { ResetPasswordRequestEmailTemplate } from "~/lib/auth/providers/email";
+import { RESEND_API_ENDPOINT } from "~/lib/auth/providers/email/resend/constants/constants";
 import { resetPasswordSchema } from "~/lib/auth/validation/schemas";
 import { checkPasswordHashNotNullByEmail } from "~/services/database/queries/auth/passwords";
 import { NextRequest, NextResponse } from "next/server";

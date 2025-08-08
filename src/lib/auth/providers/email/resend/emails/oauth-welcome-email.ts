@@ -1,11 +1,9 @@
 import "server-only";
 
 import { render } from "@react-email/render";
-import {
-  AUTH_FROM_FIELD,
-  RESEND_API_ENDPOINT,
-} from "~/lib/auth/constants/constants";
+import { AUTH_FROM_FIELD } from "~/lib/auth/constants/constants";
 import { OAuthWelcomeEmailTemplate } from "~/lib/auth/providers/email";
+import { RESEND_API_ENDPOINT } from "~/lib/auth/providers/email/resend/constants/constants";
 
 export async function oAuthWelcomeEmail(to: string) {
   try {

@@ -8,10 +8,8 @@ import {
   HeaderSheet,
 } from "~/features/header";
 import { ThemeToggle } from "~/features/theme-toggle";
-import {
-  FFK_DOCS_URL,
-  SUPPORT_EMAIL_URI,
-} from "~/lib/auth/constants/constants";
+import { SUPPORT_EMAIL_URI } from "~/lib/emails/constants/constants";
+import { FFK_DOCS_URL } from "~/lib/external-links/constants/constants";
 import { ExternalLink, LogIn } from "lucide-react";
 import Link from "next/link";
 

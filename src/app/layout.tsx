@@ -5,7 +5,7 @@ import type { Metadata, Viewport } from "next";
 
 import "~/styles/globals.css";
 
-import { FFK_URL, OSJF_URL } from "~/lib/auth/constants/constants";
+import { FFK_URL, OSJF_URL } from "~/lib/external-links/constants/constants";
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {

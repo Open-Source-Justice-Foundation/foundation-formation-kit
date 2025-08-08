@@ -1,7 +1,10 @@
 import { auth } from "~/auth";
 import { Button } from "~/components/ui/button";
 import { FullPageLoadingSpinner } from "~/features/spinners";
-import { FFK_DOCS_URL, FFK_GITHUB_URL } from "~/lib/auth/constants/constants";
+import {
+  FFK_DOCS_URL,
+  FFK_GITHUB_URL,
+} from "~/lib/external-links/constants/constants";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
