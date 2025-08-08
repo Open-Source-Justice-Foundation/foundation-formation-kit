@@ -38,9 +38,19 @@ const nextConfig = {
     return config;
   },
   images: {
+    // Relative to /public
     localPatterns: [
       {
-        pathname: "/images/**",
+        pathname: "/assets/images/optimized/**",
+        search: "",
+      },
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/u/**",
         search: "",
       },
     ],
