@@ -26,8 +26,6 @@ export function HeaderSheetExternalLinks() {
       </a>
       <a
         href={SUPPORT_EMAIL_URI}
-        target="_blank"
-        rel="noopener noreferrer"
         className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-accent-foreground"
       >
         <div className="flex items-center gap-2 text-base">

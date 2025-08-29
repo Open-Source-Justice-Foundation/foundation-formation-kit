@@ -45,7 +45,7 @@ export async function Header() {
           variant="link"
           className="p-0 text-base text-foreground underline-offset-0 hover:text-primary hover:no-underline"
         >
-          <a href={SUPPORT_EMAIL_URI} target="_blank" rel="noopener noreferrer">
+          <a href={SUPPORT_EMAIL_URI}>
             <div className="flex items-center gap-2">
               Support
               <ExternalLink aria-hidden="true" />

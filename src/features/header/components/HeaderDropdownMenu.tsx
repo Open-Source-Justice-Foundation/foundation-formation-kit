@@ -101,7 +101,7 @@ export async function HeaderDropdownMenu() {
               </div>
             </DropdownMenuItem>
           </a>
-          <a href={SUPPORT_EMAIL_URI} target="_blank" rel="noopener noreferrer">
+          <a href={SUPPORT_EMAIL_URI}>
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex grow items-center justify-between">
                 Support
